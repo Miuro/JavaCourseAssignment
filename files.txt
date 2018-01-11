@@ -1,0 +1,1 @@
+kuvat/paaikkuna.jpg = Pääikkunnan kuva ja popuppien kuva tilauksen lisäämiselle.
