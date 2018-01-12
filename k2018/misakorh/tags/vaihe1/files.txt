@@ -1,0 +1,4 @@
+!https://tim.jyu.fi/view/kurssit/tie/ohj2/2018k/ht/misakorh = Suunnitelma TIMiss‰
+kuvat/paaikkuna.jpg = P‰‰ikkunnan kuva ja popuppien kuva tilauksen lis‰‰miselle.
+kuvat/alkuikkuna.png = Kuva ohjelman avautuessa.
+kuvat/eiaukeaalku.png = Virheilmoitus jos tiedostoa ei ole.
