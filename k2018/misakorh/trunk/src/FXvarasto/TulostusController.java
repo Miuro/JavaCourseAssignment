@@ -1,10 +1,10 @@
 package FXvarasto;
 
 /**
- * @author JSirkka, Miro Korhonen
+ * @author Omistaja
  * @version 30.1.2018
  *
  */
-public class VarastoController {
+public class TulostusController {
       // TODO
 }
