@@ -1,28 +1,28 @@
 package FXvarasto;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 
 
 /**
- * @author JSirkka, Miro Korhonen
+ * @author Omistaja
  * @version 30.1.2018
  *
  */
-public class VarastoMain extends Application {
+public class TulostusMain extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            FXMLLoader ldr = new FXMLLoader(getClass().getResource("VarastoView.fxml"));
+            FXMLLoader ldr = new FXMLLoader(getClass().getResource("TulostusView.fxml"));
             final Pane root = ldr.load();
-            //final VarastoController varastoCtrl = (VarastoController) ldr.getController();
+            //final TulostusController tulostusCtrl = (TulostusController) ldr.getController();
             Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("varasto.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("tulostus.css").toExternalForm());
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Varasto");
+            primaryStage.setTitle("Tulostus");
             primaryStage.show();
         } catch(Exception e) {
             e.printStackTrace();
