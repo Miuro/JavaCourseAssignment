@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="483.0" prefWidth="335.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="FXvarasto.TulostusController">
+   <center>
+      <TextArea prefHeight="200.0" prefWidth="200.0" text="Valitut pyörät&#10;-------------------------------------------&#10;id                   : 2&#10;Nimi                 : CityBike G3&#10;Malli                : Kaupunkipyörä&#10;Kunto                : Normaali&#10;Vuokra/vrk           : 30&#10;Tila(vuokrattu/vapaa) : vuokrattu&#10;Lisätietoja          :&#10;-------------------------------------------&#10;Vuokrauspvm : 11.1.2018&#10;Palautuspvm : 13.1.2018&#10;Hinta : 60&#10;Lisätietoja :&#10;-------------------------------------------&#10;Frans Bergman&#10;110156-728K&#10;Marjakatu 6 62420 Vuoristo&#10;-&#10;&#10;-------------------------------------------&#10;id                   : 5&#10;Nimi                 : Ruputrupu&#10;Malli                : Mummopyörä&#10;Kunto                : Huono&#10;Vuokra/vrk           : 8&#10;Tila(vuokrattu/vapaa) : vuokrattu&#10;Lisätietoja          :&#10;-------------------------------------------&#10;Vuokrauspvm : 11.1.2018&#10;Palautuspvm : 12.1.2018&#10;Hinta : 4&#10;Lisätietoja : Promoale&#10;-------------------------------------------&#10;Åke Schultz&#10;260818-159K&#10;-&#10;018-515252&#10;-------------------------------------------" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+          <Button mnemonicParsing="false" text="Tulosta" />
+            <Button mnemonicParsing="false" text="OK" />
+        </buttons>
+      </ButtonBar>
+   </bottom>
+</BorderPane>
