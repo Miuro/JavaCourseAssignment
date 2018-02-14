@@ -86,7 +86,7 @@
                               <Label prefHeight="17.0" prefWidth="34.0" text="Kunto" GridPane.rowIndex="2" />
                               <Label prefHeight="17.0" prefWidth="62.0" text="Vuokra/vrk" GridPane.rowIndex="3" />
                               <Label prefHeight="17.0" prefWidth="22.0" text="Tila" GridPane.rowIndex="4" />
-                              <Label prefHeight="17.0" prefWidth="57.0" text="Lisätietoja" GridPane.rowIndex="5" />
+                              <Label prefHeight="17.0" prefWidth="57.0" text="LisÃ¤tietoja" GridPane.rowIndex="5" />
                               <TextField GridPane.columnIndex="1" />
                               <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
