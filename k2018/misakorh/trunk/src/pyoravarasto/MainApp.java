@@ -58,7 +58,8 @@ public class MainApp extends Application {
 	        loader.setLocation(MainApp.class.getResource("/view/UusiVuokrausDialog.fxml"));
 	        BorderPane page = (BorderPane) loader.load();
 	        
-	        // Luodaan dialog, eli ikkuna, stage, mutta niin, että pääikkuna näkyy edelleen (modality juttui)
+	        // Luodaan uusi stage, ja asetetaan sen sisällöksi (sceneksi) tuo loaderin lataama page.
+	        // Kikkaillaan modalitylla.
 	        Stage dialogStage = new Stage();
 	        dialogStage.setTitle("Vuokraus");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
