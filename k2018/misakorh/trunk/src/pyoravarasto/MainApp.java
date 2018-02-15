@@ -53,7 +53,7 @@ public class MainApp extends Application {
 	 */
 	public void showUusiVuokrausDialog() {
 		try {
-			// Ladataan fxml-tiedosto ja luodaan uusi stage sille
+			// Ladataan fxml-tiedosto
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(MainApp.class.getResource("/view/UusiVuokrausDialog.fxml"));
 	        BorderPane page = (BorderPane) loader.load();
@@ -87,7 +87,7 @@ public class MainApp extends Application {
 	        loader.setLocation(MainApp.class.getResource("/view/UusiTulostusDialog.fxml"));
 	        BorderPane page = (BorderPane) loader.load();
 	        
-	        // Luodaan dialog, eli ikkuna, stage, mutta niin, että pääikkuna näkyy edelleen (modality juttui)
+	        // Luodaan uusi stage, ja asetetaan sen sisällöksi (sceneksi) tuo loaderin lataama page.
 	        Stage dialogStage = new Stage();
 	        dialogStage.setTitle("Tulostus");
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
