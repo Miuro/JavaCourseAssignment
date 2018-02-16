@@ -1,0 +1,14 @@
+!https://tim.jyu.fi/view/kurssit/tie/ohj2/2018k/ht/misakorh = Suunnitelma TIMiss‰
+kuvat/paaikkunafxml.jpg = P‰‰ikkunnan kuva ja popuppien kuva tilauksen lis‰‰miselle.
+kuvat/alkuikkunafxml.jpg = Kuva ohjelman avautuessa.
+kuvat/eiaukeaalku.png = Virheilmoitus jos tiedostoa ei ole.
+kuvat/vuokraajantiedot.jpg = ikkuna johon lis‰t‰‰ vuokraajan tiedot
+kuvat/tulostusikkuna.jpg = ikkuna jossa n‰kyy tulostettavat tiedot ennen tulostusta.
+src/pyoravarasto/MainApp.java = Main
+src/view/UusiTulostusDialog.fxml = Tulostusikkuna
+src/view/UusiTulostusDialogController.java = Tulostusikkunan java -tiedosto
+src/view/UusiVuokrausDialog.fxml = Vuokrausdialogin ikkuna
+src/view/UusiVuokrausDialogController.java = Vuokrausikkunan java -tiedosto
+src/view/VarastoOverview.fxml = P‰‰ikkuna
+src/view/VarastoOverview.java = P‰‰ikkunan java -tiedosto
+varasto.jar = ajettava ohjelma, lataa ja aja
