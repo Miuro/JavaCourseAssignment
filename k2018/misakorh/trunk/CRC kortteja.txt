@@ -1,0 +1,187 @@
+|------------------------------------------------------------------------|
+| Luokan nimi:                                       | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   |
+|                                                    |                   | 
+|                                                    |                   |
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+CRC KORTIT
+
+|------------------------------------------------------------------------|
+| Luokan nimi:   Pyora                               | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+|                                                    |                   | 
+| - ei tiedä muista luokista                         |                   | 
+| - tietää pyörän kentät eli nimi, malli, kunto etc. |                   | 
+| - osaa tarkistaa tietyn kentän oikeellisuuden      |                   |
+|   (syntaksin)                                      |                   | 
+| - osaa muuttaa 1|Jopo|..| - merkkijonon            |                   |
+|   pyörän tiedoiksi                                 |                   | 
+| - osaa antaa merkkijonona i:n kentän tiedot        |                   | 
+| - osaa laittaa merkkijonon i:neksi kentäksi        |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+|------------------------------------------------------------------------|
+| Luokan nimi: Pyorat                                | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+| - Ylläpitää varsinaista pyörärekisteriä, eli       | - Pyora           | 
+|   osaa lisätä ja poistaa pyöriä                    |                   | 
+| - Lukee ja kirjoittaa pyorat.dat-tiedostoon        |                   | 
+| - Osaa etsiä ja lajitella                          |                   |
+|                                                    |                   | 
+|                                                    |                   |
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+|------------------------------------------------------------------------|
+| Luokan nimi:   Asiakas                             | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+|                                                    |                   | 
+| - ei tiedä muista luokista                         |                   | 
+| - tietää harrastusten kentät                       |                   | 
+| - osaa tarkistaa tietyn kentän oikeellisuuden      |                   |
+|   syntaksin)                                       |                   | 
+| - osaa muuttaa 4|kalastus|1955|20 - merkkijonon    |                   |
+|   harrastuksen tiedoiksi                           |                   | 
+| - osaa antaa merkkijonona i:n kentän tiedot        |                   | 
+| - osaa laittaa merkkijonon i:neksi kentäksi        |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+
+|------------------------------------------------------------------------|
+| Luokan nimi: Asiakkaat                             | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+| - Pitää yllä asiakasrekisteriä                     |  Asiakas          | 
+| - Osaa lisätä ja poistaa asiakkaita                |                   | 
+| - Lukee ja kirjoittaa asiakkaat.dat-tiedostoon     |                   | 
+| - Osaa etsiä ja lajitella                          |                   |
+|                                                    |                   | 
+|                                                    |                   |
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+
+
+|------------------------------------------------------------------------|
+| Luokan nimi:   Vuokraus                            | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+| - Ei tiedä muista luokista                         |                   | 
+| - Osaa antaa vuokrauksen tiedot                    |                   | 
+| - osaa antaa merkkijonona i:n kentän tiedot        |                   | 
+| -                                                  |                   |
+|                                                    |                   | 
+| -                                                  |                   |
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+
+|------------------------------------------------------------------------|
+| Luokan nimi: Vuokraukset                           | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+| - Osaa lisätä vuokrauksia, ja poistaa niitä tietyin|                   | 
+|  ehdoin (esim.aliohjelma PyoraPalautettu poistaa   |                   | 
+|  vuokrauksen kun painetaan nappia "Palautettu")    |                   | 
+| - Lukee ja kirjoittaa vuokraukset.dat-tiedostoon   |                   |
+| - Osaa etsiä ja lajitella                          |                   | 
+|                                                    |                   |
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+
+|------------------------------------------------------------------------|
+| Luokan nimi: Varasto                               | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      | -Vuokraukset      | 
+| - Huolehtii Pyorat, Asiakkaat ja Vuokraukset       | - Asiakkaat       | 
+|  luokkien yhteistyöstä ja osaa välittää tietoja    | - Pyorat          | 
+|                                                    | - Pyora           | 
+|                                                    | - Asiakas         |
+|                                                    |                   | 
+|                                                    |                   |
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
+
+
+|------------------------------------------------------------------------|
+| Luokan nimi:   Naytto                              | Avustajat:        |
+|-------------------------------------------------------------------------
+| Vastuualueet:                                      |                   | 
+|                                                    | - Varasto         | 
+| - hoitaa kaiken näyttöön tulevan tekstin           | - Pyora           | 
+| - hoitaa kaiken tiedon pyytämisen käyttäjältä      | - Asiakas         | 
+| (- ei tiedä kerhon eikä jäsenen yksityiskohtia)    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|                                                    |                   | 
+|-------------------------------------------------------------------------
