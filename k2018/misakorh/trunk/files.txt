@@ -4,6 +4,7 @@ kuvat/alkuikkunafxml.jpg = Kuva ohjelman avautuessa.
 kuvat/eiaukeaalku.png = Virheilmoitus jos tiedostoa ei ole.
 kuvat/vuokraajantiedot.jpg = ikkuna johon lis‰t‰‰ vuokraajan tiedot
 kuvat/tulostusikkuna.jpg = ikkuna jossa n‰kyy tulostettavat tiedot ennen tulostusta.
+kuvat/varastoRakenne.png = kuva tietorakenteesta
 src/pyoravarasto/MainApp.java = Main
 src/view/UusiTulostusDialog.fxml = Tulostusikkuna
 src/view/UusiTulostusDialogController.java = Tulostusikkunan java -tiedosto
