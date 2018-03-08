@@ -20,6 +20,7 @@ public class Asiakas {
 
 	}
 	
+	
 	/**
 	 * Palauttaa asiakkaan nimen
 	 * @return Asiakkaan nimi
@@ -27,6 +28,7 @@ public class Asiakas {
 	public String getNimi() {
 		return nimi;
 	}
+	
 	
 	/**
 	 * Tulostaa asiakkaan tiedot
@@ -39,6 +41,7 @@ public class Asiakas {
 		out.println(lisaTiedot);
 	}
 	
+	
 	/**
 	 * Tulostaa asiakkaan tiedot
 	 * @param os tietovirta johon tulostetaan
@@ -46,6 +49,7 @@ public class Asiakas {
 	public void tulosta(OutputStream os) {
 		tulosta(new PrintStream(os));
 	}
+	
 	
 	/**
 	 * Antaa asiakkaalle seuraavan id numeron
@@ -57,6 +61,7 @@ public class Asiakas {
 		return asiakasId;
 	}
 	
+	
 	/**
 	 * Palauttaa asiakkaan tunnusnumeron
 	 * @return asiakkaan tunnusnumero
@@ -65,6 +70,7 @@ public class Asiakas {
 		return asiakasId;
 	}
 
+	
 	/**
 	 * Testiohjelma asiakkaalle
 	 * @param args ei käytösä

@@ -7,12 +7,14 @@ public class Asiakkaat {
 	private String 				tiedostonNimi 	= "";
 	private Asiakas 			alkiot[] 		= new Asiakas[MAX_ASIAKKAITA];
 	
+	
 	/**
 	 * Oletusmuodostaja
 	 */
 	public Asiakkaat() {
 		//
 	}
+	
 	
 	/**
 	 * Lis‰‰ uuden asiakkaan tietorakenteeseensa. Ottaa asiakkaan omistukseensa
@@ -25,7 +27,55 @@ public class Asiakkaat {
 		lkm++;
 	}
 	
+	
+	/**
+	 * Palauttaa viitteen i:teen asiakkaaseen
+	 * @param i monennenko asiakkaan viite halutaan
+	 * @return viite asiakkaaseen jonka indeksi on i
+	 * @throws IndexOutOfBoundsException jos indeksi i ei ole sallitulla alueella
+	 */
+	public Asiakas anna(int i) throws IndexOutOfBoundsException {
+		if(i < 0 || lkm <= i)
+			throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
+		return alkiot[i];
+	}
+	
+	
+	/**
+	 * Lukee asiakkaat tiedostosta. Kesken!
+	 * @param hakemisto tiedoston hakemisto
+	 * @throws SailoException jos lukeminen ep‰onnistuu
+	 */
+	public void lueTiedostosta(String hakemisto) throws SailoException {
+		tiedostonNimi = hakemisto + "/asiakkaat.dat";
+		throw new SailoException("Ei osata viel‰ lukea tiedostoa " + tiedostonNimi);
+	}
+	
+	
+	/**
+	 * Tallentaa asiakkaat tiedostoon. Kesken!
+	 * @throws SailoException jos talletus ep‰onnistuu
+	 */
+	public void talleta() throws SailoException {
+		throw new SailoException("Ei osata viel‰ tallettaa tiedostoa " + tiedostonNimi);
+	}
+	
+	
+	/**
+	 * Palauttaa asiakkaiden lukum‰‰r‰n
+	 * @return asiakkaiden lukum‰‰r‰
+	 */
+	public int getLkm() {
+		return lkm;
+	}
+	
+	
+	/**
+	 * Testiohjelma asiakkaille
+	 * @param args ei k‰ytˆs‰
+	 */
 	public static void main(String[] args) {
 		// TODO: Everything
 	}
+	
 }
