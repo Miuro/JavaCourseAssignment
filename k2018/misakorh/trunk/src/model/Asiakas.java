@@ -46,7 +46,29 @@ public class Asiakas {
 	public void tulosta(OutputStream os) {
 		tulosta(new PrintStream(os));
 	}
+	
+	/**
+	 * Antaa asiakkaalle seuraavan id numeron
+	 * @return asiakkaan uusi idnumero
+	 */
+	public int rekisteroi() {
+		asiakasId = seuraavaId;
+		seuraavaId++;
+		return asiakasId;
+	}
+	
+	/**
+	 * Palauttaa asiakkaan tunnusnumeron
+	 * @return asiakkaan tunnusnumero
+	 */
+	public int getAsiakasId() {
+		return asiakasId;
+	}
 
+	/**
+	 * Testiohjelma asiakkaalle
+	 * @param args ei käytösä
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	}
