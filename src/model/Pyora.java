@@ -10,125 +10,71 @@ import java.io.*;
  * TODO: Miten saadaan enumit tulostamaan sisältö kivasti?
  */
 public class Pyora {
-	private enum PyoranKunto {
-		RIKKI, TYYDYTTAVA, HYVA, ERINOMAINEN
-	}
-	
-	private int pyoranID;
-	private String nimi = "";
-	private String malli = "";
-	private PyoranKunto kunto = PyoranKunto.ERINOMAINEN;
-	private double vuokraPerPaiva = 0;
-	private boolean onkoVarattu; // FALSE = vapaana, TRUE = vuokrattuna
-	private String lisatietoja = "";
-	
-	private static int seuraavaPyoranID = 1;
 
+	private static String[] kunnot = {"Rikki", "Tyydyttävä", "Hyvä", "Erinomainen"};
+	private static int seuraavaID = 1;
 	
-	/**
-	 * Konstruktori pyörälle.
-	 * Ei vissiin pidä olla valmiissa ohjelmassa, mutta lisätään testimielessä
-	 * @param nimi Nimi
-	 * @param malli Malli
-	 * @param kunto Kunto
-	 * @param vuokraPerPaiva Vuokraperpäivä euroissa.
-	 */
-	public Pyora(String nimi, String malli, PyoranKunto kunto, double vuokraPerPaiva) {
-		this.nimi = nimi;
-		this.malli = malli;
-		this.kunto = kunto;
-		this.vuokraPerPaiva = vuokraPerPaiva;
-	}
-	
+	private int			pyoranID;
+	private String 		nimi = "";
+	private String		malli = "";
+	private int			kunto = 3; // 0-3. 0 = rikki, 1 = tyydyttävä, 2 = hyvä, 3 = erinomainen
+	private String 		lisatietoja = "";
+	private boolean 	onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
+	private double 		vuokraPerPaiva = 0;
 	
 
+	
 	/**
-	 * @return Pyorän malli
+	 * Peruskonstruktori pyörälle.
 	 */
-	private String getMalli() {
-		return malli;
-	}
-
-
-
+	public Pyora() {}
+	
+	
+    /**
+     * Antaa jäsenelle seuraavan rekisterinumeron.
+     * @return jäsenen uusi tunnusNro
+     * @example
+     * <pre name="test">
+     *   Pyora jopo1 = new Pyora();
+     *   jopo1.getPyoranID() === 0;
+     *   jopo1.rekisteroi();
+     *   Pyora jopo2 = new Pyora();
+     *   jopo2.rekisteroi();
+     *   int n1 = jopo1.getPyoranID();
+     *   int n2 = jopo2.getPyoranID();
+     *   n1 === n2-1;
+     * </pre>
+     */
+    public int rekisteroi() {
+        pyoranID = seuraavaID;
+        seuraavaID++;
+        return pyoranID;
+    }
+    
+    public int getPyoranID() {
+    	return pyoranID;
+    }
+	
 	/**
-	 * @return Pyorän kunto
+	 * Apumetodi testiarvojen tuottamiselle
 	 */
-	private PyoranKunto getKunto() {
-		return kunto;
+	public void vastaaJopo() {
+		nimi = "Punainen Jopo";
+		malli = "Helkama Jopo";
+		kunto = 1;
+		onkoVarattu = true;
+		vuokraPerPaiva = 12;
+		lisatietoja = "Penkki pitää vaihtaa";
 	}
-
-
-
-	/**
-	 * @param kunto Asetettava kunto
-	 */
-	private void setKunto(PyoranKunto kunto) {
-		this.kunto = kunto;
-	}
-
-
-
-	/**
-	 * @return the vuokraPerPaiva
-	 */
-	private double getVuokraPerPaiva() {
-		return vuokraPerPaiva;
-	}
-
-
-
-	/**
-	 * @param vuokraPerPaiva Asetettava vuokra
-	 */
-	private void setVuokraPerPaiva(double vuokraPerPaiva) {
-		this.vuokraPerPaiva = vuokraPerPaiva;
-	}
-
-
-
-	/**
-	 * @return Vuokrauksen tila. True = Varattu vai vapaana
-	 */
-	private boolean isVuokrauksenTila() {
-		return onkoVarattu;
-	}
-
-
-
-	/**
-	 * @param vuokrauksenTila Asetettava vuokrauksen tila
-	 */
-	private void setVuokrauksenTila(boolean vuokrauksenTila) {
-		this.onkoVarattu = vuokrauksenTila;
-	}
-
-
-
-	/**
-	 * @return Lisätiedot
-	 */
-	private String getLisatietoja() {
-		return lisatietoja;
-	}
-
-
-
-	/**
-	 * @param lisatietoja Asetettava lisätieto
-	 */
-	private void setLisatietoja(String lisatietoja) {
-		this.lisatietoja = lisatietoja;
-	}
-
+		
 	
 	/**
 	 * Tulostetaan pyörän tiedot.
-	 * TODO: enumerable pyoranKunto sillein että se tulostaa kivasti
 	 * @param out
 	 */
 	public void tulosta(PrintStream out) {
         out.println(String.format("%03d", pyoranID, 3) + "  " + nimi +  "  " + malli);
+        out.println(String.format(kunnot[kunto]));
         out.println("Vuokran määrä: " + String.format("%4.2f", vuokraPerPaiva));
         out.println("Onko vuokrattuna: " + onkoVarattu);
         out.println("Lisätiedot: " + lisatietoja);
@@ -148,10 +94,7 @@ public class Pyora {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Pyora testi = new Pyora("Punainen Jopo", "Maastopyörä", PyoranKunto.HYVA, 100);
-		testi.setLisatietoja("Tarvitsee uudet ketjut");
-		testi.setVuokrauksenTila(false);
-		testi.tulosta(System.out);
+
 	}
 	
 }

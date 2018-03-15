@@ -1,7 +1,6 @@
 package view;
 
 import pyoravarasto.MainApp;
-import model.Pyora;
 import fi.jyu.mit.fxgui.Dialogs;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
