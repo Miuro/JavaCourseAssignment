@@ -20,7 +20,7 @@ public class Pyora {
 	private int			kunto = 3; // 0-3. 0 = rikki, 1 = tyydyttävä, 2 = hyvä, 3 = erinomainen
 	private String 		lisatietoja = "";
 	private boolean 	onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
-	private double 		vuokraPerPaiva = 0;
+	private double 		vuokraPerPaiva = 0; //TODO: muuta vuokraPerTunti
 	
 
 	
@@ -66,6 +66,14 @@ public class Pyora {
     }
     
     
+	/**
+	 * @return Pyörän vuokra per päivä
+	 */
+	public double getVuokraPerPaiva() {
+		return vuokraPerPaiva;
+	}
+
+
 	/**
 	 * Apumetodi testiarvojen tuottamiselle
 	 */
