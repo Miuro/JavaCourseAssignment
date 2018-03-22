@@ -1,18 +1,27 @@
 package model;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Vuokraus {
 	
 	private int 		vuokrausId,	 // = 0
 						pyoraId,	 // = 0
 						vuokraajaId 	= 0;
-	private String 		vuokrausPvm, // = ""
-						palautusPvm 	= "";
+	private String 		vuokrausAika, // = ""
+						palautusAika 	= "";
 	private double 		hinta 			= 0.;
-	private String 		lisaTiedot 		= "";
+	private String 		lisatiedot 		= "";
 	
 	private static int 	seuraavaId 		= 1;
+	
+	public static Calendar pvm; // = Calendar.getInstance();
+	private Calendar palautus; // = Calendar.getInstance();
+	private static final DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+	
 	
 	
 	/**
@@ -28,12 +37,13 @@ public class Vuokraus {
 	 * @param out tietovirta johon tulostetaan
 	 */
 	public void tulosta(PrintStream out) {
-		out.println(String.format("%03d", vuokrausId, 3) + " "
-					+ String.format("%03d", pyoraId, 3) + " "
-					+ String.format("%03d", vuokraajaId, 3));
-		out.println(vuokrausPvm + " - " + palautusPvm);
-		out.println(hinta);
-		out.println(lisaTiedot);
+		out.println(String.format("ID: %03d", vuokrausId, 3) + " "
+					+ String.format("Pyörä: %03d", pyoraId, 3) + " "
+					+ String.format("Vuokraaja: %03d", vuokraajaId, 3));
+		out.println(String.format("Vuokrattu: %s", vuokrausAika));
+		out.println(String.format("Palautus: %s", palautusAika));
+		out.println("Hinta eur: " + hinta);
+		out.println("Lisätiedot: " + lisatiedot);
 	}
 	
 	
@@ -56,6 +66,22 @@ public class Vuokraus {
 		return vuokrausId;
 	}
 	
+	/**
+	 * Luo testattavan ja esim. dataa sisältävän vuokrauksen.
+	 * @param kestoTunneissa Vuokrauksen kesto tunneissa.
+	 */
+	public void testiVuokraus(int kestoTunneissa) {
+		pyoraId = 7;
+		vuokraajaId = 4;
+		pvm = Calendar.getInstance();
+		palautus = Calendar.getInstance();
+		palautus.add(Calendar.HOUR, kestoTunneissa);
+		vuokrausAika = sdf.format(pvm.getTime());
+		palautusAika = sdf.format(palautus.getTime());
+		hinta = 5 * kestoTunneissa; // 50 tilalle kaivettaisiin siis pyoraID:n hinta.
+		lisatiedot = "Maksettu luottokortilla";
+	}
+	
 	
 	/**
 	 * Palauttaa vuokrauksen tunnusnumeron
@@ -65,13 +91,23 @@ public class Vuokraus {
 		return vuokrausId;
 	}
 	
+	/**
+	 * @return Palauttaa viitteen vuokrauksen loppumisaikaan, eli milloin pyörän tulisi olla palautettuna.
+	 */
+	public Calendar getPalautusAika() {
+		return palautus;
+	}
+	
 
 	/**
 	 * Testiohjelma vuokraukselle
 	 * @param args ei käytösä
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		Vuokraus testi = new Vuokraus();
+		testi.rekisteroi();
+		testi.testiVuokraus(5);
+		testi.tulosta(System.out);
 
 	}
 
