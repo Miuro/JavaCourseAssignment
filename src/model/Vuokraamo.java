@@ -5,8 +5,8 @@ public class Vuokraamo {
 	private final Vuokraukset vuokraukset = new Vuokraukset();
 	
 	/**
-	 * 
-	 * @return
+	 * Antaa pyörien lukumäärän
+	 * @return pyörien lukumäärä
 	 */
 	public int getPyoria() {
 		return pyorat.getLkm();
@@ -14,9 +14,9 @@ public class Vuokraamo {
 	
 	
 	/**
-	 * 
-	 * @param vuokraus
-	 * @throws SailoException
+	 * Lisää uuden vuokrauksen kokoelmaan
+	 * @param vuokraus lisättävä vuokraus
+	 * @throws SailoException jos täysi
 	 */
 	public void lisaaVuokraus (Vuokraus vuokraus) throws SailoException {
 		vuokraukset.lisaa(vuokraus);
@@ -24,9 +24,9 @@ public class Vuokraamo {
 	
 	
 	/**
-	 * 
-	 * @param i
-	 * @return
+	 * Antaa halutun pyörän
+	 * @param i halutun pyörän indeksi
+	 * @return haluttu pyörä
 	 */
 	public Pyora annaPyora(int i) {
 		return pyorat.anna(i);
@@ -34,9 +34,9 @@ public class Vuokraamo {
 	
 	
 	/**
-	 * 
-	 * @param pyora
-	 * @throws SailoException
+	 * Lisää pyörän kokoelmaan
+	 * @param pyora lisättävä pyörä
+	 * @throws SailoException jos menee yli
 	 */
 	public void lisaaPyora(Pyora pyora)throws SailoException {
 		pyorat.lisaa(pyora);
