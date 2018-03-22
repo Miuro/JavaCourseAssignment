@@ -51,10 +51,21 @@ public class Pyora {
         return pyoranID;
     }
     
+    /**
+     * @return Palauttaa pyörän ID:n
+     */
     public int getPyoranID() {
     	return pyoranID;
     }
 	
+    /**
+     * @return Palauttaa pyörän nimen.
+     */
+    public String getNimi() {
+    	return nimi;
+    }
+    
+    
 	/**
 	 * Apumetodi testiarvojen tuottamiselle
 	 */
@@ -81,7 +92,9 @@ public class Pyora {
 	}
 
 	
-	   /**
+
+
+	/**
      * Tulostetaan pyörän tiedot
      * @param os tietovirta johon tulostetaan
      */
