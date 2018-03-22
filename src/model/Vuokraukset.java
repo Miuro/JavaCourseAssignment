@@ -1,11 +1,15 @@
 package model;
 
-public class Vuokraukset {
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class Vuokraukset implements Iterable<Vuokraus> {
 	
-	private static final int MAX_VUOKRAUKSIA = 5; // does this even make sense?
-	private int lkm = 0;
+	//private static final int MAX_VUOKRAUKSIA = 5; // does this even make sense?
+	//private int lkm = 0;
 	private String tiedostonNimi = "";
-	private Vuokraus alkiot[] = new Vuokraus[MAX_VUOKRAUKSIA];
+	private final Collection<Vuokraus> alkiot = new ArrayList<Vuokraus>();
 	
 	
 	/**
@@ -14,23 +18,25 @@ public class Vuokraukset {
 	 * @throws SailoException jos tietorakenne on jo täynnä
 	 */
 	public void lisaa(Vuokraus vuokraus) throws SailoException {
-		if(lkm >= alkiot.length) throw new SailoException("Liikaa alkioita");
+		alkiot.add(vuokraus);
+		/*if(lkm >= alkiot.length) throw new SailoException("Liikaa alkioita");
 		alkiot[lkm] = vuokraus;
-		lkm++;
+		lkm++;*/
 	}
 	
-	
+	/*
 	/**
 	 * Palauttaa viitteen i:teen vuokraukseen
 	 * @param i monennenko asiakkaan viite halutaan
 	 * @return viite vuokraukseen jonka indeksi on i
 	 * @throws IndexOutOfBoundsException jos indeksi i ei ole sallitulla alueella
 	 */
-	public Vuokraus anna(int i) throws IndexOutOfBoundsException {
+	/*public Vuokraus anna(int i) throws IndexOutOfBoundsException {
 		if(i < 0 || lkm <= i)
 			throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
 		return alkiot[i];
 	}
+	*/
 	
 	
 	/**
@@ -58,8 +64,25 @@ public class Vuokraukset {
 	 * @return vuokrausten lukumäärä
 	 */
 	public int getLkm() {
-		return lkm;
+		return alkiot.size();
 	}
+	
+	@Override
+	public Iterator<Vuokraus> iterator(){
+		return alkiot.iterator();
+	}
+	
+	public Vuokraus annaVuokraus(int tunnusNro) throws SailoException{
+		try {
+			for(Vuokraus vuokr : alkiot)
+				if(vuokr.getPyoraId() == tunnusNro) return vuokr;
+		} catch (Exception e) {
+			throw new SailoException("Vuokrausta ei löytynyt, pyöräid: " + tunnusNro);
+		}
+		return null;
+	}
+	
+	
 	
 	
 	/**
