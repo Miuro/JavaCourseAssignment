@@ -72,6 +72,25 @@ public class Pyora {
 	public double getVuokraPerPaiva() {
 		return vuokraPerPaiva;
 	}
+	
+	
+	/**
+	 * Palauttaa pyörän string muodossa ominaisuudet erotettuna "|"-merkillä
+	 * @return pyörä stringmuodossa jossa ominaisuudet erotettuna "|"-merkillä
+	 */
+	@Override
+	public String toString() {
+		String varattu = "";
+		if (onkoVarattu) varattu = "vuokrattuna";
+		else varattu = "vapaana";
+		return pyoranID + "|" + 
+				nimi + "|" + 
+				malli + "|" + 
+				kunnot[kunto] + "|" + 
+				vuokraPerPaiva + "|" + 
+				varattu + "|" + 
+				lisatietoja;
+	}
 
 
 	/**

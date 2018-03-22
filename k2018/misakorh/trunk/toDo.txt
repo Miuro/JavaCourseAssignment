@@ -16,3 +16,4 @@
 - Asiakkaan valinta listasta?
 - Pyörän tilan valinta(joku sliderlista?)
 - Tulostaminen toimimaan(tulostaa kaikki mitä vasemman listassa on(vuokrausikkunasta voisi myös tulostaa sen vuokrauksen?))
+- Lisää testejä
