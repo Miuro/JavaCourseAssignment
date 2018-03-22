@@ -1,8 +1,11 @@
 package model;
 
+import java.io.File;
+
 public class Vuokraamo {
 	private final Pyorat pyorat = new Pyorat();
 	private final Vuokraukset vuokraukset = new Vuokraukset();
+	
 	
 	/**
 	 * Antaa pyörien lukumäärän

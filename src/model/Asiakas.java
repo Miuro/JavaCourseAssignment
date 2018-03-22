@@ -2,7 +2,7 @@ package model;
 
 import java.io.*;
 
-public class Asiakas {
+public class Asiakas{
 	
 	private int 		asiakasId 	= 0;
 	private String 		nimi 		= "";
@@ -13,12 +13,14 @@ public class Asiakas {
 	
 	private static int 	seuraavaId 	= 1;
 	
+	
 	/**
 	 * Oletusasiakkaan konstruktori
 	 */
 	public Asiakas () {
 
 	}
+	
 	
 	
 	public void vastaaHessuHopo() {
@@ -36,6 +38,21 @@ public class Asiakas {
 	 */
 	public String getNimi() {
 		return nimi;
+	}
+	
+	/**
+	 * Palauttaa jäsenen tiedot muodossa, jonka voi tallentaa tiedostoon.
+	 * @return Jäsenen tiedot tolppaeroteltuna jonona.
+	 */
+	@Override
+	public String toString() {
+		return "" + 
+				getAsiakasId() + "|" +
+				nimi + "|" +
+				sotu + "|" +
+				osoite + "|" +
+				puhnum + "|" +
+				lisatiedot + "|";
 	}
 	
 	
