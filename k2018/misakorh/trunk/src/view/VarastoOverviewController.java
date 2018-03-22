@@ -18,6 +18,7 @@ import model.Asiakas;
 import model.Pyora;
 import model.SailoException;
 import model.Vuokraus;
+import model.Vuokraamo;
 
 public class VarastoOverviewController {
 
@@ -163,7 +164,7 @@ public class VarastoOverviewController {
         uusi.vastaaJopo();
         
         try {
-            vuokraamo.lisaaPyora(uusi);
+            Vuokraamo.lisaaPyora(uusi);
         } catch (SailoException e) {
             Dialogs.showMessageDialog("Ongelmia uuden luomisessa " + e.getMessage());
             return;
@@ -182,7 +183,7 @@ public class VarastoOverviewController {
         Vuokraus vuokraus = new Vuokraus(); 
         vuokraus.rekisteroi(); 
         vuokraus.testiVuokraus(kesto);
-        vuokraamo.lisaaVuokraus(vuokraus); 
+        Vuokraamo.lisaaVuokraus(vuokraus); 
         hae(pyoraKohdalla.getPyoranID());         
     }
     
@@ -195,8 +196,8 @@ public class VarastoOverviewController {
         fxChooserPyorat.clear();
 
         int index = 0;
-        for (int i = 0; i < vuokraamo.getPyoria(); i++) {
-            Pyora pyora = vuokraamo.annaPyora(i);
+        for (int i = 0; i < Vuokraamo.getPyoria(); i++) {
+            Pyora pyora = Vuokraamo.annaPyora(i);
             if (pyora.getPyoranID() == pyoraID) index = i;
             fxChooserPyorat.add(pyora.getNimi(), pyora);
         }
