@@ -1,0 +1,18 @@
+- Clickbox(näytä vain vapaat) toimimaan halutusti
+- Pyörien listaaminen vasemmalle
+- Pyörien luokittelu vasemmalla hakuehtojen mukaan
+- Lisää hakuehtoja hakuun
+- Haku kuntoon
+- Pyörän tietojen muokkaus ja ikkunan muokkaus sopivaksi
+- Tiedostoista luku
+- Tiedostoihin kirjoittaminen
+- Napit kuntoon
+    - Uusi pyörä
+    - Tallenna
+    - Poista pyörä
+    - Vuokraa (vuokrausdialogissa)
+- Vuokraus kuntoon
+- Asiakkaan lisääminen
+- Asiakkaan valinta listasta?
+- Pyörän tilan valinta(joku sliderlista?)
+- Tulostaminen toimimaan(tulostaa kaikki mitä vasemman listassa on(vuokrausikkunasta voisi myös tulostaa sen vuokrauksen?))
