@@ -23,6 +23,7 @@ public class Vuokraamo {
 	}
 	
 	
+	
 	/**
 	 * Antaa halutun pyörän
 	 * @param i halutun pyörän indeksi
@@ -40,5 +41,34 @@ public class Vuokraamo {
 	 */
 	public void lisaaPyora(Pyora pyora)throws SailoException {
 		pyorat.lisaa(pyora);
+	}
+	
+	public static void main(String[] args) {
+		Vuokraamo testi = new Vuokraamo();
+		try {
+			Pyora p1 = new Pyora(), p2 = new Pyora();
+			p1.rekisteroi();
+			p1.vastaaJopo();
+			p2.rekisteroi();
+			p2.vastaaJopo();
+		
+			testi.lisaaPyora(p1);
+			testi.lisaaPyora(p2);
+			
+			int id1 = p1.getPyoranID();
+			int i2 = p2.getPyoranID();
+			
+			Asiakas a1 = new Asiakas();
+			a1.vastaaHessuHopo();
+			a1.rekisteroi();
+			
+			Vuokraus v1 = new Vuokraus();
+			v1.testiVuokraus(5);
+			
+			
+			
+		} catch (SailoException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

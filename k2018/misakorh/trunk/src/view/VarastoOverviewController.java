@@ -178,8 +178,8 @@ public class VarastoOverviewController {
     /**
      * Tekee vuokrauksen valitulle pyörälle.
      */
-    public void vuokraaPyora(int kesto) {
-        // JOptionPane.showMessageDialog(null, "Vielä ei osata lisätä harrastusta!" );
+    public void vuokraaPyora(int kesto) throws SailoException {
+        // JOptionPane.showMessageDialog(null, "Vielä ei osata lisätä vuokrausta!" );
         if ( pyoraKohdalla == null ) return; 
         Vuokraus vuokraus = new Vuokraus(); 
         vuokraus.rekisteroi(); 
@@ -203,6 +203,14 @@ public class VarastoOverviewController {
             fxChooserPyorat.add(pyora.getNimi(), pyora);
         }
         fxChooserPyorat.setSelectedIndex(index); // tästä tulee muutosviesti joka näyttää pyörän
+    }
+    
+    /**
+     * @param vuokraamo Vuokraamo jota käytetään tässä käyttöliittymässä
+     */
+    public void setVuokraamo(Vuokraamo vuokraamo) {
+        this.vuokraamo = vuokraamo;
+        naytaPyora();
     }
     
 

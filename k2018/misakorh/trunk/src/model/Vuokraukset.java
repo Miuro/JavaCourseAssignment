@@ -65,8 +65,9 @@ public class Vuokraukset {
 	/**
 	 * Testiohjelma vuokrauksille
 	 * @param args ei käytösä
+	 * @throws SailoException 
 	 */
 	public static void main(String[] args) {
-		// TODO: Everything
+		
 	}
 }
