@@ -139,6 +139,7 @@ public class VarastoOverviewController {
 	
 	//private Vuokraamo vuokraamo;
     private Pyora pyoraKohdalla;
+    private Vuokraamo vuokraamo;
     private TextArea areaPyora = new TextArea();
 	
     /**
@@ -164,7 +165,7 @@ public class VarastoOverviewController {
         uusi.vastaaJopo();
         
         try {
-            Vuokraamo.lisaaPyora(uusi);
+            vuokraamo.lisaaPyora(uusi);
         } catch (SailoException e) {
             Dialogs.showMessageDialog("Ongelmia uuden luomisessa " + e.getMessage());
             return;
@@ -183,7 +184,7 @@ public class VarastoOverviewController {
         Vuokraus vuokraus = new Vuokraus(); 
         vuokraus.rekisteroi(); 
         vuokraus.testiVuokraus(kesto);
-        Vuokraamo.lisaaVuokraus(vuokraus); 
+        vuokraamo.lisaaVuokraus(vuokraus); 
         hae(pyoraKohdalla.getPyoranID());         
     }
     
@@ -196,8 +197,8 @@ public class VarastoOverviewController {
         fxChooserPyorat.clear();
 
         int index = 0;
-        for (int i = 0; i < Vuokraamo.getPyoria(); i++) {
-            Pyora pyora = Vuokraamo.annaPyora(i);
+        for (int i = 0; i < vuokraamo.getPyoria(); i++) {
+            Pyora pyora = vuokraamo.annaPyora(i);
             if (pyora.getPyoranID() == pyoraID) index = i;
             fxChooserPyorat.add(pyora.getNimi(), pyora);
         }
