@@ -71,7 +71,7 @@ public class Vuokraus {
 	 */
 	public void testiVuokraus(int kestoTunneissa) {
 		pyoraId = 7;
-		vuokraajaId = 4;
+		vuokraajaId = 1;
 		pvm = Calendar.getInstance();
 		palautus = Calendar.getInstance();
 		palautus.add(Calendar.HOUR, kestoTunneissa);

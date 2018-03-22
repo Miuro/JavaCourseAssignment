@@ -9,7 +9,7 @@ public class Asiakas {
 	private String 		sotu 		= "";
 	private String 		osoite 		= "";
 	private String 		puhnum 		= "";
-	private String 		lisaTiedot 	= "";
+	private String 		lisatiedot 	= "";
 	
 	private static int 	seuraavaId 	= 1;
 	
@@ -18,6 +18,15 @@ public class Asiakas {
 	 */
 	public Asiakas () {
 
+	}
+	
+	
+	public void vastaaHessuHopo() {
+		nimi = "Hessu Hopo";
+		sotu = "123123-123W";
+		osoite = "Aleksanterinkatu 14, Helsinki";
+		puhnum = "050 1231231";
+		lisatiedot = "Hieno mies";
 	}
 	
 	
@@ -38,7 +47,7 @@ public class Asiakas {
 		out.println(String.format("%03d", asiakasId, 3) + " " + nimi + " " + sotu);
 		out.println(osoite);
 		out.println(puhnum);
-		out.println(lisaTiedot);
+		out.println(lisatiedot);
 	}
 	
 	
@@ -74,7 +83,18 @@ public class Asiakas {
 	/**
 	 * Testiohjelma asiakkaalle
 	 * @param args ei käytösä
-	 */
+	 * @example
+     * <pre name="test">
+     *   Asiakas p1 = new Asiakas();
+     *   p1.getAsiakasId() === 0;
+     *   p1.rekisteroi();
+     *   Asiakas p2 = new Asiakas();
+     *   p2.rekisteroi();
+     *   int n1 = p1.getAsiakasId();
+     *   int n2 = p2.getAsiakasId();
+     *   n1 === n2-1;
+     * </pre>
+     */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	}
