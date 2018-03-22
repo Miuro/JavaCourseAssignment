@@ -1,15 +1,40 @@
+= <h3>Ohjelman avustus</h3>
 !https://tim.jyu.fi/view/kurssit/tie/ohj2/2018k/ht/misakorh = Suunnitelma TIMissä
+=
 kuvat/paaikkunafxml.jpg = Pääikkunnan kuva ja popuppien kuva tilauksen lisäämiselle.
 kuvat/alkuikkunafxml.jpg = Kuva ohjelman avautuessa.
 kuvat/eiaukeaalku.png = Virheilmoitus jos tiedostoa ei ole.
 kuvat/vuokraajantiedot.jpg = ikkuna johon lisätää vuokraajan tiedot
 kuvat/tulostusikkuna.jpg = ikkuna jossa näkyy tulostettavat tiedot ennen tulostusta.
+=
+= <h3>Ajettava ohjelma</h3>
+varasto.jar = ajettava ohjelma, lataa ja aja
+=
+=<h3>Tietorakenne ja luokat</h3>
+@https://tim.jyu.fi/view/kurssit/tie/ohj2/2018k/ht/misakorh#crc-kortit = CRC-kortit TIMissä
 kuvat/varastoRakenne.png = kuva tietorakenteesta
-src/pyoravarasto/MainApp.java = Main
+
+=<h3>Tietorakenteiden käsittely koodissa</h3>
+src/model/Asiakas.java = Asiakas joka osaa huolhtia omista tiedoistaan
+src/model/Asiakkaat.java = Asiakkaiden käsittely
+src/model/Pyora.java = Pyörä joka osaa huolehtia omista tiedoistaan
+src/model/Pyorat.java = Pyörien käsittely
+src/model/SailoException.java = poikkeusluokka tietorakenteesta tuleville virheille
+src/model/Vuokraamo.java = Välittää pyynnöt Vuokraukset ja Pyorat luokille
+src/model/Vuokraukset.java = Vuokrausten käsittely
+src/model/Vuokraus.java = Vuokraus joka osaa huolehtia omista tiedoistaan
+
+=<h3>Käyttöliittymän ulkoasu FXML:llä</h3>
+src/view/TulostusView.fxml = 
 src/view/UusiTulostusDialog.fxml = Tulostusikkuna
 src/view/UusiTulostusDialogController.java = Tulostusikkunan java -tiedosto
 src/view/UusiVuokrausDialog.fxml = Vuokrausdialogin ikkuna
 src/view/UusiVuokrausDialogController.java = Vuokrausikkunan java -tiedosto
 src/view/VarastoOverview.fxml = Pääikkuna
 src/view/VarastoOverview.java = Pääikkunan java -tiedosto
-varasto.jar = ajettava ohjelma, lataa ja aja
+src/pyoravarasto/MainApp.java = Main
+
+=<h3>Muita tiedostoja</h3>
+.project = Eclipsen projekti
+.classpath = Eclipsen luokkapolku
+build.fxbuild = Tekee .jar:in
