@@ -21,8 +21,15 @@ public class Asiakkaat {
 	 * @param asiakas lisättävän asiakkaan viite. Huom. tietorakenne muuttuu omistajaksi
 	 * @throws SailoException jos tietorakenne on jo täynnä
 	 */
-	public void lisaa(Asiakas asiakas) throws SailoException {
-		if(lkm >= alkiot.length) throw new SailoException("Liikaa alkioita");
+	public void lisaa(Asiakas asiakas) /*throws SailoException*/ {
+		if(lkm >= alkiot.length) {
+			Asiakas[] isompi = new Asiakas[alkiot.length + 5];
+			for(int i = 0; i < alkiot.length; i++) {
+				isompi[i] = alkiot[i];
+			}
+			alkiot = isompi;
+		}
+		//throw new SailoException("Liikaa alkioita");
 		alkiot[lkm] = asiakas;
 		lkm++;
 	}

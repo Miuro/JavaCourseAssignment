@@ -30,6 +30,14 @@ public class Vuokraus {
 		
 	}
 	
+	public int getPyoraId() {
+		return this.pyoraId;
+	}
+	
+	public int getVuokraajaId() {
+		return this.vuokraajaId;
+	}
+	
 	
 	/**
 	 * Tulostaa vuokrauksen tiedot
@@ -108,6 +116,10 @@ public class Vuokraus {
 		testi.testiVuokraus(5);
 		testi.tulosta(System.out);
 
+	}
+
+	public Vuokraus get() {
+		return this;
 	}
 
 }

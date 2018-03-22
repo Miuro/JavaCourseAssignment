@@ -42,9 +42,15 @@ public class Pyorat {
 	 * pyorat.lisaa(jopo1);  #THROWS SailoException
 	 *          </pre>
 	 */
-	public void lisaa(Pyora Pyora) throws SailoException {
-		if (lkm >= alkiot.length)
-			throw new SailoException("Liikaa alkioita");
+	public void lisaa(Pyora Pyora) /*throws SailoException*/ {
+		if (lkm >= alkiot.length) {
+			Pyora[] isompi = new Pyora[alkiot.length + 5];
+			for(int i = 0; i < alkiot.length; i++) {
+				isompi[i] = alkiot[i];
+			}
+			alkiot = isompi;
+		}
+		//throw new SailoException("Liikaa alkioita");
 		alkiot[lkm] = Pyora;
 		lkm++;
 	}
@@ -109,22 +115,17 @@ public class Pyorat {
 		jopo1.vastaaJopo();
 		jopo2.rekisteroi();
 		jopo2.vastaaJopo();
+		pyorat.lisaa(jopo1);
+		pyorat.lisaa(jopo2);
 
-		try {
-			pyorat.lisaa(jopo1);
-			pyorat.lisaa(jopo2);
+		System.out.println("============= Pyörät testi =================");
 
-			System.out.println("============= Pyörät testi =================");
-
-			for (int i = 0; i < pyorat.getLkm(); i++) {
-				Pyora jasen = pyorat.anna(i);
-				System.out.println("Jäsen nro: " + i);
-				jasen.tulosta(System.out);
-			}
-
-		} catch (SailoException ex) {
-			System.out.println(ex.getMessage());
+		for (int i = 0; i < pyorat.getLkm(); i++) {
+			Pyora jasen = pyorat.anna(i);
+			System.out.println("Jäsen nro: " + i);
+			jasen.tulosta(System.out);
 		}
+
 	}
 
 }
