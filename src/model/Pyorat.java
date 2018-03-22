@@ -79,7 +79,7 @@ public class Pyorat {
 	 *             jos lukeminen epäonnistuu
 	 */
 	public void lueTiedostosta(String hakemisto) throws SailoException {
-		tiedostonNimi = hakemisto + "/nimet.dat";
+		tiedostonNimi = hakemisto + "/pyorat.dat";
 		throw new SailoException("Ei osata vielä lukea tiedostoa " + tiedostonNimi);
 	}
 
