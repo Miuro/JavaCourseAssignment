@@ -1,4 +1,4 @@
-	package model;
+package model;
 
 import java.io.*;
 
@@ -127,15 +127,12 @@ public class Pyora {
 	 */
 	@Override
 	public String toString() {
-		String varattu = "";
-		if (onkoVarattu) varattu = "vuokrattuna";
-		else varattu = "vapaana";
 		return pyoranID + "|" + 
 				nimi + "|" + 
 				malli + "|" + 
-				kunnot[kunto] + "|" + 
+				kunto + "|" + 
 				vuokraPerPaiva + "|" + 
-				varattu + "|" + 
+				onkoVarattu + "|" + 
 				lisatietoja;
 	}
 	
@@ -149,12 +146,26 @@ public class Pyora {
 	}
 
 
-	private String aseta(int k, String jono) {
+
+	/**
+	 * Asettaa k:n kent‰n arvoksi parametrina tuodun merkkijonon arvon
+	 * @param k kuinka monennen kent‰n arvo asetetaan
+	 * @param jono jonoa joka asetetaan kent‰n arvoksi
+	 * @return null jos asettaminen onnistuu.
+	 * @example
+	 * <pre name="test">
+	 * Pyora jasen = new Pyora();
+	 * jasen.aseta(1,"Jopo") === null;
+	 * jasen.aseta(3,"Terve") === "Kunto oli v‰‰rin, anna arvo 0-3";
+	 * jasen.aseta(4, "Moi") === "Vuokra oli v‰‰rin";
+	 * </pre>
+	 */
+	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
 		StringBuffer sb = new StringBuffer(tjono);
 		switch (k) {
 		case 0:
-			setPyoranID(Mjonot.erota(sb, 'ß', getPyoranID()));
+			setPyoranID(Mjonot.erota(sb, '|', getPyoranID()));
 			return null;
 		case 1:
 			nimi = tjono;
@@ -163,10 +174,28 @@ public class Pyora {
 			malli = tjono;
 			return null;
 		case 3: 
+			try {
+				kunto = Integer.parseInt(tjono);				
+			} catch (NumberFormatException e) {
+				return "Kunto oli v‰‰rin, anna arvo 0-3";
+			}
+			return null;
+		case 4: 
+			try {				
+				vuokraPerPaiva = Integer.parseInt(tjono);
+			} catch (NumberFormatException e) {
+				return "Vuokra oli v‰‰rin";
+			}
+			return null;
+		case 5:
+			onkoVarattu = Boolean.parseBoolean(tjono);
+			return null;
+		case 6:
+			lisatietoja = tjono;
+			return null;
 		default:
-			break;
+			return "Tervetti";
 		}
-		return null;
 	}
 
 	/**
