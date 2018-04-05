@@ -150,10 +150,19 @@ public class Pyora implements Cloneable {
 	 * @param rivi josta pyörän tiedot otetaan
 	 */
 	public void parse(String rivi) {
-		StringBuffer sb = new StringBuffer();
+		String[] osat = rivi.split("\\|");
+		for (int k = 0; k < getKenttia(); k++) {
+			aseta(k, osat[k]);
+		}
+				
+				/*
+		StringBuilder sb = new StringBuilder();
+		int kohta = 0;
 		for (int k = 0; k < getKenttia(); k++) {
 			aseta(k, Mjonot.erota(sb, '|'));
-		}
+			aseta(k, sb.subSequence(kohta, sb.indexOf("|"))
+			*/
+		
 	}
 
 

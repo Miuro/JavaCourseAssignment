@@ -97,7 +97,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
      * @return Tiedoston nimi.
      */
 	public String getTiedostonNimi() {
-		return tiedostonPerusNimi;
+		return tiedostonPerusNimi + ".dat";
 	}
 	
 	

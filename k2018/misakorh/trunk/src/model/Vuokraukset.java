@@ -15,7 +15,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	
 	//private static final int MAX_VUOKRAUKSIA = 5; // does this even make sense?
 	//private int lkm = 0;
-	private String tiedostonPerusNimi = "";
+	private String tiedostonPerusNimi = "vuokraukset";
 	private final Collection<Vuokraus> alkiot = new ArrayList<Vuokraus>();
 	private boolean muutettu = false;
 	
@@ -63,7 +63,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 				rivi = rivi.trim();
 				if ( "".equals(rivi) || rivi.charAt(0) == ';' ) continue;
 				Vuokraus vuokraus = new Vuokraus();
-				//vuokraus.parse(rivi);
+				vuokraus.parse(rivi);
 				lisaa(vuokraus);
 			}
 			muutettu = false;

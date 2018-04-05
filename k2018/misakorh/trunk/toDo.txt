@@ -1,4 +1,4 @@
-- Clickbox(näytä vain vapaat) toimimaan halutusti
+﻿- Clickbox(näytä vain vapaat) toimimaan halutusti
 - Pyörien listaaminen vasemmalle
 - Pyörien luokittelu vasemmalla hakuehtojen mukaan
 - Lisää hakuehtoja hakuun
@@ -17,3 +17,6 @@
 - Pyörän tilan valinta(joku sliderlista?)
 - Tulostaminen toimimaan(tulostaa kaikki mitä vasemman listassa on(vuokrausikkunasta voisi myös tulostaa sen vuokrauksen?))
 - Lisää testejä
+
+
+- HOX parse niin ettei kaadu tyhjissä kentissä tiedostoja luettaessa
