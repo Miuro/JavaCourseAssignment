@@ -222,7 +222,7 @@ public class Pyora implements Cloneable {
 		case 2:
 			return "Malli";
 		case 3:
-			return "Kunto 0-2";
+			return "Kunto 0-3";
 		case 4:
 			return "Vuokra per päivä";
 		case 5:

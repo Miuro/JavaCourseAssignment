@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.util.Collection;
 
 public class Vuokraamo {
 	private Pyorat pyorat = new Pyorat();
@@ -25,6 +26,8 @@ public class Vuokraamo {
 		return vuokraukset.annaVuokraus(pyora.getPyoranID());
 	}
 	
+	public int getPyoria()
+	
 	public void setTiedosto(String nimi) {
 		File dir = new File(nimi);
 		dir.mkdirs();
@@ -46,6 +49,17 @@ public class Vuokraamo {
 		asiakkaat.lueTiedostosta();		
 	}
 	
+	
+    /** 
+     * Palauttaa "taulukossa" hakuehtoon vastaavien pyörien viitteet 
+     * @param hakuehto hakuehto  
+     * @param k etsittävän kentän indeksi  
+     * @return tietorakenteen löytyneistä pyöristä 
+     * @throws SailoException Jos jotakin menee väärin
+     */ 
+    public Collection<Pyora> etsi(String hakuehto, int k) throws SailoException { 
+        return pyorat.etsi(hakuehto, k); 
+    } 
 	
 	public void tallenna() throws SailoException{
 		String virhe = "";

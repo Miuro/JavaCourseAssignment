@@ -60,7 +60,7 @@
                            </children>
                         </HBox>
                         <TextField promptText="Haku" />
-                        <ComboBoxChooser maxWidth="200.0" rivit="Nimi" />
+                        <ComboBoxChooser fx:id="cbKentat"  maxWidth="200.0" onAction="#handleHakuehto" rivit="Nimi Malli Kunto Vuokraperpäivä Onkovarattuna" />
                         <Label alignment="CENTER" prefHeight="0.0" prefWidth="189.0" text="Pyörät" />
                      </children>
                   </VBox>
@@ -71,7 +71,7 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="272.0">
                <center>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <ScrollPane fx:id="panelPyora" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <content>
                         <GridPane hgap="10.0">
                           <columnConstraints>
