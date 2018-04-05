@@ -14,7 +14,7 @@ public class Pyorat {
 	
 	private ArrayList<Pyora> alkiot = new ArrayList<>();
 
-	private String tiedostonPerusNimi = "";
+	private String tiedostonPerusNimi = "pyorat";
 	private boolean muutettu = false;
 	
 	/**

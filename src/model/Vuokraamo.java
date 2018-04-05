@@ -106,7 +106,7 @@ public class Vuokraamo {
 			Vuokraus v1 = new Vuokraus();
 			v1.testiVuokraus(5);
 			
-			
+			testi.lueTiedostosta("Testi");
 			
 		} catch (SailoException e) {
 			System.out.println(e.getMessage());

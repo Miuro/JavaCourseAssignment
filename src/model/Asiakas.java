@@ -111,9 +111,9 @@ public class Asiakas{
 	
 	
 	public void parse(String rivi) {
-		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < getKenttia(); i++) {
-			aseta(i, Mjonot.erota(sb, '|'));
+		String[] osat = rivi.split("\\|");
+		for (int k = 0; k < getKenttia(); k++) {
+			aseta(k, osat[k]);
 		}
 	}
 	
