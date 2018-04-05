@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Pyorat {
 	
@@ -22,6 +23,22 @@ public class Pyorat {
 	public Pyorat() {
 		// Attribuuttien oma alustus riittää
 	}
+	
+	
+	/**
+	 * Palauttaa listan hakuehtoon vastaavien pyörien viitteet
+	 * @param hakuehto hakuehto
+	 * @param k haettavan kentän indeksi
+	 * @return pyörät, jotka vastaavat hakuehtoa
+	 */
+	public Collection<Pyora> etsi(String hakuehto, int k) {
+		Collection<Pyora> loytyneet = new ArrayList<>(); 
+        for (Pyora pyora: alkiot) { 
+            loytyneet.add(pyora);  
+        } 
+        return loytyneet; 
+    }
+	
 
 	
 	/**

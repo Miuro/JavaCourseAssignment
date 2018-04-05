@@ -120,7 +120,7 @@ public class VarastoOverviewController {
 
 	@FXML
 	void handleMenuAvaa() {
-		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+		avaa();
 	}
 
 
@@ -145,13 +145,13 @@ public class VarastoOverviewController {
 
 	@FXML
 	void handleTallenna() {
-		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+		tallenna();
 	}
 
 
 	@FXML
 	void handleUusiPyora() {
-		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+		uusiPyora();
 	}
 
 
