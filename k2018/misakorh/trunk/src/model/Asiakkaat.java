@@ -1,7 +1,9 @@
 package model;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,9 +13,8 @@ import java.util.NoSuchElementException;
 public class Asiakkaat implements Iterable<Asiakas> {
 
 	private static final int 	MAX_ASIAKKAITA 	= 5;
-	private String				kerhonNimi		= "";
 	private int 				lkm 			= 0;
-	private String 				tiedostonNimi 	= "asiakkaat";
+	private String 				tiedostonPerusNimi 	= "asiakkaat";
 	private Asiakas 			alkiot[] 		= new Asiakas[MAX_ASIAKKAITA];
 	private boolean				muutettu		= false;
 	
@@ -25,7 +26,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 */
 	public class AsiakkaatIterator implements Iterator<Asiakas>{
 		private int kohdalla = 0;
-
+		
 		@Override
 		public boolean hasNext() {
 			return kohdalla < lkm;
@@ -67,19 +68,18 @@ public class Asiakkaat implements Iterable<Asiakas> {
     public void tallenna() throws SailoException {
         if ( !muutettu ) return;
 
-        //File fbak = new File(getBakNimi()); // TODO: Lis‰‰ backup jutut :D
+        File fbak = new File(getBakNimi()); // TODO: Lis‰‰ backup jutut :D
         File ftied = new File(getTiedostonNimi());
-        //fbak.delete(); // if .. System.err.println("Ei voi tuhota");
-        //ftied.renameTo(fbak); // if .. System.err.println("Ei voi nimet‰");
+        fbak.delete(); // if .. System.err.println("Ei voi tuhota");
+        ftied.renameTo(fbak); // if .. System.err.println("Ei voi nimet‰");
 
         try ( PrintWriter fo = new PrintWriter(new FileWriter(ftied.getCanonicalPath())) ) {
-            fo.println(getNimi());
-            fo.println(alkiot.length);
+            //fo.println(getNimi());
+            //fo.println(alkiot.length);  Eikˆ n‰ihin riit‰ vaan et tulostetaan ne asiakkaan tiedot
             for (Asiakas asiakas : this) {
                 fo.println(asiakas.toString());
             }
-            //} catch ( IOException e ) { // ei heit‰ poikkeusta
-            //  throw new SailoException("Tallettamisessa ongelmia: " + e.getMessage());
+            
         } catch ( FileNotFoundException ex ) {
             throw new SailoException("Tiedosto " + ftied.getName() + " ei aukea");
         } catch ( IOException ex ) {
@@ -88,19 +88,46 @@ public class Asiakkaat implements Iterable<Asiakas> {
 
         muutettu = false;
     }
-	
-	
-    private String getNimi() {
-		return kerhonNimi;
-	}
 
 
 
 	/**
+	 * Palauttaa tiedoston nimen jota k‰ytet‰‰n tallennukseen
+	 * 
      * @return Tiedoston nimi.
      */
-	private String getTiedostonNimi() {
-		return tiedostonNimi;
+	public String getTiedostonNimi() {
+		return tiedostonPerusNimi;
+	}
+	
+	
+	/**
+	 * Palauttaa varakopiotiedoston nimen
+	 * 
+	 * @return varakopiotiedoston nimi
+	 */
+	public String getBakNimi() {
+		return tiedostonPerusNimi + ".bak";
+	}
+	
+	
+	/**
+	 * Palauttaa tiedoston nimen jota k‰ytet‰‰n tallennukseen ilman p‰‰tett‰
+	 * 
+	 * @return tallennustiedoston nimi
+	 */
+	public String getTiedostonPerusNimi() {
+		return tiedostonPerusNimi;
+	}
+	
+	
+	/**
+	 * Asettaa tiedoston nimen ilman p‰‰tett‰
+	 * 
+	 * @param tied haluttu tiedoston nimi
+	 */
+	public void setTiedostonPerusNimi(String tied) {
+		tiedostonPerusNimi = tied;
 	}
 
 
@@ -138,22 +165,41 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	
 	
 	/**
-	 * Lukee asiakkaat tiedostosta. Kesken!
-	 * @param hakemisto tiedoston hakemisto
-	 * @throws SailoException jos lukeminen ep‰onnistuu
+	 * Lukee asiakkaat tiedostosta
+	 * 
+	 * @param tied tiedoston nimi
+	 * @throws FileNotFoundException jos ei aukea
+	 * @throws IOException jos ongelmia tiedoston kanssa
 	 */
-	public void lueTiedostosta(String hakemisto) throws SailoException {
-		tiedostonNimi = hakemisto + "/asiakkaat.dat";
-		throw new SailoException("Ei osata viel‰ lukea tiedostoa " + tiedostonNimi);
+	public void lueTiedostosta(String tied) throws SailoException {
+		setTiedostonPerusNimi(tied);
+		
+		try ( BufferedReader fi = new BufferedReader(new FileReader(getTiedostonNimi())) ) {
+			String rivi;
+			while ((rivi = fi.readLine()) != null) {
+				rivi = rivi.trim();
+				if ( "".equals(rivi) || rivi.charAt(0) == ';' ) continue;
+				Asiakas asiakas = new Asiakas();
+				asiakas.parse(rivi);
+				lisaa(asiakas);
+			}
+			muutettu = false;
+			
+		} catch (FileNotFoundException e) {
+			throw new SailoException("Tiedosto " + getTiedostonNimi() + " ei aukea");
+		} catch (IOException e) {
+			throw new SailoException("Ongelmia tiedoston kanssa: " + e.getMessage());
+		}
 	}
 	
 	
 	/**
-	 * Tallentaa asiakkaat tiedostoon. Kesken!
-	 * @throws SailoException jos talletus ep‰onnistuu
+	 * Luetaan aikaisemmin annetusta tiedostosta
+	 * 
+	 * @throws SailoException jos tulee poikkeus
 	 */
-	public void talleta() throws SailoException {
-		throw new SailoException("Ei osata viel‰ tallettaa tiedostoa " + tiedostonNimi);
+	public void lueTiedostosta() throws SailoException {
+		lueTiedostosta(getTiedostonPerusNimi());
 	}
 	
 	

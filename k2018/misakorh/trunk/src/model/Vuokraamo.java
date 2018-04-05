@@ -1,52 +1,72 @@
 package model;
 
+import java.io.File;
 
 public class Vuokraamo {
-	private final Pyorat pyorat = new Pyorat();
-	private final Vuokraukset vuokraukset = new Vuokraukset();
+	private Pyorat pyorat = new Pyorat();
+	private Vuokraukset vuokraukset = new Vuokraukset();
+	private Asiakkaat asiakkaat = new Asiakkaat();
 	
-	
-	/**
-	 * Antaa pyörien lukumäärän
-	 * @return pyörien lukumäärä
-	 */
-	public int getPyoria() {
-		return pyorat.getLkm();
+	public void lisaaPyora(Pyora pyora) throws SailoException{
+		pyorat.lisaa(pyora);
 	}
 	
 	
-	
-	
-	
-	/**
-	 * Lisää uuden vuokrauksen kokoelmaan
-	 * @param vuokraus lisättävä vuokraus
-	 * @throws SailoException jos täysi
-	 */
-	public void lisaaVuokraus (Vuokraus vuokraus) throws SailoException {
+	public void lisaaVuokraus(Vuokraus vuokraus) throws SailoException {
 		vuokraukset.lisaa(vuokraus);
 	}
 	
 	
+	public void lisaaAsiakas(Asiakas asiakas) throws SailoException{
+		asiakkaat.lisaa(asiakas);
+	}
 	
-	/**
-	 * Antaa halutun pyörän
-	 * @param i halutun pyörän indeksi
-	 * @return haluttu pyörä
-	 */
-	public Pyora annaPyora(int i) {
-		return pyorat.anna(i);
+	public Vuokraus annaVuokraus(Pyora pyora) throws SailoException {
+		return vuokraukset.annaVuokraus(pyora.getPyoranID());
+	}
+	
+	public void setTiedosto(String nimi) {
+		File dir = new File(nimi);
+		dir.mkdirs();
+		String hakemistonNimi = "";
+		if(!nimi.isEmpty()) hakemistonNimi = nimi + "/";
+		pyorat.setTiedostonPerusNimi(hakemistonNimi + "pyorat");
+		vuokraukset.setTiedostonPerusNimi(hakemistonNimi + "vuokraukset");
+		asiakkaat.setTiedostonPerusNimi(hakemistonNimi + "asiakkaat");
+	}
+
+	public void lueTiedostosta(String nimi) throws SailoException{
+		Pyorat pyorat = new Pyorat();
+		Vuokraukset vuokraukset = new Vuokraukset();
+		Asiakkaat asiakkaat = new Asiakkaat();
+		
+		setTiedosto(nimi);
+		pyorat.lueTiedostosta();
+		vuokraukset.lueTiedostosta();
+		asiakkaat.lueTiedostosta();		
 	}
 	
 	
-	/**
-	 * Lisää pyörän kokoelmaan
-	 * @param pyora lisättävä pyörä
-	 * @throws SailoException jos menee yli
-	 */
-	public void lisaaPyora(Pyora pyora)throws SailoException {
-		pyorat.lisaa(pyora);
+	public void tallenna() throws SailoException{
+		String virhe = "";
+		try {
+			pyorat.tallenna();
+		} catch (SailoException e) {
+			virhe = e.getMessage();
+		} 
+		try {
+			vuokraukset.tallenna();
+		} catch (SailoException e) {
+			virhe += e.getMessage();
+		}
+		try {
+			asiakkaat.tallenna();
+		} catch (SailoException e) {
+			virhe += e.getMessage();
+		}
+		if(!"".equals(virhe)) throw new SailoException(virhe);
 	}
+	
 	
 	public static void main(String[] args) {
 		Vuokraamo testi = new Vuokraamo();

@@ -69,7 +69,7 @@ public class Pyorat {
 
 	
 	/**
-	 * Lukee jäsenistön tiedostosta. Kesken.
+	 * Lukee pyörät tiedostosta
 	 * 
 	 * @param tied tiedoston nimi
 	 * @throws FileNotFoundException jos ei aukea
@@ -77,6 +77,7 @@ public class Pyorat {
 	 */
 	public void lueTiedostosta(String tied) throws SailoException {
 		setTiedostonPerusNimi(tied);
+		
 		try ( BufferedReader fi = new BufferedReader(new FileReader(getTiedostonNimi())) ) {
 			String rivi;
 			while ((rivi = fi.readLine()) != null) {
@@ -147,11 +148,11 @@ public class Pyorat {
 
 	
 	/**
-	 * Tallentaa jäsenistön tiedostoon. Kesken.
+	 * Tallentaa pyörät tiedostoon
 	 * 
 	 * @throws SailoException jos talletus epäonnistuu
 	 */
-	public void talleta() throws SailoException {
+	public void tallenna() throws SailoException {
 		if (!muutettu) return;
 		
 		File fbak = new File(getBakNimi());
