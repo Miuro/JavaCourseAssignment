@@ -19,14 +19,10 @@ public class Pyora {
 	private int pyoranID;
 	private String nimi = "";
 	private String malli = "";
-	private int kunto = 3; // 0-3. 0 = rikki, 1 =
-							// tyydyttävä, 2 = hyvä,
-							// 3 = erinomainen
+	private int kunto = 3; // 0-3. 0 = rikki, 1 = tyydyttävä, 2 = hyvä, 3 = erinomainen
 	private String lisatietoja = "";
-	private boolean onkoVarattu = false; // FALSE = vapaana, TRUE
-											// = vuokrattuna
-	private double vuokraPerPaiva = 0; // TODO: muuta
-										// vuokraPerTunti
+	private boolean onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
+	private double vuokraPerPaiva = 0; // TODO: muuta vuokraPerTunti
 
 
 	/**
