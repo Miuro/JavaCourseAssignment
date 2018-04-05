@@ -2,6 +2,8 @@ package model;
 
 import java.io.*;
 
+import fi.jyu.mit.ohj2.Mjonot;
+
 public class Asiakas{
 	
 	private int 		asiakasId 	= 0;
@@ -19,6 +21,50 @@ public class Asiakas{
 	 */
 	public Asiakas () {
 
+	}
+	
+	
+	/**
+	 * Palauttaa asiakkaan kenttien lukumäärän
+	 * @return asiakkaan kenttien lukumäärän
+	 */
+	public int getKenttia() {
+		return 6;
+	}
+	
+	
+	
+	/**
+	 * Palauttaa ensimmäisen kentän joka on mielekäs kysyttäväksi
+	 * @return ensimmäinen järkevästi kysyttävä kenttä
+	 */
+	public int ekaKentta() {
+		return 1;
+	}
+	
+	
+	/**
+	 * Palauttaa k:n kentän sisällön merkkijonona
+	 * @param k halutun kentän numero
+	 * @return kentän sisältö merkkijonona
+	 */
+	public String anna(int k) {
+		switch (k) {
+		case 0:
+			return "" + asiakasId;
+		case 1:
+			return "" + nimi;
+		case 2:
+			return "" + sotu;
+		case 3:
+			return "" + osoite;
+		case 4:
+			return "" + puhnum;
+		case 5:
+			return "" + lisatiedot;
+		default:
+			return "Hupsista";
+		}
 	}
 	
 	
@@ -40,6 +86,13 @@ public class Asiakas{
 		return nimi;
 	}
 	
+	
+	
+	public void setAsiakasId(int id) {
+		asiakasId = id;
+	}
+	
+	
 	/**
 	 * Palauttaa jäsenen tiedot muodossa, jonka voi tallentaa tiedostoon.
 	 * @return Jäsenen tiedot tolppaeroteltuna jonona.
@@ -53,6 +106,69 @@ public class Asiakas{
 				osoite + "|" +
 				puhnum + "|" +
 				lisatiedot + "|";
+	}
+	
+	
+	
+	public void parse(String rivi) {
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0; i < getKenttia(); i++) {
+			aseta(i, Mjonot.erota(sb, '|'));
+		}
+	}
+	
+	
+	public String aseta(int k, String jono) {
+		String tjono = jono.trim();
+		StringBuffer sb = new StringBuffer(tjono);
+		switch (k) {
+		case 0:
+			setAsiakasId(Mjonot.erota(sb, '|', getAsiakasId()));
+			return null;
+		case 1:
+			nimi = tjono;
+			return null;
+		case 2:
+			sotu = tjono;
+			return null;
+		case 3:
+			osoite = tjono;
+			return null;
+		case 4:
+			puhnum = tjono;
+			return null;
+		case 5:
+			lisatiedot = tjono;
+			return null;
+		default:
+			return "Tervetti";
+		}
+	}
+	
+	
+	
+	/**
+	 * Palauttaa k:tta asiakkaan kenttää vastaavan kysymyksen
+	 * @param k kuinka monennen kentän kysymys palutetaan (alkaen 0:sta)
+	 * @return k:netta kenttää vastaava kysymys 
+	 */
+	public String getKysymys(int k) {
+		switch (k) {
+		case 0:
+			return "Asiakkaan ID";
+		case 1:
+			return "Nimi";
+		case 2:
+			return "Sotu";
+		case 3:
+			return "Osoite";
+		case 4:
+			return "Puhelinnumero";
+		case 5:
+			return "Lisätiedot";
+		default:
+			return "HupsisKupsos";
+		}
 	}
 	
 	
