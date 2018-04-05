@@ -3,7 +3,6 @@ package view;
 import pyoravarasto.MainApp;
 
 import java.io.PrintStream;
-import java.util.List;
 
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
@@ -14,7 +13,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 
-import model.Asiakas;
 import model.Pyora;
 import model.SailoException;
 import model.Vuokraus;
