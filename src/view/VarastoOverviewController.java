@@ -34,8 +34,7 @@ public class VarastoOverviewController {
 	@FXML 
 	private Label labelVirhe;
 	
-	@FXML 
-	private TextField hakuehto;
+	@FXML private TextField hakuehto;
 
 	@FXML
 	private MenuItem fxMenuAvaa;
@@ -98,6 +97,12 @@ public class VarastoOverviewController {
 	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
+	}
+	
+	@FXML
+	void handleHakuehto() {
+        if ( pyoraKohdalla != null )
+            hae(pyoraKohdalla.getPyoranID()); 
 	}
 
 
