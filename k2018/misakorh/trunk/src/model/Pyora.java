@@ -2,6 +2,8 @@
 
 import java.io.*;
 
+import fi.jyu.mit.ohj2.Mjonot;
+
 /*
  * Pyorä-olio
  * Sisältää konstruktorit uudelle pyörälle.
@@ -51,10 +53,9 @@ public class Pyora {
         case 1: return "" + nimi;
         case 2: return "" + malli;
         case 3: return "" + kunto;
-        case 4: return "" + kunto;
-        case 5: return "" + lisatietoja;
-        case 6: return "" + onkoVarattu;
-        case 7: return "" + vuokraPerPaiva;
+        case 4: return "" + lisatietoja;
+        case 5: return "" + onkoVarattu;
+        case 6: return "" + vuokraPerPaiva;
         default: return "Hupsista";
         }
     }
@@ -94,6 +95,15 @@ public class Pyora {
     public int getPyoranID() {
     	return pyoranID;
     }
+    
+    
+    /**
+     * Asettaa pyörän ID:ksi annetun arvon
+     * @param id Pyörän uusi ID
+     */
+    public void setPyoranID(int id) {
+    	pyoranID = id;
+    }
 	
     /**
      * @return Palauttaa pyörän nimen.
@@ -128,7 +138,36 @@ public class Pyora {
 				varattu + "|" + 
 				lisatietoja;
 	}
+	
+	
+	
+	public void parse(String rivi) {
+		StringBuffer sb = new StringBuffer();
+		for (int k = 0; k < getKenttia(); k++) {
+			aseta(k, Mjonot.erota(sb, '|'));
+		}
+	}
 
+
+	private String aseta(int k, String jono) {
+		String tjono = jono.trim();
+		StringBuffer sb = new StringBuffer(tjono);
+		switch (k) {
+		case 0:
+			setPyoranID(Mjonot.erota(sb, '§', getPyoranID()));
+			return null;
+		case 1:
+			nimi = tjono;
+			return null;
+		case 2:
+			malli = tjono;
+			return null;
+		case 3: 
+		default:
+			break;
+		}
+		return null;
+	}
 
 	/**
 	 * Apumetodi testiarvojen tuottamiselle
