@@ -63,7 +63,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 				rivi = rivi.trim();
 				if ( "".equals(rivi) || rivi.charAt(0) == ';' ) continue;
 				Vuokraus vuokraus = new Vuokraus();
-				vuokraus.parse(rivi);
+				//vuokraus.parse(rivi);
 				lisaa(vuokraus);
 			}
 			muutettu = false;
