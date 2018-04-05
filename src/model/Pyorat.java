@@ -6,10 +6,7 @@ public class Pyorat {
 	
 	private ArrayList<Pyora> alkiot = new ArrayList<>();
 
-	private int lkm = 0;
 	private String tiedostonNimi = "";
-	//private static final int MAX_PYORIA = 5;
-	//private Pyora alkiot[] = new Pyora[MAX_PYORIA];
 
 	/**
 	 * Oletusmuodostaja
@@ -72,9 +69,7 @@ public class Pyorat {
 
 	/**
 	 * Tallentaa jäsenistön tiedostoon. Kesken.
-	 * 
-	 * @throws SailoException
-	 *             jos talletus epäonnistuu
+	 * @throws SailoException jos talletus epäonnistuu
 	 */
 	public void talleta() throws SailoException {
 		throw new SailoException("Ei osata vielä tallettaa tiedostoa " + tiedostonNimi);

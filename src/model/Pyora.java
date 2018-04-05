@@ -1,4 +1,4 @@
-package model;
+	package model;
 
 import java.io.*;
 
@@ -21,6 +21,43 @@ public class Pyora {
 	private String 		lisatietoja = "";
 	private boolean 	onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
 	private double 		vuokraPerPaiva = 0; //TODO: muuta vuokraPerTunti
+	
+	
+	/**
+	 * Palauttaa pyörän kenttien määrän
+	 * @return kenttien määrä
+	 */
+	public int getKenttia() {
+		return 7;
+	}
+	
+    /**
+     * Eka kenttä joka on mielekäs kysyttäväksi
+     * @return eknn kentän indeksi
+     */
+    public int ekaKentta() {
+        return 1;
+    }
+    
+    
+    /**
+     * Antaa k:n kentän sisällön merkkijonona
+     * @param k monenenko kentän sisältö palautetaan
+     * @return kentän sisältö merkkijonona
+     */
+    public String anna(int k) {
+        switch ( k ) {
+        case 0: return "" + pyoranID;
+        case 1: return "" + nimi;
+        case 2: return "" + malli;
+        case 3: return "" + kunto;
+        case 4: return "" + kunto;
+        case 5: return "" + lisatietoja;
+        case 6: return "" + onkoVarattu;
+        case 7: return "" + vuokraPerPaiva;
+        default: return "Hupsista";
+        }
+    }
 	
 
 	
