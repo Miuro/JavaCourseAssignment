@@ -13,18 +13,22 @@ import fi.jyu.mit.ohj2.Mjonot;
  */
 public class Pyora {
 
-	private static String[] kunnot = {"Rikki", "Tyydyttävä", "Hyvä", "Erinomainen"};
+	private static String[] kunnot = { "Rikki", "Tyydyttävä", "Hyvä", "Erinomainen" };
 	private static int seuraavaID = 1;
-	
-	private int			pyoranID;
-	private String 		nimi = "";
-	private String		malli = "";
-	private int			kunto = 3; // 0-3. 0 = rikki, 1 = tyydyttävä, 2 = hyvä, 3 = erinomainen
-	private String 		lisatietoja = "";
-	private boolean 	onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
-	private double 		vuokraPerPaiva = 0; //TODO: muuta vuokraPerTunti
-	
-	
+
+	private int pyoranID;
+	private String nimi = "";
+	private String malli = "";
+	private int kunto = 3; // 0-3. 0 = rikki, 1 =
+							// tyydyttävä, 2 = hyvä,
+							// 3 = erinomainen
+	private String lisatietoja = "";
+	private boolean onkoVarattu = false; // FALSE = vapaana, TRUE
+											// = vuokrattuna
+	private double vuokraPerPaiva = 0; // TODO: muuta
+										// vuokraPerTunti
+
+
 	/**
 	 * Palauttaa pyörän kenttien määrän
 	 * @return kenttien määrä
@@ -32,112 +36,116 @@ public class Pyora {
 	public int getKenttia() {
 		return 7;
 	}
-	
-    /**
-     * Eka kenttä joka on mielekäs kysyttäväksi
-     * @return eknn kentän indeksi
-     */
-    public int ekaKentta() {
-        return 1;
-    }
-    
-    
-    /**
-     * Antaa k:n kentän sisällön merkkijonona
-     * @param k monenenko kentän sisältö palautetaan
-     * @return kentän sisältö merkkijonona
-     */
-    public String anna(int k) {
-        switch ( k ) {
-        case 0: return "" + pyoranID;
-        case 1: return "" + nimi;
-        case 2: return "" + malli;
-        case 3: return "" + kunto;
-        case 4: return "" + lisatietoja;
-        case 5: return "" + onkoVarattu;
-        case 6: return "" + vuokraPerPaiva;
-        default: return "Hupsista";
-        }
-    }
-	
 
-	
+
+	/**
+	 * Eka kenttä joka on mielekäs kysyttäväksi
+	 * @return eknn kentän indeksi
+	 */
+	public int ekaKentta() {
+		return 1;
+	}
+
+
+	/**
+	 * Antaa k:n kentän sisällön merkkijonona
+	 * @param k monenenko kentän sisältö palautetaan
+	 * @return kentän sisältö merkkijonona
+	 */
+	public String anna(int k) {
+		switch (k) {
+		case 0:
+			return "" + pyoranID;
+		case 1:
+			return "" + nimi;
+		case 2:
+			return "" + malli;
+		case 3:
+			return "" + kunto;
+		case 4:
+			return "" + lisatietoja;
+		case 5:
+			return "" + onkoVarattu;
+		case 6:
+			return "" + vuokraPerPaiva;
+		default:
+			return "Hupsista";
+		}
+	}
+
+
 	/**
 	 * Peruskonstruktori pyörälle.
 	 */
-	public Pyora() {}
-	
-	
-    /**
-     * Antaa jäsenelle seuraavan rekisterinumeron.
-     * @return jäsenen uusi tunnusNro
-     * @example
-     * <pre name="test">
-     *   Pyora jopo1 = new Pyora();
-     *   jopo1.getPyoranID() === 0;
-     *   jopo1.rekisteroi();
-     *   Pyora jopo2 = new Pyora();
-     *   jopo2.rekisteroi();
-     *   int n1 = jopo1.getPyoranID();
-     *   int n2 = jopo2.getPyoranID();
-     *   n1 === n2-1;
-     * </pre>
-     */
-    public int rekisteroi() {
-        pyoranID = seuraavaID;
-        seuraavaID++;
-        return pyoranID;
-    }
-    
-    /**
-     * @return Palauttaa pyörän ID:n
-     */
-    public int getPyoranID() {
-    	return pyoranID;
-    }
-    
-    
-    /**
-     * Asettaa pyörän ID:ksi annetun arvon
-     * @param id Pyörän uusi ID
-     */
-    public void setPyoranID(int id) {
-    	pyoranID = id;
-    }
-	
-    /**
-     * @return Palauttaa pyörän nimen.
-     */
-    public String getNimi() {
-    	return nimi;
-    }
-    
-    
+	public Pyora() {
+	}
+
+
+	/**
+	 * Antaa jäsenelle seuraavan rekisterinumeron.
+	 * @return jäsenen uusi tunnusNro
+	 * @example <pre name="test">
+	 *   Pyora jopo1 = new Pyora();
+	 *   jopo1.getPyoranID() === 0;
+	 *   jopo1.rekisteroi();
+	 *   Pyora jopo2 = new Pyora();
+	 *   jopo2.rekisteroi();
+	 *   int n1 = jopo1.getPyoranID();
+	 *   int n2 = jopo2.getPyoranID();
+	 *   n1 === n2-1;
+	 * </pre>
+	 */
+	public int rekisteroi() {
+		pyoranID = seuraavaID;
+		seuraavaID++;
+		return pyoranID;
+	}
+
+
+	/**
+	 * @return Palauttaa pyörän ID:n
+	 */
+	public int getPyoranID() {
+		return pyoranID;
+	}
+
+
+	/**
+	 * Asettaa pyörän ID:ksi annetun arvon
+	 * @param id Pyörän uusi ID
+	 */
+	public void setPyoranID(int id) {
+		pyoranID = id;
+	}
+
+
+	/**
+	 * @return Palauttaa pyörän nimen.
+	 */
+	public String getNimi() {
+		return nimi;
+	}
+
+
 	/**
 	 * @return Pyörän vuokra per päivä
 	 */
 	public double getVuokraPerPaiva() {
 		return vuokraPerPaiva;
 	}
-	
-	
+
+
 	/**
 	 * Palauttaa pyörän string muodossa ominaisuudet erotettuna "|"-merkillä
 	 * @return pyörä stringmuodossa jossa ominaisuudet erotettuna "|"-merkillä
 	 */
 	@Override
 	public String toString() {
-		return pyoranID + "|" + 
-				nimi + "|" + 
-				malli + "|" + 
-				kunto + "|" + 
-				vuokraPerPaiva + "|" + 
-				onkoVarattu + "|" + 
-				lisatietoja;
+		return pyoranID + "|" + nimi + "|" + malli + "|" + kunto + "|" + vuokraPerPaiva + "|" + onkoVarattu + "|"
+				+ lisatietoja;
 	}
-	
-	
-	
+
+
 	public void parse(String rivi) {
 		StringBuffer sb = new StringBuffer();
 		for (int k = 0; k < getKenttia(); k++) {
@@ -146,14 +154,12 @@ public class Pyora {
 	}
 
 
-
 	/**
 	 * Asettaa k:n kentän arvoksi parametrina tuodun merkkijonon arvon
 	 * @param k kuinka monennen kentän arvo asetetaan
 	 * @param jono jonoa joka asetetaan kentän arvoksi
 	 * @return null jos asettaminen onnistuu.
-	 * @example
-	 * <pre name="test">
+	 * @example <pre name="test">
 	 * Pyora jasen = new Pyora();
 	 * jasen.aseta(1,"Jopo") === null;
 	 * jasen.aseta(3,"Terve") === "Kunto oli väärin, anna arvo 0-3";
@@ -173,15 +179,15 @@ public class Pyora {
 		case 2:
 			malli = tjono;
 			return null;
-		case 3: 
+		case 3:
 			try {
-				kunto = Integer.parseInt(tjono);				
+				kunto = Integer.parseInt(tjono);
 			} catch (NumberFormatException e) {
 				return "Kunto oli väärin, anna arvo 0-3";
 			}
 			return null;
-		case 4: 
-			try {				
+		case 4:
+			try {
 				vuokraPerPaiva = Integer.parseInt(tjono);
 			} catch (NumberFormatException e) {
 				return "Vuokra oli väärin";
@@ -198,6 +204,46 @@ public class Pyora {
 		}
 	}
 
+
+	/**
+	 * Palauttaa k:tta jäsenen kenttää vastaavan kysymyksen
+	 * @param k kuinka monennen kentän kysymys palautetaan (0-alkuinen)
+	 * @return k:netta kenttää vastaava kysymys
+	 */
+	public String getKysymys(int k) {
+		switch (k) {
+		case 0:
+			return "Tunnus nro";
+		case 1:
+			return "nimi";
+		case 2:
+			return "hetu";
+		case 3:
+			return "katuosoite";
+		case 4:
+			return "postinumero";
+		case 5:
+			return "postiosoite";
+		case 6:
+			return "kotipuhelin";
+		case 7:
+			return "työpuhelin";
+		case 8:
+			return "autopuhelin";
+		case 9:
+			return "liittymisvuosi";
+		case 10:
+			return "jmaksu";
+		case 11:
+			return "maksu";
+		case 12:
+			return "lisätietoja";
+		default:
+			return "Äääliö";
+		}
+	}
+
+
 	/**
 	 * Apumetodi testiarvojen tuottamiselle
 	 */
@@ -209,30 +255,29 @@ public class Pyora {
 		vuokraPerPaiva = 12;
 		lisatietoja = "Penkki pitää vaihtaa";
 	}
-		
-	
+
+
 	/**
 	 * Tulostetaan pyörän tiedot.
 	 * @param out
 	 */
 	public void tulosta(PrintStream out) {
-        out.println(String.format("%03d", pyoranID, 3) + "  " + nimi +  "  " + malli);
-        out.println(String.format(kunnot[kunto]));
-        out.println("Vuokran määrä: " + String.format("%4.2f", vuokraPerPaiva));
-        out.println("Onko vuokrattuna: " + onkoVarattu);
-        out.println("Lisätiedot: " + lisatietoja);
+		out.println(String.format("%03d", pyoranID, 3) + "  " + nimi + "  " + malli);
+		out.println(String.format(kunnot[kunto]));
+		out.println("Vuokran määrä: " + String.format("%4.2f", vuokraPerPaiva));
+		out.println("Onko vuokrattuna: " + onkoVarattu);
+		out.println("Lisätiedot: " + lisatietoja);
 	}
-
-	
 
 
 	/**
-     * Tulostetaan pyörän tiedot
-     * @param os tietovirta johon tulostetaan
-     */
-    public void tulosta(OutputStream os) {
-        tulosta(new PrintStream(os));
-    }
+	 * Tulostetaan pyörän tiedot
+	 * @param os tietovirta johon tulostetaan
+	 */
+	public void tulosta(OutputStream os) {
+		tulosta(new PrintStream(os));
+	}
+
 
 	/**
 	 * Testataan pyöräluokan toimivuutta.
@@ -241,7 +286,5 @@ public class Pyora {
 	public static void main(String[] args) {
 
 	}
-	
+
 }
-
-
