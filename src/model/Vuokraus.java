@@ -5,6 +5,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import fi.jyu.mit.ohj2.Mjonot;
+
 public class Vuokraus {
 	
 	private int 		vuokrausId,	 // = 0
@@ -36,6 +38,143 @@ public class Vuokraus {
 	
 	public int getVuokraajaId() {
 		return this.vuokraajaId;
+	}
+	
+	public void setVuokrausId(int id) {
+		vuokrausId = id;
+	}
+	
+	public void setVuokraajaId(int id) {
+		vuokraajaId = id;
+	}
+	
+	public void setPyoraId(int id) {
+		pyoraId = id;
+	}
+	
+	
+	/**
+	 * Palauttaa vuokrauksen kenttien lukumäärän
+	 * @return vuokrauksen kenttien lukumäärän
+	 */
+	public int getKenttia() {
+		return 7;
+	}
+	
+	/**
+	 * Palauttaa ensimmäisen kentän joka on mielekäs kysyttäväksi
+	 * @return ensimmäinen järkevästi kysyttävä kenttä
+	 */
+	public int ekaKentta() {
+		return 3;
+	}
+	
+	
+	
+	/**
+	 * Palauttaa k:n kentän sisällön merkkijonona
+	 * @param k halutun kentän numero
+	 * @return kentän sisältö merkkijonona
+	 */
+	public String anna(int k) {
+		switch (k) {
+		case 0:
+			return "" + vuokrausId;
+		case 1:
+			return "" + pyoraId;
+		case 2:
+			return "" + vuokraajaId;
+		case 3:
+			return "" + vuokrausAika;
+		case 4:
+			return "" + palautusAika;
+		case 5:
+			return "" + hinta;
+		case 6:
+			return "" + lisatiedot;
+		default:
+			return "Hupsista";
+		}
+	}
+	
+	
+	/**
+	 * Palauttaa k:tta vuokrauksen kenttää vastaavan kysymyksen
+	 * @param k kuinka monennen kentän kysymys palutetaan (alkaen 0:sta)
+	 * @return k:netta kenttää vastaava kysymys 
+	 */
+	public String getKysymys(int k) {
+		switch (k) {
+		case 0:
+			return "Vuokrauksen ID";
+		case 1:
+			return "Pyörän ID";
+		case 2:
+			return "Vuokraajan ID";
+		case 3:
+			return "Vuokraus päivämäärä";
+		case 4:
+			return "Palautus päivämäärä";
+		case 5:
+			return "Hinta";
+		case 6:
+			return "Lisätiedot";
+		default:
+			return "HupsisKupsos";
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param rivi
+	 */
+	public void parse(String rivi) {
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0; i < getKenttia(); i++) {
+			aseta(i, Mjonot.erota(sb, '|'));
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param k
+	 * @param jono
+	 * @return
+	 */
+	public String aseta(int k, String jono) {
+		String tjono = jono.trim();
+		StringBuffer sb = new StringBuffer(tjono);
+		switch (k) {
+		case 0:
+			setVuokrausId(Mjonot.erota(sb, '|', getVuokrausId()));
+			return null;
+		case 1:
+			setPyoraId(Mjonot.erota(sb, '|', getPyoraId()));;
+			return null;
+		case 2:
+			setVuokraajaId(Mjonot.erota(sb, '|', getVuokraajaId()));;
+			return null;
+		case 3:
+			setVuokrausAika(Mjonot.erota(sb, '|', getVuokrausAika()));;
+			return null;
+		case 4:
+			setPalautusAika(Mjonot.erota(sb, '|', getPalautusAika()));
+			return null;
+		case 5:
+			try {
+				hinta = Double.parseDouble(tjono);
+			} catch (NumberFormatException e) {
+				return "Hinta oli väärin, anna lukuina esim. 6.8";
+			}
+			return null;
+		case 6:
+			lisatiedot = tjono;
+			return null;
+		default:
+			return "Tervetti";
+		}
 	}
 	
 	
@@ -101,8 +240,20 @@ public class Vuokraus {
 	/**
 	 * @return Palauttaa viitteen vuokrauksen loppumisaikaan, eli milloin pyörän tulisi olla palautettuna.
 	 */
-	public Calendar getPalautusAika() {
-		return palautus;
+	public String getPalautusAika() {
+		return palautusAika;
+	}
+	
+	public String getVuokrausAika() {
+		return vuokrausAika;
+	}
+	
+	public void setVuokrausAika(String vuokrAika) {
+		vuokrausAika = vuokrAika;
+	}
+	
+	public void setPalautusAika(String palAika) {
+		palautusAika = palAika;
 	}
 	
 
