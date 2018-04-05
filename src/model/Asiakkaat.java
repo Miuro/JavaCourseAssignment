@@ -107,7 +107,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * @return varakopiotiedoston nimi
 	 */
 	public String getBakNimi() {
-		return tiedostonPerusNimi + ".bak";
+		return this.tiedostonPerusNimi + ".bak";
 	}
 	
 	
@@ -117,7 +117,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * @return tallennustiedoston nimi
 	 */
 	public String getTiedostonPerusNimi() {
-		return tiedostonPerusNimi;
+		return this.tiedostonPerusNimi;
 	}
 	
 	
@@ -127,7 +127,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * @param tied haluttu tiedoston nimi
 	 */
 	public void setTiedostonPerusNimi(String tied) {
-		tiedostonPerusNimi = tied;
+		this.tiedostonPerusNimi = tied;
 	}
 
 
