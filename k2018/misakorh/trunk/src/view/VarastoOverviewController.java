@@ -8,6 +8,7 @@ import java.util.Collection;
 import fi.jyu.mit.fxgui.ComboBoxChooser;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
+import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.TextAreaOutputStream;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -201,6 +202,7 @@ public class VarastoOverviewController {
 	 * Alustetaan
 	 */
 	protected void alusta() {
+		vuokraamo = new Vuokraamo();
 		lueTiedosto(vuokraamonNimi);
 		panelPyora.setContent(areaPyora);
 		panelPyora.setFitToHeight(true);
@@ -219,10 +221,10 @@ public class VarastoOverviewController {
 		//vuokraamonNimi = nimi;
 		try {
 			vuokraamo.lueTiedostosta(nimi);
-			hae(0);
+			hae(1); // tässä oli aiemmin nolla. Meidän pyörien ID:t taitaa alkaa ykkösestä
 			return null;
 		} catch (SailoException e) {
-			hae(0);
+			hae(1); // samaten tässä
 			String virhe = e.getMessage();
 			if (virhe != null) Dialogs.showMessageDialog(virhe);
 			return virhe;
@@ -330,6 +332,9 @@ public class VarastoOverviewController {
 	
 	
     private void naytaVirhe(String virhe) {
+    	
+    	Dialogs.showMessageDialog("Ei ole vielä lisätty");
+    	/*
         if ( virhe == null || virhe.isEmpty() ) {
             labelVirhe.setText("");
             labelVirhe.getStyleClass().removeAll("virhe");
@@ -337,6 +342,7 @@ public class VarastoOverviewController {
         }
         labelVirhe.setText(virhe);
         labelVirhe.getStyleClass().add("virhe");
+        */
     }
 
 
@@ -363,7 +369,21 @@ public class VarastoOverviewController {
 
 
 	public static void main(String[] args) {
-
+		Vuokraamo testi = new Vuokraamo();
+		Pyora p1 = new Pyora();
+		p1.rekisteroi();
+		p1.vastaaJopo();
+		try {
+			testi.lisaaPyora(p1);
+		} catch (SailoException e) {
+			e.printStackTrace();
+		}
+		try {
+			testi.etsi("Jopo", 1);
+		} catch (SailoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
