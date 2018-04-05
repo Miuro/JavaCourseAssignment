@@ -60,14 +60,14 @@
                            </children>
                         </HBox>
                         <TextField promptText="Haku" />
-                        <ComboBoxChooser fx:id="cbKentat"  maxWidth="200.0" onAction="#handleHakuehto" rivit="Nimi Malli Kunto Vuokraperpäivä Onkovarattuna" />
+                        <ComboBoxChooser fx:id="cbKentat" maxWidth="200.0" onAction="#handleHakuehto" rivit="Nimi&#10;Malli&#10;Kunto&#10;Vuokraperpäivä&#10;Onkovarattuna" />
                         <Label alignment="CENTER" prefHeight="0.0" prefWidth="189.0" text="Pyörät" />
                      </children>
                   </VBox>
                </top>
-               <center>
+               <bottom>
                   <ListChooser fx:id="fxChooserPyorat" prefHeight="306.0" prefWidth="200.0" rivit="Mountainer 6X&#10;CityBike G3&#10;Punainen Jopo&#10;Helkama G1&#10;Ruputrupu" BorderPane.alignment="CENTER" />
-               </center>
+               </bottom>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="272.0">
                <center>
