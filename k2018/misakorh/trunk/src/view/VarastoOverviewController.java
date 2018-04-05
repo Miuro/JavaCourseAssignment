@@ -3,25 +3,39 @@ package view;
 import pyoravarasto.MainApp;
 
 import java.io.PrintStream;
+import java.util.Collection;
 
+import fi.jyu.mit.fxgui.ComboBoxChooser;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.TextAreaOutputStream;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
-
+import javafx.scene.control.TextField;
+import model.Asiakas;
 import model.Pyora;
 import model.SailoException;
 import model.Vuokraus;
 import model.Vuokraamo;
 
 public class VarastoOverviewController {
+	
+	@FXML 
+	private ComboBoxChooser<String> cbKentat;
 
 	@FXML
 	private MenuItem fxMenuTallenna;
+	
+	@FXML 
+	private Label labelVirhe;
+	
+	@FXML 
+	private TextField hakuehto;
 
 	@FXML
 	private MenuItem fxMenuAvaa;
@@ -48,33 +62,36 @@ public class VarastoOverviewController {
 	private Button fxUusiPyoraButton;
 
 	@FXML
+	private ScrollPane panelPyora;
+
+	@FXML
 	private Button fxTallennaButton;
 
 	@FXML
 	private Button fxVuokraaButton;
-	
-    @FXML
-    private CheckBox fxVainVapaatCB;
+
+	@FXML
+	private CheckBox fxVainVapaatCB;
 
 	@FXML
 	private Button fxPoistaButton;
-	
-    @FXML
-    private ListChooser<Pyora> fxChooserPyorat;
+
+	@FXML
+	private ListChooser<Pyora> fxChooserPyorat;
 
 	// Reference to the main application. En ole ihan varma mitä tämä tekee.
 	private MainApp mainApp;
 
+
 	/**
-	 * Konstruktori
-	 * Tätä vissiin kutsutaan kun tapahtuu automaattinen initialize() metodi
-	 * fxml-tiedoston ladattua. Dunno tbh
+	 * Konstruktori Tätä vissiin kutsutaan kun tapahtuu automaattinen initialize() metodi fxml-tiedoston ladattua. Dunno
+	 * tbh
 	 */
 	public VarastoOverviewController() {
 
 	}
 
-	
+
 	/**
 	 * Tätä kutsutaan MainApp:sta. Määrittää, että tämä on perusnäkymä-
 	 * @param mainApp
@@ -82,47 +99,56 @@ public class VarastoOverviewController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-	
+
+
 	@FXML
-    void handleAvaaApua() {
+	void handleAvaaApua() {
 		Dialogs.showMessageDialog("Ei ole vielä lisätty");
-    }
+	}
 
-    @FXML
-    void handleAvaaTietoja() {
-    	Dialogs.showMessageDialog("Ei ole vielä lisätty");
-    }
 
-    @FXML
-    void handleMenuAvaa() {
-    	Dialogs.showMessageDialog("Ei ole vielä lisätty");
-    }
+	@FXML
+	void handleAvaaTietoja() {
+		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+	}
 
-    @FXML
-    void handleMenuLopeta() {
-    	Dialogs.showMessageDialog("Ei ole vielä lisätty");
-    }
 
-    @FXML
-    void handleMenuTulosta() {
-    	//Dialogs.showMessageDialog("Ei ole vielä lisätty");
+	@FXML
+	void handleMenuAvaa() {
+		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+	}
+
+
+	@FXML
+	void handleMenuLopeta() {
+		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+	}
+
+
+	@FXML
+	void handleMenuTulosta() {
+		//Dialogs.showMessageDialog("Ei ole vielä lisätty");
 		mainApp.showUusiTulostusDialog();
-    }
+	}
+
 
 	@FXML
 	void handlePoistaPyora() {
 		Dialogs.showMessageDialog("Ei ole vielä lisätty");
 	}
 
+
 	@FXML
 	void handleTallenna() {
 		Dialogs.showMessageDialog("Ei ole vielä lisätty");
 	}
 
+
 	@FXML
 	void handleUusiPyora() {
 		Dialogs.showMessageDialog("Ei ole vielä lisätty");
 	}
+
 
 	/**
 	 * Avataan vuokrausikkuna.
@@ -131,101 +157,200 @@ public class VarastoOverviewController {
 	void handleUusiVuokraus() {
 		mainApp.showUusiVuokrausDialog();
 	}
-	
-	//====================================================
+
+	//===============================================================================
 	// FXML:llään kuulumaton koodi tästä eteenpäin
-	
-	//private Vuokraamo vuokraamo;
-    private Pyora pyoraKohdalla;
-    private Vuokraamo vuokraamo;
-    private TextArea areaPyora = new TextArea();
+
+	private String vuokraamonNimi = "Maailman paras vuokraamo ikinä";
+	private Vuokraamo vuokraamo;
+	private Pyora pyoraKohdalla;
+	private Asiakas apuAsiakas;
+	private Vuokraus apuVuokraus;
+	private TextArea areaPyora = new TextArea();
+	private TextField[] muokkaukset;
+	private int kentta = 0;
+
+
+	/**
+	 * Näyttää listasta valitun jäsenen tiedot, tilapäisesti yhteen isoon edit-kenttään
+	 */
+	protected void naytaPyora() {
+		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
+
+		if (pyoraKohdalla == null) return;
+
+		areaPyora.setText("");
+		try (PrintStream os = TextAreaOutputStream.getTextPrintStream(areaPyora)) {
+			tulosta(os, pyoraKohdalla);
+		}
+	}
+
+
+	/**
+	 * Alustetaan
+	 */
+	protected void alusta() {
+		panelPyora.setContent(areaPyora);
+		panelPyora.setFitToHeight(true);
+		fxChooserPyorat.clear();
+		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
+	}
+
+
+	/**
+	 * Alustaa vuokraamon lukemalla sen valitun nimisestä tiedostosta
+	 * @param nimi tiedosto josta vuokraamon tiedot luetaan
+	 * @return null jos onnistuu, muuten virhe tekstinä
+	 */
+	protected String lueTiedosto(String nimi) {
+		vuokraamonNimi = nimi;
+		try {
+			vuokraamo.lueTiedostosta(nimi);
+			hae(0);
+			return null;
+		} catch (SailoException e) {
+			hae(0);
+			String virhe = e.getMessage();
+			if (virhe != null) Dialogs.showMessageDialog(virhe);
+			return virhe;
+		}
+	}
 	
     /**
-     * Näyttää listasta valitun jäsenen tiedot, tilapäisesti yhteen isoon edit-kenttään
+     * Kysytään tiedoston nimi ja luetaan se
+     * @return true jos onnistui, false jos ei
      */
-    protected void naytaPyora() {
-        pyoraKohdalla = fxChooserPyorat.getSelectedObject();
-
-        if (pyoraKohdalla == null) return;
-
-        areaPyora.setText("");
-        try (PrintStream os = TextAreaOutputStream.getTextPrintStream(areaPyora)) {
-            tulosta(os,pyoraKohdalla); 
-        }
+    public boolean avaa() {
+        lueTiedosto(vuokraamonNimi);
+        if(vuokraamonNimi == null) return false;
+        return true;
     }
+	
     
     /**
-     * Luo uuden jäsenen jota aletaan editoimaan 
+     * Tietojen tallennus
+     * @return null jos onnistuu, muuten virhe tekstinä
      */
-    protected void uusiPyora() {
-        Pyora uusi = new Pyora();
-        uusi.rekisteroi();
-        uusi.vastaaJopo();
-        
+    private String tallenna() {
         try {
-            vuokraamo.lisaaPyora(uusi);
-        } catch (SailoException e) {
-            Dialogs.showMessageDialog("Ongelmia uuden luomisessa " + e.getMessage());
-            return;
+            vuokraamo.tallenna();
+            return null;
+        } catch (SailoException ex) {
+            Dialogs.showMessageDialog("Tallennuksessa ongelmia! " + ex.getMessage());
+            return ex.getMessage();
         }
+    }
+    
+    /**
+     * Tarkistetaan onko tallennus tehty
+     * @return true jos saa sulkea sovelluksen, false jos ei
+     */
+    public boolean voikoSulkea() {
+        tallenna();
+        return true;
+    }
+
+
+
+	/**
+	 * Luo uuden jäsenen jota aletaan editoimaan
+	 */
+	protected void uusiPyora() {
+		Pyora uusi = new Pyora();
+		uusi.rekisteroi();
+		uusi.vastaaJopo();
+
+		try {
+			vuokraamo.lisaaPyora(uusi);
+		} catch (SailoException e) {
+			Dialogs.showMessageDialog("Ongelmia uuden luomisessa " + e.getMessage());
+			return;
+		}
+
+		hae(uusi.getPyoranID());
+	}
+
+
+	/**
+	 * Tekee vuokrauksen valitulle pyörälle.
+	 */
+	public void vuokraaPyora(int kesto) throws SailoException {
+		// JOptionPane.showMessageDialog(null, "Vielä ei osata lisätä vuokrausta!" );
+		if (pyoraKohdalla == null) return;
+		Vuokraus vuokraus = new Vuokraus();
+		vuokraus.rekisteroi();
+		vuokraus.testiVuokraus(kesto);
+		vuokraamo.lisaaVuokraus(vuokraus);
+		hae(pyoraKohdalla.getPyoranID());
+	}
+
+
+	/**
+	 * Hakee jäsenten tiedot listaan
+	 * @param jnro jäsenen numero, joka aktivoidaan haun jälkeen
+	 */
+	protected void hae(int pyoraID) {
+		int k = cbKentat.getSelectionModel().getSelectedIndex();
+        String ehto = hakuehto.getText(); 
+        if (k > 0 || ehto.length() > 0)
+            naytaVirhe(String.format("Ei osata hakea (kenttä: %d, ehto: %s)", k, ehto));
+        else
+            naytaVirhe(null);
         
-        hae(uusi.getPyoranID());
-    }
-    
-    
-    /**
-     * Tekee vuokrauksen valitulle pyörälle.
-     */
-    public void vuokraaPyora(int kesto) throws SailoException {
-        // JOptionPane.showMessageDialog(null, "Vielä ei osata lisätä vuokrausta!" );
-        if ( pyoraKohdalla == null ) return; 
-        Vuokraus vuokraus = new Vuokraus(); 
-        vuokraus.rekisteroi(); 
-        vuokraus.testiVuokraus(kesto);
-        vuokraamo.lisaaVuokraus(vuokraus); 
-        hae(pyoraKohdalla.getPyoranID());         
-    }
-    
-    
-    /**
-     * Hakee jäsenten tiedot listaan
-     * @param jnro jäsenen numero, joka aktivoidaan haun jälkeen
-     */
-    protected void hae(int pyoraID) {
         fxChooserPyorat.clear();
 
         int index = 0;
-        for (int i = 0; i < vuokraamo.getPyoria(); i++) {
-            Pyora pyora = vuokraamo.annaPyora(i);
-            if (pyora.getPyoranID() == pyoraID) index = i;
-            fxChooserPyorat.add(pyora.getNimi(), pyora);
+        Collection<Pyora> pyorat;
+        try {
+            pyorat = vuokraamo.etsi(ehto, k);
+            int i = 0;
+            for (Pyora pyora:pyorat) {
+                if (pyora.getPyoranID() == pyoraID) index = i;
+                fxChooserPyorat.add(pyora.getNimi(), pyora);
+                i++;
+            }
+        } catch (SailoException ex) {
+            Dialogs.showMessageDialog("Jäsenen hakemisessa ongelmia! " + ex.getMessage());
         }
-        fxChooserPyorat.setSelectedIndex(index); // tästä tulee muutosviesti joka näyttää pyörän
-    }
-    
-    /**
-     * @param vuokraamo Vuokraamo jota käytetään tässä käyttöliittymässä
-     */
-    public void setVuokraamo(Vuokraamo vuokraamo) {
-        this.vuokraamo = vuokraamo;
-        naytaPyora();
-    }
-    
-
-
-    /**
-     * Tulostaa pyörän tiedot.
-     * @param os Tietovirta, mihin tulostetaan
-     * @param pyora Tulostettava pyörä
-     */
-	private void tulosta(PrintStream os, Pyora pyora) {
-		os.println("----------------------------------------------");
-        pyora.tulosta(os);
-        os.println("----------------------------------------------");
+        fxChooserPyorat.setSelectedIndex(index); // tästä tulee muutosviesti joka näyttää jäsenen
 	}
 	
+	
+    private void naytaVirhe(String virhe) {
+        if ( virhe == null || virhe.isEmpty() ) {
+            labelVirhe.setText("");
+            labelVirhe.getStyleClass().removeAll("virhe");
+            return;
+        }
+        labelVirhe.setText(virhe);
+        labelVirhe.getStyleClass().add("virhe");
+    }
+
+
+
+	/**
+	 * @param vuokraamo Vuokraamo jota käytetään tässä käyttöliittymässä
+	 */
+	public void setVuokraamo(Vuokraamo vuokraamo) {
+		this.vuokraamo = vuokraamo;
+		naytaPyora();
+	}
+
+
+	/**
+	 * Tulostaa pyörän tiedot.
+	 * @param os Tietovirta, mihin tulostetaan
+	 * @param pyora Tulostettava pyörä
+	 */
+	private void tulosta(PrintStream os, Pyora pyora) {
+		os.println("----------------------------------------------");
+		pyora.tulosta(os);
+		os.println("----------------------------------------------");
+	}
+
+
 	public static void main(String[] args) {
-		
+
 	}
 
 }

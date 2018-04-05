@@ -115,6 +115,7 @@ public class Vuokraus {
 		testi.rekisteroi();
 		testi.testiVuokraus(5);
 		testi.tulosta(System.out);
+		
 
 	}
 

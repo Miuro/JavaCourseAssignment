@@ -66,6 +66,7 @@ public class MainApp extends Application {
 	        dialogStage.initOwner(primaryStage);
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
+	        dialogStage.setTitle("Uusi vuokraus");
 	        
 	        // Haetaan controller ja yhdistet‰‰n se stagen kanssa.
 	        UusiVuokrausDialogController controller = loader.getController();
