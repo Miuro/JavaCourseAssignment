@@ -26,7 +26,9 @@ public class Vuokraamo {
 		return vuokraukset.annaVuokraus(pyora.getPyoranID());
 	}
 	
-	public int getPyoria()
+	public int getPyoria() {
+		return pyorat.getLkm();
+	}
 	
 	public void setTiedosto(String nimi) {
 		File dir = new File(nimi);
