@@ -36,13 +36,12 @@ public class Pyorat {
 	 * pyorat.anna(2) === jopo1;
 	 * pyorat.anna(1) == jopo1 === false;
 	 * pyorat.anna(1) == jopo2 === true;
-	 * pyorat.anna(3) === jopo1; #THROWS IndexOutOfBoundsException 
 	 * pyorat.lisaa(jopo1); pyorat.getLkm() === 4;
 	 * pyorat.lisaa(jopo1); pyorat.getLkm() === 5;
-	 * pyorat.lisaa(jopo1);  #THROWS SailoException
+	 * pyorat.lisaa(jopo1);
 	 *          </pre>
 	 */
-	public void lisaa(Pyora Pyora) /*throws SailoException*/ {
+	public void lisaa(Pyora Pyora) {
 		if (lkm >= alkiot.length) {
 			Pyora[] isompi = new Pyora[alkiot.length + 5];
 			for(int i = 0; i < alkiot.length; i++) {
@@ -50,7 +49,6 @@ public class Pyorat {
 			}
 			alkiot = isompi;
 		}
-		//throw new SailoException("Liikaa alkioita");
 		alkiot[lkm] = Pyora;
 		lkm++;
 	}
@@ -58,11 +56,9 @@ public class Pyorat {
 	/**
 	 * Palauttaa viitteen i:teen pyörään.
 	 * 
-	 * @param i
-	 *            monennenko pyörän viite halutaan
+	 * @param i monennenko pyörän viite halutaan
 	 * @return viite pyörään, jonka indeksi on i
-	 * @throws IndexOutOfBoundsException
-	 *             jos i ei ole sallitulla alueella
+	 * @throws IndexOutOfBoundsException jos i ei ole sallitulla alueella
 	 */
 	public Pyora anna(int i) throws IndexOutOfBoundsException {
 		if (i < 0 || lkm <= i)
@@ -73,10 +69,8 @@ public class Pyorat {
 	/**
 	 * Lukee jäsenistön tiedostosta. Kesken.
 	 * 
-	 * @param hakemisto
-	 *            tiedoston hakemisto
-	 * @throws SailoException
-	 *             jos lukeminen epäonnistuu
+	 * @param hakemisto tiedoston hakemisto
+	 * @throws SailoException jos lukeminen epäonnistuu
 	 */
 	public void lueTiedostosta(String hakemisto) throws SailoException {
 		tiedostonNimi = hakemisto + "/pyorat.dat";

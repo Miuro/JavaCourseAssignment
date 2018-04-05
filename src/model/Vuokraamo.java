@@ -1,6 +1,5 @@
 package model;
 
-import java.io.File;
 
 public class Vuokraamo {
 	private final Pyorat pyorat = new Pyorat();
@@ -58,8 +57,8 @@ public class Vuokraamo {
 			testi.lisaaPyora(p1);
 			testi.lisaaPyora(p2);
 			
-			int id1 = p1.getPyoranID();
-			int i2 = p2.getPyoranID();
+			//int id1 = p1.getPyoranID();
+			//int i2 = p2.getPyoranID();
 			
 			Asiakas a1 = new Asiakas();
 			a1.vastaaHessuHopo();
