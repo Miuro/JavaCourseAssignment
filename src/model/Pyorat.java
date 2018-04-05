@@ -1,13 +1,22 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Pyorat {
 	
 	private ArrayList<Pyora> alkiot = new ArrayList<>();
 
-	private String tiedostonNimi = "";
-
+	private String tiedostonPerusNimi = "";
+	private boolean muutettu = false;
+	
 	/**
 	 * Oletusmuodostaja
 	 */
@@ -15,10 +24,11 @@ public class Pyorat {
 		// Attribuuttien oma alustus riittää
 	}
 
+	
 	/**
 	 * Lisää uuden pyörän tietorakenteeseen. Ottaa pyörän omistukseensa.
 	 * 
-	 * @param Pyora lisättävän pyörän viite. Huom tietorakenne muuttuu omistajaksi
+	 * @param pyora lisättävän pyörän viite. Huom tietorakenne muuttuu omistajaksi
 	 * @throws SailoException  jos tietorakenne on jo täynnä
 	 * @example
 	 * <pre name="test">
@@ -41,8 +51,10 @@ public class Pyorat {
 	 */
 	public void lisaa(Pyora pyora) {
 		alkiot.add(pyora);
+		muutettu = true;
 	}
 
+	
 	/**
 	 * Palauttaa viitteen i:teen pyörään.
 	 * 
@@ -56,23 +68,110 @@ public class Pyorat {
 		return alkiot.get(i);
 	}
 
+	
 	/**
 	 * Lukee jäsenistön tiedostosta. Kesken.
 	 * 
-	 * @param hakemisto tiedoston hakemisto
-	 * @throws SailoException jos lukeminen epäonnistuu
+	 * @param tied tiedoston nimi
+	 * @throws FileNotFoundException jos ei aukea
+	 * @throws IOException jos ongelmia tiedoston kanssa
 	 */
-	public void lueTiedostosta(String hakemisto) throws SailoException {
-		tiedostonNimi = hakemisto + "/pyorat.dat";
-		throw new SailoException("Ei osata vielä lukea tiedostoa " + tiedostonNimi);
+	public void lueTiedostosta(String tied) throws SailoException {
+		setTiedostonPerusNimi(tied);
+		try ( BufferedReader fi = new BufferedReader(new FileReader(getTiedostonNimi())) ) {
+			String rivi;
+			while ((rivi = fi.readLine()) != null) {
+				rivi = rivi.trim();
+				if ( "".equals(rivi) || rivi.charAt(0) == ';' ) continue;
+				Pyora pyora = new Pyora();
+				pyora.parse(rivi);
+				lisaa(pyora);
+			}
+			muutettu = false;
+			
+		} catch (FileNotFoundException e) {
+			throw new SailoException("Tiedosto " + getTiedostonNimi() + " ei aukea");
+		} catch (IOException e) {
+			throw new SailoException("Ongelmia tiedoston kanssa: " + e.getMessage());
+		}
+	}
+	
+	
+	/**
+	 * Luetaan aikaisemmin annetusta tiedostosta
+	 * 
+	 * @throws SailoException jos tulee poikkeus
+	 */
+	public void lueTiedostosta() throws SailoException {
+		lueTiedostosta(getTiedostonPerusNimi());
+	}
+	
+	
+	/**
+	 * Asettaa tiedoston perusnimen ilman tarkenninta
+	 * 
+	 * @param tied tallennustiedoston nimi
+	 */
+	public void setTiedostonPerusNimi(String tied) {
+		tiedostonPerusNimi = tied;
+	}
+	
+	
+	/**
+	 * Palauttaa tiedoston nimen jota käytetään tallennukseen ilman päätettä
+	 * 
+	 * @return tallennustiedoston nimi
+	 */
+	public String getTiedostonPerusNimi() {
+		return tiedostonPerusNimi;
+	}
+	
+	
+	/**
+	 * Palauttaa tiedoston nimen jota käytetään tallennukseen (.dat)
+	 * 
+	 * @return tiedoston nimi + .dat
+	 */
+	public String getTiedostonNimi() {
+		return tiedostonPerusNimi + ".dat";
+	}
+	
+	
+	/**
+	 * Palauttaa varakopiotiedoston nimen
+	 * 
+	 * @return varakopiotiedoston nimi
+	 */
+	public String getBakNimi() {
+		return tiedostonPerusNimi + ".bak";
 	}
 
+	
 	/**
 	 * Tallentaa jäsenistön tiedostoon. Kesken.
+	 * 
 	 * @throws SailoException jos talletus epäonnistuu
 	 */
 	public void talleta() throws SailoException {
-		throw new SailoException("Ei osata vielä tallettaa tiedostoa " + tiedostonNimi);
+		if (!muutettu) return;
+		
+		File fbak = new File(getBakNimi());
+		File ftied = new File(getTiedostonNimi());
+		fbak.delete();
+		ftied.renameTo(fbak);
+		
+		try ( PrintWriter fo = new PrintWriter(new FileWriter(ftied.getCanonicalPath())) ) {
+			for(int i = 0; i < getLkm(); i++) {
+				fo.println(anna(i).toString());
+			}
+		} catch (FileNotFoundException e) {
+			throw new SailoException("Tiedosto " + ftied.getName() + " ei aukea");
+		} catch (IOException e) {
+			throw new SailoException("Tiedoston " + ftied.getName() + " kirjoittamisessa ongelmia");
+		}
+		
+		muutettu = false;
+		
 	}
 
 	/**
@@ -83,6 +182,7 @@ public class Pyorat {
 	public int getLkm() {
 		return alkiot.size();
 	}
+
 
 	/**
 	 * Testataan toimivuutta
