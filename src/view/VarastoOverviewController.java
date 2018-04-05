@@ -89,6 +89,12 @@ public class VarastoOverviewController {
 	public VarastoOverviewController() {
 
 	}
+	
+	@FXML
+    private void initialize() {
+        // Initialize the person table with the two columns.
+        alusta();
+    }
 
 
 	/**
@@ -166,7 +172,7 @@ public class VarastoOverviewController {
 	//===============================================================================
 	// FXML:llään kuulumaton koodi tästä eteenpäin
 
-	private String vuokraamonNimi = "Maailman paras vuokraamo ikinä";
+	private String vuokraamonNimi = "MJVuokraamo";
 	private Vuokraamo vuokraamo;
 	private Pyora pyoraKohdalla;
 	private Asiakas apuAsiakas;
@@ -195,6 +201,7 @@ public class VarastoOverviewController {
 	 * Alustetaan
 	 */
 	protected void alusta() {
+		lueTiedosto(vuokraamonNimi);
 		panelPyora.setContent(areaPyora);
 		panelPyora.setFitToHeight(true);
 		fxChooserPyorat.clear();
@@ -208,7 +215,8 @@ public class VarastoOverviewController {
 	 * @return null jos onnistuu, muuten virhe tekstinä
 	 */
 	protected String lueTiedosto(String nimi) {
-		vuokraamonNimi = nimi;
+		// ööh tutki miten tää toimii :D
+		//vuokraamonNimi = nimi;
 		try {
 			vuokraamo.lueTiedostosta(nimi);
 			hae(0);
