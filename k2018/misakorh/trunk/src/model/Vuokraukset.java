@@ -130,7 +130,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @param tied tallennustiedoston nimi
 	 */
 	public void setTiedostonPerusNimi(String tied) {
-		tiedostonPerusNimi = tied;
+		this.tiedostonPerusNimi = tied;
 	}
 	
 	
@@ -140,7 +140,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @return tallennustiedoston nimi
 	 */
 	public String getTiedostonPerusNimi() {
-		return tiedostonPerusNimi;
+		return this.tiedostonPerusNimi;
 	}
 	
 	
@@ -150,7 +150,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @return tiedoston nimi + .dat
 	 */
 	public String getTiedostonNimi() {
-		return tiedostonPerusNimi + ".dat";
+		return this.tiedostonPerusNimi + ".dat";
 	}
 	
 	
@@ -160,7 +160,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @return varakopiotiedoston nimi
 	 */
 	public String getBakNimi() {
-		return tiedostonPerusNimi + ".bak";
+		return this.tiedostonPerusNimi + ".bak";
 	}
 	
 	
