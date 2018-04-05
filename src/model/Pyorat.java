@@ -1,11 +1,15 @@
 package model;
 
-public class Pyorat {
+import java.util.ArrayList;
 
-	private static final int MAX_PYORIA = 5;
+public class Pyorat {
+	
+	private ArrayList<Pyora> alkiot = new ArrayList<>();
+
 	private int lkm = 0;
 	private String tiedostonNimi = "";
-	private Pyora alkiot[] = new Pyora[MAX_PYORIA];
+	//private static final int MAX_PYORIA = 5;
+	//private Pyora alkiot[] = new Pyora[MAX_PYORIA];
 
 	/**
 	 * Oletusmuodostaja
@@ -17,12 +21,9 @@ public class Pyorat {
 	/**
 	 * Lisää uuden pyörän tietorakenteeseen. Ottaa pyörän omistukseensa.
 	 * 
-	 * @param Pyora
-	 *            lisättävän pyörän viite. Huom tietorakenne muuttuu omistajaksi
-	 * @throws SailoException
-	 *             jos tietorakenne on jo täynnä
+	 * @param Pyora lisättävän pyörän viite. Huom tietorakenne muuttuu omistajaksi
+	 * @throws SailoException  jos tietorakenne on jo täynnä
 	 * @example
-	 * 
 	 * <pre name="test">
 	 * #THROWS SailoException 
 	 * Pyorat pyorat = new Pyorat();
@@ -41,16 +42,8 @@ public class Pyorat {
 	 * pyorat.lisaa(jopo1);
 	 *          </pre>
 	 */
-	public void lisaa(Pyora Pyora) {
-		if (lkm >= alkiot.length) {
-			Pyora[] isompi = new Pyora[alkiot.length + 5];
-			for(int i = 0; i < alkiot.length; i++) {
-				isompi[i] = alkiot[i];
-			}
-			alkiot = isompi;
-		}
-		alkiot[lkm] = Pyora;
-		lkm++;
+	public void lisaa(Pyora pyora) {
+		alkiot.add(pyora);
 	}
 
 	/**
@@ -61,9 +54,9 @@ public class Pyorat {
 	 * @throws IndexOutOfBoundsException jos i ei ole sallitulla alueella
 	 */
 	public Pyora anna(int i) throws IndexOutOfBoundsException {
-		if (i < 0 || lkm <= i)
+		if (i < 0 || alkiot.size() <= i)
 			throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
-		return alkiot[i];
+		return alkiot.get(i);
 	}
 
 	/**
@@ -93,7 +86,7 @@ public class Pyorat {
 	 * @return pyörien lukumäärä
 	 */
 	public int getLkm() {
-		return lkm;
+		return alkiot.size();
 	}
 
 	/**

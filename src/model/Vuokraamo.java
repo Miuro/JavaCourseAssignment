@@ -15,6 +15,9 @@ public class Vuokraamo {
 	}
 	
 	
+	
+	
+	
 	/**
 	 * Lis‰‰ uuden vuokrauksen kokoelmaan
 	 * @param vuokraus lis‰tt‰v‰ vuokraus
