@@ -11,7 +11,7 @@ import fi.jyu.mit.ohj2.Mjonot;
  * TODO: Enum pyörän malleille. esim maastopyörä, mummopyörä, muu jne.
  * TODO: Miten saadaan enumit tulostamaan sisältö kivasti?
  */
-public class Pyora {
+public class Pyora implements Cloneable {
 
 	private static String[] kunnot = { "Rikki", "Tyydyttävä", "Hyvä", "Erinomainen" };
 	private static int seuraavaID = 1;
@@ -22,7 +22,7 @@ public class Pyora {
 	private int kunto = 3; // 0-3. 0 = rikki, 1 = tyydyttävä, 2 = hyvä, 3 = erinomainen
 	private String lisatietoja = "";
 	private boolean onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
-	private double vuokraPerPaiva = 0; // TODO: muuta vuokraPerTunti
+	private double vuokraPerPaiva = 0;
 
 
 	/**
@@ -108,10 +108,12 @@ public class Pyora {
 
 	/**
 	 * Asettaa pyörän ID:ksi annetun arvon
+	 * Varmistaa, että seuraava numero on aina suurempi kuin tähän mennessä suurin.
 	 * @param id Pyörän uusi ID
 	 */
 	public void setPyoranID(int id) {
 		pyoranID = id;
+		if (pyoranID >= seuraavaID) seuraavaID = pyoranID+ 1;
 	}
 
 
@@ -142,6 +144,11 @@ public class Pyora {
 	}
 
 
+	
+	/**
+	 * Selvitää pyörän tiedot | erotellusta merkkijonosta
+	 * @param rivi josta pyörän tiedot otetaan
+	 */
 	public void parse(String rivi) {
 		StringBuffer sb = new StringBuffer();
 		for (int k = 0; k < getKenttia(); k++) {
@@ -209,33 +216,21 @@ public class Pyora {
 	public String getKysymys(int k) {
 		switch (k) {
 		case 0:
-			return "Tunnus nro";
+			return "Pyörän ID";
 		case 1:
-			return "nimi";
+			return "Nimi";
 		case 2:
-			return "hetu";
+			return "Malli";
 		case 3:
-			return "katuosoite";
+			return "Kunto 0-2";
 		case 4:
-			return "postinumero";
+			return "Vuokra per päivä";
 		case 5:
-			return "postiosoite";
+			return "Onko varattuna";
 		case 6:
-			return "kotipuhelin";
-		case 7:
-			return "työpuhelin";
-		case 8:
-			return "autopuhelin";
-		case 9:
-			return "liittymisvuosi";
-		case 10:
-			return "jmaksu";
-		case 11:
-			return "maksu";
-		case 12:
-			return "lisätietoja";
+			return "Lisätietoja";
 		default:
-			return "Äääliö";
+			return "Hupsista";
 		}
 	}
 
