@@ -92,7 +92,6 @@ public class VarastoOverviewController {
 	
 	@FXML
     private void initialize() {
-        // Initialize the person table with the two columns.
         alusta();
     }
 
@@ -145,7 +144,7 @@ public class VarastoOverviewController {
 
 	@FXML
 	void handlePoistaPyora() {
-		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+		poistaPyora();
 	}
 
 
@@ -181,6 +180,16 @@ public class VarastoOverviewController {
 	private TextField[] muokkaukset;
 	private int kentta = 0;
 
+	/**
+	 * Alustetaan
+	 */
+	protected void alusta() {
+		panelPyora.setContent(areaPyora);
+		panelPyora.setFitToHeight(true);
+		fxChooserPyorat.clear();
+		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
+		setVuokraamo(new Vuokraamo());
+	}
 
 	/**
 	 * Näyttää listasta valitun jäsenen tiedot, tilapäisesti yhteen isoon edit-kenttään
@@ -188,7 +197,10 @@ public class VarastoOverviewController {
 	protected void naytaPyora() {
 		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
 
-		if (pyoraKohdalla == null) return;
+		if (pyoraKohdalla == null) {
+			areaPyora.clear();
+			return;
+		}
 
 		areaPyora.setText("");
 		try (PrintStream os = TextAreaOutputStream.getTextPrintStream(areaPyora)) {
@@ -197,17 +209,6 @@ public class VarastoOverviewController {
 	}
 
 
-	/**
-	 * Alustetaan
-	 */
-	protected void alusta() {
-		vuokraamo = new Vuokraamo();
-		lueTiedosto(vuokraamonNimi);
-		panelPyora.setContent(areaPyora);
-		panelPyora.setFitToHeight(true);
-		fxChooserPyorat.clear();
-		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
-	}
 
 
 	/**
@@ -216,14 +217,13 @@ public class VarastoOverviewController {
 	 * @return null jos onnistuu, muuten virhe tekstinä
 	 */
 	protected String lueTiedosto(String nimi) {
-		// ööh tutki miten tää toimii :D
-		//vuokraamonNimi = nimi;
+		vuokraamonNimi = nimi;
 		try {
 			vuokraamo.lueTiedostosta(nimi);
-			hae(1); // tässä oli aiemmin nolla. Meidän pyörien ID:t taitaa alkaa ykkösestä
+			hae(0);
 			return null;
 		} catch (SailoException e) {
-			hae(1); // samaten tässä
+			hae(0);
 			String virhe = e.getMessage();
 			if (virhe != null) Dialogs.showMessageDialog(virhe);
 			return virhe;
@@ -235,8 +235,9 @@ public class VarastoOverviewController {
      * @return true jos onnistui, false jos ei
      */
     public boolean avaa() {
+    	String uusiNimi = ""; // TODO dialog joka kysyy nimeä
+        if(uusiNimi == null) return false;
         lueTiedosto(vuokraamonNimi);
-        if(vuokraamonNimi == null) return false;
         return true;
     }
 	
@@ -283,6 +284,17 @@ public class VarastoOverviewController {
 
 		hae(uusi.getPyoranID());
 	}
+	
+	private void poistaPyora() {
+		if (pyoraKohdalla == null)
+			return;
+		if ( !Dialogs.showQuestionDialog("Poisto", "Poistetaanko jäsen: " + pyoraKohdalla.getNimi(), "Kyllä", "Ei") )
+            return;
+		vuokraamo.poistaPyora(pyoraKohdalla);
+		int index = fxChooserPyorat.getSelectedIndex();
+        hae(0);
+        fxChooserPyorat.setSelectedIndex(index);
+	}
 
 
 	/**
@@ -309,10 +321,8 @@ public class VarastoOverviewController {
         if (k > 0 || ehto.length() > 0)
             naytaVirhe(String.format("Ei osata hakea (kenttä: %d, ehto: %s)", k, ehto));
         else
-            naytaVirhe(null);
+        	fxChooserPyorat.clear(); // tämä oli muuten ennen elsen ulkopuolella
         
-        fxChooserPyorat.clear();
-
         int index = 0;
         Collection<Pyora> pyorat;
         try {
@@ -324,7 +334,7 @@ public class VarastoOverviewController {
                 i++;
             }
         } catch (SailoException ex) {
-            Dialogs.showMessageDialog("Jäsenen hakemisessa ongelmia! " + ex.getMessage());
+            Dialogs.showMessageDialog("Pyörän hakemisessa ongelmia! " + ex.getMessage());
         }
         fxChooserPyorat.setSelectedIndex(index); // tästä tulee muutosviesti joka näyttää jäsenen
 	}
@@ -332,7 +342,10 @@ public class VarastoOverviewController {
 	
     private void naytaVirhe(String virhe) {
     	
-    	Dialogs.showMessageDialog("Ei ole vielä lisätty");
+    	if (virhe == null || virhe.isEmpty())
+    		Dialogs.showMessageDialog("Tapahtui virhe");
+    	else
+    		Dialogs.showMessageDialog("Tapahtui virhe: " + virhe);
     	/*
         if ( virhe == null || virhe.isEmpty() ) {
             labelVirhe.setText("");
