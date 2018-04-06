@@ -41,9 +41,9 @@ public class Vuokraamo {
 	}
 
 	public void lueTiedostosta(String nimi) throws SailoException{
-		Pyorat pyorat = new Pyorat();
-		Vuokraukset vuokraukset = new Vuokraukset();
-		Asiakkaat asiakkaat = new Asiakkaat();
+		pyorat = new Pyorat();
+		vuokraukset = new Vuokraukset();
+		asiakkaat = new Asiakkaat();
 		
 		setTiedosto(nimi);
 		pyorat.lueTiedostosta();
@@ -83,6 +83,12 @@ public class Vuokraamo {
 		if(!"".equals(virhe)) throw new SailoException(virhe);
 	}
 	
+	public int poistaPyora(Pyora pyoraKohdalla) {
+		
+        if ( pyoraKohdalla == null ) return 0;
+        int ret = pyorat.poista(pyoraKohdalla.getPyoranID()); 
+        return ret; 
+	}
 	
 	public static void main(String[] args) {
 		Vuokraamo testi = new Vuokraamo();
@@ -112,4 +118,6 @@ public class Vuokraamo {
 			System.out.println(e.getMessage());
 		}
 	}
+
+
 }

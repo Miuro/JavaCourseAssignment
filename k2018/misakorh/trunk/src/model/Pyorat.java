@@ -14,7 +14,7 @@ public class Pyorat {
 	
 	private ArrayList<Pyora> alkiot = new ArrayList<>();
 
-	private String tiedostonPerusNimi = "pyorat";
+	private String tiedostonPerusNimi = "";
 	private boolean muutettu = false;
 	
 	/**
@@ -107,7 +107,7 @@ public class Pyorat {
 			muutettu = false;
 			
 		} catch (FileNotFoundException e) {
-			throw new SailoException("Tiedosto " + getTiedostonNimi() + " ei aukea");
+			throw new SailoException("Tiedostoa " + getTiedostonNimi() + " ei löytynyt. Luodaan uusi.");
 		} catch (IOException e) {
 			throw new SailoException("Ongelmia tiedoston kanssa: " + e.getMessage());
 		}
@@ -200,6 +200,24 @@ public class Pyorat {
 		return alkiot.size();
 	}
 
+	
+	
+	public int poista(int pyoranID) {
+        int ind = etsiId(pyoranID); 
+        if (ind < 0) return 0; 
+        alkiot.remove(ind);
+        muutettu = true; 
+        return 1;
+	}
+
+	private int etsiId(int pyoranID) {
+		for (int i = 0; i < alkiot.size(); i++) {
+			if(alkiot.get(i).getPyoranID() == pyoranID)
+				return i;
+		}
+		return -1;
+	}
+
 
 	/**
 	 * Testataan toimivuutta
@@ -219,12 +237,11 @@ public class Pyorat {
 
 		System.out.println("============= Pyörät testi =================");
 
-		for (int i = 0; i < pyorat.getLkm(); i++) {
-			Pyora jasen = pyorat.anna(i);
-			System.out.println("Jäsen nro: " + i);
-			jasen.tulosta(System.out);
-		}
+		
+		
 
 	}
+
+
 
 }
