@@ -32,11 +32,14 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		lkm++;*/
 	}
 	
-	public void etsi(int pyoraID) {
-		Collection<Pyora> loytyneet = new ArrayList<>(); 
-        for (Vuokraus v: alkiot) { 
-            loytyneet.add(v);  
-        } 
+	public Collection<Vuokraus> etsi(int pyoraID) {
+		Collection<Vuokraus> loytyneet = new ArrayList<>(); 
+		Iterator<Vuokraus> iter = iterator();
+		while (iter.hasNext()) {
+			Vuokraus v = (Vuokraus) iter.next();
+			if(v.getPyoraId() == pyoraID)
+				loytyneet.add(v);
+		}
         return loytyneet;
 	}
 	

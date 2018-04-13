@@ -8,55 +8,28 @@ public class Vuokraamo {
 	private Vuokraukset vuokraukset = new Vuokraukset();
 	private Asiakkaat asiakkaat = new Asiakkaat();
 	
-	/**
-	 * Lisää uuden pyörän pyöriin
-	 * @param pyora lisättävä pyörä
-	 * @throws SailoException jos tietorakenne jo täynnä
-	 */
 	public void lisaaPyora(Pyora pyora) throws SailoException{
 		pyorat.lisaa(pyora);
 	}
 	
-	/**
-	 * Lisää vuokrauksen vuokrauksiin
-	 * @param vuokraus lisättävä vuokraus
-	 * @throws SailoException jos tietorakenne jo täynnä
-	 */
+	
 	public void lisaaVuokraus(Vuokraus vuokraus) throws SailoException {
 		vuokraukset.lisaa(vuokraus);
 	}
 	
-	/**
-	 * Lisää asiakkaan asiakkaisiin
-	 * @param asiakas lisättävä asiakas
-	 * @throws SailoException jos tietorakenne jo täynnä
-	 */
+	
 	public void lisaaAsiakas(Asiakas asiakas) throws SailoException{
 		asiakkaat.lisaa(asiakas);
 	}
 	
-	/**
-	 * Antaa halutun pyörän vuokrauksen
-	 * @param pyora pyörä jonka vuokrausta halutaan
-	 * @return pyörän vuokraus
-	 * @throws SailoException jos ei löydy
-	 */
 	public Vuokraus annaVuokraus(Pyora pyora) throws SailoException {
 		return vuokraukset.annaVuokraus(pyora.getPyoranID());
 	}
 	
-	/**
-	 * Antaa pyörien lukumäärän
-	 * @return pyörien lukumäärä
-	 */
 	public int getPyoria() {
 		return pyorat.getLkm();
 	}
 	
-	/**
-	 * Asettaa tiedostojen nimet ja luo tiedostorakenteen
-	 * @param nimi hakemiston nimi
-	 */
 	public void setTiedosto(String nimi) {
 		File dir = new File(nimi);
 		dir.mkdirs();
@@ -67,11 +40,6 @@ public class Vuokraamo {
 		asiakkaat.setTiedostonPerusNimi(hakemistonNimi + "asiakkaat");
 	}
 
-	/**
-	 * Luetuttaa kaikki tiedostot
-	 * @param nimi tiedoston nimi
-	 * @throws SailoException jos tulee poikkeus
-	 */
 	public void lueTiedostosta(String nimi) throws SailoException{
 		pyorat = new Pyorat();
 		vuokraukset = new Vuokraukset();
@@ -95,10 +63,6 @@ public class Vuokraamo {
         return pyorat.etsi(hakuehto, k); 
     } 
 	
-    /**
-     * Tallentaa tiedostot
-     * @throws SailoException
-     */
 	public void tallenna() throws SailoException{
 		String virhe = "";
 		try {
@@ -119,11 +83,6 @@ public class Vuokraamo {
 		if(!"".equals(virhe)) throw new SailoException(virhe);
 	}
 	
-	/**
-	 * Poistaa valitun pyörän
-	 * @param pyoraKohdalla valittu pyörä
-	 * @return 0 jos ei onnistu, 1 jos onnistui
-	 */
 	public int poistaPyora(Pyora pyoraKohdalla) {
 		
         if ( pyoraKohdalla == null ) return 0;
@@ -131,19 +90,8 @@ public class Vuokraamo {
         return ret; 
 	}
 	
-	/**
-	 * Haetaan oyörälle kuuluva vuokraus, jos semmoinen on olemassa
-	 * @param pyoraID Pyörän ID
-	 * @return Pyörään liitetty vuokraus, tai null jos sellaista ei ole
-	 */
-	public Vuokraus annaVuokraus(int pyoraID) {
-		return vuokraukset.etsi(pyoraID);
-	}
+
 	
-	/**
- 	* Testi ohjelmaa vuokramolle
- 	* @param args ei käytösä
- 	*/
 	public static void main(String[] args) {
 		Vuokraamo testi = new Vuokraamo();
 		try {
@@ -152,6 +100,7 @@ public class Vuokraamo {
 			p1.vastaaJopo();
 			p2.rekisteroi();
 			p2.vastaaJopo();
+			
 		
 			testi.lisaaPyora(p1);
 			testi.lisaaPyora(p2);

@@ -263,7 +263,6 @@ public class Pyora implements Cloneable {
 		nimi = "Punainen Jopo";
 		malli = "Helkama Jopo";
 		kunto = 1;
-		onkoVarattu = true;
 		vuokraPerTunti = 12;
 		lisatietoja = "Penkki pit‰‰ vaihtaa";
 	}
