@@ -90,6 +90,16 @@ public class Vuokraamo {
         return ret; 
 	}
 	
+	
+	/**
+	 * Haetaan oyörälle kuuluva vuokraus, jos semmoinen on olemassa
+	 * @param pyoraID Pyörän ID
+	 * @return Pyörään liitetty vuokraus, tai null jos sellaista ei ole
+	 */
+	public Vuokraus annaVuokraus(int pyoraID) {
+		vuokraukset.etsi(pyoraID);
+	}
+	
 	public static void main(String[] args) {
 		Vuokraamo testi = new Vuokraamo();
 		try {
@@ -102,15 +112,22 @@ public class Vuokraamo {
 			testi.lisaaPyora(p1);
 			testi.lisaaPyora(p2);
 			
+			Asiakas a1 = new Asiakas();
+			a1.rekisteroi();
+			a1.vastaaHessuHopo();
+			
 			//int id1 = p1.getPyoranID();
 			//int i2 = p2.getPyoranID();
 			
-			Asiakas a1 = new Asiakas();
-			a1.vastaaHessuHopo();
-			a1.rekisteroi();
-			
-			Vuokraus v1 = new Vuokraus();
+			Vuokraus v1 = new Vuokraus(10, p1.getVuokraPerTunti(), p1.getPyoranID(),a1.getAsiakasId());
 			v1.testiVuokraus(5);
+			
+			
+			v1.tulosta(System.out);
+			
+			
+			
+			testi.lisaaVuokraus(v1);
 			
 			testi.lueTiedostosta("Testi");
 			

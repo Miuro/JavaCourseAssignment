@@ -32,6 +32,21 @@ public class Vuokraus {
 		
 	}
 	
+	
+	/**
+	 * Konstruktori vuokrauksella tarvittavilla tiedoilla
+	 * @param kestoTunneissa Vuokrauksen kesto
+	 * @param vuokraPerPaiva Vuokran määrä euroissa
+	 * @param pyoraID Pyörän ID
+	 * @param asiakasID Asiakkaan ID
+	 */
+	public Vuokraus(int kestoTunneissa, double vuokraPerPaiva, int pyoraID, int asiakasID) {
+		this.pyoraId = pyoraID;
+		this.vuokraajaId = asiakasID;
+		//TODO aika toimimaan
+		this.hinta = vuokraPerPaiva;
+	}
+	
 	public int getPyoraId() {
 		return this.pyoraId;
 	}
@@ -217,14 +232,12 @@ public class Vuokraus {
 	 * @param kestoTunneissa Vuokrauksen kesto tunneissa.
 	 */
 	public void testiVuokraus(int kestoTunneissa) {
-		pyoraId = 7;
-		vuokraajaId = 1;
 		pvm = Calendar.getInstance();
 		palautus = Calendar.getInstance();
 		palautus.add(Calendar.HOUR, kestoTunneissa);
 		vuokrausAika = sdf.format(pvm.getTime());
 		palautusAika = sdf.format(palautus.getTime());
-		hinta = 5 * kestoTunneissa; // 50 tilalle kaivettaisiin siis pyoraID:n hinta.
+		hinta = hinta * kestoTunneissa;
 		lisatiedot = "Maksettu luottokortilla";
 	}
 	
