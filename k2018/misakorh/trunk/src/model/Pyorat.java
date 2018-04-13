@@ -35,7 +35,7 @@ public class Pyorat {
 		Collection<Pyora> loytyneet = new ArrayList<>(); 
         for (Pyora pyora: alkiot) { 
             loytyneet.add(pyora);  
-        } 
+        }
         return loytyneet; 
     }
 	

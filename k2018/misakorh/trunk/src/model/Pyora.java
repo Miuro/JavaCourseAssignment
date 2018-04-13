@@ -22,8 +22,20 @@ public class Pyora implements Cloneable {
 	private int kunto = 3; // 0-3. 0 = rikki, 1 = tyydyttävä, 2 = hyvä, 3 = erinomainen
 	private String lisatietoja = "";
 	private boolean onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
-	private double vuokraPerPaiva = 0;
+	private double vuokraPerTunti = 0;
 
+	
+	/**
+	 * Asetin pyörän varauksen tilalle
+	 * @param arvo uusi arvo
+	 */
+	public void setOnkoVarattu(boolean arvo) {
+		this.onkoVarattu = arvo;
+	}
+	
+	public boolean getOnkoVarattu() {
+		return onkoVarattu;
+	}
 
 	/**
 	 * Palauttaa pyörän kenttien määrän
@@ -63,7 +75,7 @@ public class Pyora implements Cloneable {
 		case 5:
 			return "" + onkoVarattu;
 		case 6:
-			return "" + vuokraPerPaiva;
+			return "" + vuokraPerTunti;
 		default:
 			return "Hupsista";
 		}
@@ -128,8 +140,8 @@ public class Pyora implements Cloneable {
 	/**
 	 * @return Pyörän vuokra per päivä
 	 */
-	public double getVuokraPerPaiva() {
-		return vuokraPerPaiva;
+	public double getVuokraPerTunti() {
+		return vuokraPerTunti;
 	}
 
 
@@ -139,7 +151,7 @@ public class Pyora implements Cloneable {
 	 */
 	@Override
 	public String toString() {
-		return pyoranID + "|" + nimi + "|" + malli + "|" + kunto + "|" + vuokraPerPaiva + "|" + onkoVarattu + "|"
+		return pyoranID + "|" + nimi + "|" + malli + "|" + kunto + "|" + vuokraPerTunti + "|" + onkoVarattu + "|"
 				+ lisatietoja;
 	}
 
@@ -200,7 +212,7 @@ public class Pyora implements Cloneable {
 			return null;
 		case 4:
 			try {
-				vuokraPerPaiva = Integer.parseInt(tjono);
+				vuokraPerTunti = Integer.parseInt(tjono);
 			} catch (NumberFormatException e) {
 				return "Vuokra oli väärin";
 			}
@@ -233,7 +245,7 @@ public class Pyora implements Cloneable {
 		case 3:
 			return "Kunto 0-3";
 		case 4:
-			return "Vuokra per päivä";
+			return "Vuokra per tunti";
 		case 5:
 			return "Onko varattuna";
 		case 6:
@@ -252,7 +264,7 @@ public class Pyora implements Cloneable {
 		malli = "Helkama Jopo";
 		kunto = 1;
 		onkoVarattu = true;
-		vuokraPerPaiva = 12;
+		vuokraPerTunti = 12;
 		lisatietoja = "Penkki pitää vaihtaa";
 	}
 
@@ -264,7 +276,7 @@ public class Pyora implements Cloneable {
 	public void tulosta(PrintStream out) {
 		out.println(String.format("%03d", pyoranID, 3) + "  " + nimi + "  " + malli);
 		out.println(String.format(kunnot[kunto]));
-		out.println("Vuokran määrä: " + String.format("%4.2f", vuokraPerPaiva));
+		out.println("Vuokran määrä: " + String.format("%4.2f", vuokraPerTunti));
 		out.println("Onko vuokrattuna: " + onkoVarattu);
 		out.println("Lisätiedot: " + lisatietoja);
 	}

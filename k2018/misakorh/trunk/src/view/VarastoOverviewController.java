@@ -235,8 +235,8 @@ public class VarastoOverviewController {
      * @return true jos onnistui, false jos ei
      */
     public boolean avaa() {
-    	String uusiNimi = ""; // TODO dialog joka kysyy nimeä
-        if(uusiNimi == null) return false;
+    	//String uusiNimi = ""; // TODO dialog joka kysyy nimeä
+        //if(uusiNimi == null) return false;
         lueTiedosto(vuokraamonNimi);
         return true;
     }

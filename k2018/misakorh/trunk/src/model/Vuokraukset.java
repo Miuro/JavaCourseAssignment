@@ -32,6 +32,16 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		lkm++;*/
 	}
 	
+	public void etsi(int pyoraID) {
+		Collection<Pyora> loytyneet = new ArrayList<>(); 
+        for (Vuokraus v: alkiot) { 
+            loytyneet.add(v);  
+        } 
+        return loytyneet;
+	}
+	
+	
+	
 	/*
 	/**
 	 * Palauttaa viitteen i:teen vuokraukseen
