@@ -47,26 +47,45 @@ public class Vuokraus {
 		this.hinta = vuokraPerPaiva;
 	}
 	
+	/**
+	 * Antaa pyörän tunnusluvun
+	 * @return pyörän tunnusluku
+	 */
 	public int getPyoraId() {
 		return this.pyoraId;
 	}
 	
+	/**
+	 * Antaa vuokraajan tunnusluvun
+	 * @return vuokraajan tunnusluku
+	 */
 	public int getVuokraajaId() {
 		return this.vuokraajaId;
 	}
 	
+	/**
+	 * Asettaa vuokrauksen tunnusluvun
+	 * @param id haluttu tunnusluku
+	 */
 	public void setVuokrausId(int id) {
 		vuokrausId = id;
 	}
 	
+	/**
+	 * Asettaa vuokraajan tunnusluvun
+	 * @param id haluttu tunnusluku
+	 */
 	public void setVuokraajaId(int id) {
 		vuokraajaId = id;
 	}
 	
+	/**
+	 * Asettaa vuokratun pyörän tunnusluvun
+	 * @param id haluttu tunnusluku
+	 */
 	public void setPyoraId(int id) {
 		pyoraId = id;
 	}
-	
 	
 	/**
 	 * Palauttaa vuokrauksen kenttien lukumäärän
@@ -83,8 +102,6 @@ public class Vuokraus {
 	public int ekaKentta() {
 		return 3;
 	}
-	
-	
 	
 	/**
 	 * Palauttaa k:n kentän sisällön merkkijonona
@@ -141,8 +158,8 @@ public class Vuokraus {
 	
 	
 	/**
-	 * 
-	 * @param rivi
+	 * Pilkkoo rivin ja kutsuu aseta -funktiota
+	 * @param rivi pilkottava rivi
 	 */
 	public void parse(String rivi) {
 		String[] osat = rivi.split("\\|");
@@ -153,10 +170,10 @@ public class Vuokraus {
 	
 	
 	/**
-	 * 
-	 * @param k
-	 * @param jono
-	 * @return
+	 * Asettaa vuokraukseen merkkijonon sisältävän tiedon jos se on sopiva.
+	 * @param k kentän indeksi
+	 * @param jono asetettava merkkijono
+	 * @return null jos kaikki ok, muu merkkijono jos jotain ongelmaa
 	 */
 	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
@@ -251,24 +268,44 @@ public class Vuokraus {
 	}
 	
 	/**
+	 * Antaa palautusajan
 	 * @return Palauttaa viitteen vuokrauksen loppumisaikaan, eli milloin pyörän tulisi olla palautettuna.
 	 */
 	public String getPalautusAika() {
 		return palautusAika;
 	}
 	
+	/**
+	 * Antaa vuokrausajanhetken
+	 * @return viite vuokrauksen aloitusajankohtaan, milloin pyörä vuokrattiin
+	 */
 	public String getVuokrausAika() {
 		return vuokrausAika;
 	}
 	
+	/**
+	 * Asettaa vuokrausajan
+	 * @param vuokrAika vuokrausajankohta
+	 */
 	public void setVuokrausAika(String vuokrAika) {
 		vuokrausAika = vuokrAika;
 	}
 	
+	/**
+	 * Asettaa palautusajankohdan
+	 * @param palAika palautusaika
+	 */
 	public void setPalautusAika(String palAika) {
 		palautusAika = palAika;
 	}
 	
+	/**
+	 * Antaa vuokrauksen viitteen
+	 * @return vuokraus
+	 */
+	public Vuokraus get() {
+		return this;
+	}
 
 	/**
 	 * Testiohjelma vuokraukselle
@@ -279,12 +316,6 @@ public class Vuokraus {
 		testi.rekisteroi();
 		testi.testiVuokraus(5);
 		testi.tulosta(System.out);
-		
-
-	}
-
-	public Vuokraus get() {
-		return this;
 	}
 
 }
