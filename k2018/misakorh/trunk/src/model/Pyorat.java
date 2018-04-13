@@ -201,7 +201,11 @@ public class Pyorat {
 	}
 
 	
-	
+	/**
+	 * Poistaa halutun pyörän
+	 * @param pyoranID halutun pyörän tunnusluku
+	 * @return 0 jos ei löydy, 1 jos onnistui
+	 */
 	public int poista(int pyoranID) {
         int ind = etsiId(pyoranID); 
         if (ind < 0) return 0; 
@@ -210,6 +214,11 @@ public class Pyorat {
         return 1;
 	}
 
+	/**
+	 * Etsii halutun pyörän indeksin
+	 * @param pyoranID halutun pyörän tunnusluku
+	 * @return indeksin numero jos onnistui, -1 jos ei
+	 */
 	private int etsiId(int pyoranID) {
 		for (int i = 0; i < alkiot.size(); i++) {
 			if(alkiot.get(i).getPyoranID() == pyoranID)
@@ -237,11 +246,6 @@ public class Pyorat {
 
 		System.out.println("============= Pyörät testi =================");
 
-		
-		
-
 	}
-
-
-
+	
 }

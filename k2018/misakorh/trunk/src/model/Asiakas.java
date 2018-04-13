@@ -68,7 +68,9 @@ public class Asiakas{
 	}
 	
 	
-	
+	/**
+	 * T‰ytt‰‰ asiakkaan testitiedoillas
+	 */
 	public void vastaaHessuHopo() {
 		nimi = "Hessu Hopo";
 		sotu = "123123-123W";
@@ -87,7 +89,10 @@ public class Asiakas{
 	}
 	
 	
-	
+	/**
+	 * Asettaa asiakkaan tunnusluvun
+	 * @param id Asiakkaan haluttu tunnusluku
+	 */
 	public void setAsiakasId(int id) {
 		asiakasId = id;
 	}
@@ -109,7 +114,11 @@ public class Asiakas{
 	}
 	
 	
-	
+	/**
+	 * Jakaa merkkijonon haluttuihin osiin ja kutsuu aseta() funktiota joka asettaa luetut tiedot
+	 * asiakkaan tiedoiksi jos mahdollista
+	 * @param rivi jaettava merkkijono
+	 */
 	public void parse(String rivi) {
 		String[] osat = rivi.split("\\|");
 		for (int k = 0; k < getKenttia(); k++) {
@@ -117,7 +126,12 @@ public class Asiakas{
 		}
 	}
 	
-	
+	/**
+	 * Asettaa asiakkaan tietoihin merkkijonon tiedot
+	 * @param k mik‰ case kyseess‰
+	 * @param jono merkkijono jota sovitetaan tiedoksi
+	 * @return null mjos kaikki hyvin, "Tervetti" jos ei sovi mihink‰‰n kent‰‰n
+	 */
 	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
 		StringBuffer sb = new StringBuffer(tjono);

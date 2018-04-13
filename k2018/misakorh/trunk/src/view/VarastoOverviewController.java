@@ -90,6 +90,9 @@ public class VarastoOverviewController {
 
 	}
 	
+	/**
+	 * Alustaa
+	 */
 	@FXML
     private void initialize() {
         alusta();
@@ -104,6 +107,9 @@ public class VarastoOverviewController {
 		this.mainApp = mainApp;
 	}
 	
+	/**
+	 * Hakuehdon händläys
+	 */
 	@FXML
 	void handleHakuehto() {
         if ( pyoraKohdalla != null )
@@ -111,30 +117,45 @@ public class VarastoOverviewController {
 	}
 
 
+	/**
+	 * Händlää Apua painikkeen
+	 */
 	@FXML
 	void handleAvaaApua() {
 		Dialogs.showMessageDialog("Ei ole vielä lisätty");
 	}
 
 
+	/**
+	 * Händlää Tietoja painikkeen
+	 */
 	@FXML
 	void handleAvaaTietoja() {
-		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+		Dialogs.showMessageDialog("PyöräVarasto\nVer. 0.6\nTekijät: Jouko Sirkka & Miro Korhonen");
 	}
 
 
+	/**
+	 * Händlää Avaa -painikkeen toiminnan
+	 */
 	@FXML
 	void handleMenuAvaa() {
 		avaa();
 	}
 
 
+	/**
+	 * Händlää lopeta painikkeen
+	 */
 	@FXML
 	void handleMenuLopeta() {
 		Dialogs.showMessageDialog("Ei ole vielä lisätty");
 	}
 
 
+	/**
+	 * Händlää tulosta-painikkeen
+	 */
 	@FXML
 	void handleMenuTulosta() {
 		//Dialogs.showMessageDialog("Ei ole vielä lisätty");
@@ -142,18 +163,27 @@ public class VarastoOverviewController {
 	}
 
 
+	/**
+	 * Händlää poistapyörä painikkeen
+	 */
 	@FXML
 	void handlePoistaPyora() {
 		poistaPyora();
 	}
 
 
+	/**
+	 * Händlää tallennus painikkeen
+	 */
 	@FXML
 	void handleTallenna() {
 		tallenna();
 	}
 
 
+	/**
+	 * Händlää uusipyörä painikkeen
+	 */
 	@FXML
 	void handleUusiPyora() {
 		uusiPyora();
@@ -189,6 +219,7 @@ public class VarastoOverviewController {
 		fxChooserPyorat.clear();
 		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
 		setVuokraamo(new Vuokraamo());
+		avaa();
 	}
 
 	/**
@@ -208,9 +239,7 @@ public class VarastoOverviewController {
 		}
 	}
 
-
-
-
+	
 	/**
 	 * Alustaa vuokraamon lukemalla sen valitun nimisestä tiedostosta
 	 * @param nimi tiedosto josta vuokraamon tiedot luetaan
@@ -265,8 +294,7 @@ public class VarastoOverviewController {
         return true;
     }
 
-
-
+    
 	/**
 	 * Luo uuden jäsenen jota aletaan editoimaan
 	 */
@@ -285,6 +313,9 @@ public class VarastoOverviewController {
 		hae(uusi.getPyoranID());
 	}
 	
+	/**
+	 * Poistaa halutun pyörän
+	 */
 	private void poistaPyora() {
 		if (pyoraKohdalla == null)
 			return;
@@ -339,7 +370,10 @@ public class VarastoOverviewController {
         fxChooserPyorat.setSelectedIndex(index); // tästä tulee muutosviesti joka näyttää jäsenen
 	}
 	
-	
+	/**
+	 * Näyttää virheen
+	 * @param virhe virheen teksti
+	 */
     private void naytaVirhe(String virhe) {
     	
     	if (virhe == null || virhe.isEmpty())
@@ -380,6 +414,10 @@ public class VarastoOverviewController {
 	}
 
 
+	/**
+	 * Testihommia
+	 * @param args ei käytösä
+	 */
 	public static void main(String[] args) {
 		Vuokraamo testi = new Vuokraamo();
 		Pyora p1 = new Pyora();
