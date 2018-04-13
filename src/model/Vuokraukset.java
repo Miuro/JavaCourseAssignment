@@ -32,6 +32,11 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		lkm++;*/
 	}
 	
+	/**
+	 * Etsii pyörän vuokraukset
+	 * @param pyoraID vuokratun pyörän tunnusluku
+	 * @return löytyneet vuokraukset
+	 */
 	public Collection<Vuokraus> etsi(int pyoraID) {
 		Collection<Vuokraus> loytyneet = new ArrayList<>(); 
 		Iterator<Vuokraus> iter = iterator();
