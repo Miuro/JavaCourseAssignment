@@ -192,10 +192,12 @@ public class VarastoOverviewController {
 
 	/**
 	 * Avataan vuokrausikkuna.
+	 * @throws SailoException 
 	 */
 	@FXML
-	void handleUusiVuokraus() {
-		mainApp.showUusiVuokrausDialog();
+	void handleUusiVuokraus() throws SailoException {
+		//mainApp.showUusiVuokrausDialog();
+		vuokraaPyora(60);
 	}
 
 	//===============================================================================
@@ -334,7 +336,8 @@ public class VarastoOverviewController {
 	public void vuokraaPyora(int kesto) throws SailoException {
 		// JOptionPane.showMessageDialog(null, "Vielä ei osata lisätä vuokrausta!" );
 		if (pyoraKohdalla == null) return;
-		Vuokraus vuokraus = new Vuokraus();
+		Vuokraus vuokraus = new Vuokraus(kesto, pyoraKohdalla.getVuokraPerTunti(), pyoraKohdalla.getPyoranID(), 1); // TODO: Asiakkaat lol
+		pyoraKohdalla.setOnkoVarattu(true); 
 		vuokraus.rekisteroi();
 		vuokraus.testiVuokraus(kesto);
 		vuokraamo.lisaaVuokraus(vuokraus);
@@ -410,6 +413,12 @@ public class VarastoOverviewController {
 	private void tulosta(PrintStream os, Pyora pyora) {
 		os.println("----------------------------------------------");
 		pyora.tulosta(os);
+		try {
+			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
+			apuVuokraus.tulosta(os);
+		} catch (SailoException e) {
+			e.printStackTrace();
+		}
 		os.println("----------------------------------------------");
 	}
 
