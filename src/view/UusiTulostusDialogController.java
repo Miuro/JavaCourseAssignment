@@ -8,7 +8,9 @@ import javafx.stage.Stage;
 
 public class UusiTulostusDialogController {
 	
-	@FXML TextArea tulostusAlue;
+	@FXML
+	TextArea tulostusAlue;
+	
 	@FXML
 	private Button fxTulostaButton;
 
@@ -63,6 +65,11 @@ public class UusiTulostusDialogController {
         return tulostusAlue;
     }
     
+    /**
+     * Antaa UusiTulostusDialogControllerin
+     * @param tulostus
+     * @return
+     */
     public static UusiTulostusDialogController tulosta (String tulostus) {
     	UusiTulostusDialogController control = new UusiTulostusDialogController();
     	

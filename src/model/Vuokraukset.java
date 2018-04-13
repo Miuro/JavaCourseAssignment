@@ -108,9 +108,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		} catch (IOException e) {
 			throw new SailoException("Tiedoston " + ftied.getName() + " kirjoittamisessa ongelmia");
 		}
-		
 		muutettu = false;
-		
 	}
 
 	

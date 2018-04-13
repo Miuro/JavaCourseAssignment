@@ -108,8 +108,10 @@ public class MainApp extends Application {
 		}
 	}
 
-
-
+	/**
+	 * Maini k‰ynnist‰‰ vehkeen
+	 * @param args parametrit
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

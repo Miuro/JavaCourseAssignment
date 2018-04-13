@@ -48,7 +48,7 @@ public class UusiVuokrausDialogController {
 	}
 
 	/**
-	 * 
+	 * H‰ndl‰‰ Vuokraa painikkeen
 	 */
 	@FXML
 	void handleVuokraaPyora() {
