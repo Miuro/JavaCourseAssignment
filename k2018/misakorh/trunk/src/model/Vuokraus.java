@@ -9,9 +9,9 @@ import fi.jyu.mit.ohj2.Mjonot;
 
 public class Vuokraus {
 	
-	private int 		vuokrausId,	 // = 0
-						pyoraId,	 // = 0
-						vuokraajaId 	= 0;
+	private int 		vuokrausId,	
+						pyoraId,	 
+						vuokraajaId;
 	private String 		vuokrausAika, // = ""
 						palautusAika 	= "";
 	private double 		hinta 			= 0.;
@@ -22,6 +22,17 @@ public class Vuokraus {
 	public static Calendar pvm; // = Calendar.getInstance();
 	private Calendar palautus; // = Calendar.getInstance();
 	private static final DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+	
+	
+	/**
+	 * Palauttaa pyörän string muodossa ominaisuudet erotettuna "|"-merkillä
+	 * @return pyörä stringmuodossa jossa ominaisuudet erotettuna "|"-merkillä
+	 */
+	@Override
+	public String toString() {
+		return vuokrausId + "|" + pyoraId + "|" + vuokraajaId + "|" + vuokrausAika + "|" + palautusAika + "|" + hinta + "|"
+				+ lisatiedot;
+	}
 	
 	
 	
@@ -180,19 +191,19 @@ public class Vuokraus {
 		StringBuffer sb = new StringBuffer(tjono);
 		switch (k) {
 		case 0:
-			setVuokrausId(Mjonot.erota(sb, '|', getVuokrausId()));
+			setVuokrausId(Integer.parseInt(tjono));
 			return null;
 		case 1:
-			setPyoraId(Mjonot.erota(sb, '|', getPyoraId()));;
+			setPyoraId(Integer.parseInt(tjono));
 			return null;
 		case 2:
-			setVuokraajaId(Mjonot.erota(sb, '|', getVuokraajaId()));;
+			vuokraajaId = Integer.parseInt(tjono);
 			return null;
 		case 3:
-			setVuokrausAika(Mjonot.erota(sb, '|', getVuokrausAika()));;
+			vuokrausAika = tjono;
 			return null;
 		case 4:
-			setPalautusAika(Mjonot.erota(sb, '|', getPalautusAika()));
+			palautusAika = tjono;
 			return null;
 		case 5:
 			try {
@@ -248,7 +259,8 @@ public class Vuokraus {
 	 * Luo testattavan ja esim. dataa sisältävän vuokrauksen.
 	 * @param kestoTunneissa Vuokrauksen kesto tunneissa.
 	 */
-	public void testiVuokraus(int kestoTunneissa) {
+	public void testiVuokraus(int pyoraId, int kestoTunneissa) {
+		this.pyoraId = pyoraId;
 		pvm = Calendar.getInstance();
 		palautus = Calendar.getInstance();
 		palautus.add(Calendar.HOUR, kestoTunneissa);
@@ -312,10 +324,17 @@ public class Vuokraus {
 	 * @param args ei käytösä
 	 */
 	public static void main(String[] args) {
-		Vuokraus testi = new Vuokraus();
+		Vuokraus testi = new Vuokraus(10,1,1,1);
 		testi.rekisteroi();
-		testi.testiVuokraus(5);
+		testi.testiVuokraus(1,5);
 		testi.tulosta(System.out);
+		Vuokraus testi2 = new Vuokraus(20,2,2,2);
+		testi2.rekisteroi();
+		testi2.testiVuokraus(2,5);
+		System.out.println();
+		testi2.tulosta(System.out);
+		System.out.println(testi.toString());
+		System.out.println(testi2.toString());
 	}
 
 }

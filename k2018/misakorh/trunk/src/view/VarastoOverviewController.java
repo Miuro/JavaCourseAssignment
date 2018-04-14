@@ -339,7 +339,7 @@ public class VarastoOverviewController {
 		Vuokraus vuokraus = new Vuokraus(kesto, pyoraKohdalla.getVuokraPerTunti(), pyoraKohdalla.getPyoranID(), 1); // TODO: Asiakkaat lol
 		pyoraKohdalla.setOnkoVarattu(true); 
 		vuokraus.rekisteroi();
-		vuokraus.testiVuokraus(kesto);
+		vuokraus.testiVuokraus(pyoraKohdalla.getPyoranID(),kesto);
 		vuokraamo.lisaaVuokraus(vuokraus);
 		hae(pyoraKohdalla.getPyoranID());
 	}

@@ -9,10 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
-public class Pyorat {
+public class Pyorat implements Iterable<Pyora> {
 	
-	private ArrayList<Pyora> alkiot = new ArrayList<>();
+	private Collection<Pyora> alkiot = new ArrayList<>();
 
 	private String tiedostonPerusNimi = "";
 	private boolean muutettu = false;
@@ -76,12 +77,19 @@ public class Pyorat {
 	 * 
 	 * @param i monennenko pyörän viite halutaan
 	 * @return viite pyörään, jonka indeksi on i
-	 * @throws IndexOutOfBoundsException jos i ei ole sallitulla alueella
 	 */
 	public Pyora anna(int i) throws IndexOutOfBoundsException {
-		if (i < 0 || alkiot.size() <= i)
-			throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
-		return alkiot.get(i);
+		//if (i < 0 || alkiot.size() <= i)
+		//	throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
+		//return alkiot.get(i);
+		
+		
+		for (Pyora pyora : alkiot) {
+			if(pyora.getPyoranID() == i) {
+				return pyora;
+			}
+		}
+ 		return null;
 	}
 
 	
@@ -134,6 +142,7 @@ public class Pyorat {
 	}
 	
 	
+	
 	/**
 	 * Palauttaa tiedoston nimen jota käytetään tallennukseen ilman päätettä
 	 * 
@@ -176,17 +185,18 @@ public class Pyorat {
 		File ftied = new File(getTiedostonNimi());
 		fbak.delete();
 		ftied.renameTo(fbak);
+		Pyora temp;
 		
 		try ( PrintWriter fo = new PrintWriter(new FileWriter(ftied.getCanonicalPath())) ) {
-			for(int i = 0; i < getLkm(); i++) {
-				fo.println(anna(i).toString());
+			for (Pyora pyora: this) {
+				fo.println(pyora.toString());
+			
 			}
 		} catch (FileNotFoundException e) {
 			throw new SailoException("Tiedosto " + ftied.getName() + " ei aukea");
 		} catch (IOException e) {
 			throw new SailoException("Tiedoston " + ftied.getName() + " kirjoittamisessa ongelmia");
 		}
-		
 		muutettu = false;
 		
 	}
@@ -220,9 +230,9 @@ public class Pyorat {
 	 * @return indeksin numero jos onnistui, -1 jos ei
 	 */
 	private int etsiId(int pyoranID) {
-		for (int i = 0; i < alkiot.size(); i++) {
-			if(alkiot.get(i).getPyoranID() == pyoranID)
-				return i;
+		for (Pyora pyora : alkiot) {
+			if(pyora.getPyoranID() == pyoranID)
+				return pyora.getPyoranID();
 		}
 		return -1;
 	}
@@ -246,6 +256,12 @@ public class Pyorat {
 
 		System.out.println("============= Pyörät testi =================");
 
+	}
+
+
+	@Override
+	public Iterator<Pyora> iterator() {
+		return alkiot.iterator();
 	}
 	
 }

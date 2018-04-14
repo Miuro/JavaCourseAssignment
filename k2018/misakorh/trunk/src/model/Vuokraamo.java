@@ -23,6 +23,9 @@ public class Vuokraamo {
 	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaVuokraus(Vuokraus vuokraus) throws SailoException {
+		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
+		if(temp.getOnkoVarattu() == true) return;
+		temp.setOnkoVarattu(true);
 		vuokraukset.lisaa(vuokraus);
 	}
 	
@@ -38,11 +41,16 @@ public class Vuokraamo {
 	/**
 	 * Antaa halutun pyörän vuokrauksen
 	 * @param pyora pyörä jonka vuokrausta halutaan
-	 * @return pyörän vuokraus
+	 * @return pyörän vuokraus, null jos ei ole vuokrausta
 	 * @throws SailoException jos ei löydy
 	 */
 	public Vuokraus annaVuokraus(Pyora pyora) throws SailoException {
-		return vuokraukset.annaVuokraus(pyora.getPyoranID());
+		if(pyora.getOnkoVarattu() == true) {
+			Vuokraus temp = vuokraukset.etsi(pyora.getPyoranID());
+			return vuokraukset.anna(temp.getVuokrausId());			
+		}
+		else 
+			return null;
 	}
 	
 	/**
@@ -152,12 +160,14 @@ public class Vuokraamo {
 			Asiakas a1 = new Asiakas();
 			a1.rekisteroi();
 			a1.vastaaHessuHopo();
+			testi.lisaaAsiakas(a1);
 			
 			//int id1 = p1.getPyoranID();
 			//int i2 = p2.getPyoranID();
 			
 			Vuokraus v1 = new Vuokraus(10, p1.getVuokraPerTunti(), p1.getPyoranID(),a1.getAsiakasId());
-			v1.testiVuokraus(5);
+			v1.rekisteroi();
+			v1.testiVuokraus(p1.getPyoranID(),5);
 			
 			
 			v1.tulosta(System.out);
@@ -166,7 +176,8 @@ public class Vuokraamo {
 			
 			testi.lisaaVuokraus(v1);
 			
-			testi.lueTiedostosta("Testi");
+			testi.tallenna();
+			testi.lueTiedostosta("MJVuokraamo");
 			
 		} catch (SailoException e) {
 			System.out.println(e.getMessage());

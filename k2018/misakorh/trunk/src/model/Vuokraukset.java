@@ -27,25 +27,25 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 */
 	public void lisaa(Vuokraus vuokraus) throws SailoException {
 		alkiot.add(vuokraus);
+		muutettu = true;
 		/*if(lkm >= alkiot.length) throw new SailoException("Liikaa alkioita");
 		alkiot[lkm] = vuokraus;
 		lkm++;*/
 	}
 	
 	/**
-	 * Etsii pyörän vuokraukset
+	 * Etsii pyörän vuokrauksen
 	 * @param pyoraID vuokratun pyörän tunnusluku
-	 * @return löytyneet vuokraukset
+	 * @return löytynyt vuokraus, tai null jos ei löytynyt
 	 */
-	public Collection<Vuokraus> etsi(int pyoraID) {
-		Collection<Vuokraus> loytyneet = new ArrayList<>(); 
+	public Vuokraus etsi(int pyoraID) {
 		Iterator<Vuokraus> iter = iterator();
 		while (iter.hasNext()) {
 			Vuokraus v = (Vuokraus) iter.next();
 			if(v.getPyoraId() == pyoraID)
-				loytyneet.add(v);
+				return v;
 		}
-        return loytyneet;
+        return null;
 	}
 	
 	
@@ -106,10 +106,11 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		File ftied = new File(getTiedostonNimi());
 		fbak.delete();
 		ftied.renameTo(fbak);
+		Vuokraus temp;
 		
 		try ( PrintWriter fo = new PrintWriter(new FileWriter(ftied.getCanonicalPath())) ) {
-			for(int i = 0; i < getLkm(); i++) {
-				fo.println(annaVuokraus(i).toString());
+			for (Vuokraus vuokraus : this) {
+				fo.println(vuokraus.toString());
 			}
 		} catch (FileNotFoundException e) {
 			throw new SailoException("Tiedosto " + ftied.getName() + " ei aukea");
@@ -192,18 +193,29 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	/**
 	 * Palauttaa halutun vuokrauksen
 	 * 
-	 * @param tunnusNro halutun vuokrauksen pyörän tunnusnumero
+	 * @param tunnusNro halutun vuokrauksen id
 	 * @return vuokr haluttu vuokraus
 	 * @throws SailoException jos ei löydy
+	 * @example
+	 * <pre name="test">
+	 * Vuokraukset t = new Vuokraukset();
+	 * v1 = new Vuokraus();
+	 * v1.rekisteroi();
+	 * v1.testiVuokraus();
+	 * t.lisaa(v1);
+	 * v2 = new Vuokraus();
+	 * v2.testiVuokraus();
+	 * v2.rekisteroi();
+	 * t.lisaa(v2);
+	 * </pre>
 	 */
-	public Vuokraus annaVuokraus(int tunnusNro) throws SailoException{
-		try {
-			for(Vuokraus vuokr : alkiot)
-				if(vuokr.getPyoraId() == tunnusNro) return vuokr;
-		} catch (Exception e) {
-			throw new SailoException("Vuokrausta ei löytynyt, pyöräid: " + tunnusNro);
+	public Vuokraus anna(int vuokrauksenId){
+		for (Vuokraus vuokraus : alkiot) {
+			if(vuokraus.getVuokrausId() == vuokrauksenId) {
+				return vuokraus;
+			}
 		}
-		return null;
+ 		return null;
 	}
 	
 	

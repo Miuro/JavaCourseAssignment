@@ -195,7 +195,7 @@ public class Pyora implements Cloneable {
 		StringBuffer sb = new StringBuffer(tjono);
 		switch (k) {
 		case 0:
-			setPyoranID(Mjonot.erota(sb, '|', getPyoranID()));
+			setPyoranID(Integer.parseInt(tjono));
 			return null;
 		case 1:
 			nimi = tjono;
