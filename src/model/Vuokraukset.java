@@ -212,12 +212,64 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	}
 	
 	
+	public boolean poista(int pyoranID) {
+		for (Vuokraus vuokraus : alkiot) {
+			if(vuokraus.getPyoraId() == pyoranID) {
+				alkiot.remove(vuokraus);
+				muutettu = true;
+				return true;
+			}
+		}
+		return false;		
+	}
+	
+	
 	/**
 	 * Testiohjelma vuokrauksille
 	 *
 	 * @param args ei käytösä 
 	 */
 	public static void main(String[] args) {
+		Vuokraukset vuokraukset = new Vuokraukset();
+		Vuokraus t1 = new Vuokraus();
+		Vuokraus t2 = new Vuokraus();
+		t1.testiVuokraus(1, 2);
+		t2.testiVuokraus(2, 5);
+		t1.rekisteroi();
+		t2.rekisteroi();
+		
+		System.out.println("============= Pyörät testi =================");
+		String nimi = "vuokrauksetTesti";
+		File ftied = new File(nimi+ ".dat");
+		//ftied.delete();
+		
+		try {
+			vuokraukset.lueTiedostosta(nimi);
+		} catch (SailoException e) {
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		//vuokraukset.lisaa(t1);
+		//vuokraukset.lisaa(t2);
+
+		try {
+			vuokraukset.tallenna();
+		} catch (SailoException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Vuokrauksia on : " + vuokraukset.getLkm());
+		
+		Iterator<Vuokraus> iter = vuokraukset.iterator();
+		while (iter.hasNext()) System.out.println(iter.next());
+		
+		System.out.println("Poistetaan vuokraus pyörältä jonka id on 1");
+		
+		vuokraukset.poista(1);
+		System.out.println("Vuokrauksia on : " + vuokraukset.getLkm());
+		
+		iter = vuokraukset.iterator();		
+		while (iter.hasNext()) System.out.println(iter.next());
 		
 	}
 }

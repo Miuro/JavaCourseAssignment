@@ -266,6 +266,7 @@ public class Vuokraus {
 		palautus.add(Calendar.HOUR, kestoTunneissa);
 		vuokrausAika = sdf.format(pvm.getTime());
 		palautusAika = sdf.format(palautus.getTime());
+		hinta = 10;
 		hinta = hinta * kestoTunneissa;
 		lisatiedot = "Maksettu luottokortilla";
 	}
