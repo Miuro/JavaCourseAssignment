@@ -413,12 +413,11 @@ public class VarastoOverviewController {
 	private void tulosta(PrintStream os, Pyora pyora) {
 		os.println("----------------------------------------------");
 		pyora.tulosta(os);
-		try {
-			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
-			apuVuokraus.tulosta(os);
-		} catch (SailoException e) {
-			e.printStackTrace();
-		}
+
+		apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
+			if(apuVuokraus != null) 
+				apuVuokraus.tulosta(os);
+
 		os.println("----------------------------------------------");
 	}
 

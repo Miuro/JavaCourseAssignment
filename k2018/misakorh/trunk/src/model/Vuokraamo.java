@@ -20,9 +20,8 @@ public class Vuokraamo {
 	/**
 	 * Lisää vuokrauksen vuokrauksiin
 	 * @param vuokraus lisättävä vuokraus
-	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
-	public void lisaaVuokraus(Vuokraus vuokraus) throws SailoException {
+	public void lisaaVuokraus(Vuokraus vuokraus) {
 		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
 		if(temp.getOnkoVarattu() == true) return;
 		temp.setOnkoVarattu(true);
@@ -42,12 +41,11 @@ public class Vuokraamo {
 	 * Antaa halutun pyörän vuokrauksen
 	 * @param pyora pyörä jonka vuokrausta halutaan
 	 * @return pyörän vuokraus, null jos ei ole vuokrausta
-	 * @throws SailoException jos ei löydy
 	 */
-	public Vuokraus annaVuokraus(Pyora pyora) throws SailoException {
+	public Vuokraus annaVuokraus(Pyora pyora){
 		if(pyora.getOnkoVarattu() == true) {
-			Vuokraus temp = vuokraukset.etsi(pyora.getPyoranID());
-			return vuokraukset.anna(temp.getVuokrausId());			
+			Vuokraus v = vuokraukset.etsi(pyora.getPyoranID());
+			return v;		
 		}
 		else 
 			return null;
@@ -130,12 +128,12 @@ public class Vuokraamo {
 	/**
 	 * Poistaa valitun pyörän
 	 * @param pyoraKohdalla valittu pyörä
-	 * @return 0 jos ei onnistu, 1 jos onnistui
+	 * @return true jos onnistui, muuten false
 	 */
-	public int poistaPyora(Pyora pyoraKohdalla) {
+	public boolean poistaPyora(Pyora pyoraKohdalla) {
 		
-        if ( pyoraKohdalla == null ) return 0;
-        int ret = pyorat.poista(pyoraKohdalla.getPyoranID()); 
+        if ( pyoraKohdalla == null ) return false;
+        boolean ret = pyorat.poista(pyoraKohdalla.getPyoranID()); 
         return ret; 
 	}
 	

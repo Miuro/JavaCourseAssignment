@@ -23,14 +23,10 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	/**
 	 * Lisää uuden asiakkaan tietorakenteeseensa. Ottaa vuokrauksen omistukseensa
 	 * @param vuokraus lisättävän vuokrauksen viite. Huom. tietorakenne muuttuu omistajaksi
-	 * @throws SailoException jos tietorakenne on jo täynnä
 	 */
-	public void lisaa(Vuokraus vuokraus) throws SailoException {
+	public void lisaa(Vuokraus vuokraus) {
 		alkiot.add(vuokraus);
 		muutettu = true;
-		/*if(lkm >= alkiot.length) throw new SailoException("Liikaa alkioita");
-		alkiot[lkm] = vuokraus;
-		lkm++;*/
 	}
 	
 	/**
@@ -39,13 +35,11 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @return löytynyt vuokraus, tai null jos ei löytynyt
 	 */
 	public Vuokraus etsi(int pyoraID) {
-		Iterator<Vuokraus> iter = iterator();
-		while (iter.hasNext()) {
-			Vuokraus v = (Vuokraus) iter.next();
+        for (Vuokraus v : alkiot) {
 			if(v.getPyoraId() == pyoraID)
 				return v;
 		}
-        return null;
+     return null;
 	}
 	
 	
@@ -66,7 +60,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	
 	
 	/**
-	 * Lukee vuokraukset tiedostosta. Kesken.
+	 * Lukee vuokraukset tiedostosta.
 	 * 
 	 * @param tied tiedoston nimi
 	 * @throws FileNotFoundException jos ei aukea
@@ -87,7 +81,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 			muutettu = false;
 			
 		} catch (FileNotFoundException e) {
-			throw new SailoException("Tiedosto " + getTiedostonNimi() + " ei aukea");
+			throw new SailoException("Tiedosto " + getTiedostonNimi() + " ei löytynyt. Luodaan uusi.");
 		} catch (IOException e) {
 			throw new SailoException("Ongelmia tiedoston kanssa: " + e.getMessage());
 		}
@@ -106,7 +100,6 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		File ftied = new File(getTiedostonNimi());
 		fbak.delete();
 		ftied.renameTo(fbak);
-		Vuokraus temp;
 		
 		try ( PrintWriter fo = new PrintWriter(new FileWriter(ftied.getCanonicalPath())) ) {
 			for (Vuokraus vuokraus : this) {
