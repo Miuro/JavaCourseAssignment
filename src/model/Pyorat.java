@@ -73,17 +73,12 @@ public class Pyorat implements Iterable<Pyora> {
 
 	
 	/**
-	 * Palauttaa viitteen i:teen pyörään.
+	 * Palauttaa viitteen haluttuun pyörään
 	 * 
-	 * @param i monennenko pyörän viite halutaan
-	 * @return viite pyörään, jonka indeksi on i
+	 * @param i Halutun pyörän ID
+	 * @return viite pyörään, jonka ID on annettu ID
 	 */
 	public Pyora anna(int i) throws IndexOutOfBoundsException {
-		//if (i < 0 || alkiot.size() <= i)
-		//	throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
-		//return alkiot.get(i);
-		
-		
 		for (Pyora pyora : alkiot) {
 			if(pyora.getPyoranID() == i) {
 				return pyora;
@@ -185,12 +180,10 @@ public class Pyorat implements Iterable<Pyora> {
 		File ftied = new File(getTiedostonNimi());
 		fbak.delete();
 		ftied.renameTo(fbak);
-		Pyora temp;
 		
 		try ( PrintWriter fo = new PrintWriter(new FileWriter(ftied.getCanonicalPath())) ) {
 			for (Pyora pyora: this) {
 				fo.println(pyora.toString());
-			
 			}
 		} catch (FileNotFoundException e) {
 			throw new SailoException("Tiedosto " + ftied.getName() + " ei aukea");
@@ -209,21 +202,30 @@ public class Pyorat implements Iterable<Pyora> {
 	public int getLkm() {
 		return alkiot.size();
 	}
+	
+
 
 	
 	/**
-	 * Poistaa halutun pyörän
-	 * @param pyoranID halutun pyörän tunnusluku
-	 * @return 0 jos ei löydy, 1 jos onnistui
-	 */
-	public int poista(int pyoranID) {
-        int ind = etsiId(pyoranID); 
-        if (ind < 0) return 0; 
-        alkiot.remove(ind);
+	 * Poistaa pyörän ID:n mukaan
+	 * @param pyoranID poistettavan pyörän id
+	 * @return True jos poistettiin
+	 * 	 */
+	public boolean poista(int pyoranID) {
+		
+        Pyora p = anna(pyoranID);
+        if(p == null)
+        	return false;
+        else
+        	alkiot.remove(p);
+        
+        
         muutettu = true; 
-        return 1;
+        return true;
 	}
 
+	
+	// TODO Varmaankin obsolete
 	/**
 	 * Etsii halutun pyörän indeksin
 	 * @param pyoranID halutun pyörän tunnusluku
@@ -251,11 +253,42 @@ public class Pyorat implements Iterable<Pyora> {
 		jopo1.vastaaJopo();
 		jopo2.rekisteroi();
 		jopo2.vastaaJopo();
+
+		System.out.println("============= Pyörät testi =================");
+		String nimi = "pyoratTesti";
+		File ftied = new File(nimi+ ".dat");
+		ftied.delete();
+		
+		try {
+			pyorat.lueTiedostosta(nimi);
+		} catch (SailoException e) {
+			//e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 		pyorat.lisaa(jopo1);
 		pyorat.lisaa(jopo2);
 
-		System.out.println("============= Pyörät testi =================");
-
+		try {
+			pyorat.tallenna();
+		} catch (SailoException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		System.out.println("Pyöriä on : " + pyorat.getLkm());
+		
+		Iterator<Pyora> iter = pyorat.iterator();
+		while (iter.hasNext()) System.out.println(iter.next());
+		
+		System.out.println("Poistetaan pyörä jonka id on 1");
+		
+		pyorat.poista(1);
+		System.out.println("Pyöriä on : " + pyorat.getLkm());
+		
+		iter = pyorat.iterator();		
+		while (iter.hasNext()) System.out.println(iter.next());
+		
+		
+		
 	}
 
 
