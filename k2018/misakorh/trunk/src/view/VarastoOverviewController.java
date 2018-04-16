@@ -197,7 +197,7 @@ public class VarastoOverviewController {
 	@FXML
 	void handleUusiVuokraus() throws SailoException {
 		//mainApp.showUusiVuokrausDialog();
-		vuokraaPyora(60);
+		vuokraaPyora(5);
 	}
 
 	//===============================================================================
@@ -225,7 +225,7 @@ public class VarastoOverviewController {
 	}
 
 	/**
-	 * Näyttää listasta valitun jäsenen tiedot, tilapäisesti yhteen isoon edit-kenttään
+	 * Näyttää listasta valitun pyörän tiedot, tilapäisesti yhteen isoon edit-kenttään
 	 */
 	protected void naytaPyora() {
 		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
@@ -233,6 +233,11 @@ public class VarastoOverviewController {
 		if (pyoraKohdalla == null) {
 			areaPyora.clear();
 			return;
+		}
+		
+		apuVuokraus = null;
+		if(pyoraKohdalla.getOnkoVarattu() == true) {
+			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
 		}
 
 		areaPyora.setText("");
@@ -336,11 +341,12 @@ public class VarastoOverviewController {
 	public void vuokraaPyora(int kesto) throws SailoException {
 		// JOptionPane.showMessageDialog(null, "Vielä ei osata lisätä vuokrausta!" );
 		if (pyoraKohdalla == null) return;
-		Vuokraus vuokraus = new Vuokraus(kesto, pyoraKohdalla.getVuokraPerTunti(), pyoraKohdalla.getPyoranID(), 1); // TODO: Asiakkaat lol
-		pyoraKohdalla.setOnkoVarattu(true); 
+		//Vuokraus vuokraus = new Vuokraus(kesto, pyoraKohdalla.getVuokraPerTunti(), pyoraKohdalla.getPyoranID(), 1); // TODO: Asiakkaat lol
+		Vuokraus vuokraus = new Vuokraus();
 		vuokraus.rekisteroi();
 		vuokraus.testiVuokraus(pyoraKohdalla.getPyoranID(),kesto);
 		vuokraamo.lisaaVuokraus(vuokraus);
+		pyoraKohdalla.setOnkoVarattu(true); 
 		hae(pyoraKohdalla.getPyoranID());
 	}
 
@@ -354,8 +360,7 @@ public class VarastoOverviewController {
         String ehto = hakuehto.getText(); 
         if (k > 0 || ehto.length() > 0)
             naytaVirhe(String.format("Ei osata hakea (kenttä: %d, ehto: %s)", k, ehto));
-        else
-        	fxChooserPyorat.clear(); // tämä oli muuten ennen elsen ulkopuolella
+        fxChooserPyorat.clear();
         
         int index = 0;
         Collection<Pyora> pyorat;
@@ -413,10 +418,9 @@ public class VarastoOverviewController {
 	private void tulosta(PrintStream os, Pyora pyora) {
 		os.println("----------------------------------------------");
 		pyora.tulosta(os);
-
-		apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
-			if(apuVuokraus != null) 
-				apuVuokraus.tulosta(os);
+		if(apuVuokraus != null) {
+			apuVuokraus.tulosta(os);			
+		}
 
 		os.println("----------------------------------------------");
 	}
@@ -427,6 +431,7 @@ public class VarastoOverviewController {
 	 * @param args ei käytösä
 	 */
 	public static void main(String[] args) {
+		/*
 		Vuokraamo testi = new Vuokraamo();
 		Pyora p1 = new Pyora();
 		p1.rekisteroi();
@@ -442,6 +447,7 @@ public class VarastoOverviewController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 	}
 
 }
