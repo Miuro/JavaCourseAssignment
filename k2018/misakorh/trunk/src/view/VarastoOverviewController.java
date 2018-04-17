@@ -196,8 +196,21 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleUusiVuokraus() throws SailoException {
-		//mainApp.showUusiVuokrausDialog();
-		vuokraaPyora(5);
+		if(pyoraKohdalla == null) {
+			Dialogs.showMessageDialog("Valitse vuokrattava pyörä");
+			return;
+		}
+		
+		if (pyoraKohdalla.getOnkoVarattu() == true) {
+			Dialogs.showMessageDialog("Pyörä on jo vuokrattu");
+			return;
+		}
+		
+		apuVuokraus = new Vuokraus();
+		mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus);
+		vuokraamo.lisaaVuokraus(apuVuokraus);
+		hae(pyoraKohdalla.getPyoranID());
+		//vuokraaPyora(5);
 	}
 
 	//===============================================================================
@@ -220,6 +233,7 @@ public class VarastoOverviewController {
 		panelPyora.setFitToHeight(true);
 		fxChooserPyorat.clear();
 		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
+		
 		setVuokraamo(new Vuokraamo());
 		avaa();
 	}

@@ -27,7 +27,9 @@ public class Vuokraamo {
 	public void lisaaVuokraus(Vuokraus vuokraus) {
 		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
 		if (temp.getOnkoVarattu() == true) return;
+		//temp.rekisteroi();
 		temp.setOnkoVarattu(true);
+		vuokraus.rekisteroi();
 		vuokraukset.lisaa(vuokraus);
 	}
 
