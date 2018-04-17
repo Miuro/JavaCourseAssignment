@@ -340,7 +340,7 @@ public class VarastoOverviewController {
 	private void poistaPyora() {
 		if (pyoraKohdalla == null)
 			return;
-		if ( !Dialogs.showQuestionDialog("Poisto", "Poistetaanko jäsen: " + pyoraKohdalla.getNimi(), "Kyllä", "Ei") )
+		if ( !Dialogs.showQuestionDialog("Poisto", "Poistetaanko pyörä: " + pyoraKohdalla.getNimi(), "Kyllä", "Ei") )
             return;
 		vuokraamo.poistaPyora(pyoraKohdalla);
 		int index = fxChooserPyorat.getSelectedIndex();
