@@ -212,7 +212,7 @@ public class Pyora implements Cloneable {
 			return null;
 		case 4:
 			try {
-				vuokraPerTunti = Integer.parseInt(tjono);
+				vuokraPerTunti = Double.parseDouble(tjono);
 			} catch (NumberFormatException e) {
 				return "Vuokra oli v‰‰rin";
 			}

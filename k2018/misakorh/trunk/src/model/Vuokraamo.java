@@ -9,49 +9,42 @@ public class Vuokraamo {
 	private Vuokraukset vuokraukset = new Vuokraukset();
 	private Asiakkaat asiakkaat = new Asiakkaat();
 
+
 	/**
 	 * Lisää uuden pyörän pyöriin
-	 * 
-	 * @param pyora
-	 *            lisättävä pyörä
-	 * @throws SailoException
-	 *             jos tietorakenne jo täynnä
+	 * @param pyora lisättävä pyörä
+	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaPyora(Pyora pyora) throws SailoException {
 		pyorat.lisaa(pyora);
 	}
 
+
 	/**
 	 * Lisää vuokrauksen vuokrauksiin
-	 * 
-	 * @param vuokraus
-	 *            lisättävä vuokraus
+	 * @param vuokraus lisättävä vuokraus
 	 */
 	public void lisaaVuokraus(Vuokraus vuokraus) {
 		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
-		if (temp.getOnkoVarattu() == true)
-			return;
+		if (temp.getOnkoVarattu() == true) return;
 		temp.setOnkoVarattu(true);
 		vuokraukset.lisaa(vuokraus);
 	}
 
+
 	/**
 	 * Lisää asiakkaan asiakkaisiin
-	 * 
-	 * @param asiakas
-	 *            lisättävä asiakas
-	 * @throws SailoException
-	 *             jos tietorakenne jo täynnä
+	 * @param asiakas lisättävä asiakas
+	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaAsiakas(Asiakas asiakas) throws SailoException {
 		asiakkaat.lisaa(asiakas);
 	}
 
+
 	/**
 	 * Antaa halutun pyörän vuokrauksen
-	 * 
-	 * @param pyora
-	 *            pyörä jonka vuokrausta halutaan
+	 * @param pyora pyörä jonka vuokrausta halutaan
 	 * @return pyörän vuokraus, null jos ei ole vuokrausta
 	 */
 	public Vuokraus annaVuokraus(Pyora pyora) {
@@ -62,39 +55,35 @@ public class Vuokraamo {
 			return null;
 	}
 
+
 	/**
 	 * Antaa pyörien lukumäärän
-	 * 
 	 * @return pyörien lukumäärä
 	 */
 	public int getPyoria() {
 		return pyorat.getLkm();
 	}
 
+
 	/**
 	 * Asettaa tiedostojen nimet ja luo tiedostorakenteen
-	 * 
-	 * @param nimi
-	 *            hakemiston nimi
+	 * @param nimi hakemiston nimi
 	 */
 	public void setTiedosto(String nimi) {
 		File dir = new File(nimi);
 		dir.mkdirs();
 		String hakemistonNimi = "";
-		if (!nimi.isEmpty())
-			hakemistonNimi = nimi + "/";
+		if (!nimi.isEmpty()) hakemistonNimi = nimi + "/";
 		pyorat.setTiedostonPerusNimi(hakemistonNimi + "pyorat");
 		vuokraukset.setTiedostonPerusNimi(hakemistonNimi + "vuokraukset");
 		asiakkaat.setTiedostonPerusNimi(hakemistonNimi + "asiakkaat");
 	}
 
+
 	/**
 	 * Luetuttaa kaikki tiedostot
-	 * 
-	 * @param nimi
-	 *            tiedoston nimi
-	 * @throws SailoException
-	 *             jos tulee poikkeus
+	 * @param nimi tiedoston nimi
+	 * @throws SailoException jos tulee poikkeus
 	 */
 	public void lueTiedostosta(String nimi) throws SailoException {
 		pyorat = new Pyorat();
@@ -107,24 +96,21 @@ public class Vuokraamo {
 		asiakkaat.lueTiedostosta();
 	}
 
+
 	/**
 	 * Palauttaa "taulukossa" hakuehtoon vastaavien pyörien viitteet
-	 * 
-	 * @param hakuehto
-	 *            hakuehto
-	 * @param k
-	 *            etsittävän kentän indeksi
+	 * @param hakuehto hakuehto
+	 * @param k etsittävän kentän indeksi
 	 * @return tietorakenteen löytyneistä pyöristä
-	 * @throws SailoException
-	 *             Jos jotakin menee väärin
+	 * @throws SailoException Jos jotakin menee väärin
 	 */
 	public Collection<Pyora> etsi(String hakuehto, int k) throws SailoException {
 		return pyorat.etsi(hakuehto, k);
 	}
 
+
 	/**
 	 * Tallentaa tiedostot
-	 * 
 	 * @throws SailoException
 	 */
 	public void tallenna() throws SailoException {
@@ -144,31 +130,27 @@ public class Vuokraamo {
 		} catch (SailoException e) {
 			virhe += e.getMessage();
 		}
-		if (!"".equals(virhe))
-			throw new SailoException(virhe);
+		if (!"".equals(virhe)) throw new SailoException(virhe);
 	}
+
 
 	/**
 	 * Poistaa valitun pyörän
-	 * 
-	 * @param pyoraKohdalla
-	 *            valittu pyörä
+	 * @param pyoraKohdalla valittu pyörä
 	 * @return true jos onnistui, muuten false
 	 */
 	public boolean poistaPyora(Pyora pyoraKohdalla) {
 
-		if (pyoraKohdalla == null)
-			return false;
+		if (pyoraKohdalla == null) return false;
 		boolean ret = pyorat.poista(pyoraKohdalla.getPyoranID());
 		return ret;
 	}
 
+
 	/**
 	 * Testi ohjelmaa vuokramolle
-	 * 
-	 * @param args
-	 *            ei käytösä
-	 * @throws SailoException 
+	 * @param args ei käytösä
+	 * @throws SailoException
 	 */
 	public static void main(String[] args) throws SailoException {
 		Vuokraamo testi = new Vuokraamo();
