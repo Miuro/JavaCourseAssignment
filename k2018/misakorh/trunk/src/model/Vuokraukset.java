@@ -240,8 +240,6 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		
 		System.out.println("============= Pyörät testi =================");
 		String nimi = "vuokrauksetTesti";
-		File ftied = new File(nimi+ ".dat");
-		//ftied.delete();
 		
 		try {
 			vuokraukset.lueTiedostosta(nimi);
