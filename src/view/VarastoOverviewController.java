@@ -34,7 +34,8 @@ public class VarastoOverviewController {
 	@FXML 
 	private Label labelVirhe;
 	
-	@FXML private TextField hakuehto;
+	@FXML
+	private TextField hakuehto;
 
 	@FXML
 	private MenuItem fxMenuAvaa;
@@ -78,7 +79,7 @@ public class VarastoOverviewController {
 	@FXML
 	private ListChooser<Pyora> fxChooserPyorat;
 
-	// Reference to the main application. En ole ihan varma mitä tämä tekee.
+	// Reference to the main application.
 	private MainApp mainApp;
 
 
