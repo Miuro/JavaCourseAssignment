@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import fi.jyu.mit.ohj2.Mjonot;
 
 public class Vuokraus {
 	
@@ -188,7 +187,6 @@ public class Vuokraus {
 	 */
 	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
-		StringBuffer sb = new StringBuffer(tjono);
 		switch (k) {
 		case 0:
 			setVuokrausId(Integer.parseInt(tjono));

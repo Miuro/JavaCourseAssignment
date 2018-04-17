@@ -2,7 +2,6 @@ package model;
 
 import java.io.*;
 
-import fi.jyu.mit.ohj2.Mjonot;
 
 /*
  * Pyorä-olio
@@ -192,7 +191,6 @@ public class Pyora implements Cloneable {
 	 */
 	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
-		StringBuffer sb = new StringBuffer(tjono);
 		switch (k) {
 		case 0:
 			setPyoranID(Integer.parseInt(tjono));
