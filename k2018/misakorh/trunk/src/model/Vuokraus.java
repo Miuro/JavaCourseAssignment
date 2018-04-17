@@ -11,8 +11,8 @@ public class Vuokraus {
 	private int 		vuokrausId,	
 						pyoraId,	 
 						vuokraajaId;
-	private String 		vuokrausAika, // = ""
-						palautusAika 	= "";
+	private String 		vuokrausAika    = "";
+	private String		palautusAika 	= "";
 	private double 		hinta 			= 0.;
 	private String 		lisatiedot 		= "";
 	
@@ -29,10 +29,14 @@ public class Vuokraus {
 	 */
 	@Override
 	public String toString() {
-		return vuokrausId + "|" + pyoraId + "|" + vuokraajaId + "|" + vuokrausAika + "|" + palautusAika + "|" + hinta + "|"
-				+ lisatiedot;
+		return vuokrausId + "|" +
+				pyoraId + "|" +
+				vuokraajaId + "|" +
+				vuokrausAika + "|" +
+				palautusAika + "|" +
+				hinta + "|"	+
+				lisatiedot;
 	}
-	
 	
 	
 	/**
@@ -64,6 +68,15 @@ public class Vuokraus {
 	public int getPyoraId() {
 		return this.pyoraId;
 	}
+
+	/**
+	 * Asettaa vuokratun pyörän tunnusluvun
+	 * @param id haluttu tunnusluku
+	 */
+	public void setPyoraId(int id) {
+		pyoraId = id;
+	}
+	
 	
 	/**
 	 * Antaa vuokraajan tunnusluvun
@@ -89,13 +102,6 @@ public class Vuokraus {
 		vuokraajaId = id;
 	}
 	
-	/**
-	 * Asettaa vuokratun pyörän tunnusluvun
-	 * @param id haluttu tunnusluku
-	 */
-	public void setPyoraId(int id) {
-		pyoraId = id;
-	}
 	
 	/**
 	 * Palauttaa vuokrauksen kenttien lukumäärän
@@ -170,6 +176,13 @@ public class Vuokraus {
 	/**
 	 * Pilkkoo rivin ja kutsuu aseta -funktiota
 	 * @param rivi pilkottava rivi
+	 * <pre name="test">
+	 * Vuokraus v1 = new Vuokraus();
+	 * Vuokraus v2 = new Vuokraus();
+	 * v1.parse("1|1|1|13.04.2018 23:48|14.04.2018 04:48|60.0|Maksettu luottokortilla");
+	 * v1.toString() === "1|1|1|13.04.2018 23:48|14.04.2018 04:48|60.0|Maksettu luottokortilla";
+	 * v2.toString() === "0|0|0|||0.0|";
+	 * </pre>
 	 */
 	public void parse(String rivi) {
 		String[] osat = rivi.split("\\|");

@@ -150,7 +150,12 @@ public class Pyora implements Cloneable {
 	 */
 	@Override
 	public String toString() {
-		return pyoranID + "|" + nimi + "|" + malli + "|" + kunto + "|" + vuokraPerTunti + "|" + onkoVarattu + "|"
+		return pyoranID + "|" +
+				nimi + "|" +
+				malli + "|" +
+				kunto + "|" +
+				vuokraPerTunti + "|" +
+				onkoVarattu + "|"
 				+ lisatietoja;
 	}
 
@@ -159,6 +164,14 @@ public class Pyora implements Cloneable {
 	/**
 	 * Selvitää pyörän tiedot | erotellusta merkkijonosta
 	 * @param rivi josta pyörän tiedot otetaan
+	 * <pre name="test">
+	 * Pyora p1 = new Pyora();
+	 * Pyora p2 = new Pyora();
+	 * p1.parse("1|Mountainer 6X|Maastopyörä|3|50|true|Jee");
+	 * p2.setPyoranID(2);
+	 * p1.toString() === "1|Mountainer 6X|Maastopyörä|3|50.0|true|Jee";
+	 * p2.toString() === "2|||3|0.0|false|";
+	 * </pre>
 	 */
 	public void parse(String rivi) {
 		String[] osat = rivi.split("\\|");

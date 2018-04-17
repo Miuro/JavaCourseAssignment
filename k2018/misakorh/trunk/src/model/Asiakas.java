@@ -110,7 +110,7 @@ public class Asiakas{
 				sotu + "|" +
 				osoite + "|" +
 				puhnum + "|" +
-				lisatiedot + "|";
+				lisatiedot;
 	}
 	
 	
@@ -118,6 +118,14 @@ public class Asiakas{
 	 * Jakaa merkkijonon haluttuihin osiin ja kutsuu aseta() funktiota joka asettaa luetut tiedot
 	 * asiakkaan tiedoiksi jos mahdollista
 	 * @param rivi jaettava merkkijono
+	 * <pre name="test">
+	 * Asiakas a1 = new Asiakas();
+	 * Asiakas a2 = new Asiakas();
+	 * a1.parse("1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-|Herkku-ukko");
+	 * a1.toString() === "1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-|Herkku-ukko";
+	 * a2.setAsiakasId(2);
+	 * a2.toString() === "2|||||";
+	 * </pre>
 	 */
 	public void parse(String rivi) {
 		String[] osat = rivi.split("\\|");
