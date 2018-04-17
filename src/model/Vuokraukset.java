@@ -81,7 +81,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 			muutettu = false;
 			
 		} catch (FileNotFoundException e) {
-			throw new SailoException("Tiedosto " + getTiedostonNimi() + " ei löytynyt. Luodaan uusi.");
+			throw new SailoException("Tiedostoa " + getTiedostonNimi() + " ei löytynyt.");
 		} catch (IOException e) {
 			throw new SailoException("Ongelmia tiedoston kanssa: " + e.getMessage());
 		}
