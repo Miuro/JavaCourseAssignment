@@ -445,23 +445,7 @@ public class VarastoOverviewController {
 	 * @param args ei käytösä
 	 */
 	public static void main(String[] args) {
-		/*
-		Vuokraamo testi = new Vuokraamo();
-		Pyora p1 = new Pyora();
-		p1.rekisteroi();
-		p1.vastaaJopo();
-		try {
-			testi.lisaaPyora(p1);
-		} catch (SailoException e) {
-			e.printStackTrace();
-		}
-		try {
-			testi.etsi("Jopo", 1);
-		} catch (SailoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
+
 	}
 
 }

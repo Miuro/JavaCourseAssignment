@@ -77,8 +77,12 @@ public class UusiVuokrausDialogController {
 	}
 
 
+	/**
+	 * Tarkistaa, ovatko kenttiin syötetyt tiedot oikeassa muodossa.
+	 * @return True, jos kentät ovat oikein, muuten false.
+	 */
 	private boolean syottoTarkistin() {
-		// TODO Auto-generated method stub
+		// TODO Toteutus tälle
 		return false;
 	}
 

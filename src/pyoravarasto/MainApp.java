@@ -55,7 +55,7 @@ public class MainApp extends Application {
 	 * @param pyora Pyörä, mitä vuokrataa
 	 * @return True, jos pyörä vuokrattiin onnistuneesti
 	 */
-	public Vuokraus showUusiVuokrausDialog(Pyora pyora, Vuokraus vuokraus) {
+	public boolean showUusiVuokrausDialog(Pyora pyora, Vuokraus vuokraus) {
 		try {
 			// Ladataan fxml-tiedosto
 	        FXMLLoader loader = new FXMLLoader();
@@ -79,11 +79,11 @@ public class MainApp extends Application {
 	        controller.asetaVuokraus(vuokraus);
 	        
 	        dialogStage.showAndWait();
-	        return vuokraus;
+	        return controller.onkoOK();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-			return null;
+			return false;
 		}
 	}
 	
