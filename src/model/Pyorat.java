@@ -47,24 +47,6 @@ public class Pyorat implements Iterable<Pyora> {
 	 * 
 	 * @param pyora lisättävän pyörän viite. Huom tietorakenne muuttuu omistajaksi
 	 * @throws SailoException  jos tietorakenne on jo täynnä
-	 * @example
-	 * <pre name="test">
-	 * #THROWS SailoException 
-	 * Pyorat pyorat = new Pyorat();
-	 * Pyora jopo1 = new Pyora(), jopo2 = new Pyora();
-	 * pyorat.getLkm() === 0;
-	 * pyorat.lisaa(jopo1); pyorat.getLkm() === 1;
-	 * pyorat.lisaa(jopo2); pyorat.getLkm() === 2;
-	 * pyorat.lisaa(jopo1); pyorat.getLkm() === 3;
-	 * pyorat.anna(0) === jopo1;
-	 * pyorat.anna(1) === jopo2;
-	 * pyorat.anna(2) === jopo1;
-	 * pyorat.anna(1) == jopo1 === false;
-	 * pyorat.anna(1) == jopo2 === true;
-	 * pyorat.lisaa(jopo1); pyorat.getLkm() === 4;
-	 * pyorat.lisaa(jopo1); pyorat.getLkm() === 5;
-	 * pyorat.lisaa(jopo1);
-	 *          </pre>
 	 */
 	public void lisaa(Pyora pyora) {
 		alkiot.add(pyora);
@@ -224,26 +206,29 @@ public class Pyorat implements Iterable<Pyora> {
         return true;
 	}
 
-	
-	// TODO Varmaankin obsolete
-	/**
-	 * Etsii halutun pyörän indeksin
-	 * @param pyoranID halutun pyörän tunnusluku
-	 * @return indeksin numero jos onnistui, -1 jos ei
-	 */
-	private int etsiId(int pyoranID) {
-		for (Pyora pyora : alkiot) {
-			if(pyora.getPyoranID() == pyoranID)
-				return pyora.getPyoranID();
-		}
-		return -1;
-	}
-
 
 	/**
 	 * Testataan toimivuutta
 	 * 
 	 * @param args
+	 * @example
+	 * <pre name="test">
+	 * #THROWS SailoException
+	 * Pyorat pyorat = new Pyorat();
+	 * Pyora jopo1 = new Pyora(), jopo2 = new Pyora();
+	 * jopo1.rekisteroi();
+	 * jopo1.vastaaJopo();
+	 * jopo2.rekisteroi();
+	 * jopo2.vastaaJopo();
+	 * String nimi = "pyoratTesti";
+	 * pyorat.lueTiedostosta(nimi); #THROWS SailoException
+	 * pyorat.lisaa(jopo1);
+	 * pyorat.lisaa(jopo2);
+	 * pyorat.tallenna();
+	 * pyorat.getLkm() === 2;
+	 * pyorat.poista(1);
+	 * pyorat.getLkm() === 1;
+	 * </pre>
 	 */
 	public static void main(String[] args) {
 		Pyorat pyorat = new Pyorat();
@@ -292,6 +277,9 @@ public class Pyorat implements Iterable<Pyora> {
 	}
 
 
+	/**
+	 * Palauttaa iteraattorin tietorakenteelle
+	 */
 	@Override
 	public Iterator<Pyora> iterator() {
 		return alkiot.iterator();

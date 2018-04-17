@@ -13,8 +13,6 @@ import java.util.Iterator;
 
 public class Vuokraukset implements Iterable<Vuokraus> {
 	
-	//private static final int MAX_VUOKRAUKSIA = 5; // does this even make sense?
-	//private int lkm = 0;
 	private String tiedostonPerusNimi = "vuokraukset";
 	private final Collection<Vuokraus> alkiot = new ArrayList<Vuokraus>();
 	private boolean muutettu = false;
@@ -41,22 +39,6 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 		}
      return null;
 	}
-	
-	
-	
-	/*
-	/**
-	 * Palauttaa viitteen i:teen vuokraukseen
-	 * @param i monennenko asiakkaan viite halutaan
-	 * @return viite vuokraukseen jonka indeksi on i
-	 * @throws IndexOutOfBoundsException jos indeksi i ei ole sallitulla alueella
-	 */
-	/*public Vuokraus anna(int i) throws IndexOutOfBoundsException {
-		if(i < 0 || lkm <= i)
-			throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
-		return alkiot[i];
-	}
-	*/
 	
 	
 	/**
@@ -126,7 +108,6 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	
 	/**
 	 * Luetaan aikaisemmin annetusta tiedostosta
-	 * 
 	 * @throws SailoException jos tulee poikkeus
 	 */
 	public void lueTiedostosta() throws SailoException {
@@ -192,14 +173,16 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @example
 	 * <pre name="test">
 	 * Vuokraukset t = new Vuokraukset();
-	 * v1 = new Vuokraus();
+	 * Vuokraus v1 = new Vuokraus();
 	 * v1.rekisteroi();
-	 * v1.testiVuokraus();
+	 * v1.testiVuokraus(1,5);
 	 * t.lisaa(v1);
-	 * v2 = new Vuokraus();
-	 * v2.testiVuokraus();
+	 * Vuokraus v2 = new Vuokraus();
+	 * v2.testiVuokraus(2,4);
 	 * v2.rekisteroi();
 	 * t.lisaa(v2);
+	 * t.anna(1) === v1;
+	 * t.anna(2) === v2;
 	 * </pre>
 	 */
 	public Vuokraus anna(int vuokrauksenId){
@@ -228,8 +211,30 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * Testiohjelma vuokrauksille
 	 *
 	 * @param args ei käytösä 
+	 * @throws SailoException 
+	 * @example
+	 * <pre name="test">
+	 * #THROWS SailoException 
+	 * String nimi = "vuokrauksetTesti";
+	 * Vuokraukset vuokraukset = new Vuokraukset();
+	 * vuokraukset.lueTiedostosta(nimi); #THROWS SailoException 
+	 * Vuokraus t1 = new Vuokraus();
+	 * Vuokraus t2 = new Vuokraus();
+	 * t1.testiVuokraus(1, 2);
+	 * t2.testiVuokraus(2, 5);
+	 * t1.rekisteroi();
+	 * t2.rekisteroi();
+	 * vuokraukset.lisaa(t1);
+	 * vuokraukset.lisaa(t2);
+	 * vuokraukset.tallenna();
+	 * vuokraukset = new Vuokraukset();
+	 * vuokraukset.lueTiedostosta(nimi);
+	 * vuokraukset.getLkm() === 2;
+	 * vuokraukset.poista(1);
+	 * vuokraukset.getLkm() === 1;
+	 * </pre>
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SailoException {
 		Vuokraukset vuokraukset = new Vuokraukset();
 		Vuokraus t1 = new Vuokraus();
 		Vuokraus t2 = new Vuokraus();
@@ -247,8 +252,8 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 			//e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-		//vuokraukset.lisaa(t1);
-		//vuokraukset.lisaa(t2);
+		vuokraukset.lisaa(t1);
+		vuokraukset.lisaa(t2);
 
 		try {
 			vuokraukset.tallenna();
