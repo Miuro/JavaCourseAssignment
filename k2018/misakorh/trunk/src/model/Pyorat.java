@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import fi.jyu.mit.ohj2.WildChars;
-
 public class Pyorat implements Iterable<Pyora> {
 	
 	private Collection<Pyora> alkiot = new ArrayList<>();
@@ -33,10 +31,15 @@ public class Pyorat implements Iterable<Pyora> {
 	 * @param hakuehto hakuehto
 	 * @return pyörät, jotka vastaavat hakuehtoa
 	 */
-	public Collection<Pyora> etsi(String hakuehto) {
+	public Collection<Pyora> etsi(String hakuehto, boolean vapaanaValittu) {
 		String ehto = "*";
 		if(hakuehto != null && hakuehto.length() > 0) ehto = hakuehto;
-		Collection<Pyora> loytyneet = new ArrayList<>(); 
+		Collection<Pyora> loytyneet = new ArrayList<>();
+		if (vapaanaValittu) {
+			for(Pyora pyora : this) {
+				
+			}
+		}
         for (Pyora pyora: this) { 
         	if (ehto == "*") loytyneet.add(pyora);
             if (pyora.toStringNOID().toLowerCase().contains(ehto.toLowerCase())) loytyneet.add(pyora);  
@@ -55,6 +58,18 @@ public class Pyorat implements Iterable<Pyora> {
 	public void lisaa(Pyora pyora) {
 		alkiot.add(pyora);
 		muutettu = true;
+	}
+	
+	/**
+	 * Antaa kokoelman kaikista vapaana olevista pyöristä
+	 * @return Kaikki vapaana olevat pyörät
+	 */
+	public Collection<Pyora> annaVapaat(){
+		Collection<Pyora> vapaat = new ArrayList<>();
+		for(Pyora pyora : alkiot) {
+			if(!pyora.getOnkoVarattu()) vapaat.add(pyora);
+		}
+		return vapaat;
 	}
 
 	

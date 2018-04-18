@@ -105,8 +105,8 @@ public class Vuokraamo {
 	 * @return tietorakenteen löytyneistä pyöristä
 	 * @throws SailoException Jos jotakin menee väärin
 	 */
-	public Collection<Pyora> etsi(String hakuehto) throws SailoException {
-		return pyorat.etsi(hakuehto);
+	public Collection<Pyora> etsi(String hakuehto, boolean vapaanaValittu) throws SailoException {
+		return pyorat.etsi(hakuehto, vapaanaValittu);
 	}
 
 
