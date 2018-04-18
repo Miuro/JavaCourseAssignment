@@ -233,13 +233,13 @@ public class Pyorat implements Iterable<Pyora> {
 	 * Palauttaa kopion listasta, jossa pyörät ovat hinnan mukaan kasvavassa järjestyksessä
 	 * @return Sama lista pyöriä, mutta järjestyksessä
 	 */
-	private Collection<Pyora> jarjestaHalvin() {
+	public Collection<Pyora> jarjestaHalvin(Collection<Pyora> lista) {
 		Collection<Pyora> jarjestetty = new ArrayList<>();
 		Collection<Pyora> temp = new ArrayList<>();
 		
 		for (Pyora pyora : temp) System.out.println(pyora);
 		
-		for (Pyora pyora : alkiot) {
+		for (Pyora pyora : lista) {
 			Pyora asd = new Pyora();
 			asd.parse(pyora.toString());
 			temp.add(asd);
@@ -299,7 +299,7 @@ public class Pyorat implements Iterable<Pyora> {
 		pyorat.lisaa(jopo1);
 		pyorat.lisaa(jopo2);
 		
-		pyorat.jarjestaHalvin();
+		//pyorat.jarjestaHalvin();
 		
 		for (Pyora pyora : pyorat) {
 			System.out.println(pyora);
