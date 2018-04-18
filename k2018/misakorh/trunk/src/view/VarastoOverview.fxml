@@ -60,7 +60,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="3.0" />
                                  </padding>
                               </CheckBox>
-                              <CheckBox fx:id="fxVainVapaatCB" mnemonicParsing="false" text="Vapaat">
+                              <CheckBox fx:id="fxVainVapaatCB" mnemonicParsing="false" onAction="#handleVainVapaatCB" text="Vapaat">
                                  <padding>
                                     <Insets top="3.0" />
                                  </padding></CheckBox>
