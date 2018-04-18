@@ -172,6 +172,19 @@ public class Pyora implements Cloneable {
 				onkoVarattu + "|"
 				+ lisatietoja;
 	}
+	
+	/**
+	 * Palauttaa pyörän string muodossa ominaisuudet erotettuna "|"-merkillä poislukien Id kenttä 
+	 * @return pyörä stringmuodossa jossa ominaisuudet erotettuna "|"-merkillä ilman id:tä
+	 */
+	public String toStringNOID() {
+		return 	nimi + "|" +
+				malli + "|" +
+				kunto + "|" +
+				vuokraPerTunti + "|" +
+				onkoVarattu + "|"
+				+ lisatietoja;
+	}
 
 
 	

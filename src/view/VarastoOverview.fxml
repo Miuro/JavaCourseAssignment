@@ -60,7 +60,7 @@
                               <CheckBox fx:id="fxVainVapaatCB" mnemonicParsing="false" text="Näytä vain vapaat" />
                            </children>
                         </HBox>
-                        <TextField fx:id="hakuehto" onMouseDragReleased="#handleHakuehto" promptText="Haku" />
+                        <TextField fx:id="hakuehto" onKeyReleased="#handleHakuehto" promptText="Haku" />
                         <ComboBoxChooser fx:id="cbKentat" maxWidth="200.0" onAction="#handleHakuehto" rivit="Nimi&#10;Malli&#10;Kunto&#10;Vuokraperpäivä&#10;Onkovarattuna" />
                         <Label alignment="CENTER" prefHeight="0.0" prefWidth="189.0" text="Pyörät" />
                      </children>

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import fi.jyu.mit.ohj2.WildChars;
+
 public class Pyorat implements Iterable<Pyora> {
 	
 	private Collection<Pyora> alkiot = new ArrayList<>();
@@ -29,13 +31,15 @@ public class Pyorat implements Iterable<Pyora> {
 	/**
 	 * Palauttaa listan hakuehtoon vastaavien pyörien viitteet
 	 * @param hakuehto hakuehto
-	 * @param k haettavan kentän indeksi
 	 * @return pyörät, jotka vastaavat hakuehtoa
 	 */
-	public Collection<Pyora> etsi(String hakuehto, int k) {
+	public Collection<Pyora> etsi(String hakuehto) {
+		String ehto = "*";
+		if(hakuehto != null && hakuehto.length() > 0) ehto = hakuehto;
 		Collection<Pyora> loytyneet = new ArrayList<>(); 
-        for (Pyora pyora: alkiot) { 
-            loytyneet.add(pyora);  
+        for (Pyora pyora: this) { 
+        	if (ehto == "*") loytyneet.add(pyora);
+            if (pyora.toStringNOID().toLowerCase().contains(ehto.toLowerCase())) loytyneet.add(pyora);  
         }
         return loytyneet; 
     }

@@ -295,9 +295,9 @@ public class VarastoOverviewController {
 		textFieldNimi.setText(pyoraKohdalla.anna(1));	
 		textFieldMalli.setText(pyoraKohdalla.anna(2));	
 		textFieldKunto.setText(pyoraKohdalla.anna(3));	
-		textFieldVuokra.setText(pyoraKohdalla.anna(4));	
+		textFieldVuokra.setText(pyoraKohdalla.anna(6));	
 		textFieldTila.setText(pyoraKohdalla.anna(5));
-		textFieldLisatietoja.setText(pyoraKohdalla.anna(6));
+		textFieldLisatietoja.setText(pyoraKohdalla.anna(4));
 		vaihdaMuokattavuus(false);
 	}
 	
@@ -427,14 +427,14 @@ public class VarastoOverviewController {
 	protected void hae(int pyoraID) {
 		int k = cbKentat.getSelectionModel().getSelectedIndex();
         String ehto = hakuehto.getText(); 
-        if (k > 0 || ehto.length() > 0)
-            naytaVirhe(String.format("Ei osata hakea (kenttä: %d, ehto: %s)", k, ehto));
+        //if (k > 0 || ehto.length() > 0)
+        //    naytaVirhe(String.format("Ei osata hakea (ehto: %s)", ehto));
         fxChooserPyorat.clear();
         
         int index = 0;
         Collection<Pyora> pyorat;
         try {
-            pyorat = vuokraamo.etsi(ehto, k);
+            pyorat = vuokraamo.etsi(ehto);
             int i = 0;
             for (Pyora pyora:pyorat) {
                 if (pyora.getPyoranID() == pyoraID) index = i;
