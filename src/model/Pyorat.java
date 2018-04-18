@@ -10,10 +10,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
-public class Pyorat implements Iterable<Pyora>{
+public class Pyorat implements Iterable<Pyora> {
 	
 	private Collection<Pyora> alkiot = new ArrayList<>();
 
@@ -49,7 +49,8 @@ public class Pyorat implements Iterable<Pyora>{
             if (pyora.toStringNOID().toLowerCase().contains(ehto.toLowerCase())) loytyneet.add(pyora);  
         }
         return loytyneet; 
-    }	
+    }
+	
 
 	
 	/**
@@ -62,7 +63,6 @@ public class Pyorat implements Iterable<Pyora>{
 		alkiot.add(pyora);
 		muutettu = true;
 	}
-
 	
 	/**
 	 * Antaa kokoelman kaikista vapaana olevista pyöristä
@@ -208,18 +208,6 @@ public class Pyorat implements Iterable<Pyora>{
 		return alkiot.size();
 	}
 	
-	/**
-	 * 
-	 */
-	@Override
-	public String toString() {
-		String palautus = new String();
-		for(Pyora pyora : this) {
-			palautus += pyora.toString() +  "\n";
-		}
-		return palautus;
-	}
-	
 
 
 	
@@ -241,6 +229,34 @@ public class Pyorat implements Iterable<Pyora>{
         return true;
 	}
 
+	/**
+	 * Palauttaa kopion listasta, jossa pyörät ovat hinnan mukaan kasvavassa järjestyksessä
+	 * @return Sama lista pyöriä, mutta järjestyksessä
+	 */
+	private Collection<Pyora> jarjestaHalvin() {
+		Collection<Pyora> jarjestetty = new ArrayList<>();
+		Collection<Pyora> temp = new ArrayList<>();
+		
+		for (Pyora pyora : temp) System.out.println(pyora);
+		
+		for (Pyora pyora : alkiot) {
+			Pyora asd = new Pyora();
+			asd.parse(pyora.toString());
+			temp.add(asd);
+		}
+		
+		while(temp.size() > 0) {
+			Pyora halvin =  temp.iterator().next();
+			for (Pyora pyora : temp) {
+				if(Double.compare(halvin.getVuokraPerTunti(), pyora.getVuokraPerTunti()) > 0) {
+					 halvin = pyora;
+				}
+			}
+			jarjestetty.add(halvin);
+			temp.remove(halvin);
+		}
+		return jarjestetty;
+	}
 
 	/**
 	 * Testataan toimivuutta
@@ -272,16 +288,24 @@ public class Pyorat implements Iterable<Pyora>{
 		jopo1.rekisteroi();
 		jopo1.vastaaJopo();
 		jopo2.rekisteroi();
-		jopo2.vastaaJopo2();
-		jopo3.rekisteroi();
+		jopo2.vastaaJopo();
 		jopo3.vastaaJopo();
+		jopo3.rekisteroi();
+		jopo2.aseta(4, "15");
+		jopo3.aseta(4, "20");
 		
+		
+		pyorat.lisaa(jopo3);
 		pyorat.lisaa(jopo1);
 		pyorat.lisaa(jopo2);
-		pyorat.lisaa(jopo3);
 		
-		System.out.println(pyorat);
+		pyorat.jarjestaHalvin();
 		
+		for (Pyora pyora : pyorat) {
+			System.out.println(pyora);
+		}
+
+		/*
 		System.out.println("============= Pyörät testi =================");
 		String nimi = "pyoratTesti";
 		File ftied = new File(nimi+ ".dat");
@@ -314,9 +338,12 @@ public class Pyorat implements Iterable<Pyora>{
 		
 		iter = pyorat.iterator();		
 		while (iter.hasNext()) System.out.println(iter.next());
+		*/
 		
 		
 	}
+
+
 
 
 	/**
