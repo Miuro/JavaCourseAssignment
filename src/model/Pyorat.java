@@ -36,9 +36,11 @@ public class Pyorat implements Iterable<Pyora> {
 		if(hakuehto != null && hakuehto.length() > 0) ehto = hakuehto;
 		Collection<Pyora> loytyneet = new ArrayList<>();
 		if (vapaanaValittu) {
-			for(Pyora pyora : this) {
-				
+			for(Pyora pyora : annaVapaat()) {
+	        	if (ehto == "*") loytyneet.add(pyora);
+	            if (pyora.toStringNOID().toLowerCase().contains(ehto.toLowerCase())) loytyneet.add(pyora);
 			}
+			return loytyneet;
 		}
         for (Pyora pyora: this) { 
         	if (ehto == "*") loytyneet.add(pyora);
