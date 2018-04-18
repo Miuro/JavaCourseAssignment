@@ -64,6 +64,17 @@ public class Pyorat implements Iterable<Pyora> {
 		muutettu = true;
 	}
 	
+	
+	/**
+	 * Muuttaa pyörän toiseksi
+	 * @param alku muutettava pyörä
+	 * @param uusi pyörä jolla alku korvataan
+	 */
+	public void muutaPyora(Pyora alku, Pyora uusi) {
+		alku = uusi;
+		muutettu = true;
+	}
+	
 	/**
 	 * Antaa kokoelman kaikista vapaana olevista pyöristä
 	 * @return Kaikki vapaana olevat pyörät

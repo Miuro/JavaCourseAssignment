@@ -1,22 +1,13 @@
-﻿- Clickbox(näytä vain vapaat) toimimaan halutusti
-- Pyörien listaaminen vasemmalle
-- Pyörien luokittelu vasemmalla hakuehtojen mukaan
-- Lisää hakuehtoja hakuun
-- Haku kuntoon
-- Pyörän tietojen muokkaus ja ikkunan muokkaus sopivaksi
-- Tiedostoista luku
-- Tiedostoihin kirjoittaminen
-- Napit kuntoon
-    - Uusi pyörä
-    - Tallenna
-    - Poista pyörä
-    - Vuokraa (vuokrausdialogissa)
+﻿- Napit kuntoon
+    - Lopeta
+
 - Vuokraus kuntoon
-- Asiakkaan lisääminen
-- Asiakkaan valinta listasta?
+	- Vuokrauksen kesto-, ja hinta textfieldit tulostamaan oikeita arvoja.
+	- Yhdistää vuokrausdialogin niin, että jos pyörällä on jo vuokraus, niin
+	  sitten Overview-ikkunassa vuokraa-nappi lukee "Näytä vuokraus" (dialogissa lukee vuokrauksen tiedot),
+	  ja vuokrausdialogin sisällä Vuokraa-nappi lukee "Kuittaa vuokraus" (joka poistaa vuokrauksen)
+
 - Pyörän tilan valinta(joku sliderlista?)
-- Tulostaminen toimimaan(tulostaa kaikki mitä vasemman listassa on(vuokrausikkunasta voisi myös tulostaa sen vuokrauksen?))
-- Lisää testejä
+- Vuokrauksen keston valinta(sliderijotainjotain)
 
-
-- HOX parse niin ettei kaadu tyhjissä kentissä tiedostoja luettaessa
+- Menun Tulosta-nappi toimimaan (tulostaa listalla näkyvät pyörät ja niiden mahdolliset vuokraukset)
