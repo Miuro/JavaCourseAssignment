@@ -51,6 +51,9 @@ public class VarastoOverviewController {
 
 	@FXML
 	private MenuItem fxMenuPoistaPyora;
+	
+	@FXML
+	private MenuItem fxMenuMuokkaaPyoraa;
 
 	@FXML
 	private MenuItem fxMenuApua;
@@ -78,6 +81,24 @@ public class VarastoOverviewController {
 
 	@FXML
 	private ListChooser<Pyora> fxChooserPyorat;
+	
+	@FXML
+	private TextField textFieldNimi;	
+	
+	@FXML
+	private TextField textFieldMalli;	
+	
+	@FXML
+	private TextField textFieldKunto;	
+	
+	@FXML
+	private TextField textFieldVuokra;	
+	
+	@FXML
+	private TextField textFieldTila;	
+	
+	@FXML
+	private TextField textFieldLisatietoja;
 
 	// Reference to the main application.
 	private MainApp mainApp;
@@ -106,6 +127,14 @@ public class VarastoOverviewController {
 	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
+	}
+	
+	/**
+	 * Muokkaa pyörää napin handläys
+	 */
+	@FXML
+	void handleMuokkaaPyoraa() {
+		vaihdaMuokattavuus(true);
 	}
 	
 	/**
@@ -222,7 +251,7 @@ public class VarastoOverviewController {
 	private Pyora pyoraKohdalla;
 	private Asiakas apuAsiakas;
 	private Vuokraus apuVuokraus;
-	private TextArea areaPyora = new TextArea();
+	//private TextArea areaPyora = new TextArea();
 	private TextField[] muokkaukset;
 	private int kentta = 0;
 
@@ -230,7 +259,7 @@ public class VarastoOverviewController {
 	 * Alustetaan
 	 */
 	protected void alusta() {
-		panelPyora.setContent(areaPyora);
+		//panelPyora.setContent(areaPyora);
 		panelPyora.setFitToHeight(true);
 		fxChooserPyorat.clear();
 		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
@@ -246,7 +275,7 @@ public class VarastoOverviewController {
 		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
 
 		if (pyoraKohdalla == null) {
-			areaPyora.clear();
+			//areaPyora.clear();
 			return;
 		}
 		
@@ -255,10 +284,34 @@ public class VarastoOverviewController {
 			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
 		}
 
-		areaPyora.setText("");
-		try (PrintStream os = TextAreaOutputStream.getTextPrintStream(areaPyora)) {
-			tulosta(os, pyoraKohdalla);
-		}
+		//areaPyora.setText("");
+		taytaKentat();
+	}
+	
+	/**
+	 * Täyttää pyörän kentät pyörän tiedoilla
+	 */
+	private void taytaKentat() {
+		textFieldNimi.setText(pyoraKohdalla.anna(1));	
+		textFieldMalli.setText(pyoraKohdalla.anna(2));	
+		textFieldKunto.setText(pyoraKohdalla.anna(3));	
+		textFieldVuokra.setText(pyoraKohdalla.anna(4));	
+		textFieldTila.setText(pyoraKohdalla.anna(5));
+		textFieldLisatietoja.setText(pyoraKohdalla.anna(6));
+		vaihdaMuokattavuus(false);
+	}
+	
+	/**
+	 * Muuttaa pyörän tekstikenttien muokattavuuden truesta falseksi tai toisinpäin
+	 */
+	private void vaihdaMuokattavuus(boolean muokataanko) {
+		boolean muokattavaksi = muokataanko;
+		textFieldNimi.setEditable(muokattavaksi);;	
+		textFieldMalli.setEditable(muokattavaksi);	
+		textFieldKunto.setEditable(muokattavaksi);	
+		textFieldVuokra.setEditable(muokattavaksi);
+		textFieldTila.setEditable(muokattavaksi);
+		textFieldLisatietoja.setEditable(muokattavaksi);
 	}
 
 	
@@ -300,6 +353,7 @@ public class VarastoOverviewController {
     private String tallenna() {
         try {
             vuokraamo.tallenna();
+            vaihdaMuokattavuus(false);
             return null;
         } catch (SailoException ex) {
             Dialogs.showMessageDialog("Tallennuksessa ongelmia! " + ex.getMessage());

@@ -134,6 +134,20 @@ public class Pyora implements Cloneable {
 	public String getNimi() {
 		return nimi;
 	}
+	
+	/**
+	 * @return palauttaa pyörän mallin
+	 */
+	public String getMalli() {
+		return malli;
+	}
+	
+	/**
+	 * @return palauttaa pyörän kunnon
+	 */
+	public int getKunto() {
+		return kunto;
+	}
 
 
 	/**
