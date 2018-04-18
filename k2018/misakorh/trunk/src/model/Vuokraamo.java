@@ -66,8 +66,8 @@ public class Vuokraamo {
 		return pyorat.getLkm();
 	}
 	
-	public Collection<Pyora> hinnanMukaan(){
-		return pyorat.jarjestaHalvin();
+	public Collection<Pyora> hinnanMukaan(Collection<Pyora> lista){
+		return pyorat.jarjestaHalvin(lista);
 	}
 
 

@@ -252,6 +252,11 @@ public class VarastoOverviewController {
 	void handleVainVapaatCB() {
 		hae(pyoraKohdalla.getPyoranID());
 	}
+	
+	@FXML
+	void handleHinnanMukaan(){
+		hae(pyoraKohdalla.getPyoranID());
+	}
 
 	//===============================================================================
 	// FXML:ll‰‰n kuulumaton koodi t‰st‰ eteenp‰in
@@ -445,7 +450,7 @@ public class VarastoOverviewController {
         Collection<Pyora> pyorat;
         try {
             pyorat = vuokraamo.etsi(ehto, fxVainVapaatCB.isSelected());
-            pyorat = vuokraamo.hinnanMukaan();
+            if(fxHinnanMukaanCB.isSelected()) pyorat = vuokraamo.hinnanMukaan(pyorat);
             int i = 0;
             for (Pyora pyora : pyorat) {
                 if (pyora.getPyoranID() == pyoraID) index = i;
