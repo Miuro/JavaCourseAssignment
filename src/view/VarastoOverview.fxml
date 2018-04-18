@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import fi.jyu.mit.fxgui.ComboBoxChooser?>
 <?import fi.jyu.mit.fxgui.ListChooser?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -56,18 +55,24 @@
                      <children>
                         <HBox>
                            <children>
-                              <Label alignment="CENTER" prefWidth="80.0" text="Hakuehto" />
-                              <CheckBox fx:id="fxVainVapaatCB" mnemonicParsing="false" text="Näytä vain vapaat" />
+                              <CheckBox fx:id="fxHinnanMukaanCB" mnemonicParsing="false" text="Hinnan mukaan">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="3.0" />
+                                 </padding>
+                              </CheckBox>
+                              <CheckBox fx:id="fxVainVapaatCB" mnemonicParsing="false" text="Vapaat">
+                                 <padding>
+                                    <Insets top="3.0" />
+                                 </padding></CheckBox>
                            </children>
                         </HBox>
-                        <TextField fx:id="hakuehto" onKeyReleased="#handleHakuehto" promptText="Haku" />
-                        <ComboBoxChooser fx:id="cbKentat" maxWidth="200.0" onAction="#handleHakuehto" rivit="Nimi&#10;Malli&#10;Kunto&#10;Vuokraperpäivä&#10;Onkovarattuna" />
+                        <TextField fx:id="hakuehto" onKeyReleased="#handleHakuehto" prefHeight="25.0" prefWidth="200.0" promptText="Haku" />
                         <Label alignment="CENTER" prefHeight="0.0" prefWidth="189.0" text="Pyörät" />
                      </children>
                   </VBox>
                </top>
                <bottom>
-                  <ListChooser fx:id="fxChooserPyorat" prefHeight="306.0" prefWidth="200.0" rivit="Mountainer 6X&#10;CityBike G3&#10;Punainen Jopo&#10;Helkama G1&#10;Ruputrupu" BorderPane.alignment="CENTER" />
+                  <ListChooser fx:id="fxChooserPyorat" prefHeight="329.0" prefWidth="200.0" rivit="Mountainer 6X&#10;CityBike G3&#10;Punainen Jopo&#10;Helkama G1&#10;Ruputrupu" BorderPane.alignment="CENTER" />
                </bottom>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="272.0">

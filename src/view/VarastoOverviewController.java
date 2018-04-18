@@ -24,9 +24,6 @@ import model.Vuokraus;
 import model.Vuokraamo;
 
 public class VarastoOverviewController {
-	
-	@FXML 
-	private ComboBoxChooser<String> cbKentat;
 
 	@FXML
 	private MenuItem fxMenuTallenna;
@@ -75,6 +72,9 @@ public class VarastoOverviewController {
 
 	@FXML
 	private CheckBox fxVainVapaatCB;
+	
+	@FXML
+	private CheckBox fxHinnanMukaanCB;
 
 	@FXML
 	private Button fxPoistaButton;
@@ -425,7 +425,7 @@ public class VarastoOverviewController {
 	 * @param jnro jäsenen numero, joka aktivoidaan haun jälkeen
 	 */
 	protected void hae(int pyoraID) {
-		int k = cbKentat.getSelectionModel().getSelectedIndex();
+		//int k = cbKentat.getSelectionModel().getSelectedIndex();
         String ehto = hakuehto.getText(); 
         //if (k > 0 || ehto.length() > 0)
         //    naytaVirhe(String.format("Ei osata hakea (ehto: %s)", ehto));
