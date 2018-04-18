@@ -4,6 +4,7 @@ import pyoravarasto.MainApp;
 
 import java.io.PrintStream;
 import java.util.Collection;
+import java.util.Collections;
 
 import fi.jyu.mit.fxgui.ComboBoxChooser;
 import fi.jyu.mit.fxgui.Dialogs;
@@ -242,6 +243,13 @@ public class VarastoOverviewController {
 		hae(pyoraKohdalla.getPyoranID());
 		//vuokraaPyora(5);
 	}
+	
+	/**
+	 * H‰ndl‰‰ tilanteen jossa checkboxia "Vain vapaat" painetaan
+	 */
+	void handleVainVapaatCB() {
+		hae(pyoraKohdalla.getPyoranID());
+	}
 
 	//===============================================================================
 	// FXML:ll‰‰n kuulumaton koodi t‰st‰ eteenp‰in
@@ -434,7 +442,7 @@ public class VarastoOverviewController {
         int index = 0;
         Collection<Pyora> pyorat;
         try {
-            pyorat = vuokraamo.etsi(ehto);
+            pyorat = vuokraamo.etsi(ehto, fxVainVapaatCB.isSelected());
             int i = 0;
             for (Pyora pyora:pyorat) {
                 if (pyora.getPyoranID() == pyoraID) index = i;
