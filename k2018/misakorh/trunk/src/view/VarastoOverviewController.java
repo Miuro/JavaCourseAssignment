@@ -247,6 +247,7 @@ public class VarastoOverviewController {
 	/**
 	 * H‰ndl‰‰ tilanteen jossa checkboxia "Vain vapaat" painetaan
 	 */
+	@FXML
 	void handleVainVapaatCB() {
 		hae(pyoraKohdalla.getPyoranID());
 	}
