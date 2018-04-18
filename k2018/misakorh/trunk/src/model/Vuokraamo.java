@@ -102,12 +102,11 @@ public class Vuokraamo {
 	/**
 	 * Palauttaa "taulukossa" hakuehtoon vastaavien pyörien viitteet
 	 * @param hakuehto hakuehto
-	 * @param k etsittävän kentän indeksi
 	 * @return tietorakenteen löytyneistä pyöristä
 	 * @throws SailoException Jos jotakin menee väärin
 	 */
-	public Collection<Pyora> etsi(String hakuehto, int k) throws SailoException {
-		return pyorat.etsi(hakuehto, k);
+	public Collection<Pyora> etsi(String hakuehto) throws SailoException {
+		return pyorat.etsi(hakuehto);
 	}
 
 
