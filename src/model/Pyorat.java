@@ -9,9 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
-public class Pyorat implements Iterable<Pyora> {
+public class Pyorat implements Iterable<Pyora>{
 	
 	private Collection<Pyora> alkiot = new ArrayList<>();
 
@@ -47,8 +49,7 @@ public class Pyorat implements Iterable<Pyora> {
             if (pyora.toStringNOID().toLowerCase().contains(ehto.toLowerCase())) loytyneet.add(pyora);  
         }
         return loytyneet; 
-    }
-	
+    }	
 
 	
 	/**
@@ -61,6 +62,7 @@ public class Pyorat implements Iterable<Pyora> {
 		alkiot.add(pyora);
 		muutettu = true;
 	}
+
 	
 	/**
 	 * Antaa kokoelman kaikista vapaana olevista pyöristä
@@ -206,6 +208,18 @@ public class Pyorat implements Iterable<Pyora> {
 		return alkiot.size();
 	}
 	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		String palautus = new String();
+		for(Pyora pyora : this) {
+			palautus += pyora.toString() +  "\n";
+		}
+		return palautus;
+	}
+	
 
 
 	
@@ -254,12 +268,20 @@ public class Pyorat implements Iterable<Pyora> {
 	public static void main(String[] args) {
 		Pyorat pyorat = new Pyorat();
 
-		Pyora jopo1 = new Pyora(), jopo2 = new Pyora();
+		Pyora jopo1 = new Pyora(), jopo2 = new Pyora(), jopo3 = new Pyora();
 		jopo1.rekisteroi();
 		jopo1.vastaaJopo();
 		jopo2.rekisteroi();
-		jopo2.vastaaJopo();
-
+		jopo2.vastaaJopo2();
+		jopo3.rekisteroi();
+		jopo3.vastaaJopo();
+		
+		pyorat.lisaa(jopo1);
+		pyorat.lisaa(jopo2);
+		pyorat.lisaa(jopo3);
+		
+		System.out.println(pyorat);
+		
 		System.out.println("============= Pyörät testi =================");
 		String nimi = "pyoratTesti";
 		File ftied = new File(nimi+ ".dat");
@@ -292,7 +314,6 @@ public class Pyorat implements Iterable<Pyora> {
 		
 		iter = pyorat.iterator();		
 		while (iter.hasNext()) System.out.println(iter.next());
-		
 		
 		
 	}

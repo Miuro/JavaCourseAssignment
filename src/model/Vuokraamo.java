@@ -65,6 +65,10 @@ public class Vuokraamo {
 	public int getPyoria() {
 		return pyorat.getLkm();
 	}
+	
+	public Collection<Pyora> hinnanMukaan(){
+		return pyorat.jarjestaHalvin();
+	}
 
 
 	/**

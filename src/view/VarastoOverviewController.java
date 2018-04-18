@@ -3,6 +3,7 @@ package view;
 import pyoravarasto.MainApp;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -444,8 +445,9 @@ public class VarastoOverviewController {
         Collection<Pyora> pyorat;
         try {
             pyorat = vuokraamo.etsi(ehto, fxVainVapaatCB.isSelected());
+            pyorat = vuokraamo.hinnanMukaan();
             int i = 0;
-            for (Pyora pyora:pyorat) {
+            for (Pyora pyora : pyorat) {
                 if (pyora.getPyoranID() == pyoraID) index = i;
                 fxChooserPyorat.add(pyora.getNimi(), pyora);
                 i++;

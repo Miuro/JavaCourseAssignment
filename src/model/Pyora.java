@@ -35,6 +35,10 @@ public class Pyora implements Cloneable {
 	public boolean getOnkoVarattu() {
 		return onkoVarattu;
 	}
+	
+	public void setVuokraPerH(double hinta) {
+		vuokraPerTunti = hinta;
+	}
 
 	/**
 	 * Palauttaa pyörän kenttien määrän
@@ -186,6 +190,14 @@ public class Pyora implements Cloneable {
 				+ lisatietoja;
 	}
 
+	/**
+	 * 
+	 */
+	public int compareTo(Pyora p) {
+		if(this.getVuokraPerTunti() < p.getVuokraPerTunti()) return -1;
+		if(this.getVuokraPerTunti() > p.getVuokraPerTunti()) return 1;
+		return 0;
+	}
 
 	
 	/**
@@ -305,6 +317,17 @@ public class Pyora implements Cloneable {
 		lisatietoja = "Penkki pitää vaihtaa";
 	}
 
+	/**
+	 * Apumetodi testiarvojen tuottamiselle
+	 */
+	public void vastaaJopo2() {
+		nimi = "Punainen Jopo";
+		malli = "Helkama Jopo";
+		onkoVarattu = true;
+		kunto = 1;
+		vuokraPerTunti = 10;
+		lisatietoja = "Penkki pitää vaihtaa";
+	}
 
 	/**
 	 * Tulostetaan pyörän tiedot.
