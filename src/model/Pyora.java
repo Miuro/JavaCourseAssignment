@@ -16,10 +16,10 @@ public class Pyora implements Cloneable {
 	private static int seuraavaID = 1;
 
 	private int pyoranID;
-	private String nimi = "";
-	private String malli = "";
+	private String nimi = "-";
+	private String malli = "-";
 	private int kunto = 3; // 0-3. 0 = rikki, 1 = tyydyttävä, 2 = hyvä, 3 = erinomainen
-	private String lisatietoja = "";
+	private String lisatietoja = "-";
 	private boolean onkoVarattu = false; // FALSE = vapaana, TRUE = vuokrattuna
 	private double vuokraPerTunti = 0;
 
@@ -243,6 +243,7 @@ public class Pyora implements Cloneable {
 	 */
 	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
+		if(tjono.equals("")) tjono = "-";
 		switch (k) {
 		case 0:
 			setPyoranID(Integer.parseInt(tjono));

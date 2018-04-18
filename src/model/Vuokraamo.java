@@ -137,6 +137,17 @@ public class Vuokraamo {
 		}
 		if (!"".equals(virhe)) throw new SailoException(virhe);
 	}
+	
+	
+	 /**
+	 * Muuttaa pyörän toiseksi
+	 * @param alku muutettava pyörä
+	 * @param uusi pyörä jolla alku korvataan
+	  */
+	public void muutaPyora(Pyora alku, Pyora uusi) {
+		pyorat.muutaPyora(alku, uusi);
+		
+	}
 
 
 	/**
