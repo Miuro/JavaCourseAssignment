@@ -25,7 +25,6 @@
           <Menu mnemonicParsing="false" text="Tiedosto">
             <items>
               <MenuItem fx:id="fxMenuTallenna" mnemonicParsing="false" onAction="#handleTallenna" text="Tallenna" />
-                  <MenuItem fx:id="fxMenuAvaa" mnemonicParsing="false" onAction="#handleMenuAvaa" text="Avaa..." />
                   <MenuItem fx:id="fxMenuTulosta" mnemonicParsing="false" onAction="#handleMenuTulosta" text="Tulosta..." />
                   <MenuItem fx:id="fxMenuLopeta" mnemonicParsing="false" onAction="#handleMenuLopeta" text="Lopeta" />
             </items>
