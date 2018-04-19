@@ -201,27 +201,15 @@ public class VarastoOverviewController {
 			return;
 		}
 		if (pyoraKohdalla.getOnkoVarattu()) {
-			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
-			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
-			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
 			apuAsiakas = vuokraamo.annaAsiakas(apuVuokraus);
 			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas, vuokraamo);
-			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
-			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
-			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			hae(pyoraKohdalla.getPyoranID());
 			
 		} else {
 			apuAsiakas = new Asiakas();
 			apuVuokraus = new Vuokraus();
-			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
-			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
-			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas, vuokraamo);
-			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
-			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
-			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			hae(pyoraKohdalla.getPyoranID());
 		}
 
@@ -402,7 +390,6 @@ public class VarastoOverviewController {
 		}
 		try {
 			vuokraamo.tallenna();
-			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
 			return null;
 		} catch (SailoException ex) {
 			Dialogs.showMessageDialog("Tallennuksessa ongelmia! " + ex.getMessage());

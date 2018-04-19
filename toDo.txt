@@ -1,7 +1,10 @@
 ﻿- Menun Tulosta-nappi
 	- jos pyörällä on vuokraus, niin näyttää pyörän alla vuokrauksen tiedot
 
+
+- Vuokrausdialogin kentät muokkaamattomaksi, kun vuokrausta tarkastellaan
 - Vuokrausdialogin hinta ja palautusaika uutta vuokrausta luotaessa
-- Ylimääräisten dialogien poisto
+- Pyörää muokattaessa pyörän kunnon tilan valitseminen dropdown valikosta.
 - Fieldit järkeviksi, etenkin pyörän tiedot (overview) you know
+	- väri harmaaksi, kun ne ei ole muokattavissa
 - tila (true) hommeli kivan näköiseksi maybe
