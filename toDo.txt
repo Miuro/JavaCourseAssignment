@@ -11,3 +11,6 @@
 - Vuokrauksen keston valinta(sliderijotainjotain)
 
 - Menun Tulosta-nappi toimimaan (tulostaa listalla näkyvät pyörät ja niiden mahdolliset vuokraukset)
+
+- Virheiden käsittely kuntoon (esim. overview controllerissa on paljon Dialogeja jossa on e.getMessage-tulostus vaan.
+  voi käyttää sitä naytaVirhe-aliohjelmaa.
