@@ -32,10 +32,19 @@ public class Pyora implements Cloneable {
 		this.onkoVarattu = arvo;
 	}
 	
+	/**
+	 * Palauttaa tiedon, onko pyörä varattu
+	 * @return True, jos pyörä on varattu
+	 */
 	public boolean getOnkoVarattu() {
 		return onkoVarattu;
 	}
 	
+	
+	/**
+	 * Asettaa pyörän tuntivuokran määrän
+	 * @param hinta Hinta euroissa per tunti
+	 */
 	public void setVuokraPerH(double hinta) {
 		vuokraPerTunti = hinta;
 	}
@@ -191,7 +200,7 @@ public class Pyora implements Cloneable {
 	}
 
 	/**
-	 * 
+	 * Vertailu kahdelle pyörälle. Vertaa pyörien hintoja.
 	 */
 	public int compareTo(Pyora p) {
 		if(this.getVuokraPerTunti() < p.getVuokraPerTunti()) return -1;

@@ -1,14 +1,11 @@
 package view;
 
-import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ModalController;
 import fi.jyu.mit.fxgui.ModalControllerInterface;
 import javafx.fxml.FXML;
 import javafx.print.PrinterJob;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.web.WebEngine;
-import javafx.stage.Stage;
 
 public class UusiTulostusDialogController implements ModalControllerInterface<String> {
 	

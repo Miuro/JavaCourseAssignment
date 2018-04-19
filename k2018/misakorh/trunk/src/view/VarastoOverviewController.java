@@ -7,11 +7,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-
-import fi.jyu.mit.fxgui.ComboBoxChooser;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.TextAreaOutputStream;
@@ -511,23 +507,6 @@ public class VarastoOverviewController {
 		fxChooserPyorat.setSelectedIndex(index);
 	}
 
-
-	/**
-	 * N‰ytt‰‰ virheen
-	 * @param virhe virheen teksti
-	 */
-	private void naytaVirhe(String virhe) {
-
-		if (virhe == null || virhe.isEmpty())
-			Dialogs.showMessageDialog("Tapahtui virhe");
-		else
-			Dialogs.showMessageDialog("Tapahtui virhe: " + virhe);
-		/*
-		 * if ( virhe == null || virhe.isEmpty() ) { labelVirhe.setText("");
-		 * labelVirhe.getStyleClass().removeAll("virhe"); return; } labelVirhe.setText(virhe);
-		 * labelVirhe.getStyleClass().add("virhe");
-		 */
-	}
 
 
 	/**

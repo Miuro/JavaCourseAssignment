@@ -1,7 +1,6 @@
 package view;
 
 import fi.jyu.mit.fxgui.Dialogs;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -68,51 +67,47 @@ public class UusiVuokrausDialogController {
 	 */
 	@FXML
 	void handleVuokraaPyora() {
-		if(lueKentat()) {
+		if (lueKentat()) {
 			vuokraaPainettu = true;
 			pyora.setOnkoVarattu(true);
 			dialogStage.close();
 		}
-		
-		//Dialogs.showMessageDialog("Tämä luo vain esimerkkivuokrauksen atm");
-		//vuokraus.testiVuokraus(pyora.getPyoranID(), 2);
-		
-		
 
-		
-		/*
-		if(syottoTarkistin()) {
-			vuokraus.aseta(k, jono)
-		}
-		*/
 	}
-	
-	
+
+
+	/**
+	 * Lukee kentät, luo asiakkaan niiden arvojen mukaan.
+	 * @return
+	 */
 	private boolean lueKentat() {
 		try {
 			asiakas.aseta(1, nimiKentta.getText());
 			asiakas.aseta(2, hetuKentta.getText());
 			asiakas.aseta(3, osoiteKentta.getText());
 			asiakas.aseta(4, puhnumKentta.getText());
-			
+
 			vuokraamo.lisaaAsiakas(asiakas);
-			
+
 			vuokraus.aseta(1, Integer.toString(pyora.getPyoranID()));
 			vuokraus.aseta(2, Integer.toString(asiakas.getAsiakasId()));
 			vuokraus.aseta(3, kestoKentta.getText());
 			vuokraus.setPalautusAika(Integer.parseInt(kestoKentta.getText()));
 			vuokraus.aseta(5, Double.toString((Double.parseDouble(vuokraus.anna(3)) * pyora.getVuokraPerTunti())));
-			
+
 			vuokraamo.lisaaVuokraus(vuokraus);
-			
+
 		} catch (Exception e) {
-			Dialogs.showMessageDialog("Kenttien luvussa onglemia! " + e.getMessage());
+			Dialogs.showMessageDialog("Kenttien luvussa onglemia!");
 			return false;
 		}
 
 		return true;
 	}
-	
+
+	/**
+	 * Hakee asiakkaan tiedot, ja kirjoittaa ne dialogin kenttiin.
+	 */
 	private void taytaAsiakasKentat() {
 		nimiKentta.setText(asiakas.anna(1));
 		hetuKentta.setText(asiakas.anna(2));
@@ -121,16 +116,6 @@ public class UusiVuokrausDialogController {
 		kestoKentta.setText(vuokraus.anna(3));
 		hintaText.setText("Hinta: " + vuokraus.anna(5));
 		kestoText.setText("Palautus: " + vuokraus.anna(4));
-	}
-
-
-	/**
-	 * Tarkistaa, ovatko kenttiin syötetyt tiedot oikeassa muodossa.
-	 * @return True, jos kentät ovat oikein, muuten false.
-	 */
-	private boolean syottoTarkistin() {
-		// TODO Toteutus tälle
-		return false;
 	}
 
 
@@ -157,13 +142,13 @@ public class UusiVuokrausDialogController {
 	 */
 	public void asetaPyora(Pyora pyora) {
 		this.pyora = pyora;
-		
+
 		pyoraKentta.setText(pyora.getNimi());
 		tuntivuokraKentta.setText(Double.toString(pyora.getVuokraPerTunti()));
 		//hintaText.setText("Hinta: " + (pyora.getVuokraPerTunti() * Double.parseDouble(kestoKentta.getText())));
 	}
-	
-	
+
+
 	/**
 	 * Vuokraus-olio, jota muokataan.
 	 * @param vuokraus Vuokrausolio mainApp:sta
@@ -171,12 +156,17 @@ public class UusiVuokrausDialogController {
 	public void asetaVuokraus(Vuokraus vuokraus) {
 		this.vuokraus = vuokraus;
 	}
-	
-	
+
+
+	/**
+	 * Asettaa asiakkaan, jota käytetään dialogissa.
+	 * Muuttaa Vuokraa-napin Kuittaa vuokraus-napiksi, jos asetettu asiakas on uusi.
+	 * @param asiakas Asiakas
+	 */
 	public void asetaAsiakas(Asiakas asiakas) {
 		this.asiakas = asiakas;
-		
-		if(pyora.getOnkoVarattu()) {
+
+		if (pyora.getOnkoVarattu()) {
 			taytaAsiakasKentat();
 
 			fxVuokraaButton.setText("Kuittaa vuokraus");
@@ -192,15 +182,20 @@ public class UusiVuokrausDialogController {
 				}
 				dialogStage.close();
 			});
-			
+
 		}
 	}
-	
+
+
+	/**
+	 * Asettaa dialogissa käytettävän vuokraamon.
+	 * @param vuokraamo
+	 */
 	public void asetaVuokraamo(Vuokraamo vuokraamo) {
 		this.vuokraamo = vuokraamo;
 	}
-	
-	
+
+
 	/**
 	 * Onko vuokraa painiketta painettu, eli onko vuokraus oikein ja mennyt läpi
 	 * @return True, jos vuokraus on tapahtunut
@@ -208,6 +203,5 @@ public class UusiVuokrausDialogController {
 	public boolean onkoOK() {
 		return vuokraaPainettu;
 	}
-	
 
 }
