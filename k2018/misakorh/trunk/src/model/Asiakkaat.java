@@ -53,6 +53,14 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	}
 	
 	
+	public Asiakas etsi(int vuokraajaID) {
+		for (Asiakas asiakas : alkiot) {
+			if(asiakas.getAsiakasId() == vuokraajaID)
+				return asiakas;			
+		}
+		return null;
+	}
+	
 	
 	/**
 	 * Oletusmuodostaja
@@ -146,6 +154,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 			alkiot = isompi;
 		}
 		//throw new SailoException("Liikaa alkioita");
+		muutettu = true;
 		alkiot[lkm] = asiakas;
 		lkm++;
 	}

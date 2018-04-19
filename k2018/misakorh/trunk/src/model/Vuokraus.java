@@ -11,7 +11,7 @@ public class Vuokraus {
 	private int 		vuokrausId,	
 						pyoraId,	 
 						vuokraajaId;
-	private String 		vuokrausAika    = "";
+	private int 		vuokrausAika    = 0;
 	private String		palautusAika 	= "";
 	private double 		hinta 			= 0.;
 	private String 		lisatiedot 		= "";
@@ -160,7 +160,7 @@ public class Vuokraus {
 		case 2:
 			return "Vuokraajan ID";
 		case 3:
-			return "Vuokraus päivämäärä";
+			return "Vuokrauksen kesto tunneissa";
 		case 4:
 			return "Palautus päivämäärä";
 		case 5:
@@ -211,7 +211,7 @@ public class Vuokraus {
 			vuokraajaId = Integer.parseInt(tjono);
 			return null;
 		case 3:
-			vuokrausAika = tjono;
+			vuokrausAika = Integer.parseInt(tjono);
 			return null;
 		case 4:
 			palautusAika = tjono;
@@ -275,7 +275,7 @@ public class Vuokraus {
 		pvm = Calendar.getInstance();
 		palautus = Calendar.getInstance();
 		palautus.add(Calendar.HOUR, kestoTunneissa);
-		vuokrausAika = sdf.format(pvm.getTime());
+		vuokrausAika = kestoTunneissa;
 		palautusAika = sdf.format(palautus.getTime());
 		hinta = 10;
 		hinta = hinta * kestoTunneissa;
@@ -303,7 +303,7 @@ public class Vuokraus {
 	 * Antaa vuokrausajanhetken
 	 * @return viite vuokrauksen aloitusajankohtaan, milloin pyörä vuokrattiin
 	 */
-	public String getVuokrausAika() {
+	public int getVuokrausAika() {
 		return vuokrausAika;
 	}
 	
@@ -311,7 +311,7 @@ public class Vuokraus {
 	 * Asettaa vuokrausajan
 	 * @param vuokrAika vuokrausajankohta
 	 */
-	public void setVuokrausAika(String vuokrAika) {
+	public void setVuokrausAika(int vuokrAika) {
 		vuokrausAika = vuokrAika;
 	}
 	

@@ -204,10 +204,18 @@ public class VarastoOverviewController {
 			return;
 		}
 
-		apuVuokraus = new Vuokraus();
-		mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus);
-		vuokraamo.lisaaVuokraus(apuVuokraus);
-		hae(pyoraKohdalla.getPyoranID());
+		if (pyoraKohdalla.getOnkoVarattu()) {
+			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
+		} else {
+			apuAsiakas = new Asiakas();
+			apuAsiakas.vastaaHessuHopo();
+			vuokraamo.lisaaAsiakas(apuAsiakas);
+			
+			apuVuokraus = new Vuokraus();
+			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
+			vuokraamo.lisaaVuokraus(apuVuokraus);
+			hae(pyoraKohdalla.getPyoranID());
+		}
 
 	}
 
@@ -232,7 +240,7 @@ public class VarastoOverviewController {
 	private String vuokraamonNimi = "MJVuokraamo";
 	private Vuokraamo vuokraamo;
 	private Pyora pyoraKohdalla;
-	private Pyora apuPyora;
+	private Asiakas apuAsiakas;
 	private Vuokraus apuVuokraus;
 	private boolean muokattavana = false;
 
@@ -255,9 +263,9 @@ public class VarastoOverviewController {
 	 * Muokkaa tällä hetkellä valittuna olevaa pyörää
 	 */
 	private void muokkaaPyora() {
-		if (muokattavana) {
+		if (muokattavana) 
 			return;
-		}
+		
 		muokattavana = true;
 		vaihdaMuokattavuus(true);
 	}
@@ -282,24 +290,19 @@ public class VarastoOverviewController {
 	 * Näyttää listasta valitun pyörän tiedot, tilapäisesti yhteen isoon edit-kenttään
 	 */
 	protected void naytaPyora() {
-		if(muokattavana) muokattavana = false;
-		
-		
-		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
+		if (muokattavana) muokattavana = false;
 
-		if (pyoraKohdalla == null) {
-			//areaPyora.clear();
-			return;
-		}
+		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
+		if (pyoraKohdalla == null) return;
 
 		apuVuokraus = null;
 		if (pyoraKohdalla.getOnkoVarattu() == true) {
 			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
+			apuAsiakas = vuokraamo.annaAsiakas(apuVuokraus);
 			fxVuokraaButton.setText("Näytä vuokraus");
-		}
-		else fxVuokraaButton.setText("Vuokraa");
+		} else
+			fxVuokraaButton.setText("Vuokraa");
 
-		//areaPyora.setText("");
 		taytaKentat();
 	}
 
@@ -372,7 +375,6 @@ public class VarastoOverviewController {
 		
 		if(muokattavana == true) {
 			try {
-				Dialogs.showMessageDialog(pyoraKohdalla.toString());
 				pyoraKohdalla.aseta(1, textFieldNimi.getText());
 				pyoraKohdalla.aseta(2, textFieldMalli.getText());
 				pyoraKohdalla.aseta(3, textFieldKunto.getText());
@@ -381,8 +383,6 @@ public class VarastoOverviewController {
 				pyoraKohdalla.aseta(6, textFieldLisatietoja.getText());
 				vuokraamo.poistaPyora(pyoraKohdalla);
 				vuokraamo.lisaaPyora(pyoraKohdalla);
-				Dialogs.showMessageDialog(pyoraKohdalla.toString());
-				
 			} catch (Exception e) {
 				Dialogs.showMessageDialog("Kenttien luvussa onglemia! " + e.getMessage());
 				return e.getMessage();
@@ -430,9 +430,7 @@ public class VarastoOverviewController {
 	 */
 	protected void uusiPyora() {
 		Pyora uusi = new Pyora();
-		uusi.rekisteroi();
 		uusi.aseta(1, "tyhjä");
-		
 		
 		try {
 			vuokraamo.lisaaPyora(uusi);
@@ -464,9 +462,7 @@ public class VarastoOverviewController {
 	 * Tekee vuokrauksen valitulle pyörälle.
 	 */
 	public void vuokraaPyora(int kesto) throws SailoException {
-		// JOptionPane.showMessageDialog(null, "Vielä ei osata lisätä vuokrausta!" );
 		if (pyoraKohdalla == null) return;
-		//Vuokraus vuokraus = new Vuokraus(kesto, pyoraKohdalla.getVuokraPerTunti(), pyoraKohdalla.getPyoranID(), 1); // TODO: Asiakkaat lol
 		Vuokraus vuokraus = new Vuokraus();
 		vuokraus.rekisteroi();
 		vuokraus.testiVuokraus(pyoraKohdalla.getPyoranID(), kesto);
@@ -481,10 +477,7 @@ public class VarastoOverviewController {
 	 * @param jnro jäsenen numero, joka aktivoidaan haun jälkeen
 	 */
 	protected void hae(int pyoraID) {
-		//int k = cbKentat.getSelectionModel().getSelectedIndex();
 		String ehto = hakuehto.getText();
-		//if (k > 0 || ehto.length() > 0)
-		//    naytaVirhe(String.format("Ei osata hakea (ehto: %s)", ehto));
 		fxChooserPyorat.clear();
 
 		int index = 0;
@@ -501,7 +494,7 @@ public class VarastoOverviewController {
 		} catch (SailoException ex) {
 			Dialogs.showMessageDialog("Pyörän hakemisessa ongelmia! " + ex.getMessage());
 		}
-		fxChooserPyorat.setSelectedIndex(index); // tästä tulee muutosviesti joka näyttää jäsenen
+		fxChooserPyorat.setSelectedIndex(index);
 	}
 
 

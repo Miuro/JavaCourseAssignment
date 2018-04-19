@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Asiakas;
 import model.Pyora;
 import model.Vuokraus;
 import view.UusiTulostusDialogController;
@@ -55,7 +56,7 @@ public class MainApp extends Application {
 	 * @param pyora Pyörä, mitä vuokrataa
 	 * @return True, jos pyörä vuokrattiin onnistuneesti
 	 */
-	public boolean showUusiVuokrausDialog(Pyora pyora, Vuokraus vuokraus) {
+	public boolean showUusiVuokrausDialog(Pyora pyora, Vuokraus vuokraus, Asiakas asiakas) {
 		try {
 			// Ladataan fxml-tiedosto
 	        FXMLLoader loader = new FXMLLoader();
@@ -77,6 +78,7 @@ public class MainApp extends Application {
 	        controller.setDialogStage(dialogStage);
 	        controller.asetaPyora(pyora);
 	        controller.asetaVuokraus(vuokraus);
+	        controller.asetaAsiakas(asiakas);
 	        
 	        dialogStage.showAndWait();
 	        return controller.onkoOK();
