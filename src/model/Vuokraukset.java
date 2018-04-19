@@ -196,6 +196,11 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	}
 	
 	
+	/**
+	 * Poistaa vuokrauksen sen pyöräID:n mukaan
+	 * @param pyoranID Pyörä, jonka vuokraus poistetaan
+	 * @return True, jos poisto onnistui
+	 */
 	public boolean poista(int pyoranID) {
 		for (Vuokraus vuokraus : alkiot) {
 			if(vuokraus.getPyoraId() == pyoranID) {

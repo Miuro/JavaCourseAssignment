@@ -2,7 +2,6 @@ package model;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.Iterator;
 
 public class Vuokraamo {
 	private Pyorat pyorat = new Pyorat();
@@ -55,6 +54,12 @@ public class Vuokraamo {
 			return null;
 	}
 	
+	
+	/**
+	 * Palauttaa asiakkaan vuokrauksen avulla
+	 * @param vuokraus Vuokraus, jonka asiakas etsitään
+	 * @return Asiakas, jos sellainen löydettiin, muuten null
+	 */
 	public Asiakas annaAsiakas(Vuokraus vuokraus) {
 		if(!vuokraus.getPalautusAika().equals("")) {
 			Asiakas a = asiakkaat.etsi(vuokraus.getVuokraajaId());

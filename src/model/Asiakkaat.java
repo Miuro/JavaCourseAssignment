@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 
 public class Asiakkaat implements Iterable<Asiakas> {
@@ -229,6 +228,9 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	}
 
 
+	/**
+	 * Luo iteraattorin asiakkaille
+	 */
 	@Override
 	public Iterator<Asiakas> iterator() {
 		return Arrays.asList(alkiot).iterator();

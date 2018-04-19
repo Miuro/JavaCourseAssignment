@@ -12,7 +12,6 @@ import model.Asiakas;
 import model.Pyora;
 import model.Vuokraamo;
 import model.Vuokraus;
-import view.UusiTulostusDialogController;
 import view.UusiVuokrausDialogController;
 import view.VarastoOverviewController;
 
