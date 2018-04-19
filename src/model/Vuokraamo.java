@@ -16,7 +16,6 @@ public class Vuokraamo {
 	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaPyora(Pyora pyora) throws SailoException {
-		pyora.rekisteroi();
 		pyorat.lisaa(pyora);
 	}
 
@@ -29,7 +28,6 @@ public class Vuokraamo {
 		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
 		if (temp.getOnkoVarattu() == true) return;
 		temp.setOnkoVarattu(true);
-		vuokraus.rekisteroi();
 		vuokraukset.lisaa(vuokraus);
 	}
 
@@ -40,7 +38,6 @@ public class Vuokraamo {
 	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaAsiakas(Asiakas asiakas) throws SailoException {
-		asiakas.rekisteroi();
 		asiakkaat.lisaa(asiakas);
 	}
 
@@ -128,6 +125,7 @@ public class Vuokraamo {
 	 * @throws SailoException
 	 */
 	public void tallenna() throws SailoException {
+		pyorat.setMuutettu(true);
 		String virhe = "";
 		try {
 			pyorat.tallenna();
@@ -203,12 +201,15 @@ public class Vuokraamo {
 	 */
 	public static void main(String[] args) throws SailoException {
 		Vuokraamo testi = new Vuokraamo();
+		
+		/*
 		try {
 			testi.lueTiedostosta("Testi");
 		} catch (SailoException e) {
 			System.out.println(e.getMessage());
 		}
 
+		 */
 		Pyora p1 = new Pyora(), p2 = new Pyora();
 		p1.rekisteroi();
 		p1.vastaaJopo();
@@ -217,22 +218,16 @@ public class Vuokraamo {
 
 		testi.lisaaPyora(p1);
 		testi.lisaaPyora(p2);
-
-		Asiakas a1 = new Asiakas();
-		a1.rekisteroi();
-		a1.vastaaHessuHopo();
-		testi.lisaaAsiakas(a1);
-
-		// int id1 = p1.getPyoranID();
-		// int i2 = p2.getPyoranID();
-
-		Vuokraus v1 = new Vuokraus();
-		v1.rekisteroi();
-		v1.testiVuokraus(p1.getPyoranID(), 5);
-		testi.lisaaVuokraus(v1);
+		
+		p1.setOnkoVarattu(true);
 
 		testi.tallenna();
+		
+		for (Pyora p : testi.pyorat) {
+			System.out.println(p);
+		}
 
+		/*
 		Iterator<Pyora> iter1 = testi.pyorat.iterator();
 		Iterator<Vuokraus> iter2 = testi.vuokraukset.iterator();
 
@@ -246,7 +241,7 @@ public class Vuokraamo {
 		while (iter2.hasNext()) {
 			System.out.println(iter2.next().toString());
 		}
-
+		*/
 	}
 
 }

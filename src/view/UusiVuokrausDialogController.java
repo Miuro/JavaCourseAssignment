@@ -70,6 +70,7 @@ public class UusiVuokrausDialogController {
 	void handleVuokraaPyora() {
 		if(lueKentat()) {
 			vuokraaPainettu = true;
+			pyora.setOnkoVarattu(true);
 			dialogStage.close();
 		}
 		
@@ -94,15 +95,21 @@ public class UusiVuokrausDialogController {
 			asiakas.aseta(3, osoiteKentta.getText());
 			asiakas.aseta(4, puhnumKentta.getText());
 			
+			vuokraamo.lisaaAsiakas(asiakas);
+			
 			vuokraus.aseta(1, Integer.toString(pyora.getPyoranID()));
 			vuokraus.aseta(2, Integer.toString(asiakas.getAsiakasId()));
 			vuokraus.aseta(3, kestoKentta.getText());
 			vuokraus.setPalautusAika(Integer.parseInt(kestoKentta.getText()));
 			vuokraus.aseta(5, Double.toString((Double.parseDouble(vuokraus.anna(3)) * pyora.getVuokraPerTunti())));
+			
+			vuokraamo.lisaaVuokraus(vuokraus);
+			
 		} catch (Exception e) {
 			Dialogs.showMessageDialog("Kenttien luvussa onglemia! " + e.getMessage());
 			return false;
 		}
+
 		return true;
 	}
 	

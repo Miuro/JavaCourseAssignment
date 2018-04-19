@@ -1,16 +1,7 @@
-﻿- Napit kuntoon
-    - Lopeta
+﻿- Menun Tulosta-nappi
+	- jos pyörällä on vuokraus, niin näyttää pyörän alla vuokrauksen tiedot
 
-- Vuokraus kuntoon
-	- Vuokrauksen kesto-, ja hinta textfieldit tulostamaan oikeita arvoja.
-	- Yhdistää vuokrausdialogin niin, että jos pyörällä on jo vuokraus, niin
-	  sitten Overview-ikkunassa vuokraa-nappi lukee "Näytä vuokraus" (dialogissa lukee vuokrauksen tiedot),
-	  ja vuokrausdialogin sisällä Vuokraa-nappi lukee "Kuittaa vuokraus" (joka poistaa vuokrauksen)
-
-- Pyörän tilan valinta(joku sliderlista?)
-- Vuokrauksen keston valinta(sliderijotainjotain)
-
-- Menun Tulosta-nappi toimimaan (tulostaa listalla näkyvät pyörät ja niiden mahdolliset vuokraukset)
-
-- Virheiden käsittely kuntoon (esim. overview controllerissa on paljon Dialogeja jossa on e.getMessage-tulostus vaan.
-  voi käyttää sitä naytaVirhe-aliohjelmaa.
+- Vuokrausdialogin hinta ja palautusaika uutta vuokrausta luotaessa
+- Ylimääräisten dialogien poisto
+- Fieldit järkeviksi, etenkin pyörän tiedot (overview) you know
+- tila (true) hommeli kivan näköiseksi maybe

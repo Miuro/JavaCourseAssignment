@@ -7,8 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
 
 public class Asiakkaat implements Iterable<Asiakas> {
 
@@ -17,41 +19,6 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	private String tiedostonPerusNimi = "asiakkaat";
 	private Asiakas alkiot[] = new Asiakas[MAX_ASIAKKAITA];
 	private boolean muutettu = false;
-
-	// Toteutus iteraattorille ensin
-
-	/**
-	 * Luokka jäsenten iteroimiselle.
-	 */
-	public class AsiakkaatIterator implements Iterator<Asiakas> {
-		private int kohdalla = 0;
-
-
-		@Override
-		public boolean hasNext() {
-			return kohdalla < lkm;
-		}
-
-
-		/**
-		 * Palauttaa seuraavan asiakkaan.
-		 * @return Seuraava asiakas, jos sellainen on olemassa.
-		 */
-		@Override
-		public Asiakas next() throws NoSuchElementException {
-			if (!hasNext()) throw new NoSuchElementException("Seuraavaa asiakasta ei ole");
-			return anna(kohdalla++);
-		}
-
-	}
-
-
-	/**
-	 * Palauttaa iteraattorin asiakkaille.
-	 */
-	public Iterator<Asiakas> iterator() {
-		return new AsiakkaatIterator();
-	}
 
 
 	public Asiakas etsi(int vuokraajaID) {
@@ -68,7 +35,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * Oletusmuodostaja
 	 */
 	public Asiakkaat() {
-		//
+		
 	}
 
 
@@ -78,24 +45,23 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	public void tallenna() throws SailoException {
 		if (!muutettu) return;
 
-		File fbak = new File(getBakNimi()); // TODO: Lisää backup jutut :D
+		File fbak = new File(getBakNimi());
 		File ftied = new File(getTiedostonNimi());
-		fbak.delete(); // if .. System.err.println("Ei voi tuhota");
-		ftied.renameTo(fbak); // if .. System.err.println("Ei voi nimetä");
+		fbak.delete();
+		ftied.renameTo(fbak);
 
 		try (PrintWriter fo = new PrintWriter(new FileWriter(ftied.getCanonicalPath()))) {
-			//fo.println(getNimi());
-			//fo.println(alkiot.length);  Eikö näihin riitä vaan et tulostetaan ne asiakkaan tiedot
-			for (Asiakas asiakas : this) {
-				if (asiakas != null) fo.println(asiakas.toString());
+			for (Asiakas asiakas : alkiot) {
+				if(asiakas != null) {
+					fo.println(asiakas);
+				}
 			}
-
+			
 		} catch (FileNotFoundException ex) {
 			throw new SailoException("Tiedosto " + ftied.getName() + " ei aukea");
 		} catch (IOException ex) {
 			throw new SailoException("Tiedoston " + ftied.getName() + " kirjoittamisessa ongelmia");
 		}
-
 		muutettu = false;
 	}
 
@@ -150,6 +116,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 			alkiot = isompi;
 		}
 		//throw new SailoException("Liikaa alkioita");
+		asiakas.rekisteroi();
 		muutettu = true;
 		alkiot[lkm] = asiakas;
 		lkm++;
@@ -163,8 +130,12 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 */
 	public boolean poista(Asiakas asiakas) {
 		for (int i = 0; i < alkiot.length; i++) {
+			if(alkiot[i] == null) 
+				continue;
 			if (alkiot[i].getAsiakasId() == asiakas.getAsiakasId()) {
 				alkiot[i] = null;
+				lkm--;
+				
 				return true;
 			}
 		}
@@ -235,7 +206,31 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * @param args ei käytösä
 	 */
 	public static void main(String[] args) {
-		// TODO: Everything
+		Asiakkaat testi = new Asiakkaat();
+		Asiakas a1 = new Asiakas();
+		a1.vastaaHessuHopo();
+		Asiakas a2 = new Asiakas();
+		a2.vastaaHessuHopo();
+		a2.aseta(1, "Aku Ankka");
+		
+		
+		testi.lisaa(a1);
+		testi.lisaa(a2);
+
+		for (Asiakas asiakas : testi) 
+			System.out.println(asiakas);
+			
+		testi.poista(a1);
+		
+		for (Asiakas asiakas : testi) 
+			System.out.println(asiakas);
+
+
 	}
 
+
+	@Override
+	public Iterator<Asiakas> iterator() {
+		return Arrays.asList(alkiot).iterator();
+	}
 }
