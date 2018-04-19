@@ -30,7 +30,6 @@ import model.Vuokraus;
 import model.Vuokraamo;
 
 public class VarastoOverviewController {
-
 	@FXML
 	private MenuItem fxMenuTallenna;
 	@FXML
@@ -82,7 +81,6 @@ public class VarastoOverviewController {
 
 	// Reference to the main application.
 	private MainApp mainApp;
-
 
 	/**
 	 * Konstruktori Tätä vissiin kutsutaan kun tapahtuu automaattinen initialize() metodi fxml-tiedoston ladattua. Dunno
@@ -162,7 +160,9 @@ public class VarastoOverviewController {
 	@FXML
 	void handleMenuTulosta() {
 		//Dialogs.showMessageDialog("Ei ole vielä lisätty");
-		mainApp.showUusiTulostusDialog();
+		//mainApp.showUusiTulostusDialog();
+		UusiTulostusDialogController tulostusDialog  = UusiTulostusDialogController.tulosta(null);
+		tulostaValitut(tulostusDialog.getTextArea());
 	}
 
 
@@ -410,6 +410,20 @@ public class VarastoOverviewController {
 		tallenna();
 		return true;
 	}
+	
+	/**
+	 * Tulostaa listassa olevat pyörät tekstialueeseen
+	 * @param text alue johon tulostetaan
+	 */
+	public void tulostaValitut(TextArea text) {
+		try (PrintStream os = TextAreaOutputStream.getTextPrintStream(text)) {
+			os.println("Valitut pyörät");
+			for(Pyora pyora : fxChooserPyorat.getObjects()) {
+				tulosta(os, pyora);
+				os.println("\n\n");
+			}
+		}
+	} 
 
 
 	/**
