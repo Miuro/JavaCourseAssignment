@@ -72,11 +72,12 @@ public class Pyora implements Cloneable {
 		case 2:
 			return "" + malli;
 		case 3:
-			return "" + kunto;
+			return "" + kunnot[kunto];
 		case 4:
 			return "" + lisatietoja;
 		case 5:
-			return "" + onkoVarattu;
+			if (onkoVarattu) return "Varattu";
+			return "Vapaa";
 		case 6:
 			return "" + vuokraPerTunti;
 		default:

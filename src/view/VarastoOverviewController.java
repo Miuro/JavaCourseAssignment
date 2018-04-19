@@ -324,11 +324,10 @@ public class VarastoOverviewController {
 	private void vaihdaMuokattavuus(boolean muokataanko) {
 		boolean muokattavaksi = muokataanko;
 		textFieldNimi.setEditable(muokattavaksi);
-		;
 		textFieldMalli.setEditable(muokattavaksi);
 		textFieldKunto.setEditable(muokattavaksi);
 		textFieldVuokra.setEditable(muokattavaksi);
-		textFieldTila.setEditable(muokattavaksi);
+		//textFieldTila.setEditable(muokattavaksi);
 		textFieldLisatietoja.setEditable(muokattavaksi);
 	}
 
