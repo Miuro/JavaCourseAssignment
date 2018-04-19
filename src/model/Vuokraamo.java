@@ -28,7 +28,6 @@ public class Vuokraamo {
 	public void lisaaVuokraus(Vuokraus vuokraus) {
 		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
 		if (temp.getOnkoVarattu() == true) return;
-		//temp.rekisteroi();
 		temp.setOnkoVarattu(true);
 		vuokraus.rekisteroi();
 		vuokraukset.lisaa(vuokraus);
@@ -41,6 +40,7 @@ public class Vuokraamo {
 	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaAsiakas(Asiakas asiakas) throws SailoException {
+		asiakas.rekisteroi();
 		asiakkaat.lisaa(asiakas);
 	}
 
@@ -171,6 +171,30 @@ public class Vuokraamo {
 		return ret;
 	}
 
+	
+	/**
+	 * Poistaa vuokraamosta parametrina annetun asiakkaan
+	 * @param asiakas Poistettava asiakas
+	 * @return True, jos poisto onnistui
+	 */
+	public boolean poistaAsiakas(Asiakas asiakas) {
+
+		if (asiakas == null) return false;
+		boolean ret = asiakkaat.poista(asiakas);
+		return ret;
+	}
+	
+	/**
+	 * Poistaa vuokraamosta parametrina annetun asiakkaan
+	 * @param asiakas Poistettava asiakas
+	 * @return True, jos poisto onnistui
+	 */
+	public boolean poistaVuokraus(Vuokraus vuokraus) {
+
+		if (vuokraus == null) return false;
+		boolean ret = vuokraukset.poista(vuokraus.getPyoraId());
+		return ret;
+	}
 
 	/**
 	 * Testi ohjelmaa vuokramolle
