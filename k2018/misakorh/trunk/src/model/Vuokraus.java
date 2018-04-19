@@ -12,9 +12,9 @@ public class Vuokraus {
 						pyoraId,	 
 						vuokraajaId;
 	private int 		vuokrausAika    = 0;
-	private String		palautusAika 	= "";
+	private String		palautusAika 	= "-";
 	private double 		hinta 			= 0.;
-	private String 		lisatiedot 		= "";
+	private String 		lisatiedot 		= "-";
 	
 	private static int 	seuraavaId 		= 1;
 	

@@ -20,6 +20,7 @@ public class Pyorat implements Iterable<Pyora> {
 	private String tiedostonPerusNimi = "";
 	private boolean muutettu = false;
 	
+	
 	/**
 	 * Oletusmuodostaja
 	 */
@@ -27,6 +28,14 @@ public class Pyorat implements Iterable<Pyora> {
 		// Attribuuttien oma alustus riittää
 	}
 	
+	
+	/**
+	 * Asetin muutettu-fieldille
+	 * @param arvo Uusi arvo
+	 */
+	public void setMuutettu(boolean arvo) {
+		muutettu = arvo;
+	}
 	
 	/**
 	 * Palauttaa listan hakuehtoon vastaavien pyörien viitteet
@@ -60,6 +69,9 @@ public class Pyorat implements Iterable<Pyora> {
 	 * @throws SailoException  jos tietorakenne on jo täynnä
 	 */
 	public void lisaa(Pyora pyora) {
+		if(pyora.getPyoranID() == 0) {
+			pyora.rekisteroi();			
+		}
 		alkiot.add(pyora);
 		muutettu = true;
 	}
@@ -310,11 +322,12 @@ public class Pyorat implements Iterable<Pyora> {
 		pyorat.lisaa(jopo1);
 		pyorat.lisaa(jopo2);
 		
-		//pyorat.jarjestaHalvin();
 		
-		for (Pyora pyora : pyorat) {
-			System.out.println(pyora);
-		}
+		for (Pyora pyora : pyorat) System.out.println(pyora);
+		
+		jopo1.setOnkoVarattu(true);
+		System.out.println();
+		for (Pyora pyora : pyorat) System.out.println(pyora);
 
 		/*
 		System.out.println("============= Pyörät testi =================");

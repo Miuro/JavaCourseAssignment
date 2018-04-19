@@ -199,24 +199,37 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleUusiVuokraus() throws SailoException {
+		
 		if (pyoraKohdalla == null) {
 			Dialogs.showMessageDialog("Valitse vuokrattava pyörä");
 			return;
 		}
-
 		if (pyoraKohdalla.getOnkoVarattu()) {
+			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
+			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
+			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
+			apuAsiakas = vuokraamo.annaAsiakas(apuVuokraus);
 			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas, vuokraamo);
+			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
+			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
+			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			hae(pyoraKohdalla.getPyoranID());
+			
 		} else {
 			apuAsiakas = new Asiakas();
 			apuVuokraus = new Vuokraus();
+			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
+			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
+			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas, vuokraamo);
-			vuokraamo.lisaaAsiakas(apuAsiakas);
-			vuokraamo.lisaaVuokraus(apuVuokraus);
+			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
+			Dialogs.showMessageDialog("Vuokraus: " + apuVuokraus.toString());
+			Dialogs.showMessageDialog("Asiakas: " + apuAsiakas.toString());
 			hae(pyoraKohdalla.getPyoranID());
 		}
 
+		
 	}
 
 
@@ -292,6 +305,7 @@ public class VarastoOverviewController {
 	protected void naytaPyora() {
 		if (muokattavana) muokattavana = false;
 
+		
 		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
 		if (pyoraKohdalla == null) return;
 
@@ -371,8 +385,7 @@ public class VarastoOverviewController {
 	 * Tietojen tallennus
 	 * @return null jos onnistuu, muuten virhe tekstinä
 	 */
-	private String tallenna() {
-		
+	private String tallenna() {	
 		if(muokattavana == true) {
 			try {
 				pyoraKohdalla.aseta(1, textFieldNimi.getText());
@@ -393,6 +406,7 @@ public class VarastoOverviewController {
 		}
 		try {
 			vuokraamo.tallenna();
+			Dialogs.showMessageDialog("Pyörä: " + pyoraKohdalla.toString());
 			return null;
 		} catch (SailoException ex) {
 			Dialogs.showMessageDialog("Tallennuksessa ongelmia! " + ex.getMessage());
@@ -464,7 +478,7 @@ public class VarastoOverviewController {
 	public void vuokraaPyora(int kesto) throws SailoException {
 		if (pyoraKohdalla == null) return;
 		Vuokraus vuokraus = new Vuokraus();
-		vuokraus.rekisteroi();
+		//vuokraus.rekisteroi();
 		vuokraus.testiVuokraus(pyoraKohdalla.getPyoranID(), kesto);
 		vuokraamo.lisaaVuokraus(vuokraus);
 		pyoraKohdalla.setOnkoVarattu(true);

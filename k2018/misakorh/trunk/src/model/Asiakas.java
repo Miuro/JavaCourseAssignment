@@ -7,11 +7,11 @@ import fi.jyu.mit.ohj2.Mjonot;
 public class Asiakas{
 	
 	private int 		asiakasId;
-	private String 		nimi 		= "";
-	private String 		sotu 		= "";
-	private String 		osoite 		= "";
-	private String 		puhnum 		= "";
-	private String 		lisatiedot 	= "";
+	private String 		nimi 		= "-";
+	private String 		sotu 		= "-";
+	private String 		osoite 		= "-";
+	private String 		puhnum 		= "-";
+	private String 		lisatiedot 	= "-";
 	
 	private static int 	seuraavaId 	= 1;
 	

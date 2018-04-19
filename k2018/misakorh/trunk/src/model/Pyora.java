@@ -76,8 +76,7 @@ public class Pyora implements Cloneable {
 		case 4:
 			return "" + lisatietoja;
 		case 5:
-			if (onkoVarattu) return "Varattu";
-			return "Vapaa";
+			return "" + onkoVarattu;
 		case 6:
 			return "" + vuokraPerTunti;
 		default:
@@ -271,6 +270,7 @@ public class Pyora implements Cloneable {
 			return null;
 		case 5:
 			onkoVarattu = Boolean.parseBoolean(tjono);
+			
 			return null;
 		case 6:
 			lisatietoja = tjono;
