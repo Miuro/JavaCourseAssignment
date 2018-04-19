@@ -287,7 +287,9 @@ public class VarastoOverviewController {
 		apuVuokraus = null;
 		if (pyoraKohdalla.getOnkoVarattu() == true) {
 			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
+			fxVuokraaButton.setText("Näytä vuokraus");
 		}
+		else fxVuokraaButton.setText("Vuokraa");
 
 		//areaPyora.setText("");
 		taytaKentat();
