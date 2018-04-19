@@ -90,7 +90,7 @@ public class MainApp extends Application {
 	/**
 	 * Luonti tulostusdialogille
 	 * */
-	public void showUusiTulostusDialog() {
+	/*public void showUusiTulostusDialog() {
 		try {
 			// Ladataan fxml-tiedosto ja luodaan uusi stage sille
 	        FXMLLoader loader = new FXMLLoader();
@@ -106,15 +106,15 @@ public class MainApp extends Application {
 	        dialogStage.setScene(scene);
 	        
 	        // Haetaan controller ja yhdistet‰‰n se stagen kanssa.
-	        UusiTulostusDialogController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
+	        //UusiTulostusDialogController controller = loader.getController();
+	        //controller.setDialogStage(dialogStage);
 	        
 	        dialogStage.showAndWait();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Maini k‰ynnist‰‰ vehkeen
