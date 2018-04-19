@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Asiakas;
 import model.Pyora;
 import model.Vuokraus;
 
@@ -37,6 +38,7 @@ public class UusiVuokrausDialogController {
 	private Stage dialogStage;
 	private Vuokraus vuokraus;
 	private Pyora pyora;
+	private Asiakas asiakas;
 	private boolean vuokraaPainettu = false;
 
 
@@ -62,9 +64,14 @@ public class UusiVuokrausDialogController {
 	 */
 	@FXML
 	void handleVuokraaPyora() {
+		/*
+		if(pyora.getOnkoVarattu()) {
+			taytaAsiakasentat();
+		}
+		*/
+		
 		Dialogs.showMessageDialog("Tämä luo vain esimerkkivuokrauksen atm");
-		//vuokraus.rekisteroi();
-		vuokraus.testiVuokraus(pyora.getPyoranID(), 5);
+		vuokraus.testiVuokraus(pyora.getPyoranID(), 2);
 		
 		vuokraaPainettu = true;
 		dialogStage.close();
@@ -74,6 +81,16 @@ public class UusiVuokrausDialogController {
 			vuokraus.aseta(k, jono)
 		}
 		*/
+	}
+	
+	private void taytaAsiakasKentat() {
+		nimiKentta.setText(asiakas.anna(1));
+		hetuKentta.setText(asiakas.anna(2));
+		osoiteKentta.setText(asiakas.anna(3));
+		puhnumKentta.setText(asiakas.anna(4));
+		kestoKentta.setText(vuokraus.anna(3));
+		hintaText.setText("Hinta: " + vuokraus.anna(5));
+		kestoText.setText("Palautus: " + vuokraus.anna(4));
 	}
 
 
@@ -123,6 +140,15 @@ public class UusiVuokrausDialogController {
 	 */
 	public void asetaVuokraus(Vuokraus vuokraus) {
 		this.vuokraus = vuokraus;
+	}
+	
+	
+	public void asetaAsiakas(Asiakas asiakas) {
+		this.asiakas = asiakas;
+		
+		if(pyora.getOnkoVarattu()) {
+			taytaAsiakasKentat();
+		}
 	}
 	
 	

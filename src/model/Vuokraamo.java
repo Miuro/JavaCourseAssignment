@@ -16,6 +16,7 @@ public class Vuokraamo {
 	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaPyora(Pyora pyora) throws SailoException {
+		pyora.rekisteroi();
 		pyorat.lisaa(pyora);
 	}
 
@@ -53,6 +54,14 @@ public class Vuokraamo {
 		if (pyora.getOnkoVarattu() == true) {
 			Vuokraus v = vuokraukset.etsi(pyora.getPyoranID());
 			return v;
+		} else
+			return null;
+	}
+	
+	public Asiakas annaAsiakas(Vuokraus vuokraus) {
+		if(!vuokraus.getPalautusAika().equals("")) {
+			Asiakas a = asiakkaat.etsi(vuokraus.getVuokraajaId());
+			return a;
 		} else
 			return null;
 	}
