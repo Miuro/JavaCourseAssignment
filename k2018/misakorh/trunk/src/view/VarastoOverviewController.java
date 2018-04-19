@@ -205,14 +205,14 @@ public class VarastoOverviewController {
 		}
 
 		if (pyoraKohdalla.getOnkoVarattu()) {
-			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
+			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
+			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas, vuokraamo);
+			hae(pyoraKohdalla.getPyoranID());
 		} else {
 			apuAsiakas = new Asiakas();
-			apuAsiakas.vastaaHessuHopo();
-			vuokraamo.lisaaAsiakas(apuAsiakas);
-			
 			apuVuokraus = new Vuokraus();
-			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
+			mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas, vuokraamo);
+			vuokraamo.lisaaAsiakas(apuAsiakas);
 			vuokraamo.lisaaVuokraus(apuVuokraus);
 			hae(pyoraKohdalla.getPyoranID());
 		}

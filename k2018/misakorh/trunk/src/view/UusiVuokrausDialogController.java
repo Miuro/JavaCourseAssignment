@@ -1,6 +1,7 @@
 package view;
 
 import fi.jyu.mit.fxgui.Dialogs;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -8,6 +9,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Asiakas;
 import model.Pyora;
+import model.SailoException;
+import model.Vuokraamo;
 import model.Vuokraus;
 
 public class UusiVuokrausDialogController {
@@ -39,6 +42,7 @@ public class UusiVuokrausDialogController {
 	private Vuokraus vuokraus;
 	private Pyora pyora;
 	private Asiakas asiakas;
+	private Vuokraamo vuokraamo;
 	private boolean vuokraaPainettu = false;
 
 
@@ -64,23 +68,42 @@ public class UusiVuokrausDialogController {
 	 */
 	@FXML
 	void handleVuokraaPyora() {
-		/*
-		if(pyora.getOnkoVarattu()) {
-			taytaAsiakasentat();
+		if(lueKentat()) {
+			vuokraaPainettu = true;
+			dialogStage.close();
 		}
-		*/
 		
-		Dialogs.showMessageDialog("Tämä luo vain esimerkkivuokrauksen atm");
-		vuokraus.testiVuokraus(pyora.getPyoranID(), 2);
+		//Dialogs.showMessageDialog("Tämä luo vain esimerkkivuokrauksen atm");
+		//vuokraus.testiVuokraus(pyora.getPyoranID(), 2);
 		
-		vuokraaPainettu = true;
-		dialogStage.close();
+		
+
 		
 		/*
 		if(syottoTarkistin()) {
 			vuokraus.aseta(k, jono)
 		}
 		*/
+	}
+	
+	
+	private boolean lueKentat() {
+		try {
+			asiakas.aseta(1, nimiKentta.getText());
+			asiakas.aseta(2, hetuKentta.getText());
+			asiakas.aseta(3, osoiteKentta.getText());
+			asiakas.aseta(4, puhnumKentta.getText());
+			
+			vuokraus.aseta(1, Integer.toString(pyora.getPyoranID()));
+			vuokraus.aseta(2, Integer.toString(asiakas.getAsiakasId()));
+			vuokraus.aseta(3, kestoKentta.getText());
+			vuokraus.setPalautusAika(Integer.parseInt(kestoKentta.getText()));
+			vuokraus.aseta(5, Double.toString((Double.parseDouble(vuokraus.anna(3)) * pyora.getVuokraPerTunti())));
+		} catch (Exception e) {
+			Dialogs.showMessageDialog("Kenttien luvussa onglemia! " + e.getMessage());
+			return false;
+		}
+		return true;
 	}
 	
 	private void taytaAsiakasKentat() {
@@ -148,7 +171,26 @@ public class UusiVuokrausDialogController {
 		
 		if(pyora.getOnkoVarattu()) {
 			taytaAsiakasKentat();
+
+			fxVuokraaButton.setText("Kuittaa vuokraus");
+			fxVuokraaButton.setOnAction((event) -> {
+				vuokraamo.poistaAsiakas(asiakas);
+				vuokraamo.poistaVuokraus(vuokraus);
+				pyora.setOnkoVarattu(false);
+				vuokraaPainettu = true;
+				try {
+					vuokraamo.tallenna();
+				} catch (SailoException e) {
+					Dialogs.showMessageDialog(e.getMessage());
+				}
+				dialogStage.close();
+			});
+			
 		}
+	}
+	
+	public void asetaVuokraamo(Vuokraamo vuokraamo) {
+		this.vuokraamo = vuokraamo;
 	}
 	
 	

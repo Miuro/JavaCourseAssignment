@@ -282,6 +282,15 @@ public class Vuokraus {
 		lisatiedot = "Maksettu luottokortilla";
 	}
 	
+	/**
+	 * Asetin palautusajalle. Lis‰‰ palautusajaksi t‰m‰n hetkisen kellonajan + keston tunneissa
+	 * @param kestoTunneissa Kesto tunneissa
+	 */
+	public void setPalautusAika(int kestoTunneissa) {
+		palautus = Calendar.getInstance();
+		palautus.add(Calendar.HOUR, kestoTunneissa);
+		palautusAika = sdf.format(palautus.getTime());
+	}
 	
 	/**
 	 * Palauttaa vuokrauksen tunnusnumeron

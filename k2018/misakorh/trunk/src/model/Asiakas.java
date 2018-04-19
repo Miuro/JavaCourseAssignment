@@ -6,7 +6,7 @@ import fi.jyu.mit.ohj2.Mjonot;
 
 public class Asiakas{
 	
-	private int 		asiakasId 	= 0;
+	private int 		asiakasId;
 	private String 		nimi 		= "";
 	private String 		sotu 		= "";
 	private String 		osoite 		= "";
