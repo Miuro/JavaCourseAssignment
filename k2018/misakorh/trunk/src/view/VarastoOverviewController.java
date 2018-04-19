@@ -2,7 +2,11 @@ package view;
 
 import pyoravarasto.MainApp;
 
+import java.awt.Desktop;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,8 +37,6 @@ public class VarastoOverviewController {
 	private Label labelVirhe;
 	@FXML
 	private TextField hakuehto;
-	@FXML
-	private MenuItem fxMenuAvaa;
 	@FXML
 	private MenuItem fxMenuTulosta;
 	@FXML
@@ -132,7 +134,7 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleAvaaApua() {
-		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+		avaaApua();
 	}
 
 
@@ -142,15 +144,6 @@ public class VarastoOverviewController {
 	@FXML
 	void handleAvaaTietoja() {
 		Dialogs.showMessageDialog("PyöräVarasto\nVer. 0.6\nTekijät: Jouko Sirkka & Miro Korhonen");
-	}
-
-
-	/**
-	 * Händlää Avaa -painikkeen toiminnan
-	 */
-	@FXML
-	void handleMenuAvaa() {
-		avaa();
 	}
 
 
@@ -267,6 +260,21 @@ public class VarastoOverviewController {
 		}
 		muokattavana = true;
 		vaihdaMuokattavuus(true);
+	}
+	
+	/**
+	 * Avaa työn dokumentaation netistä
+	 */
+	private void avaaApua() {
+		Desktop desktop = Desktop.getDesktop();
+		try {
+			URI uri = new URI("https://www.mit.jyu.fi/demowww/ohj2/ht18/misakorh/trunk/");
+			desktop.browse(uri);
+		} catch (URISyntaxException e) {
+			return;
+		} catch (IOException e) {
+			return;
+		}
 	}
 
 	
