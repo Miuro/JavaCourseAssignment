@@ -312,9 +312,30 @@ public class VarastoOverviewController {
 		textFieldMalli.setText(pyoraKohdalla.anna(2));
 		textFieldKunto.setText(pyoraKohdalla.anna(3));
 		textFieldVuokra.setText(pyoraKohdalla.anna(6));
-		textFieldTila.setText(pyoraKohdalla.anna(5));
+		textFieldTila.setText(vuokrattunaString(Boolean.parseBoolean(pyoraKohdalla.anna(5))));
 		textFieldLisatietoja.setText(pyoraKohdalla.anna(4));
 		vaihdaMuokattavuus(false);
+	}
+	
+	
+	/**
+	 * Muuttaa pyörän tilan merkkijonoksi vapaa tai varattu riippuen booleanista tila
+	 * @param bool pyörän tila
+	 * @return vapaa jos false, true jos vuokrattuna
+	 */
+	private String vuokrattunaString(boolean bool) {
+		if (bool) return "Vuokrattuna";
+		return "Vapaa";
+	}
+	
+	/**
+	 * Muuttaa käyttiksestä "varattuna" -> true ja vapaan -> falseksi
+	 * @param str tutkittava merkkijono
+	 * @return true jos vuokrattuna false jos vapaa
+	 */
+	private boolean vuokrattunaBool(String str) {
+		if (str.equals("Vuokrattuna")) return true;
+		return false;
 	}
 	
 	/**
@@ -387,7 +408,7 @@ public class VarastoOverviewController {
 				pyoraKohdalla.aseta(2, textFieldMalli.getText());
 				pyoraKohdalla.aseta(3, textFieldKunto.getText());
 				pyoraKohdalla.aseta(4, textFieldVuokra.getText());
-				pyoraKohdalla.aseta(5, textFieldTila.getText());
+				pyoraKohdalla.aseta(5, Boolean.toString(vuokrattunaBool(textFieldTila.getText())));
 				pyoraKohdalla.aseta(6, textFieldLisatietoja.getText());
 				vuokraamo.poistaPyora(pyoraKohdalla);
 				vuokraamo.lisaaPyora(pyoraKohdalla);
