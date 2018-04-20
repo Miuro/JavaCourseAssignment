@@ -65,14 +65,17 @@
                                  </padding></CheckBox>
                            </children>
                         </HBox>
-                        <TextField fx:id="hakuehto" onKeyReleased="#handleHakuehto" prefHeight="25.0" prefWidth="200.0" promptText="Haku" />
-                        <Label alignment="CENTER" prefHeight="0.0" prefWidth="189.0" text="Pyörät" />
+                        <TextField fx:id="hakuehto" onKeyReleased="#handleHakuehto" promptText="Haku" />
+                        <Label alignment="CENTER" text="Pyörät">
+                           <VBox.margin>
+                              <Insets left="75.0" />
+                           </VBox.margin></Label>
                      </children>
                   </VBox>
                </top>
-               <bottom>
-                  <ListChooser fx:id="fxChooserPyorat" prefHeight="329.0" prefWidth="200.0" rivit="Mountainer 6X&#10;CityBike G3&#10;Punainen Jopo&#10;Helkama G1&#10;Ruputrupu" BorderPane.alignment="CENTER" />
-               </bottom>
+               <center>
+                  <ListChooser fx:id="fxChooserPyorat" prefHeight="300.0" rivit="Mountainer 6X&#10;CityBike G3&#10;Punainen Jopo&#10;Helkama G1&#10;Ruputrupu" BorderPane.alignment="CENTER" />
+               </center>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="272.0">
                <center>
@@ -95,7 +98,7 @@
                               <Label text="Nimi" />
                               <Label text="Malli" GridPane.rowIndex="1" />
                               <Label fx:id="textKunto" text="Kunto" GridPane.rowIndex="2" />
-                              <Label text="Vuokra/vrk" GridPane.rowIndex="3" />
+                              <Label text="Vuokra/tunti" GridPane.rowIndex="3" />
                               <Label text="Tila" GridPane.rowIndex="4" />
                               <Label text="Lisätietoja" GridPane.rowIndex="5" />
                               <TextField fx:id="textFieldNimi" GridPane.columnIndex="1" />
