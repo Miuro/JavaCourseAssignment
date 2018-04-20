@@ -168,6 +168,7 @@ public class VarastoOverviewController {
 	@FXML
 	void handlePoistaPyora() {
 		poistaPyora();
+		tyhjennaKentat();
 	}
 
 
@@ -316,6 +317,18 @@ public class VarastoOverviewController {
 		textFieldTila.setText(pyoraKohdalla.anna(5));
 		textFieldLisatietoja.setText(pyoraKohdalla.anna(4));
 		vaihdaMuokattavuus(false);
+	}
+	
+	/**
+	 * Tyjentää pyörän kentät
+	 */
+	private void tyhjennaKentat() {
+		textFieldNimi.clear();
+		textFieldMalli.clear();
+		textFieldKunto.clear();
+		textFieldVuokra.clear();
+		textFieldTila.clear();
+		textFieldLisatietoja.clear();
 	}
 
 
