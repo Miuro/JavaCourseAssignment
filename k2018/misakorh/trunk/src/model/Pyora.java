@@ -155,12 +155,16 @@ public class Pyora implements Cloneable {
 		return malli;
 	}
 	
-	/**
-	 * @return palauttaa pyörän kunnon
+	
+	/*
+	 * @return palauttaa pyörän kunnon integer arvona. 0 = rikki ja 3 = erinomainen
 	 */
+	
 	public int getKunto() {
 		return kunto;
 	}
+	
+
 
 
 	/**
@@ -220,8 +224,9 @@ public class Pyora implements Cloneable {
 	 * p1.toString() === "1|Mountainer 6X|Maastopyörä|3|50.0|true|Jee";
 	 * p2.toString() === "2|||3|0.0|false|";
 	 * </pre>
+	 * @throws SailoException 
 	 */
-	public void parse(String rivi) {
+	public void parse(String rivi) throws SailoException {
 		String[] osat = rivi.split("\\|");
 		for (int k = 0; k < getKenttia(); k++) {
 			aseta(k, osat[k]);
@@ -243,6 +248,7 @@ public class Pyora implements Cloneable {
 	 * @param k kuinka monennen kentän arvo asetetaan
 	 * @param jono jonoa joka asetetaan kentän arvoksi
 	 * @return null jos asettaminen onnistuu.
+	 * @throws SailoException 
 	 * @example <pre name="test">
 	 * Pyora jasen = new Pyora();
 	 * jasen.aseta(1,"Jopo") === null;
@@ -250,12 +256,16 @@ public class Pyora implements Cloneable {
 	 * jasen.aseta(4, "Moi") === "Vuokra oli väärin";
 	 * </pre>
 	 */
-	public String aseta(int k, String jono) {
+	public String aseta(int k, String jono) throws SailoException {
 		String tjono = jono.trim();
 		if(tjono.equals("")) tjono = "-";
 		switch (k) {
 		case 0:
-			setPyoranID(Integer.parseInt(tjono));
+			try {
+				setPyoranID(Integer.parseInt(tjono));
+			} catch (NumberFormatException e) {
+				throw new SailoException("ID:n on oltava numero");
+			}
 			return null;
 		case 1:
 			nimi = tjono;
@@ -267,20 +277,21 @@ public class Pyora implements Cloneable {
 			try {
 				kunto = Integer.parseInt(tjono);
 			} catch (NumberFormatException e) {
-				return "Kunto oli väärin, anna arvo 0-3";
+				throw new SailoException("Kunto oli väärin, anna arvo 0-3");
 			}
 			return null;
 		case 4:
 			try {
 				vuokraPerTunti = Double.parseDouble(tjono);
 			} catch (NumberFormatException e) {
-				return "Vuokra oli väärin";
+				throw new SailoException("Vuokran luku epäonnistui, anna numeroita.");
 			}
-			return null;
 		case 5:
-			onkoVarattu = Boolean.parseBoolean(tjono);
-			
-			return null;
+			try {
+				onkoVarattu = Boolean.parseBoolean(tjono);
+			} catch (Exception e) {
+				throw new SailoException("Tilan luku epäonnistui. Kirjoita false tai true");
+			}
 		case 6:
 			lisatietoja = tjono;
 			return null;

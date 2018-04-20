@@ -181,9 +181,10 @@ public class VarastoOverviewController {
 
 	/**
 	 * Händlää uusipyörä painikkeen
+	 * @throws SailoException 
 	 */
 	@FXML
-	void handleUusiPyora() {
+	void handleUusiPyora() throws SailoException {
 		uusiPyora();
 	}
 
@@ -262,6 +263,8 @@ public class VarastoOverviewController {
 		if (muokattavana) 
 			return;
 		
+		// asetetaan pyörän kunto field tekstistä numeroksi.
+		textFieldKunto.setText(Integer.toString(pyoraKohdalla.getKunto()));
 		muokattavana = true;
 		vaihdaMuokattavuus(true);
 	}
@@ -412,10 +415,12 @@ public class VarastoOverviewController {
 				pyoraKohdalla.aseta(6, textFieldLisatietoja.getText());
 				vuokraamo.poistaPyora(pyoraKohdalla);
 				vuokraamo.lisaaPyora(pyoraKohdalla);
-			} catch (Exception e) {
-				Dialogs.showMessageDialog("Kenttien luvussa onglemia! " + e.getMessage());
+			} catch (SailoException e) {
+				Dialogs.showMessageDialog(e.getMessage());
+				hae(pyoraKohdalla.getPyoranID());
 				return e.getMessage();
 			}
+			textFieldKunto.setText(pyoraKohdalla.anna(3));
 			hae(pyoraKohdalla.getPyoranID());
 			muokattavana = false;
 			vaihdaMuokattavuus(false);
@@ -456,8 +461,9 @@ public class VarastoOverviewController {
 
 	/**
 	 * Luo uuden jäsenen jota aletaan editoimaan
+	 * @throws SailoException 
 	 */
-	protected void uusiPyora() {
+	protected void uusiPyora() throws SailoException {
 		Pyora uusi = new Pyora();
 		uusi.aseta(1, "tyhjä");
 		

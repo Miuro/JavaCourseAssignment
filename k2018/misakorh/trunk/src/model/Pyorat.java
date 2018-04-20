@@ -253,8 +253,9 @@ public class Pyorat implements Iterable<Pyora> {
 	/**
 	 * Palauttaa kopion listasta, jossa pyörät ovat hinnan mukaan kasvavassa järjestyksessä
 	 * @return Sama lista pyöriä, mutta järjestyksessä
+	 * @throws SailoException 
 	 */
-	public Collection<Pyora> jarjestaHalvin(Collection<Pyora> lista) {
+	public Collection<Pyora> jarjestaHalvin(Collection<Pyora> lista) throws SailoException {
 		Collection<Pyora> jarjestetty = new ArrayList<>();
 		Collection<Pyora> temp = new ArrayList<>();
 		
@@ -283,6 +284,7 @@ public class Pyorat implements Iterable<Pyora> {
 	 * Testataan toimivuutta
 	 * 
 	 * @param args
+	 * @throws SailoException 
 	 * @example
 	 * <pre name="test">
 	 * #THROWS SailoException
@@ -302,7 +304,7 @@ public class Pyorat implements Iterable<Pyora> {
 	 * pyorat.getLkm() === 1;
 	 * </pre>
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SailoException {
 		Pyorat pyorat = new Pyorat();
 
 		Pyora jopo1 = new Pyora(), jopo2 = new Pyora(), jopo3 = new Pyora();
