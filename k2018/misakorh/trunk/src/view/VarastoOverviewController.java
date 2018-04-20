@@ -228,6 +228,9 @@ public class VarastoOverviewController {
 	}
 
 
+	/**
+	 * Händlää tilanteen jossa checkboxia "hinnan mukaan" painetaan
+	 */
 	@FXML
 	void handleHinnanMukaan() {
 		hae(pyoraKohdalla.getPyoranID());
@@ -248,7 +251,6 @@ public class VarastoOverviewController {
 	 * Alustetaan
 	 */
 	protected void alusta() {
-		//panelPyora.setContent(areaPyora);
 		panelPyora.setFitToHeight(true);
 		fxChooserPyorat.clear();
 		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
@@ -396,8 +398,6 @@ public class VarastoOverviewController {
 	 * @return true jos onnistui, false jos ei
 	 */
 	public boolean avaa() {
-		//String uusiNimi = ""; // TODO dialog joka kysyy nimeä
-		//if(uusiNimi == null) return false;
 		lueTiedosto(vuokraamonNimi);
 		return true;
 	}

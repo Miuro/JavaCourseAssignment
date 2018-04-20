@@ -20,6 +20,11 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	private boolean muutettu = false;
 
 
+	/**
+	 * Etsii halutun asiakkaan
+	 * @param vuokraajaID asiakkaanId
+	 * @return haluttu asiakas tai null jos ei ole
+	 */
 	public Asiakas etsi(int vuokraajaID) {
 		for (Asiakas asiakas : alkiot) {
 			if (asiakas != null) 
@@ -104,9 +109,8 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	/**
 	 * Lisää uuden asiakkaan tietorakenteeseensa. Ottaa asiakkaan omistukseensa
 	 * @param asiakas lisättävän asiakkaan viite. Huom. tietorakenne muuttuu omistajaksi
-	 * @throws SailoException jos tietorakenne on jo täynnä
 	 */
-	public void lisaa(Asiakas asiakas) /* throws SailoException */ {
+	public void lisaa(Asiakas asiakas) {
 		if (lkm >= alkiot.length) {
 			Asiakas[] isompi = new Asiakas[alkiot.length + 5];
 			for (int i = 0; i < alkiot.length; i++) {
@@ -114,7 +118,6 @@ public class Asiakkaat implements Iterable<Asiakas> {
 			}
 			alkiot = isompi;
 		}
-		//throw new SailoException("Liikaa alkioita");
 		asiakas.rekisteroi();
 		muutettu = true;
 		alkiot[lkm] = asiakas;
