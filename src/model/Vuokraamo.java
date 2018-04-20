@@ -77,7 +77,7 @@ public class Vuokraamo {
 		return pyorat.getLkm();
 	}
 	
-	public Collection<Pyora> hinnanMukaan(Collection<Pyora> lista){
+	public Collection<Pyora> hinnanMukaan(Collection<Pyora> lista) throws SailoException{
 		return pyorat.jarjestaHalvin(lista);
 	}
 
