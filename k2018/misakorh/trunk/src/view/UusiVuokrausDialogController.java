@@ -72,7 +72,12 @@ public class UusiVuokrausDialogController {
 			pyora.setOnkoVarattu(true);
 			dialogStage.close();
 		}
-
+	}
+		
+	@FXML
+	void handleHintaAikaMuutos() {
+		kestoText.setText("Vuokrauksen kesto : " + Double.parseDouble((kestoKentta.getText())) + " tuntia");
+		hintaText.setText("Hinta : " + (pyora.getVuokraPerTunti() * Double.parseDouble(kestoKentta.getText())) + "€");
 	}
 
 

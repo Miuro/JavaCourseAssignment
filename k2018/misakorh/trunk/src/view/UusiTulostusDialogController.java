@@ -11,22 +11,7 @@ public class UusiTulostusDialogController implements ModalControllerInterface<St
 	
 	@FXML
 	TextArea tulostusAlue;
-	//@FXML
-	//private Button fxTulostaButton;
-	//@FXML
-	//private Button fxOkButton;
 
-	//private Stage dialogStage;
-	
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
-	//@FXML
-	//private void Initialize(){
-	//}
-	
-	
 	/**
 	 * Sulkee ikkunan.
 	 */
@@ -38,7 +23,6 @@ public class UusiTulostusDialogController implements ModalControllerInterface<St
 	
 	@FXML
 	void handleTulosta() {
-		//Dialogs.showMessageDialog("Ei ole vielä lisätty");
 		PrinterJob job = PrinterJob.createPrinterJob();
 		if (job != null && job.showPrintDialog(null)) {
 			WebEngine webEngine = new WebEngine();
@@ -47,14 +31,7 @@ public class UusiTulostusDialogController implements ModalControllerInterface<St
 			job.endJob();
 		}
 	}
-	
-	
-	/**
-	 * Konstruktori.
-	 * */
-//	public UusiTulostusDialogController(){
-		
-	//}
+
 	
     /**
      * @return alue johon tulostetaan

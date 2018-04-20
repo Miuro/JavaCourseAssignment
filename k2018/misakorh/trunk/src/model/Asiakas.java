@@ -11,7 +11,6 @@ public class Asiakas{
 	private String 		sotu 		= "-";
 	private String 		osoite 		= "-";
 	private String 		puhnum 		= "-";
-	private String 		lisatiedot 	= "-";
 	
 	private static int 	seuraavaId 	= 1;
 	
@@ -60,8 +59,6 @@ public class Asiakas{
 			return "" + osoite;
 		case 4:
 			return "" + puhnum;
-		case 5:
-			return "" + lisatiedot;
 		default:
 			return "Hupsista";
 		}
@@ -76,7 +73,6 @@ public class Asiakas{
 		sotu = "123123-123W";
 		osoite = "Aleksanterinkatu 14, Helsinki";
 		puhnum = "050 1231231";
-		lisatiedot = "Hieno mies";
 	}
 	
 	
@@ -109,8 +105,7 @@ public class Asiakas{
 				nimi + "|" +
 				sotu + "|" +
 				osoite + "|" +
-				puhnum + "|" +
-				lisatiedot;
+				puhnum + "|";
 	}
 	
 	
@@ -159,9 +154,6 @@ public class Asiakas{
 		case 4:
 			puhnum = tjono;
 			return null;
-		case 5:
-			lisatiedot = tjono;
-			return null;
 		default:
 			return "Tervetti";
 		}
@@ -202,7 +194,6 @@ public class Asiakas{
 		out.println(String.format("%03d", asiakasId, 3) + " " + nimi + " " + sotu);
 		out.println(osoite);
 		out.println(puhnum);
-		out.println(lisatiedot);
 	}
 	
 	
