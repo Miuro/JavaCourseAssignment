@@ -74,6 +74,9 @@ public class UusiVuokrausDialogController {
 		}
 	}
 		
+	/**
+	 * H‰ndl‰‰ ikkunan hinta ja kesto kohdan tekstien muutokset
+	 */
 	@FXML
 	void handleHintaAikaMuutos() {
 		kestoText.setText("Vuokrauksen kesto : " + Double.parseDouble((kestoKentta.getText())) + " tuntia");
@@ -150,7 +153,6 @@ public class UusiVuokrausDialogController {
 
 		pyoraKentta.setText(pyora.getNimi());
 		tuntivuokraKentta.setText(Double.toString(pyora.getVuokraPerTunti()));
-		//hintaText.setText("Hinta: " + (pyora.getVuokraPerTunti() * Double.parseDouble(kestoKentta.getText())));
 	}
 
 

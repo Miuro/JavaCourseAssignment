@@ -228,8 +228,6 @@ public class Pyorat implements Iterable<Pyora> {
 	public int getLkm() {
 		return alkiot.size();
 	}
-	
-
 
 	
 	/**
@@ -279,7 +277,17 @@ public class Pyorat implements Iterable<Pyora> {
 		}
 		return jarjestetty;
 	}
-
+	
+	
+	/**
+	 * Palauttaa iteraattorin tietorakenteelle
+	 */
+	@Override
+	public Iterator<Pyora> iterator() {
+		return alkiot.iterator();
+	}
+	
+	
 	/**
 	 * Testataan toimivuutta
 	 * 
@@ -363,19 +371,10 @@ public class Pyorat implements Iterable<Pyora> {
 		iter = pyorat.iterator();		
 		while (iter.hasNext()) System.out.println(iter.next());
 		*/
-		
-		
 	}
 
 
 
 
-	/**
-	 * Palauttaa iteraattorin tietorakenteelle
-	 */
-	@Override
-	public Iterator<Pyora> iterator() {
-		return alkiot.iterator();
-	}
 	
 }

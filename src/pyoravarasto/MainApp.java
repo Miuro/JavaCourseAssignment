@@ -90,34 +90,6 @@ public class MainApp extends Application {
 		}
 	}
 	
-	/**
-	 * Luonti tulostusdialogille
-	 * */
-	/*public void showUusiTulostusDialog() {
-		try {
-			// Ladataan fxml-tiedosto ja luodaan uusi stage sille
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("/view/UusiTulostusDialog.fxml"));
-	        BorderPane page = (BorderPane) loader.load();
-	        
-	        // Luodaan uusi stage, ja asetetaan sen sisällöksi (sceneksi) tuo loaderin lataama page.
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Tulostus");
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        dialogStage.initOwner(primaryStage);
-	        Scene scene = new Scene(page);
-	        dialogStage.setScene(scene);
-	        
-	        // Haetaan controller ja yhdistetään se stagen kanssa.
-	        //UusiTulostusDialogController controller = loader.getController();
-	        //controller.setDialogStage(dialogStage);
-	        
-	        dialogStage.showAndWait();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	/**
 	 * Maini käynnistää vehkeen

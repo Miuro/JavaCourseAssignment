@@ -32,7 +32,6 @@ public class Asiakas{
 	}
 	
 	
-	
 	/**
 	 * Palauttaa ensimmäisen kentän joka on mielekäs kysyttäväksi
 	 * @return ensimmäinen järkevästi kysyttävä kenttä
@@ -156,32 +155,6 @@ public class Asiakas{
 			return null;
 		default:
 			return "Tervetti";
-		}
-	}
-	
-	
-	
-	/**
-	 * Palauttaa k:tta asiakkaan kenttää vastaavan kysymyksen
-	 * @param k kuinka monennen kentän kysymys palutetaan (alkaen 0:sta)
-	 * @return k:netta kenttää vastaava kysymys 
-	 */
-	public String getKysymys(int k) {
-		switch (k) {
-		case 0:
-			return "Asiakkaan ID";
-		case 1:
-			return "Nimi";
-		case 2:
-			return "Sotu";
-		case 3:
-			return "Osoite";
-		case 4:
-			return "Puhelinnumero";
-		case 5:
-			return "Lisätiedot";
-		default:
-			return "HupsisKupsos";
 		}
 	}
 	

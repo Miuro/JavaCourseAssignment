@@ -7,8 +7,6 @@ import java.io.*;
  * Pyorä-olio
  * Sisältää konstruktorit uudelle pyörälle.
  * Sisältää metodit pyörän muokkaukselle.
- * TODO: Enum pyörän malleille. esim maastopyörä, mummopyörä, muu jne.
- * TODO: Miten saadaan enumit tulostamaan sisältö kivasti?
  */
 public class Pyora implements Cloneable {
 
@@ -231,14 +229,6 @@ public class Pyora implements Cloneable {
 		for (int k = 0; k < getKenttia(); k++) {
 			aseta(k, osat[k]);
 		}
-				
-				/*
-		StringBuilder sb = new StringBuilder();
-		int kohta = 0;
-		for (int k = 0; k < getKenttia(); k++) {
-			aseta(k, Mjonot.erota(sb, '|'));
-			aseta(k, sb.subSequence(kohta, sb.indexOf("|"))
-			*/
 		
 	}
 
@@ -297,33 +287,6 @@ public class Pyora implements Cloneable {
 			return null;
 		default:
 			return "Tervetti";
-		}
-	}
-
-
-	/**
-	 * Palauttaa k:tta jäsenen kenttää vastaavan kysymyksen
-	 * @param k kuinka monennen kentän kysymys palautetaan (0-alkuinen)
-	 * @return k:netta kenttää vastaava kysymys
-	 */
-	public String getKysymys(int k) {
-		switch (k) {
-		case 0:
-			return "Pyörän ID";
-		case 1:
-			return "Nimi";
-		case 2:
-			return "Malli";
-		case 3:
-			return "Kunto 0-3";
-		case 4:
-			return "Vuokra per tunti";
-		case 5:
-			return "Onko varattuna";
-		case 6:
-			return "Lisätietoja";
-		default:
-			return "Hupsista";
 		}
 	}
 

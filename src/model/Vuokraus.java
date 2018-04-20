@@ -57,7 +57,6 @@ public class Vuokraus {
 	public Vuokraus(int kestoTunneissa, double vuokraPerPaiva, int pyoraID, int asiakasID) {
 		this.pyoraId = pyoraID;
 		this.vuokraajaId = asiakasID;
-		//TODO aika toimimaan
 		this.hinta = vuokraPerPaiva;
 	}
 	
@@ -145,32 +144,6 @@ public class Vuokraus {
 		}
 	}
 	
-	
-	/**
-	 * Palauttaa k:tta vuokrauksen kentt‰‰ vastaavan kysymyksen
-	 * @param k kuinka monennen kent‰n kysymys palutetaan (alkaen 0:sta)
-	 * @return k:netta kentt‰‰ vastaava kysymys 
-	 */
-	public String getKysymys(int k) {
-		switch (k) {
-		case 0:
-			return "Vuokrauksen ID";
-		case 1:
-			return "Pyˆr‰n ID";
-		case 2:
-			return "Vuokraajan ID";
-		case 3:
-			return "Vuokrauksen kesto tunneissa";
-		case 4:
-			return "Palautus p‰iv‰m‰‰r‰";
-		case 5:
-			return "Hinta";
-		case 6:
-			return "Lis‰tiedot";
-		default:
-			return "HupsisKupsos";
-		}
-	}
 	
 	
 	/**
