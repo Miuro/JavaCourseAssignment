@@ -76,12 +76,12 @@
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="272.0">
                <center>
-                  <ScrollPane fx:id="panelPyora" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <ScrollPane fx:id="panelPyora" BorderPane.alignment="CENTER">
                      <content>
                         <GridPane hgap="10.0">
                           <columnConstraints>
-                            <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="93.0" minWidth="10.0" prefWidth="67.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="133.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="10.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -92,12 +92,12 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label prefHeight="17.0" prefWidth="29.0" text="Nimi" />
-                              <Label prefHeight="17.0" prefWidth="30.0" text="Malli" GridPane.rowIndex="1" />
-                              <Label prefHeight="17.0" prefWidth="34.0" text="Kunto" GridPane.rowIndex="2" />
-                              <Label prefHeight="17.0" prefWidth="62.0" text="Vuokra/vrk" GridPane.rowIndex="3" />
-                              <Label prefHeight="17.0" prefWidth="22.0" text="Tila" GridPane.rowIndex="4" />
-                              <Label prefHeight="17.0" prefWidth="57.0" text="Lisätietoja" GridPane.rowIndex="5" />
+                              <Label text="Nimi" />
+                              <Label text="Malli" GridPane.rowIndex="1" />
+                              <Label fx:id="textKunto" text="Kunto" GridPane.rowIndex="2" />
+                              <Label text="Vuokra/vrk" GridPane.rowIndex="3" />
+                              <Label text="Tila" GridPane.rowIndex="4" />
+                              <Label text="Lisätietoja" GridPane.rowIndex="5" />
                               <TextField fx:id="textFieldNimi" GridPane.columnIndex="1" />
                               <TextField fx:id="textFieldMalli" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="textFieldKunto" GridPane.columnIndex="1" GridPane.rowIndex="2" />
