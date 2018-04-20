@@ -74,6 +74,8 @@ public class VarastoOverviewController {
 	private TextField textFieldTila;
 	@FXML
 	private TextField textFieldLisatietoja;
+    @FXML
+    private Label textKunto;
 
 	// Reference to the main application.
 	private MainApp mainApp;
@@ -263,8 +265,9 @@ public class VarastoOverviewController {
 		if (muokattavana) 
 			return;
 		
-		// asetetaan pyörän kunto field tekstistä numeroksi.
+		// asetetaan pyörän kunto field tekstistä numeroksi ja muutetaan labelia
 		textFieldKunto.setText(Integer.toString(pyoraKohdalla.getKunto()));
+		textKunto.setText("Kunto välilä 0-3");
 		muokattavana = true;
 		vaihdaMuokattavuus(true);
 	}
@@ -420,7 +423,9 @@ public class VarastoOverviewController {
 				hae(pyoraKohdalla.getPyoranID());
 				return e.getMessage();
 			}
+			// asetetaan pyörän kunto taas tekstiksi ja label takaisin
 			textFieldKunto.setText(pyoraKohdalla.anna(3));
+			textKunto.setText("Kunto");
 			hae(pyoraKohdalla.getPyoranID());
 			muokattavana = false;
 			vaihdaMuokattavuus(false);
