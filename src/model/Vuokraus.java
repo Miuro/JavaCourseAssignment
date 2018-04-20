@@ -237,7 +237,7 @@ public class Vuokraus {
 	 * @param out tietovirta johon tulostetaan
 	 */
 	public void tulosta(PrintStream out) {
-		out.println(String.format("ID: %03d", vuokrausId, 3) + " "
+		out.println(String.format("%03d", vuokrausId, 3) + " "
 					+ String.format("Pyörä: %03d", pyoraId, 3) + " "
 					+ String.format("Vuokraaja: %03d", vuokraajaId, 3));
 		out.println(String.format("Vuokrattu: %s", vuokrausAika));

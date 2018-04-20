@@ -155,8 +155,6 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleMenuTulosta() {
-		//Dialogs.showMessageDialog("Ei ole vielä lisätty");
-		//mainApp.showUusiTulostusDialog();
 		UusiTulostusDialogController tulostusDialog  = UusiTulostusDialogController.tulosta(null);
 		tulostaValitut(tulostusDialog.getTextArea());
 	}
@@ -526,8 +524,10 @@ public class VarastoOverviewController {
 	private void tulosta(PrintStream os, Pyora pyora) {
 		os.println("----------------------------------------------");
 		pyora.tulosta(os);
-		if (apuVuokraus != null) {
-			apuVuokraus.tulosta(os);
+		if (pyora.getOnkoVarattu()) {
+			os.println("----------------------------------------------");
+			vuokraamo.annaVuokraus(pyora).tulosta(os);
+			vuokraamo.annaAsiakas(vuokraamo.annaVuokraus(pyora)).tulosta(os);
 		}
 
 		os.println("----------------------------------------------");

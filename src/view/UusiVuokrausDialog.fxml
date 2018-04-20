@@ -74,7 +74,7 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pyörän tuntivuokra" GridPane.rowIndex="1" />
                         <TextField fx:id="tuntivuokraKentta" alignment="CENTER" editable="false" opacity="0.6" text="16 € / tunti" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kaunko vuokrataan &#10;(tunneissa)" GridPane.rowIndex="2" />
-                        <TextField fx:id="kestoKentta" promptText="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="kestoKentta" onKeyReleased="#handleHintaAikaMuutos" promptText="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <GridPane.margin>
                         <Insets />
@@ -90,12 +90,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Text fx:id="hintaText" strokeType="OUTSIDE" strokeWidth="0.0" text="Hinta: 100 €" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <Text fx:id="hintaText" strokeType="OUTSIDE" strokeWidth="0.0" text="Hinta: 0 €" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Text>
-                        <Text fx:id="kestoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Vuokrauksen kesto : 2 päivää" GridPane.halignment="RIGHT">
+                        <Text fx:id="kestoText" strokeType="OUTSIDE" strokeWidth="0.0" text="Vuokrauksen kesto :  0 tuntia" GridPane.halignment="RIGHT">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
