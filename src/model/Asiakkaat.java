@@ -24,6 +24,19 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * Etsii halutun asiakkaan
 	 * @param vuokraajaID asiakkaanId
 	 * @return haluttu asiakas tai null jos ei ole
+	 * <pre name="test">
+	 * Asiakkaat testi = new Asiakkaat();
+	 * Asiakas a1 = new Asiakas();
+	 * a1.vastaaHessuHopo();
+	 * Asiakas a2 = new Asiakas();
+	 * a2.vastaaHessuHopo();
+	 * a2.aseta(1, "Aku Ankka");
+	 * testi.lisaa(a1);
+	 * testi.lisaa(a2);
+	 * testi.etsi(4) === a1;
+	 * testi.etsi(5) === a2;
+	 * testi.etsi(6) === null;
+	 * </pre>
 	 */
 	public Asiakas etsi(int vuokraajaID) {
 		for (Asiakas asiakas : alkiot) {
@@ -129,6 +142,20 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * Poistaa asiakkaan jonka id on sama kuin parametrina tuodun asiakkaan id
 	 * @param asiakas Asiakas
 	 * @return true jos poisto onnistui
+	 * <pre name="test">
+	 * Asiakkaat testi = new Asiakkaat();
+	 * Asiakas a1 = new Asiakas();
+	 * a1.vastaaHessuHopo();
+	 * Asiakas a2 = new Asiakas();
+	 * a2.vastaaHessuHopo();
+	 * a2.aseta(1, "Aku Ankka");
+	 * testi.lisaa(a1);
+	 * testi.lisaa(a2);
+	 * testi.etsi(1) === a1;
+	 * testi.etsi(2) === a2;
+	 * testi.etsi(3) === null;
+	 * testi.poista(a1) === true;
+	 * </pre>
 	 */
 	public boolean poista(Asiakas asiakas) {
 		for (int i = 0; i < alkiot.length; i++) {
@@ -197,6 +224,14 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	/**
 	 * Palauttaa asiakkaiden lukum‰‰r‰n
 	 * @return asiakkaiden lukum‰‰r‰
+	 * <pre name="test">
+	 * Asiakkaat testi2 = new Asiakkaat();
+	 * Asiakas a6 = new Asiakas();
+	 * a6.vastaaHessuHopo();
+	 * testi2.getLkm() === 0;
+	 * testi2.lisaa(a6);
+	 * testi2.getLkm() === 1;
+	 * </pre>
 	 */
 	public int getLkm() {
 		return lkm;
@@ -229,7 +264,6 @@ public class Asiakkaat implements Iterable<Asiakas> {
 
 
 	}
-
 
 	/**
 	 * Luo iteraattorin asiakkaille
