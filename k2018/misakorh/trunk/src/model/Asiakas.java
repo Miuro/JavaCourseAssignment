@@ -28,7 +28,7 @@ public class Asiakas{
 	 * @return asiakkaan kenttien lukumäärän
 	 */
 	public int getKenttia() {
-		return 6;
+		return 5;
 	}
 	
 	
@@ -45,6 +45,14 @@ public class Asiakas{
 	 * Palauttaa k:n kentän sisällön merkkijonona
 	 * @param k halutun kentän numero
 	 * @return kentän sisältö merkkijonona
+	 * <pre name="test">
+	 * Asiakas a = new Asiakas();
+	 * a.vastaaHessuHopo();
+	 * a.anna(1) === "Hessu Hopo";
+	 * a.anna(2) === "123123-123W";
+	 * a.anna(3) === "Aleksanterinkatu 14, Helsinki";
+	 * a.anna(4) === "050 1231231";
+	 * </pre>
 	 */
 	public String anna(int k) {
 		switch (k) {
@@ -78,6 +86,11 @@ public class Asiakas{
 	/**
 	 * Palauttaa asiakkaan nimen
 	 * @return Asiakkaan nimi
+	 * <pre name="test">
+	 * Asiakas a = new Asiakas();
+	 * a.vastaaHessuHopo();
+	 * a.getNimi() === "Hessu Hopo";
+	 * </pre>
 	 */
 	public String getNimi() {
 		return nimi;
@@ -96,6 +109,11 @@ public class Asiakas{
 	/**
 	 * Palauttaa jäsenen tiedot muodossa, jonka voi tallentaa tiedostoon.
 	 * @return Jäsenen tiedot tolppaeroteltuna jonona.
+	 * <pre name="test">
+	 * Asiakas a = new Asiakas();
+	 * a.vastaaHessuHopo();
+	 * a.toString() === "0|Hessu Hopo|123123-123W|Aleksanterinkatu 14, Helsinki|050 1231231|";
+	 * </pre>
 	 */
 	@Override
 	public String toString() {
@@ -115,10 +133,10 @@ public class Asiakas{
 	 * <pre name="test">
 	 * Asiakas a1 = new Asiakas();
 	 * Asiakas a2 = new Asiakas();
-	 * a1.parse("1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-|Herkku-ukko");
-	 * a1.toString() === "1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-|Herkku-ukko";
+	 * a1.parse("1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-");
+	 * a1.toString() === "1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-|";
 	 * a2.setAsiakasId(2);
-	 * a2.toString() === "2|||||";
+	 * a2.toString() === "2|-|-|-|-|";
 	 * </pre>
 	 */
 	public void parse(String rivi) {
@@ -133,6 +151,11 @@ public class Asiakas{
 	 * @param k mikä case kyseessä
 	 * @param jono merkkijono jota sovitetaan tiedoksi
 	 * @return null mjos kaikki hyvin, "Tervetti" jos ei sovi mihinkään kentään
+	 * <pre name="test">
+	 * Asiakas a = new Asiakas();
+	 * a.aseta(1, "Snibs");
+	 * a.toString() === "0|Snibs|-|-|-|";
+	 * </pre>
 	 */
 	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
@@ -142,16 +165,20 @@ public class Asiakas{
 			setAsiakasId(Mjonot.erota(sb, '|', getAsiakasId()));
 			return null;
 		case 1:
-			nimi = tjono;
+			if (tjono != "")
+				nimi = tjono;
 			return null;
 		case 2:
-			sotu = tjono;
+			if (tjono != "")
+				sotu = tjono;
 			return null;
 		case 3:
-			osoite = tjono;
+			if (tjono != "" && tjono.length() > 1)
+				osoite = tjono;
 			return null;
 		case 4:
-			puhnum = tjono;
+			if (tjono != "")
+				puhnum = tjono;
 			return null;
 		default:
 			return "Tervetti";
@@ -193,6 +220,10 @@ public class Asiakas{
 	/**
 	 * Palauttaa asiakkaan tunnusnumeron
 	 * @return asiakkaan tunnusnumero
+	 * <pre name="test">
+	 * Asiakas a = new Asiakas();
+	 * a.getAsiakasId() === 0;
+	 * </pre>
 	 */
 	public int getAsiakasId() {
 		return asiakasId;
