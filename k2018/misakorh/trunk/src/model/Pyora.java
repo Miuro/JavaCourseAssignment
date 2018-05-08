@@ -25,6 +25,12 @@ public class Pyora implements Cloneable {
 	/**
 	 * Asetin pyörän varauksen tilalle
 	 * @param arvo uusi arvo
+	 * <pre name="test">
+	 * Pyora p = new Pyora();
+	 * p.getOnkoVarattu() === false;
+	 * p.setOnkoVarattu(true);
+	 * p.getOnkoVarattu() === true; 
+	 * </pre>
 	 */
 	public void setOnkoVarattu(boolean arvo) {
 		this.onkoVarattu = arvo;
@@ -69,6 +75,13 @@ public class Pyora implements Cloneable {
 	 * Antaa k:n kentän sisällön merkkijonona
 	 * @param k monenenko kentän sisältö palautetaan
 	 * @return kentän sisältö merkkijonona
+	 * @example
+	 * <pre name="test">
+	 * Pyora p1 = new Pyora();
+	 * p1.vastaaJopo();
+	 * p1.anna(1) === "Punainen Jopo";
+	 * p1.anna(4) === "Penkki pitää vaihtaa";
+	 * </pre>
 	 */
 	public String anna(int k) {
 		switch (k) {
@@ -161,8 +174,6 @@ public class Pyora implements Cloneable {
 	public int getKunto() {
 		return kunto;
 	}
-	
-
 
 
 	/**
@@ -215,12 +226,13 @@ public class Pyora implements Cloneable {
 	 * Selvitää pyörän tiedot | erotellusta merkkijonosta
 	 * @param rivi josta pyörän tiedot otetaan
 	 * <pre name="test">
+	 * #THROWS SailoException
 	 * Pyora p1 = new Pyora();
 	 * Pyora p2 = new Pyora();
 	 * p1.parse("1|Mountainer 6X|Maastopyörä|3|50|true|Jee");
 	 * p2.setPyoranID(2);
 	 * p1.toString() === "1|Mountainer 6X|Maastopyörä|3|50.0|true|Jee";
-	 * p2.toString() === "2|||3|0.0|false|";
+	 * p2.toString() === "2|-|-|3|0.0|false|-";
 	 * </pre>
 	 * @throws SailoException 
 	 */
@@ -239,11 +251,13 @@ public class Pyora implements Cloneable {
 	 * @param jono jonoa joka asetetaan kentän arvoksi
 	 * @return null jos asettaminen onnistuu.
 	 * @throws SailoException 
-	 * @example <pre name="test">
+	 * @example
+	 * <pre name="test">
+	 * #THROWS SailoException
 	 * Pyora jasen = new Pyora();
 	 * jasen.aseta(1,"Jopo") === null;
-	 * jasen.aseta(3,"Terve") === "Kunto oli väärin, anna arvo 0-3";
-	 * jasen.aseta(4, "Moi") === "Vuokra oli väärin";
+	 * jasen.aseta(3,"Terve"); #THROWS SailoException
+	 * jasen.aseta(4, "Moi"); #THROWS SailoException
 	 * </pre>
 	 */
 	public String aseta(int k, String jono) throws SailoException {
