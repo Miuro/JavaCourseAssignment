@@ -67,9 +67,10 @@ public class Pyorat implements Iterable<Pyora> {
 	 * @throws SailoException  jos tietorakenne on jo täynnä
 	 */
 	public void lisaa(Pyora pyora) {
-		if(pyora.getPyoranID() == 0) {
-			pyora.rekisteroi();			
-		}
+		//if(pyora.getPyoranID() == 0) {
+		//	pyora.rekisteroi();			
+		//}
+		//pyora.rekisteroi();
 		alkiot.add(pyora);
 		muutettu = true;
 	}

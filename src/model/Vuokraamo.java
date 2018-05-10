@@ -9,12 +9,14 @@ public class Vuokraamo {
 	private Asiakkaat asiakkaat = new Asiakkaat();
 
 
+
 	/**
 	 * Lisää uuden pyörän pyöriin
 	 * @param pyora lisättävä pyörä
 	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaPyora(Pyora pyora) throws SailoException {
+		pyora.rekisteroi();
 		pyorat.lisaa(pyora);
 	}
 
@@ -25,8 +27,9 @@ public class Vuokraamo {
 	 */
 	public void lisaaVuokraus(Vuokraus vuokraus) {
 		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
-		if (temp.getOnkoVarattu() == true) return;
-		temp.setOnkoVarattu(true);
+		if (temp != null && temp.getOnkoVarattu() == true) return;
+		//temp.setOnkoVarattu(true);
+		vuokraus.rekisteroi();
 		vuokraukset.lisaa(vuokraus);
 	}
 
@@ -37,6 +40,7 @@ public class Vuokraamo {
 	 * @throws SailoException jos tietorakenne jo täynnä
 	 */
 	public void lisaaAsiakas(Asiakas asiakas) throws SailoException {
+		asiakas.rekisteroi();
 		asiakkaat.lisaa(asiakas);
 	}
 
@@ -47,11 +51,9 @@ public class Vuokraamo {
 	 * @return pyörän vuokraus, null jos ei ole vuokrausta
 	 */
 	public Vuokraus annaVuokraus(Pyora pyora) {
-		if (pyora.getOnkoVarattu() == true) {
-			Vuokraus v = vuokraukset.etsi(pyora.getPyoranID());
-			return v;
-		} else
-			return null;
+		Vuokraus v = vuokraukset.etsi(pyora.getPyoranID());
+		return v;
+		
 	}
 	
 	
@@ -61,11 +63,11 @@ public class Vuokraamo {
 	 * @return Asiakas, jos sellainen löydettiin, muuten null
 	 */
 	public Asiakas annaAsiakas(Vuokraus vuokraus) {
-		if(!vuokraus.getPalautusAika().equals("")) {
+		if(vuokraus != null) {
 			Asiakas a = asiakkaat.etsi(vuokraus.getVuokraajaId());
 			return a;
-		} else
-			return null;
+		}
+		return null;
 	}
 
 
@@ -183,7 +185,7 @@ public class Vuokraamo {
 	public boolean poistaAsiakas(Asiakas asiakas) {
 
 		if (asiakas == null) return false;
-		boolean ret = asiakkaat.poista(asiakas);
+		boolean ret = asiakkaat.poista(asiakas.getAsiakasId());
 		return ret;
 	}
 	
@@ -216,16 +218,24 @@ public class Vuokraamo {
 
 		 */
 		Pyora p1 = new Pyora(), p2 = new Pyora();
-		p1.rekisteroi();
 		p1.vastaaJopo();
-		p2.rekisteroi();
 		p2.vastaaJopo();
 
 		testi.lisaaPyora(p1);
 		testi.lisaaPyora(p2);
 		
-		p1.setOnkoVarattu(true);
+		Asiakas juuu = new Asiakas();
+		Vuokraus asd = new Vuokraus();
+		testi.lisaaAsiakas(juuu);
+		testi.lisaaVuokraus(asd);
+		juuu.vastaaHessuHopo();
+		asd.testiVuokraus(p1.getPyoranID(), 4);
+		asd.setVuokraajaId(juuu.getAsiakasId());
 
+		
+		
+		System.out.println(testi.annaVuokraus(p1).toString());
+		
 		testi.tallenna();
 		
 		for (Pyora p : testi.pyorat) {

@@ -23,7 +23,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @param vuokraus lisättävän vuokrauksen viite. Huom. tietorakenne muuttuu omistajaksi
 	 */
 	public void lisaa(Vuokraus vuokraus) {
-		vuokraus.rekisteroi();
+		//vuokraus.rekisteroi();
 		alkiot.add(vuokraus);
 		muutettu = true;
 	}
