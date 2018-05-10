@@ -42,7 +42,7 @@ public class UusiVuokrausDialogController {
 	private Pyora pyora;
 	private Asiakas asiakas;
 	private Vuokraamo vuokraamo;
-	private boolean vuokraaPainettu = false;
+	private int muokkaus = 0; // mit‰ tehtiin -1 on vuokraus poistettiin, 0 ei mit‰‰n, 1 luotiin uusi vuokraus
 
 
 	/**
@@ -68,10 +68,10 @@ public class UusiVuokrausDialogController {
 	@FXML
 	void handleVuokraaPyora() {
 		if (lueKentat()) {
-			vuokraaPainettu = true;
-			pyora.setOnkoVarattu(true);
+			muokkaus = 1;
 			dialogStage.close();
 		}
+
 	}
 		
 	/**
@@ -95,15 +95,11 @@ public class UusiVuokrausDialogController {
 			asiakas.aseta(3, osoiteKentta.getText());
 			asiakas.aseta(4, puhnumKentta.getText());
 
-			vuokraamo.lisaaAsiakas(asiakas);
-
 			vuokraus.aseta(1, Integer.toString(pyora.getPyoranID()));
 			vuokraus.aseta(2, Integer.toString(asiakas.getAsiakasId()));
 			vuokraus.aseta(3, kestoKentta.getText());
 			vuokraus.setPalautusAika(Integer.parseInt(kestoKentta.getText()));
 			vuokraus.aseta(5, Double.toString((Double.parseDouble(vuokraus.anna(3)) * pyora.getVuokraPerTunti())));
-
-			vuokraamo.lisaaVuokraus(vuokraus);
 
 		} catch (Exception e) {
 			Dialogs.showMessageDialog("Kenttien luvussa onglemia!");
@@ -178,21 +174,22 @@ public class UusiVuokrausDialogController {
 
 			fxVuokraaButton.setText("Kuittaa vuokraus");
 			fxVuokraaButton.setOnAction((event) -> {
-				vuokraamo.poistaAsiakas(asiakas);
-				vuokraamo.poistaVuokraus(vuokraus);
-				pyora.setOnkoVarattu(false);
-				vuokraaPainettu = true;
-				try {
-					vuokraamo.tallenna();
-				} catch (SailoException e) {
-					Dialogs.showMessageDialog(e.getMessage());
-				}
+				muokkaus = -1;
+				
 				dialogStage.close();
 			});
 
 		}
 	}
 
+	
+	/**
+	 * Palauttaa numeron sen mukaan mit‰ tehtiin
+	 * @return -1 jos poistettiin vuokraus, 0 jos ei tehty mit‰‰n, 1 jos luotiin uusi vuokraus
+	 */
+	public int mitaTehtiin() {
+		return muokkaus;
+	}
 
 	/**
 	 * Asettaa dialogissa k‰ytett‰v‰n vuokraamon.
@@ -200,15 +197,6 @@ public class UusiVuokrausDialogController {
 	 */
 	public void asetaVuokraamo(Vuokraamo vuokraamo) {
 		this.vuokraamo = vuokraamo;
-	}
-
-
-	/**
-	 * Onko vuokraa painiketta painettu, eli onko vuokraus oikein ja mennyt l‰pi
-	 * @return True, jos vuokraus on tapahtunut
-	 */
-	public boolean onkoOK() {
-		return vuokraaPainettu;
 	}
 
 }

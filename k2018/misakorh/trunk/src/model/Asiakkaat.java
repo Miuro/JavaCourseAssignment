@@ -131,7 +131,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 			}
 			alkiot = isompi;
 		}
-		asiakas.rekisteroi();
+		//asiakas.rekisteroi();
 		muutettu = true;
 		alkiot[lkm] = asiakas;
 		lkm++;
@@ -157,11 +157,11 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * testi.poista(a1) === true;
 	 * </pre>
 	 */
-	public boolean poista(Asiakas asiakas) {
+	public boolean poista(int asiakasID) {
 		for (int i = 0; i < alkiot.length; i++) {
 			if(alkiot[i] == null) 
 				continue;
-			if (alkiot[i].getAsiakasId() == asiakas.getAsiakasId()) {
+			if (alkiot[i].getAsiakasId() == asiakasID) {
 				alkiot[i] = null;
 				lkm--;
 				
@@ -257,7 +257,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 		for (Asiakas asiakas : testi) 
 			System.out.println(asiakas);
 			
-		testi.poista(a1);
+		//testi.poista(a1);
 		
 		for (Asiakas asiakas : testi) 
 			System.out.println(asiakas);
