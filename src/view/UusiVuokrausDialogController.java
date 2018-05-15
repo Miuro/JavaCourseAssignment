@@ -8,8 +8,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Asiakas;
 import model.Pyora;
-import model.SailoException;
-import model.Vuokraamo;
 import model.Vuokraus;
 
 public class UusiVuokrausDialogController {
@@ -41,7 +39,6 @@ public class UusiVuokrausDialogController {
 	private Vuokraus vuokraus;
 	private Pyora pyora;
 	private Asiakas asiakas;
-	private Vuokraamo vuokraamo;
 	private int muokkaus = 0; // mit‰ tehtiin -1 on vuokraus poistettiin, 0 ei mit‰‰n, 1 luotiin uusi vuokraus
 
 
@@ -102,7 +99,7 @@ public class UusiVuokrausDialogController {
 			vuokraus.aseta(5, Double.toString((Double.parseDouble(vuokraus.anna(3)) * pyora.getVuokraPerTunti())));
 
 		} catch (Exception e) {
-			Dialogs.showMessageDialog("Kenttien luvussa onglemia!");
+			Dialogs.showMessageDialog("Tarkasta kent‰t " + e.getMessage());
 			return false;
 		}
 
@@ -191,12 +188,5 @@ public class UusiVuokrausDialogController {
 		return muokkaus;
 	}
 
-	/**
-	 * Asettaa dialogissa k‰ytett‰v‰n vuokraamon.
-	 * @param vuokraamo
-	 */
-	public void asetaVuokraamo(Vuokraamo vuokraamo) {
-		this.vuokraamo = vuokraamo;
-	}
 
 }

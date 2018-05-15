@@ -10,7 +10,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Asiakas;
 import model.Pyora;
-import model.Vuokraamo;
 import model.Vuokraus;
 import view.UusiVuokrausDialogController;
 import view.VarastoOverviewController;
