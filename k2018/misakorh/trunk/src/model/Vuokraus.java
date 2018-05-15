@@ -5,7 +5,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
+/**
+ * Vuokrausolio. Sis‰lt‰‰ metodit vuokrauksen muokkaukselle ja tiedon hakemiselle.
+ * @author Jouko Sirkka, Miro Korhonen
+ *
+ */
 public class Vuokraus {
 	
 	private int 		vuokrausId,	

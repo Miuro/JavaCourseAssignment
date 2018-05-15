@@ -4,6 +4,11 @@ import java.io.*;
 
 import fi.jyu.mit.ohj2.Mjonot;
 
+/**
+ * Luokka asiakas tietorakenteelle.
+ * @author Jouko Sirkka, Miro Korhonen
+ *
+ */
 public class Asiakas{
 	
 	private int 		asiakasId;

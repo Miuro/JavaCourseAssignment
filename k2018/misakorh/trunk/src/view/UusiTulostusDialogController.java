@@ -7,6 +7,12 @@ import javafx.print.PrinterJob;
 import javafx.scene.control.TextArea;
 import javafx.scene.web.WebEngine;
 
+
+/**
+ * Luonti uudelle tulostusdialogille.
+ * @author Miro Korhonen
+ *
+ */
 public class UusiTulostusDialogController implements ModalControllerInterface<String> {
 	
 	@FXML

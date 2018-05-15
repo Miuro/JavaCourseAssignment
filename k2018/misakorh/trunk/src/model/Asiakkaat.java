@@ -10,7 +10,11 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
 
-
+/**
+ * Tietorakenne asiakkaille
+ * @author Jouko Sirkka, Miro Korhonen
+ *
+ */
 public class Asiakkaat implements Iterable<Asiakas> {
 
 	private static final int MAX_ASIAKKAITA = 5;
