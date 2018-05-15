@@ -10,6 +10,11 @@ import model.Asiakas;
 import model.Pyora;
 import model.Vuokraus;
 
+/**
+ * Controller vuokrausikkunalle. Sis‰lt‰‰ kent‰t, jolla voidaan luoda uusia vuokrauksia, tai poistaa olemassa oleva.
+ * @author Jouko Sirkka
+ *
+ */
 public class UusiVuokrausDialogController {
 
 	@FXML

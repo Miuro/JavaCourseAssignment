@@ -14,6 +14,12 @@ import model.Vuokraus;
 import view.UusiVuokrausDialogController;
 import view.VarastoOverviewController;
 
+
+/**
+ * JavaFX:n p‰‰luokka. T‰m‰n kautta avataan ikkunat ja v‰litet‰‰n tietoa ikkunoiden v‰lill‰.
+ * @author Jouko Sirkka
+ *
+ */
 public class MainApp extends Application {
 	
 	private Stage primaryStage;
@@ -78,7 +84,6 @@ public class MainApp extends Application {
 	        controller.asetaPyora(pyora);
 	        controller.asetaVuokraus(vuokraus);
 	        controller.asetaAsiakas(asiakas);
-	        //controller.asetaVuokraamo(vuokraamo);
 	        
 	        dialogStage.showAndWait();
 	        return controller.mitaTehtiin();

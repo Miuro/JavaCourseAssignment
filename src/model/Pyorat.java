@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+
+/**
+ * Tietorakenne pyörille. Sisältää metodit mm. pyörän tallenukselle.
+ * @author Jouko Sirkka, Miro Korhonen
+ *
+ */
 public class Pyorat implements Iterable<Pyora> {
 	
 	private Collection<Pyora> alkiot = new ArrayList<>();

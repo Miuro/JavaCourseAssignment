@@ -3,6 +3,11 @@ package model;
 import java.io.File;
 import java.util.Collection;
 
+/**
+ * Ohjelman p‰‰luokka. T‰m‰n kautta voidaan k‰sitell‰ helposti kaikkia muita tietorakenteita.
+ * @author Jouko Sirkka, Miro Korhonen
+ *
+ */
 public class Vuokraamo {
 	private Pyorat pyorat = new Pyorat();
 	private Vuokraukset vuokraukset = new Vuokraukset();

@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * Tietorakenne vuokrauksille. Sis‰lt‰‰ metodit mm. vuokraukset.dat-tiedoston tallenukselle.
+ * @author Jouko Sirkka, Miro Korhonen
+ *
+ */
 public class Vuokraukset implements Iterable<Vuokraus> {
 	
 	private String tiedostonPerusNimi = "vuokraukset";

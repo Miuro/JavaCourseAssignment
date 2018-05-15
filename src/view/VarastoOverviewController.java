@@ -25,6 +25,12 @@ import model.SailoException;
 import model.Vuokraus;
 import model.Vuokraamo;
 
+
+/**
+ * Ohjelman p‰‰ikkunan controller. Sis‰lt‰‰ ohjaimet ohjelman k‰ytt‰miseen.
+ * @author Jouko Sirkka, Miro Korhonen
+ *
+ */
 public class VarastoOverviewController {
 	@FXML
 	private MenuItem fxMenuTallenna;
@@ -222,7 +228,7 @@ public class VarastoOverviewController {
 		hae(pyoraKohdalla.getPyoranID());
 	}
 
-	//===============================================================================
+	//==================================================================================
 	// FXML:ll‰‰n kuulumaton koodi t‰st‰ eteenp‰in
 
 	private String vuokraamonNimi = "MJVuokraamo";
