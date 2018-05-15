@@ -18,7 +18,7 @@ import view.VarastoOverviewController;
 /**
  * JavaFX:n p‰‰luokka. T‰m‰n kautta avataan ikkunat ja v‰litet‰‰n tietoa ikkunoiden v‰lill‰.
  * @author Jouko Sirkka
- *
+ * @version 1.0, 15.5.2018
  */
 public class MainApp extends Application {
 	

@@ -8,7 +8,7 @@ import java.util.Calendar;
 /**
  * Vuokrausolio. Sis‰lt‰‰ metodit vuokrauksen muokkaukselle ja tiedon hakemiselle.
  * @author Jouko Sirkka, Miro Korhonen
- *
+ * @version 1.0, 15.5.2018
  */
 public class Vuokraus {
 	

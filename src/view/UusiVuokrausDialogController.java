@@ -13,7 +13,7 @@ import model.Vuokraus;
 /**
  * Controller vuokrausikkunalle. Sis‰lt‰‰ kent‰t, jolla voidaan luoda uusia vuokrauksia, tai poistaa olemassa oleva.
  * @author Jouko Sirkka
- *
+ * @version 1.0, 15.5.2018
  */
 public class UusiVuokrausDialogController {
 

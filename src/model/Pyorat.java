@@ -15,7 +15,7 @@ import java.util.Iterator;
 /**
  * Tietorakenne pyörille. Sisältää metodit mm. pyörän tallenukselle.
  * @author Jouko Sirkka, Miro Korhonen
- *
+ * @version 1.0, 15.5.2018
  */
 public class Pyorat implements Iterable<Pyora> {
 	
