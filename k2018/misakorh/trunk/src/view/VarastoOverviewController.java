@@ -228,7 +228,6 @@ public class VarastoOverviewController {
 	private String vuokraamonNimi = "MJVuokraamo";
 	private Vuokraamo vuokraamo;
 	private Pyora pyoraKohdalla;
-	private Pyora apuPyora;
 	private Asiakas apuAsiakas;
 	private Vuokraus apuVuokraus;
 	private boolean muokattavana = false;
@@ -405,11 +404,14 @@ public class VarastoOverviewController {
 		textFieldMalli.setEditable(muokattavaksi);
 		textFieldKunto.setEditable(muokattavaksi);
 		textFieldVuokra.setEditable(muokattavaksi);
-		//textFieldTila.setEditable(muokattavaksi);
 		textFieldLisatietoja.setEditable(muokattavaksi);
 	}
 
-
+	
+	/**
+	 * Luo ikkunan uuden vuokrauksen luontia varten.
+	 * @throws SailoException
+	 */
 	public void uusiVuokraus() throws SailoException {
 		if (pyoraKohdalla == null) {
 			Dialogs.showMessageDialog("Valitse vuokrattava pyörä");
@@ -419,7 +421,6 @@ public class VarastoOverviewController {
 			int palautus = mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
 			// jos vuokraus poistettiin (eli dialogi palautti), poistetaan vuokraus ja asiakas.
 			if(palautus == -1) {
-				//vuokraamo.poistaAsiakas(apuAsiakas);
 				vuokraamo.poistaVuokraus(apuVuokraus);
 				pyoraKohdalla.setOnkoVarattu(false);
 				vuokraamo.tallenna();
@@ -430,7 +431,6 @@ public class VarastoOverviewController {
 			apuVuokraus = new Vuokraus();
 			vuokraamo.lisaaAsiakas(apuAsiakas);
 			vuokraamo.lisaaVuokraus(apuVuokraus);
-			//if(mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas, vuokraamo)) {
 			int palautus = mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
 			if (palautus == 1) {
 				apuVuokraus.setVuokraajaId(apuAsiakas.getAsiakasId());
@@ -447,8 +447,10 @@ public class VarastoOverviewController {
 	 * Muokkaa tällä hetkellä valittuna olevaa pyörää
 	 */
 	private void muokkaaPyora() {
-		//if (muokattavana) 
-		//	return;
+		if(pyoraKohdalla.getOnkoVarattu() == true) {
+			Dialogs.showMessageDialog("Vuokrattua pyörää ei voida muokata.");
+			return;
+		}
 	
 		// asetetaan pyörän kunto field tekstistä numeroksi ja muutetaan labelia
 		textFieldKunto.setText(Integer.toString(pyoraKohdalla.getKunto()));
@@ -482,8 +484,6 @@ public class VarastoOverviewController {
 
 		Pyora uusi = new Pyora();
 		uusi.aseta(1, "tyhjä");
-		//pyoraKohdalla = uusi;
-
 		
 		try {
 			vuokraamo.lisaaPyora(uusi);
@@ -495,8 +495,6 @@ public class VarastoOverviewController {
 		pyoraKohdalla = uusi;
 		hae(uusi.getPyoranID());
 		muokkaaPyora();
-		//muokattavana = true;
-		//vaihdaMuokattavuus(true);
 	}
 
 
@@ -527,8 +525,6 @@ public class VarastoOverviewController {
 				pyoraKohdalla.aseta(4, textFieldVuokra.getText());
 				pyoraKohdalla.aseta(5, Boolean.toString(vuokrattunaBool(textFieldTila.getText())));
 				pyoraKohdalla.aseta(6, textFieldLisatietoja.getText());
-				//vuokraamo.poistaPyora(pyoraKohdalla);
-				//vuokraamo.lisaaPyora(pyoraKohdalla);
 			} catch (SailoException e) {
 				Dialogs.showMessageDialog(e.getMessage());
 				hae(pyoraKohdalla.getPyoranID());
@@ -540,7 +536,6 @@ public class VarastoOverviewController {
 	
 			muokattavana = false;
 			vaihdaMuokattavuus(false);
-			//hae(pyoraKohdalla.getPyoranID());
 		}
 		try {
 			vuokraamo.tallenna();
@@ -550,20 +545,6 @@ public class VarastoOverviewController {
 			Dialogs.showMessageDialog("Tallennuksessa ongelmia! " + ex.getMessage());
 			return ex.getMessage();
 		}
-	}
-
-
-	/**
-	 * Tekee vuokrauksen valitulle pyörälle.
-	 */
-	public void vuokraaPyora(int kesto) throws SailoException {
-		//if (pyoraKohdalla == null) return;
-		//Vuokraus vuokraus = new Vuokraus();
-		//vuokraus.rekisteroi();
-		//vuokraus.testiVuokraus(pyoraKohdalla.getPyoranID(), kesto);
-		//vuokraamo.lisaaVuokraus(vuokraus);
-		//pyoraKohdalla.setOnkoVarattu(true);
-		//hae(pyoraKohdalla.getPyoranID());
 	}
 
 

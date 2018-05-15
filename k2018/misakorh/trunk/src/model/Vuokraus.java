@@ -156,8 +156,9 @@ public class Vuokraus {
 	 * v1.toString() === "1|1|1|13.04.2018 23:48|14.04.2018 04:48|60.0|Maksettu luottokortilla";
 	 * v2.toString() === "0|0|0|||0.0|";
 	 * </pre>
+	 * @throws SailoException 
 	 */
-	public void parse(String rivi) {
+	public void parse(String rivi) throws SailoException {
 		String[] osat = rivi.split("\\|");
 		for (int k = 0; k < getKenttia(); k++) {
 			aseta(k, osat[k]);
@@ -170,11 +171,12 @@ public class Vuokraus {
 	 * @param k kentän indeksi
 	 * @param jono asetettava merkkijono
 	 * @return null jos kaikki ok, muu merkkijono jos jotain ongelmaa
+	 * @throws SailoException 
 	 */
-	public String aseta(int k, String jono) {
+	public String aseta(int k, String jono) throws SailoException {
 		String tjono = jono.trim();
 		switch (k) {
-		case 0:
+		case 0:		
 			setVuokrausId(Integer.parseInt(tjono));
 			return null;
 		case 1:
@@ -193,7 +195,7 @@ public class Vuokraus {
 			try {
 				hinta = Double.parseDouble(tjono);
 			} catch (NumberFormatException e) {
-				return "Hinta oli väärin, anna lukuina esim. 6.8";
+				throw new SailoException("Hinta oli väärin, anna lukuina esim. 6.8");
 			}
 			return null;
 		case 6:
