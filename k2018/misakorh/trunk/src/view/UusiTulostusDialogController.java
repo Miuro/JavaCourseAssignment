@@ -11,7 +11,7 @@ import javafx.scene.web.WebEngine;
 /**
  * Luonti uudelle tulostusdialogille.
  * @author Miro Korhonen
- *
+ * @version 1.0, 15.5.2018
  */
 public class UusiTulostusDialogController implements ModalControllerInterface<String> {
 	

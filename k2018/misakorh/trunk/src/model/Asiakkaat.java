@@ -13,7 +13,7 @@ import java.util.Iterator;
 /**
  * Tietorakenne asiakkaille
  * @author Jouko Sirkka, Miro Korhonen
- *
+ * @version 1.0, 15.5.2018
  */
 public class Asiakkaat implements Iterable<Asiakas> {
 

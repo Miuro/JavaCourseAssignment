@@ -7,6 +7,8 @@ import java.io.*;
  * Pyorä-olio
  * Sisältää konstruktorit uudelle pyörälle.
  * Sisältää metodit pyörän muokkaukselle.
+ * @author Jouko Sirkka, Miro Korhonen
+ * @version 1.0, 15.5.2018
  */
 public class Pyora implements Cloneable {
 

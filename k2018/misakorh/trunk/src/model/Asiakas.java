@@ -5,9 +5,9 @@ import java.io.*;
 import fi.jyu.mit.ohj2.Mjonot;
 
 /**
- * Luokka asiakas tietorakenteelle.
+ * Asiakasolio. Sisältää metodit pyörän muokkaukselle.
  * @author Jouko Sirkka, Miro Korhonen
- *
+ * @version 1.0, 15.5.2018
  */
 public class Asiakas{
 	

@@ -14,7 +14,7 @@ import java.util.Iterator;
 /**
  * Tietorakenne vuokrauksille. Sis‰lt‰‰ metodit mm. vuokraukset.dat-tiedoston tallenukselle.
  * @author Jouko Sirkka, Miro Korhonen
- *
+ * @version 1.0, 15.5.2018
  */
 public class Vuokraukset implements Iterable<Vuokraus> {
 	

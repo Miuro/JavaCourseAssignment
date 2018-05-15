@@ -29,7 +29,7 @@ import model.Vuokraamo;
 /**
  * Ohjelman p‰‰ikkunan controller. Sis‰lt‰‰ ohjaimet ohjelman k‰ytt‰miseen.
  * @author Jouko Sirkka, Miro Korhonen
- *
+ * @version 1.0, 15.5.2018
  */
 public class VarastoOverviewController {
 	@FXML
