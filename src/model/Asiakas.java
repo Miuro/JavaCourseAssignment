@@ -127,7 +127,7 @@ public class Asiakas{
 				nimi + "|" +
 				sotu + "|" +
 				osoite + "|" +
-				puhnum + "|";
+				puhnum;
 	}
 	
 	
@@ -165,6 +165,7 @@ public class Asiakas{
 	public String aseta(int k, String jono) {
 		String tjono = jono.trim();
 		StringBuffer sb = new StringBuffer(tjono);
+		
 		switch (k) {
 		case 0:
 			setAsiakasId(Mjonot.erota(sb, '|', getAsiakasId()));
