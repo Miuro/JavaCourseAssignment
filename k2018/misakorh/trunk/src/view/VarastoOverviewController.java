@@ -8,6 +8,8 @@ import java.io.PrintStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.List;
+
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.TextAreaOutputStream;
@@ -29,7 +31,7 @@ import model.Vuokraamo;
 /**
  * Ohjelman pääikkunan controller. Sisältää ohjaimet ohjelman käyttämiseen.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.0, 15.5.2018
+ * @version 1.1, 16.5.2018
  */
 public class VarastoOverviewController {
 	@FXML
@@ -146,7 +148,7 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleAvaaTietoja() {
-		Dialogs.showMessageDialog("PyöräVarasto\nVer. 0.6\nTekijät: Jouko Sirkka & Miro Korhonen");
+		Dialogs.showMessageDialog("PyöräVarasto\nVer. 1.0\nTekijät: Jouko Sirkka & Miro Korhonen");
 	}
 
 
@@ -237,6 +239,7 @@ public class VarastoOverviewController {
 	private Asiakas apuAsiakas;
 	private Vuokraus apuVuokraus;
 	private boolean muokattavana = false;
+	private List<TextField> tekstikentat;
 
 
 	/**
@@ -246,6 +249,8 @@ public class VarastoOverviewController {
 		panelPyora.setFitToHeight(true);
 		fxChooserPyorat.clear();
 		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
+		
+		tekstikentat = List.<TextField>of(textFieldNimi, textFieldMalli,textFieldKunto,textFieldVuokra,textFieldTila,textFieldLisatietoja);
 
 		setVuokraamo(new Vuokraamo());
 		avaa();
@@ -278,11 +283,18 @@ public class VarastoOverviewController {
 		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
 		if (pyoraKohdalla == null) return;
 
-		apuVuokraus = null;
-		apuAsiakas = null;
+		//apuVuokraus = null;
+		//apuAsiakas = null;
 		if (pyoraKohdalla.getOnkoVarattu() == true) {
 			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
 			apuAsiakas = vuokraamo.annaAsiakas(apuVuokraus);
+			// jos pyörä on merkattu varatuksi mutta vuokrausta tai asiakasta ei löydy
+			// niin asetetaan varattu falseksi
+			if(apuVuokraus == null || apuAsiakas == null) {
+				pyoraKohdalla.setOnkoVarattu(false);
+				return;
+			}
+			
 			fxVuokraaButton.setText("Näytä vuokraus");
 		} else
 			fxVuokraaButton.setText("Vuokraa");
@@ -524,6 +536,12 @@ public class VarastoOverviewController {
 	 */
 	private String tallenna() {
 		if (muokattavana == true) {
+			for (TextField textField : tekstikentat) {
+				if(textField.getText().contains("|")) {
+					Dialogs.showMessageDialog("Tekstikenttään ei voi syöttää | merkkiä");
+					return "Tekstikenttään ei voi syöttää | merkkiä";		
+				}
+			}
 			try {
 				pyoraKohdalla.aseta(1, textFieldNimi.getText());
 				pyoraKohdalla.aseta(2, textFieldMalli.getText());

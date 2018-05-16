@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 import fi.jyu.mit.fxgui.Dialogs;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +15,7 @@ import model.Vuokraus;
 /**
  * Controller vuokrausikkunalle. Sis‰lt‰‰ kent‰t, jolla voidaan luoda uusia vuokrauksia, tai poistaa olemassa oleva.
  * @author Jouko Sirkka
- * @version 1.0, 15.5.2018
+ * @version 1.1, 15.5.2018
  */
 public class UusiVuokrausDialogController {
 
@@ -45,6 +47,7 @@ public class UusiVuokrausDialogController {
 	private Pyora pyora;
 	private Asiakas asiakas;
 	private int muokkaus = 0; // mit‰ tehtiin -1 on vuokraus poistettiin, 0 ei mit‰‰n, 1 luotiin uusi vuokraus
+	private List<TextField> tekstikentat;
 
 
 	/**
@@ -52,6 +55,7 @@ public class UusiVuokrausDialogController {
 	 */
 	@FXML
 	private void initialize() {
+		tekstikentat = List.<TextField>of(nimiKentta, osoiteKentta,hetuKentta,puhnumKentta,pyoraKentta,tuntivuokraKentta,kestoKentta);
 	}
 
 
@@ -75,7 +79,8 @@ public class UusiVuokrausDialogController {
 		}
 
 	}
-		
+
+
 	/**
 	 * H‰ndl‰‰ ikkunan hinta ja kesto kohdan tekstien muutokset
 	 */
@@ -91,6 +96,10 @@ public class UusiVuokrausDialogController {
 	 * @return
 	 */
 	private boolean lueKentat() {
+		if (tarkastaKentat() == false) {
+			return false;
+		}
+		
 		try {
 			asiakas.aseta(1, nimiKentta.getText());
 			asiakas.aseta(2, hetuKentta.getText());
@@ -110,6 +119,27 @@ public class UusiVuokrausDialogController {
 
 		return true;
 	}
+
+
+	private boolean tarkastaKentat() {
+		for (TextField textField : tekstikentat) {
+			if(textField.getText().contains("|")) {
+				Dialogs.showMessageDialog("Tekstikentt‰‰n ei voi syˆtt‰‰ | merkki‰");
+				return false;	
+			}
+		}
+		if (nimiKentta.getText().isEmpty() ||
+			hetuKentta.getText().isEmpty() ||
+			hetuKentta.getText().isEmpty() ||
+			osoiteKentta.getText().isEmpty() ||
+			puhnumKentta.getText().isEmpty()) {
+			Dialogs.showMessageDialog("Kent‰t eiv‰t saa olla tyhji‰");
+			return false;
+		}
+
+		return true;
+	}
+
 
 	/**
 	 * Hakee asiakkaan tiedot, ja kirjoittaa ne dialogin kenttiin.
@@ -164,8 +194,8 @@ public class UusiVuokrausDialogController {
 
 
 	/**
-	 * Asettaa asiakkaan, jota k‰ytet‰‰n dialogissa.
-	 * Muuttaa Vuokraa-napin Kuittaa vuokraus-napiksi, jos asetettu asiakas on uusi.
+	 * Asettaa asiakkaan, jota k‰ytet‰‰n dialogissa. Muuttaa Vuokraa-napin Kuittaa vuokraus-napiksi, jos asetettu
+	 * asiakas on uusi.
 	 * @param asiakas Asiakas
 	 */
 	public void asetaAsiakas(Asiakas asiakas) {
@@ -174,17 +204,31 @@ public class UusiVuokrausDialogController {
 		if (pyora.getOnkoVarattu()) {
 			taytaAsiakasKentat();
 
+			setMuokattavuus(false);
+
 			fxVuokraaButton.setText("Kuittaa vuokraus");
 			fxVuokraaButton.setOnAction((event) -> {
 				muokkaus = -1;
-				
+
 				dialogStage.close();
 			});
 
 		}
 	}
 
-	
+
+	private void setMuokattavuus(boolean b) {
+		nimiKentta.setEditable(b);
+		osoiteKentta.setEditable(b);
+		hetuKentta.setEditable(b);
+		puhnumKentta.setEditable(b);
+		pyoraKentta.setEditable(b);
+		tuntivuokraKentta.setEditable(b);
+		kestoKentta.setEditable(b);
+
+	}
+
+
 	/**
 	 * Palauttaa numeron sen mukaan mit‰ tehtiin
 	 * @return -1 jos poistettiin vuokraus, 0 jos ei tehty mit‰‰n, 1 jos luotiin uusi vuokraus
@@ -192,6 +236,5 @@ public class UusiVuokrausDialogController {
 	public int mitaTehtiin() {
 		return muokkaus;
 	}
-
 
 }
