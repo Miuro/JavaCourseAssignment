@@ -8,11 +8,11 @@ import java.util.Calendar;
 /**
  * Vuokrausolio. Sisältää metodit vuokrauksen muokkaukselle ja tiedon hakemiselle.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.0, 15.5.2018
+ * @version 1.1, 15.5.2018
  */
 public class Vuokraus implements Cloneable {
 	
-	private static int 	seuraavaId 		= 1;
+	private static int 	seuraavaID 		= 1;
 	private int 		vuokrausId;
 	private int			pyoraId;	 
 	private int			asiakasId;
@@ -95,6 +95,7 @@ public class Vuokraus implements Cloneable {
 	 */
 	public void setVuokrausId(int id) {
 		vuokrausId = id;
+		if (vuokrausId >= seuraavaID) seuraavaID = vuokrausId+ 1;
 	}
 	
 	/**
@@ -240,8 +241,8 @@ public class Vuokraus implements Cloneable {
 	 * @return vuokrauksen tunnusnumero
 	 */
 	public int rekisteroi() {
-		vuokrausId = seuraavaId;
-		seuraavaId++;
+		vuokrausId = seuraavaID;
+		seuraavaID++;
 		return vuokrausId;
 	}
 	

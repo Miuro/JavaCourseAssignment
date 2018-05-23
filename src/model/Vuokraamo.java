@@ -6,7 +6,7 @@ import java.util.Collection;
 /**
  * Ohjelman p‰‰luokka. T‰m‰n kautta voidaan k‰sitell‰ helposti kaikkia muita tietorakenteita.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.0, 15.5.2018
+ * @version 1.1, 15.5.2018
  *
  */
 public class Vuokraamo {

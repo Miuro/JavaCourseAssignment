@@ -31,7 +31,7 @@ import model.Vuokraamo;
 /**
  * Ohjelman p‰‰ikkunan controller. Sis‰lt‰‰ ohjaimet ohjelman k‰ytt‰miseen.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.1, 16.5.2018
+ * @version 1.2, 16.5.2018
  */
 public class VarastoOverviewController {
 	@FXML
@@ -366,7 +366,7 @@ public class VarastoOverviewController {
 		} catch (SailoException e) {
 			hae(0);
 			String virhe = e.getMessage();
-			if (virhe != null) Dialogs.showMessageDialog(virhe);
+			//if (virhe != null) Dialogs.showMessageDialog(virhe);
 			return virhe;
 		}
 	}

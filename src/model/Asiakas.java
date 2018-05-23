@@ -7,7 +7,7 @@ import fi.jyu.mit.ohj2.Mjonot;
 /**
  * Asiakasolio. Sisältää metodit pyörän muokkaukselle.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.0, 15.5.2018
+ * @version 1.1, 15.5.2018
  */
 public class Asiakas{
 	
@@ -17,7 +17,7 @@ public class Asiakas{
 	private String 		osoite 		= "-";
 	private String 		puhnum 		= "-";
 	
-	private static int 	seuraavaId 	= 1;
+	private static int 	seuraavaID 	= 1;
 	
 	
 	/**
@@ -108,6 +108,7 @@ public class Asiakas{
 	 */
 	public void setAsiakasId(int id) {
 		asiakasId = id;
+		if (asiakasId >= seuraavaID) seuraavaID = asiakasId+ 1;
 	}
 	
 	
@@ -217,8 +218,8 @@ public class Asiakas{
 	 * @return asiakkaan uusi idnumero
 	 */
 	public int rekisteroi() {
-		asiakasId = seuraavaId;
-		seuraavaId++;
+		asiakasId = seuraavaID;
+		seuraavaID++;
 		return asiakasId;
 	}
 	
