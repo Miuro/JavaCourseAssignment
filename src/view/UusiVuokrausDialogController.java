@@ -86,6 +86,7 @@ public class UusiVuokrausDialogController {
 	 */
 	@FXML
 	void handleHintaAikaMuutos() {
+		if(kestoKentta.getText().isEmpty()) return;
 		kestoText.setText("Vuokrauksen kesto : " + Double.parseDouble((kestoKentta.getText())) + " tuntia");
 		hintaText.setText("Hinta : " + (pyora.getVuokraPerTunti() * Double.parseDouble(kestoKentta.getText())) + "€");
 	}
@@ -121,19 +122,36 @@ public class UusiVuokrausDialogController {
 	}
 
 
+	/**
+	 * Tarkastaa tekstikenttiin syötön oikeellisuuden. Ei hyväksy tyhjiä kenttiä tai
+	 * tekstiä, joka sisältää '|' merkin.
+	 * 
+	 * @return True, jos syöte on hyvä.
+	 */
 	private boolean tarkastaKentat() {
+		String s = "";
+		boolean onkoVirheita = false;
+
 		for (TextField textField : tekstikentat) {
-			if(textField.getText().contains("|")) {
-				Dialogs.showMessageDialog("Tekstikenttään ei voi syöttää | merkkiä");
-				return false;	
+			if (textField.getText().contains("|")) {
+				s = s + textField.getId() + " ";
+				onkoVirheita = true;
 			}
 		}
-		if (nimiKentta.getText().isEmpty() ||
-			hetuKentta.getText().isEmpty() ||
-			hetuKentta.getText().isEmpty() ||
-			osoiteKentta.getText().isEmpty() ||
-			puhnumKentta.getText().isEmpty()) {
-			Dialogs.showMessageDialog("Kentät eivät saa olla tyhjiä");
+		if (onkoVirheita == true) {
+			Dialogs.showMessageDialog("Tekstikentät " + s + "sisältävät laittoman merkin '|'");
+			return false;
+		}
+		
+		s = "";
+		for (TextField textField : tekstikentat) {
+			if (textField.getText().isEmpty()) {
+				s = s + textField.getId() + " ";
+				onkoVirheita = true;
+			}
+		}
+		if(onkoVirheita == true) {			
+			Dialogs.showMessageDialog("Kentät " + s + "eivät saa olla tyhjiä");
 			return false;
 		}
 
