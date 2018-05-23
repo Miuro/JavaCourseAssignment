@@ -70,7 +70,7 @@ public class Vuokraamo {
 	 */
 	public Asiakas annaAsiakas(Vuokraus vuokraus) {
 		if(vuokraus != null) {
-			Asiakas a = asiakkaat.etsi(vuokraus.getVuokraajaId());
+			Asiakas a = asiakkaat.etsi(vuokraus.getAsiakasId());
 			return a;
 		}
 		return null;
@@ -236,13 +236,13 @@ public class Vuokraamo {
 		juuu.vastaaHessuHopo();
 		testi.lisaaAsiakas(juuu);
 		asd.testiVuokraus(p1.getPyoranID(), 4);
-		asd.setVuokraajaId(juuu.getAsiakasId());
+		asd.setAsiakasId(juuu.getAsiakasId());
 		
 		testi.lisaaVuokraus(asd);
 		
 		Vuokraus v2 = new Vuokraus();
 		v2.testiVuokraus(p2.getPyoranID(), 10);
-		v2.setVuokraajaId(juuu.getAsiakasId());
+		v2.setAsiakasId(juuu.getAsiakasId());
 		
 		testi.lisaaVuokraus(v2);
 
@@ -261,7 +261,7 @@ public class Vuokraamo {
 		
 		Vuokraus v3 = new Vuokraus();
 		v3.testiVuokraus(p3.getPyoranID(), 15);
-		v3.setVuokraajaId(juuu.getAsiakasId());
+		v3.setAsiakasId(juuu.getAsiakasId());
 		testi.lisaaVuokraus(v3);
 		testi.tallenna();
 
