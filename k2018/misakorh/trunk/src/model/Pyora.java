@@ -8,12 +8,12 @@ import java.io.*;
  * Sisältää konstruktorit uudelle pyörälle.
  * Sisältää metodit pyörän muokkaukselle.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.0, 15.5.2018
+ * @version 1.1, 15.5.2018
  */
 public class Pyora implements Cloneable {
 
 	private static String[] kunnot = { "Rikki", "Tyydyttävä", "Hyvä", "Erinomainen" };
-	private static int seuraavaID = 1;
+	public static int seuraavaID = 1;
 
 	private int pyoranID;
 	private String nimi = "-";
