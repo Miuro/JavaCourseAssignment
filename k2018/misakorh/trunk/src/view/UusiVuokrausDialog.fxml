@@ -74,7 +74,7 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pyörän tuntivuokra" GridPane.rowIndex="1" />
                         <TextField fx:id="tuntivuokraKentta" alignment="CENTER" editable="false" opacity="0.6" text="16 € / tunti" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kauanko vuokrataan &#10;(tunneissa)" GridPane.rowIndex="2" />
-                        <TextField fx:id="kestoKentta" onKeyReleased="#handleHintaAikaMuutos" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="kestoKentta" onKeyTyped="#handleHintaAikaMuutos" promptText="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                      <GridPane.margin>
                         <Insets />

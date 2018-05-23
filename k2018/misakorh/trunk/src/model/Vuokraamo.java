@@ -33,8 +33,8 @@ public class Vuokraamo {
 	 */
 	public void lisaaVuokraus(Vuokraus vuokraus) {
 		Pyora temp = pyorat.anna(vuokraus.getPyoraId());
-		if (temp != null && temp.getOnkoVarattu() == true) return;
-		//temp.setOnkoVarattu(true);
+		if (temp == null || temp.getOnkoVarattu() == true) return;
+		temp.setOnkoVarattu(true);
 		vuokraus.rekisteroi();
 		vuokraukset.lisaa(vuokraus);
 	}
@@ -215,38 +215,55 @@ public class Vuokraamo {
 	public static void main(String[] args) throws SailoException {
 		Vuokraamo testi = new Vuokraamo();
 		
-		/*
+		
 		try {
 			testi.lueTiedostosta("Testi");
 		} catch (SailoException e) {
 			System.out.println(e.getMessage());
 		}
 
-		 */
-		Pyora p1 = new Pyora(), p2 = new Pyora();
+		Pyora p1 = new Pyora(), p2 = new Pyora(), p3 = new Pyora();
 		p1.vastaaJopo();
 		p2.vastaaJopo();
+		p3.vastaaJopo();
 
 		testi.lisaaPyora(p1);
 		testi.lisaaPyora(p2);
+		testi.lisaaPyora(p3);
 		
 		Asiakas juuu = new Asiakas();
 		Vuokraus asd = new Vuokraus();
-		testi.lisaaAsiakas(juuu);
-		testi.lisaaVuokraus(asd);
 		juuu.vastaaHessuHopo();
+		testi.lisaaAsiakas(juuu);
 		asd.testiVuokraus(p1.getPyoranID(), 4);
 		asd.setVuokraajaId(juuu.getAsiakasId());
+		
+		testi.lisaaVuokraus(asd);
+		
+		Vuokraus v2 = new Vuokraus();
+		v2.testiVuokraus(p2.getPyoranID(), 10);
+		v2.setVuokraajaId(juuu.getAsiakasId());
+		
+		testi.lisaaVuokraus(v2);
 
-		
-		
 		System.out.println(testi.annaVuokraus(p1).toString());
+		System.out.println(testi.annaVuokraus(p2).toString());
 		
 		testi.tallenna();
+		
 		
 		for (Pyora p : testi.pyorat) {
 			System.out.println(p);
 		}
+		
+		testi = new Vuokraamo();
+		testi.lueTiedostosta("Testi");
+		
+		Vuokraus v3 = new Vuokraus();
+		v3.testiVuokraus(p3.getPyoranID(), 15);
+		v3.setVuokraajaId(juuu.getAsiakasId());
+		testi.lisaaVuokraus(v3);
+		testi.tallenna();
 
 		/*
 		Iterator<Pyora> iter1 = testi.pyorat.iterator();

@@ -441,19 +441,23 @@ public class VarastoOverviewController {
 			if(palautus == -1) {
 				vuokraamo.poistaVuokraus(apuVuokraus);
 				pyoraKohdalla.setOnkoVarattu(false);
-				vuokraamo.tallenna();
+				//vuokraamo.tallenna();
 			}
 			hae(pyoraKohdalla.getPyoranID());
 		} else {
 			apuAsiakas = new Asiakas();
 			apuVuokraus = new Vuokraus();
-			vuokraamo.lisaaAsiakas(apuAsiakas);
-			vuokraamo.lisaaVuokraus(apuVuokraus);
+			//vuokraamo.lisaaAsiakas(apuAsiakas);
+			//vuokraamo.lisaaVuokraus(apuVuokraus);
+			//apuVuokraus.setPyoraId(pyoraKohdalla.getPyoranID());
 			int palautus = mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
 			if (palautus == 1) {
+				vuokraamo.lisaaAsiakas(apuAsiakas);
 				apuVuokraus.setVuokraajaId(apuAsiakas.getAsiakasId());
-				pyoraKohdalla.setOnkoVarattu(true);
-				vuokraamo.tallenna();
+				apuVuokraus.setPyoraId(pyoraKohdalla.getPyoranID());
+				//pyoraKohdalla.setOnkoVarattu(true);
+				vuokraamo.lisaaVuokraus(apuVuokraus);
+				//vuokraamo.tallenna();
 			}
 
 			hae(pyoraKohdalla.getPyoranID());
