@@ -7,7 +7,7 @@ import fi.jyu.mit.ohj2.Mjonot;
 /**
  * Asiakasolio. Sisältää metodit pyörän muokkaukselle.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.1, 15.5.2018
+ * @version 1.1, 23.5.2018
  */
 public class Asiakas{
 	
