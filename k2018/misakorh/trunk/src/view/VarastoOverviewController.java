@@ -13,6 +13,7 @@ import java.util.List;
 import fi.jyu.mit.fxgui.Dialogs;
 import fi.jyu.mit.fxgui.ListChooser;
 import fi.jyu.mit.fxgui.TextAreaOutputStream;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -27,11 +28,10 @@ import model.SailoException;
 import model.Vuokraus;
 import model.Vuokraamo;
 
-
 /**
  * Ohjelman pääikkunan controller. Sisältää ohjaimet ohjelman käyttämiseen.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.2, 16.5.2018
+ * @version 1.2.1, 23.5.2018
  */
 public class VarastoOverviewController {
 	@FXML
@@ -148,7 +148,7 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleAvaaTietoja() {
-		Dialogs.showMessageDialog("PyöräVarasto\nVer. 1.0\nTekijät: Jouko Sirkka & Miro Korhonen");
+		Dialogs.showMessageDialog("PyöräVarasto\nVer. 1.2\nTekijät: Jouko Sirkka & Miro Korhonen");
 	}
 
 
@@ -157,7 +157,7 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleMenuLopeta() {
-		Dialogs.showMessageDialog("Ei ole vielä lisätty");
+		voikoSulkea();
 	}
 
 
@@ -177,7 +177,7 @@ public class VarastoOverviewController {
 	@FXML
 	void handlePoistaPyora() {
 		poistaPyora();
-		tyhjennaKentat();
+		//tyhjennaKentat();
 	}
 
 
@@ -208,7 +208,6 @@ public class VarastoOverviewController {
 	void handleUusiVuokraus() throws SailoException {
 
 		uusiVuokraus();
-		
 
 	}
 
@@ -218,7 +217,7 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleVainVapaatCB() {
-		hae(pyoraKohdalla.getPyoranID());
+		hae(0);
 	}
 
 
@@ -227,7 +226,7 @@ public class VarastoOverviewController {
 	 */
 	@FXML
 	void handleHinnanMukaan() {
-		hae(pyoraKohdalla.getPyoranID());
+		hae(0);
 	}
 
 	//==================================================================================
@@ -249,8 +248,9 @@ public class VarastoOverviewController {
 		panelPyora.setFitToHeight(true);
 		fxChooserPyorat.clear();
 		fxChooserPyorat.addSelectionListener(e -> naytaPyora());
-		
-		tekstikentat = List.<TextField>of(textFieldNimi, textFieldMalli,textFieldKunto,textFieldVuokra,textFieldTila,textFieldLisatietoja);
+
+		tekstikentat = List.<TextField>of(textFieldNimi, textFieldMalli, textFieldKunto, textFieldVuokra, textFieldTila,
+				textFieldLisatietoja);
 
 		setVuokraamo(new Vuokraamo());
 		avaa();
@@ -277,24 +277,36 @@ public class VarastoOverviewController {
 	 * Näyttää listasta valitun pyörän tiedot
 	 */
 	protected void naytaPyora() {
-		if (muokattavana) muokattavana = false;
+		if (muokattavana) {
+			boolean vastaus = Dialogs.showQuestionDialog("Tallennus", "Tallenetaanko nykyinen pyörä?", "Kyllä", "Ei");
+			if (vastaus) {
+				tallenna();
+				muokattavana = false;
+				vaihdaMuokattavuus(false);
+			} else {
+				vuokraamo.poistaPyora(pyoraKohdalla);
+				muokattavana = false;
+				vaihdaMuokattavuus(false);
+				hae(0);
+			}
+		}
 		
 
 		pyoraKohdalla = fxChooserPyorat.getSelectedObject();
-		if (pyoraKohdalla == null) return;
+		if (pyoraKohdalla == null) {
+			return;
+		}
 
-		//apuVuokraus = null;
-		//apuAsiakas = null;
 		if (pyoraKohdalla.getOnkoVarattu() == true) {
 			apuVuokraus = vuokraamo.annaVuokraus(pyoraKohdalla);
 			apuAsiakas = vuokraamo.annaAsiakas(apuVuokraus);
 			// jos pyörä on merkattu varatuksi mutta vuokrausta tai asiakasta ei löydy
 			// niin asetetaan varattu falseksi
-			if(apuVuokraus == null || apuAsiakas == null) {
+			if (apuVuokraus == null || apuAsiakas == null) {
 				pyoraKohdalla.setOnkoVarattu(false);
 				return;
 			}
-			
+
 			fxVuokraaButton.setText("Näytä vuokraus");
 		} else
 			fxVuokraaButton.setText("Vuokraa");
@@ -366,7 +378,6 @@ public class VarastoOverviewController {
 		} catch (SailoException e) {
 			hae(0);
 			String virhe = e.getMessage();
-			//if (virhe != null) Dialogs.showMessageDialog(virhe);
 			return virhe;
 		}
 	}
@@ -378,13 +389,13 @@ public class VarastoOverviewController {
 	 */
 	public boolean avaa() {
 		String virhe = lueTiedosto(vuokraamonNimi);
-		if(virhe == null)
+		if (virhe == null)
 			return true;
 		else {
-			Dialogs.showMessageDialog(virhe);
+			//Dialogs.showMessageDialog(virhe);
 			return false;
 		}
-		
+
 	}
 
 
@@ -392,9 +403,14 @@ public class VarastoOverviewController {
 	 * Tarkistetaan onko tallennus tehty
 	 * @return true jos saa sulkea sovelluksen, false jos ei
 	 */
-	public boolean voikoSulkea() {
-		tallenna();
-		return true;
+	public void voikoSulkea() {
+		if (muokattavana == true) {
+			boolean vastaus = Dialogs.showQuestionDialog("Tallennus", "Tallenetaanko ennen sulkemista?", "Kyllä", "Ei");
+			if (vastaus) {
+				tallenna();
+			}
+		}
+		Platform.exit();
 	}
 
 
@@ -425,7 +441,7 @@ public class VarastoOverviewController {
 		textFieldLisatietoja.setEditable(muokattavaksi);
 	}
 
-	
+
 	/**
 	 * Luo ikkunan uuden vuokrauksen luontia varten.
 	 * @throws SailoException
@@ -435,29 +451,29 @@ public class VarastoOverviewController {
 			Dialogs.showMessageDialog("Valitse vuokrattava pyörä");
 			return;
 		}
+		
+		if(muokattavana == true) {
+			Dialogs.showMessageDialog("Tallenna pyörä ensin.");
+			return;
+		}
+		
 		if (pyoraKohdalla.getOnkoVarattu()) {
 			int palautus = mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
 			// jos vuokraus poistettiin (eli dialogi palautti), poistetaan vuokraus ja asiakas.
-			if(palautus == -1) {
+			if (palautus == -1) {
 				vuokraamo.poistaVuokraus(apuVuokraus);
 				pyoraKohdalla.setOnkoVarattu(false);
-				//vuokraamo.tallenna();
 			}
 			hae(pyoraKohdalla.getPyoranID());
 		} else {
 			apuAsiakas = new Asiakas();
 			apuVuokraus = new Vuokraus();
-			//vuokraamo.lisaaAsiakas(apuAsiakas);
-			//vuokraamo.lisaaVuokraus(apuVuokraus);
-			//apuVuokraus.setPyoraId(pyoraKohdalla.getPyoranID());
 			int palautus = mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
 			if (palautus == 1) {
 				vuokraamo.lisaaAsiakas(apuAsiakas);
 				apuVuokraus.setAsiakasId(apuAsiakas.getAsiakasId());
 				apuVuokraus.setPyoraId(pyoraKohdalla.getPyoranID());
-				//pyoraKohdalla.setOnkoVarattu(true);
 				vuokraamo.lisaaVuokraus(apuVuokraus);
-				//vuokraamo.tallenna();
 			}
 
 			hae(pyoraKohdalla.getPyoranID());
@@ -469,21 +485,23 @@ public class VarastoOverviewController {
 	 * Muokkaa tällä hetkellä valittuna olevaa pyörää
 	 */
 	private void muokkaaPyora() {
-		if(pyoraKohdalla.getOnkoVarattu() == true) {
+		if (pyoraKohdalla.getOnkoVarattu() == true) {
 			Dialogs.showMessageDialog("Vuokrattua pyörää ei voida muokata.");
 			return;
 		}
-	
+
 		// asetetaan pyörän kunto field tekstistä numeroksi ja muutetaan labelia
 		textFieldKunto.setText(Integer.toString(pyoraKohdalla.getKunto()));
 		textKunto.setText("Kunto välilä 0-3");
 		muokattavana = true;
 		vaihdaMuokattavuus(true);
+		textFieldNimi.requestFocus();
+		textFieldNimi.selectEnd();
 	}
 
 
 	/**
-	 * Luo uuden jäsenen jota aletaan editoimaan
+	 * Luo uuden pyörän jota aletaan editoimaan
 	 * @throws SailoException
 	 */
 	protected void uusiPyora() throws SailoException {
@@ -493,8 +511,7 @@ public class VarastoOverviewController {
 				tallenna();
 				muokattavana = false;
 				vaihdaMuokattavuus(false);
-			}
-			else {
+			} else {
 				vuokraamo.poistaPyora(pyoraKohdalla);
 				int index = fxChooserPyorat.getSelectedIndex();
 				hae(0);
@@ -506,14 +523,14 @@ public class VarastoOverviewController {
 
 		Pyora uusi = new Pyora();
 		uusi.aseta(1, "tyhjä");
-		
+
 		try {
 			vuokraamo.lisaaPyora(uusi);
 		} catch (SailoException e) {
 			Dialogs.showMessageDialog("Ongelmia uuden luomisessa " + e.getMessage());
 			return;
 		}
-		
+
 		pyoraKohdalla = uusi;
 		hae(uusi.getPyoranID());
 		muokkaaPyora();
@@ -525,12 +542,18 @@ public class VarastoOverviewController {
 	 */
 	private void poistaPyora() {
 		if (pyoraKohdalla == null) return;
-		if (!Dialogs.showQuestionDialog("Poisto", "Poistetaanko pyörä: " + pyoraKohdalla.getNimi(), "Kyllä", "Ei"))
+		if(pyoraKohdalla.getOnkoVarattu()) {
+			Dialogs.showMessageDialog("Vuokrattua pyörää ei voi poistaa. Kuittaa ensin vuokraus");
 			return;
+		}
+		if (!Dialogs.showQuestionDialog("Poisto", "Poistetaanko pyörä: " + pyoraKohdalla.getNimi(), "Kyllä", "Ei")) {
+			return;
+		}
 		vuokraamo.poistaPyora(pyoraKohdalla);
-		int index = fxChooserPyorat.getSelectedIndex();
+		muokattavana = false;
+		vaihdaMuokattavuus(false);
+
 		hae(0);
-		fxChooserPyorat.setSelectedIndex(index);
 	}
 
 
@@ -541,9 +564,9 @@ public class VarastoOverviewController {
 	private String tallenna() {
 		if (muokattavana == true) {
 			for (TextField textField : tekstikentat) {
-				if(textField.getText().contains("|")) {
+				if (textField.getText().contains("|")) {
 					Dialogs.showMessageDialog("Tekstikenttään ei voi syöttää | merkkiä");
-					return "Tekstikenttään ei voi syöttää | merkkiä";		
+					return "Tekstikenttään ei voi syöttää | merkkiä";
 				}
 			}
 			try {
@@ -561,7 +584,7 @@ public class VarastoOverviewController {
 			// asetetaan pyörän kunto taas tekstiksi ja label takaisin
 			textFieldKunto.setText(pyoraKohdalla.anna(3));
 			textKunto.setText("Kunto");
-	
+
 			muokattavana = false;
 			vaihdaMuokattavuus(false);
 		}
@@ -577,8 +600,8 @@ public class VarastoOverviewController {
 
 
 	/**
-	 * Hakee jäsenten tiedot listaan
-	 * @param jnro jäsenen numero, joka aktivoidaan haun jälkeen
+	 * Hakee pyörien tiedot listaan
+	 * @param pyoraID pyörän ID, joka aktivoidaan haun jälkeen
 	 */
 	protected void hae(int pyoraID) {
 		String ehto = hakuehto.getText();
@@ -586,10 +609,11 @@ public class VarastoOverviewController {
 
 		int index = 0;
 		Collection<Pyora> pyorat;
+		int i = 0;
 		try {
 			pyorat = vuokraamo.etsi(ehto, fxVainVapaatCB.isSelected());
 			if (fxHinnanMukaanCB.isSelected()) pyorat = vuokraamo.hinnanMukaan(pyorat);
-			int i = 0;
+			//int i = 0;
 			for (Pyora pyora : pyorat) {
 				if (pyora.getPyoranID() == pyoraID) index = i;
 				fxChooserPyorat.add(pyora.getNimi(), pyora);
@@ -597,6 +621,12 @@ public class VarastoOverviewController {
 			}
 		} catch (SailoException ex) {
 			Dialogs.showMessageDialog("Pyörän hakemisessa ongelmia! " + ex.getMessage());
+		}
+		
+		// jos ei ole pyöriä, niin tyhjennetään kentät. Parempi paikka tälle olisi naytaPyora() aliohjelmassa, mutta vaivalloinen fxguin takia.
+		if(i == 0) {
+			pyoraKohdalla = null;
+			tyhjennaKentat();
 		}
 		fxChooserPyorat.setSelectedIndex(index);
 	}

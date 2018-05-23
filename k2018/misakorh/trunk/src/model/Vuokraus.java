@@ -8,7 +8,7 @@ import java.util.Calendar;
 /**
  * Vuokrausolio. Sis‰lt‰‰ metodit vuokrauksen muokkaukselle ja tiedon hakemiselle.
  * @author Jouko Sirkka, Miro Korhonen
- * @version 1.1, 15.5.2018
+ * @version 1.1, 23.5.2018
  */
 public class Vuokraus implements Cloneable {
 	

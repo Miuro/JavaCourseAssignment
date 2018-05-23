@@ -18,7 +18,7 @@ import view.VarastoOverviewController;
 /**
  * JavaFX:n pääluokka. Tämän kautta avataan ikkunat ja välitetään tietoa ikkunoiden välillä.
  * @author Jouko Sirkka
- * @version 1.0, 15.5.2018
+ * @version 1.1, 23.5.2018
  */
 public class MainApp extends Application {
 	
@@ -32,6 +32,8 @@ public class MainApp extends Application {
 		
 		initRootLayout();
 	}
+
+
 
 	/**
 	 * Luodaan perusikkuna, eli varastoOverview.
@@ -49,10 +51,12 @@ public class MainApp extends Application {
 			primaryStage.show();
 			VarastoOverviewController controller = loader.getController();
 			controller.setMainApp(this);
+			primaryStage.setOnCloseRequest(e -> controller.voikoSulkea());
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		
 	}
 	
