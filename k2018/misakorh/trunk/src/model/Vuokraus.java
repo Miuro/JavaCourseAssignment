@@ -10,17 +10,17 @@ import java.util.Calendar;
  * @author Jouko Sirkka, Miro Korhonen
  * @version 1.0, 15.5.2018
  */
-public class Vuokraus {
+public class Vuokraus implements Cloneable {
 	
-	private int 		vuokrausId,	
-						pyoraId,	 
-						vuokraajaId;
+	private static int 	seuraavaId 		= 1;
+	private int 		vuokrausId;
+	private int			pyoraId;	 
+	private int			asiakasId;
 	private int 		vuokrausAika    = 0;
 	private String		palautusAika 	= "-";
 	private double 		hinta 			= 0.;
 	private String 		lisatiedot 		= "-";
 	
-	private static int 	seuraavaId 		= 1;
 	
 	public static Calendar pvm; // = Calendar.getInstance();
 	private Calendar palautus; // = Calendar.getInstance();
@@ -35,7 +35,7 @@ public class Vuokraus {
 	public String toString() {
 		return vuokrausId + "|" +
 				pyoraId + "|" +
-				vuokraajaId + "|" +
+				asiakasId + "|" +
 				vuokrausAika + "|" +
 				palautusAika + "|" +
 				hinta + "|"	+
@@ -60,7 +60,7 @@ public class Vuokraus {
 	 */
 	public Vuokraus(int kestoTunneissa, double vuokraPerPaiva, int pyoraID, int asiakasID) {
 		this.pyoraId = pyoraID;
-		this.vuokraajaId = asiakasID;
+		this.asiakasId = asiakasID;
 		this.hinta = vuokraPerPaiva;
 	}
 	
@@ -85,8 +85,8 @@ public class Vuokraus {
 	 * Antaa vuokraajan tunnusluvun
 	 * @return vuokraajan tunnusluku
 	 */
-	public int getVuokraajaId() {
-		return this.vuokraajaId;
+	public int getAsiakasId() {
+		return this.asiakasId;
 	}
 	
 	/**
@@ -101,8 +101,8 @@ public class Vuokraus {
 	 * Asettaa vuokraajan tunnusluvun
 	 * @param id haluttu tunnusluku
 	 */
-	public void setVuokraajaId(int id) {
-		vuokraajaId = id;
+	public void setAsiakasId(int id) {
+		asiakasId = id;
 	}
 	
 	
@@ -134,7 +134,7 @@ public class Vuokraus {
 		case 1:
 			return "" + pyoraId;
 		case 2:
-			return "" + vuokraajaId;
+			return "" + asiakasId;
 		case 3:
 			return "" + vuokrausAika;
 		case 4:
@@ -187,7 +187,7 @@ public class Vuokraus {
 			setPyoraId(Integer.parseInt(tjono));
 			return null;
 		case 2:
-			vuokraajaId = Integer.parseInt(tjono);
+			asiakasId = Integer.parseInt(tjono);
 			return null;
 		case 3:
 			vuokrausAika = Integer.parseInt(tjono);
@@ -218,7 +218,7 @@ public class Vuokraus {
 	public void tulosta(PrintStream out) {
 		out.println(String.format("%03d", vuokrausId, 3) + " "
 					+ String.format("Pyörä: %03d", pyoraId, 3) + " "
-					+ String.format("Vuokraaja: %03d", vuokraajaId, 3));
+					+ String.format("Vuokraaja: %03d", asiakasId, 3));
 		out.println(String.format("Vuokrattu: %s", vuokrausAika));
 		out.println(String.format("Palautus: %s", palautusAika));
 		out.println("Hinta eur: " + hinta);

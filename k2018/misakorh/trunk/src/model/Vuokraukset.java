@@ -19,7 +19,7 @@ import java.util.Iterator;
 public class Vuokraukset implements Iterable<Vuokraus> {
 	
 	private String tiedostonPerusNimi = "vuokraukset";
-	private final Collection<Vuokraus> alkiot = new ArrayList<Vuokraus>();
+	private final Collection<Vuokraus> alkiot = new ArrayList<>();
 	private boolean muutettu = false;
 	
 	

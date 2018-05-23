@@ -453,7 +453,7 @@ public class VarastoOverviewController {
 			int palautus = mainApp.showUusiVuokrausDialog(pyoraKohdalla, apuVuokraus, apuAsiakas);
 			if (palautus == 1) {
 				vuokraamo.lisaaAsiakas(apuAsiakas);
-				apuVuokraus.setVuokraajaId(apuAsiakas.getAsiakasId());
+				apuVuokraus.setAsiakasId(apuAsiakas.getAsiakasId());
 				apuVuokraus.setPyoraId(pyoraKohdalla.getPyoranID());
 				//pyoraKohdalla.setOnkoVarattu(true);
 				vuokraamo.lisaaVuokraus(apuVuokraus);
