@@ -31,7 +31,7 @@ src/view/UusiTulostusDialogController.java = Tulostusikkunan java -tiedosto
 src/view/UusiVuokrausDialog.fxml = Vuokrausdialogin ikkuna
 src/view/UusiVuokrausDialogController.java = Vuokrausikkunan java -tiedosto
 src/view/VarastoOverview.fxml = P‰‰ikkuna
-src/view/VarastoOverview.java = P‰‰ikkunan java -tiedosto
+src/view/VarastoOverviewController.java = P‰‰ikkunan java -tiedosto
 src/pyoravarasto/MainApp.java = Main
 
 =<h3>Muita tiedostoja</h3>
