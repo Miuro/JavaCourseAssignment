@@ -196,12 +196,12 @@ public class Vuokraamo {
 	 * @param asiakas Poistettava asiakas
 	 * @return True, jos poisto onnistui
 	 */
-	public boolean poistaAsiakas(Asiakas asiakas) {
+	/*public boolean poistaAsiakas(Asiakas asiakas) {
 
 		if (asiakas == null) return false;
 		boolean ret = asiakkaat.poista(asiakas.getAsiakasId());
 		return ret;
-	}
+	}*/
 	
 	/**
 	 * Poistaa vuokraamosta parametrina annetun asiakkaan
