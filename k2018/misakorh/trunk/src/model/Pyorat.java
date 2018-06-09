@@ -114,6 +114,19 @@ public class Pyorat implements Iterable<Pyora> {
 	 * @param i Halutun pyörän ID
 	 * @return viite pyörään, jonka ID on annettu ID
 	 * @throws IndexOutOfBoundsException jos ylitetään rajat.
+	 * <pre name="test">
+	 * Pyorat pyorat = new Pyorat();
+	 * Pyora p = new Pyora();
+	 * Pyora q = new Pyora();
+	 * p.vastaaJopo();
+	 * q.vastaaJopo2();
+	 * p.setPyoranID(8);
+	 * pyorat.lisaa(p);
+	 * pyorat.lisaa(q);
+	 * pyorat.anna(8) === p;
+	 * p.setPyoranID(10);
+	 * pyorat.anna(8) === null;
+	 * </pre>
 	 */
 	public Pyora anna(int i) throws IndexOutOfBoundsException {
 		for (Pyora pyora : alkiot) {

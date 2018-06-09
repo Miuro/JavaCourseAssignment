@@ -34,8 +34,10 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * Asiakkaat testi = new Asiakkaat();
 	 * Asiakas a1 = new Asiakas();
 	 * a1.vastaaHessuHopo();
+	 * a1.setAsiakasId(4);
 	 * Asiakas a2 = new Asiakas();
 	 * a2.vastaaHessuHopo();
+	 * a2.setAsiakasId(5);
 	 * a2.aseta(1, "Aku Ankka");
 	 * testi.lisaa(a1);
 	 * testi.lisaa(a2);
@@ -129,6 +131,15 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	/**
 	 * Lis‰‰ uuden asiakkaan tietorakenteeseensa. Ottaa asiakkaan omistukseensa
 	 * @param asiakas lis‰tt‰v‰n asiakkaan viite. Huom. tietorakenne muuttuu omistajaksi
+	 * @example
+	 * <pre name="test">
+	 * Asiakkaat asiakkaat = new Asiakkaat();
+	 * Asiakas a1 = new Asiakas();
+	 * a1.vastaaHessuHopo();
+	 * asiakkaat.getLkm() === 0;
+	 * asiakkaat.lisaa(a1);
+	 * asiakkaat.getLkm() === 1;
+	 * </pre>
 	 */
 	public void lisaa(Asiakas asiakas) {
 		if (lkm >= alkiot.length) {
@@ -139,9 +150,9 @@ public class Asiakkaat implements Iterable<Asiakas> {
 			alkiot = isompi;
 		}
 		//asiakas.rekisteroi();
-		muutettu = true;
 		alkiot[lkm] = asiakas;
 		lkm++;
+		muutettu = true;
 	}
 
 
@@ -153,18 +164,20 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * Asiakkaat testi = new Asiakkaat();
 	 * Asiakas a1 = new Asiakas();
 	 * a1.vastaaHessuHopo();
+	 * a1.setAsiakasId(1);
 	 * Asiakas a2 = new Asiakas();
 	 * a2.vastaaHessuHopo();
+	 * a2.setAsiakasId(2);
 	 * a2.aseta(1, "Aku Ankka");
 	 * testi.lisaa(a1);
 	 * testi.lisaa(a2);
 	 * testi.etsi(1) === a1;
 	 * testi.etsi(2) === a2;
 	 * testi.etsi(3) === null;
-	 * testi.poista(a1) === true;
+	 * testi.poista(a1.getAsiakasId()) === true;
 	 * </pre>
 	 */
-	public boolean poista(int asiakasID) {
+	/*public boolean poista(int asiakasID) {
 		for (int i = 0; i < alkiot.length; i++) {
 			if(alkiot[i] == null) 
 				continue;
@@ -176,7 +189,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 			}
 		}
 		return false;
-	}
+	}*/
 
 
 	/**
@@ -184,11 +197,15 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * @param i monennenko asiakkaan viite halutaan
 	 * @return viite asiakkaaseen jonka indeksi on i
 	 * @throws IndexOutOfBoundsException jos indeksi i ei ole sallitulla alueella
+	 * @example
+	 * <pre name="test">
+	 * 
+	 * </pre>
 	 */
-	public Asiakas anna(int i) throws IndexOutOfBoundsException {
+	/*public Asiakas anna(int i) throws IndexOutOfBoundsException {
 		if (i < 0 || lkm <= i) throw new IndexOutOfBoundsException("Laiton indeksi: " + i);
 		return alkiot[i];
-	}
+	}*/
 
 
 	/**
@@ -199,11 +216,11 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	public void lueTiedostosta(String tied) throws SailoException {
 		setTiedostonPerusNimi(tied);
 
-		try (BufferedReader fi = new BufferedReader(new FileReader(getTiedostonNimi()))) {
+		try ( BufferedReader fi = new BufferedReader(new FileReader(getTiedostonNimi()))) {
 			String rivi;
 			while ((rivi = fi.readLine()) != null) {
 				rivi = rivi.trim();
-				if ("".equals(rivi) || rivi.charAt(0) == ';') continue;
+				if ( "".equals(rivi) || rivi.charAt(0) == ';') continue;
 				Asiakas asiakas = new Asiakas();
 				asiakas.parse(rivi);
 				lisaa(asiakas);

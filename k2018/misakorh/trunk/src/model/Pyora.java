@@ -220,7 +220,19 @@ public class Pyora implements Cloneable {
 	/**
 	 * Vertailu kahdelle pyörälle. Vertaa pyörien hintoja.
 	 * @param p Mihin pyörään verrataan.
-	 * @return true, jos samat.
+	 * @return -1, jos pienempi vuokra. 1, jos suurempi. 0, jos samat.
+	 * @example
+	 * <pre name="test">
+	 * Pyora p1 = new Pyora();
+	 * Pyora p2 = new Pyora();
+	 * Pyora p3 = new Pyora();
+	 * p1.setVuokraPerH(1.0);
+	 * p2.setVuokraPerH(2.0);
+	 * p3.setVuokraPerH(1.0);
+	 * p1.compareTo(p2) === -1;
+	 * p1.compareTo(p3) === 0;
+	 * p2.compareTo(p1) === 1;
+	 * </pre>
 	 */
 	public int compareTo(Pyora p) {
 		if(this.getVuokraPerTunti() < p.getVuokraPerTunti()) return -1;
