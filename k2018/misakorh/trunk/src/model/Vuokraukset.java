@@ -26,6 +26,20 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	/**
 	 * Lisää uuden asiakkaan tietorakenteeseensa. Ottaa vuokrauksen omistukseensa
 	 * @param vuokraus lisättävän vuokrauksen viite. Huom. tietorakenne muuttuu omistajaksi
+	 * @example
+	 * <pre name="test">
+     * #THROWS SailoException
+     * Vuokraukset vuokraukset = new Vuokraukset();
+     * Vuokraus v1 = new Vuokraus(), v2 = new Vuokraus();
+     * v1.rekisteroi();
+     * v2.rekisteroi();
+     * vuokraukset.lisaa(v1);
+     * vuokraukset.lisaa(v2);
+     * vuokraukset.tallenna();
+     * int a = v1.getVuokrausId();
+     * int b = v2.getVuokrausId();
+     * b - a === 1;
+	 * </pre>
 	 */
 	public void lisaa(Vuokraus vuokraus) {
 		//vuokraus.rekisteroi();
@@ -184,8 +198,8 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * v2.testiVuokraus(2,4);
 	 * v2.rekisteroi();
 	 * t.lisaa(v2);
-	 * t.anna(1) === v1;
-	 * t.anna(2) === v2;
+	 * t.anna(v1.getVuokrausId()) === v1;
+	 * t.anna(v2.getVuokrausId()) === v2;
 	 * </pre>
 	 */
 	public Vuokraus anna(int vuokrauksenId){
@@ -202,6 +216,20 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * Poistaa vuokrauksen sen pyöräID:n mukaan
 	 * @param pyoranID Pyörä, jonka vuokraus poistetaan
 	 * @return True, jos poisto onnistui
+	 * @example
+	 * <pre name="test">
+	 * #THROWS SailoException
+     * Vuokraukset vuokraukset = new Vuokraukset();
+     * Vuokraus v1 = new Vuokraus(), v2 = new Vuokraus();
+     * v1.rekisteroi();
+     * v1.testiVuokraus(3,1000);
+     * v2.rekisteroi();
+     * vuokraukset.lisaa(v1);
+     * vuokraukset.lisaa(v2);
+     * vuokraukset.getLkm() === 2;
+     * vuokraukset.poista(v1.getPyoraId());
+     * vuokraukset.getLkm() === 1;
+	 * </pre>
 	 */
 	public boolean poista(int pyoranID) {
 		for (Vuokraus vuokraus : alkiot) {
