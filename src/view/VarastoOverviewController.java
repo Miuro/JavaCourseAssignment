@@ -426,14 +426,34 @@ public class VarastoOverviewController {
 
 	/**
 	 * Muuttaa pyörän tekstikenttien muokattavuuden truesta falseksi tai toisinpäin
+	 * Asettaa myös kenttien opacityn tummemmaksi tai kirkkaammaksi riippuen tilasta.
 	 */
 	private void vaihdaMuokattavuus(boolean muokataanko) {
+	    
+	    double opacityFull = 1.0;
+	    double opacityHalf = 0.7;
+	    
 		boolean muokattavaksi = muokataanko;
 		textFieldNimi.setEditable(muokattavaksi);
 		textFieldMalli.setEditable(muokattavaksi);
 		textFieldKunto.setEditable(muokattavaksi);
 		textFieldVuokra.setEditable(muokattavaksi);
 		textFieldLisatietoja.setEditable(muokattavaksi);
+		
+		if(muokattavaksi == true) {
+		    textFieldNimi.setOpacity(opacityFull);
+		    textFieldMalli.setOpacity(opacityFull);
+		    textFieldKunto.setOpacity(opacityFull);
+		    textFieldVuokra.setOpacity(opacityFull);
+		    textFieldLisatietoja.setOpacity(opacityFull);
+		}
+		else {
+		    textFieldNimi.setOpacity(opacityHalf);
+            textFieldMalli.setOpacity(opacityHalf);
+            textFieldKunto.setOpacity(opacityHalf);
+            textFieldVuokra.setOpacity(opacityHalf);
+            textFieldLisatietoja.setOpacity(opacityHalf);
+		}
 	}
 
 
