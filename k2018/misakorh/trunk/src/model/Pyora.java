@@ -3,16 +3,20 @@ package model;
 import java.io.*;
 
 
-/*
+/**
  * Pyorä-olio
  * Sisältää konstruktorit uudelle pyörälle.
  * Sisältää metodit pyörän muokkaukselle.
  * @author Jouko Sirkka, Miro Korhonen
  * @version 1.1, 15.5.2018
  */
+
 public class Pyora implements Cloneable {
 
 	private static String[] kunnot = { "Rikki", "Tyydyttävä", "Hyvä", "Erinomainen" };
+	/**
+	 * Pitää muistissa seuraavan vapaan ID:n
+	 */
 	public static int seuraavaID = 1;
 
 	private int pyoranID;
@@ -169,10 +173,9 @@ public class Pyora implements Cloneable {
 	}
 	
 	
-	/*
+	/**
 	 * @return palauttaa pyörän kunnon integer arvona. 0 = rikki ja 3 = erinomainen
 	 */
-	
 	public int getKunto() {
 		return kunto;
 	}
@@ -216,6 +219,8 @@ public class Pyora implements Cloneable {
 
 	/**
 	 * Vertailu kahdelle pyörälle. Vertaa pyörien hintoja.
+	 * @param p Mihin pyörään verrataan.
+	 * @return true, jos samat.
 	 */
 	public int compareTo(Pyora p) {
 		if(this.getVuokraPerTunti() < p.getVuokraPerTunti()) return -1;
@@ -236,7 +241,7 @@ public class Pyora implements Cloneable {
 	 * p1.toString() === "1|Mountainer 6X|Maastopyörä|3|50.0|true|Jee";
 	 * p2.toString() === "2|-|-|3|0.0|false|-";
 	 * </pre>
-	 * @throws SailoException 
+	 * @throws SailoException jos virhe tapahtuu parsimisessa.
 	 */
 	public void parse(String rivi) throws SailoException {
 		String[] osat = rivi.split("\\|");
@@ -252,7 +257,7 @@ public class Pyora implements Cloneable {
 	 * @param k kuinka monennen kentän arvo asetetaan
 	 * @param jono jonoa joka asetetaan kentän arvoksi
 	 * @return null jos asettaminen onnistuu.
-	 * @throws SailoException 
+	 * @throws SailoException jos virhe tapahtuu kenttien asetuksessa.
 	 * @example
 	 * <pre name="test">
 	 * #THROWS SailoException
@@ -292,12 +297,14 @@ public class Pyora implements Cloneable {
 			} catch (NumberFormatException e) {
 				throw new SailoException("Vuokran luku epäonnistui, anna numeroita.");
 			}
+			return null;
 		case 5:
 			try {
 				onkoVarattu = Boolean.parseBoolean(tjono);
 			} catch (Exception e) {
 				throw new SailoException("Tilan luku epäonnistui. Kirjoita false tai true");
 			}
+			return null;
 		case 6:
 			lisatietoja = tjono;
 			return null;
@@ -332,7 +339,7 @@ public class Pyora implements Cloneable {
 
 	/**
 	 * Tulostetaan pyörän tiedot.
-	 * @param out
+	 * @param out Virta, mihin tulostetaan.
 	 */
 	public void tulosta(PrintStream out) {
 		out.println(String.format("%03d", pyoranID, 3) + "  " + nimi + "  " + malli);
@@ -354,10 +361,10 @@ public class Pyora implements Cloneable {
 
 	/**
 	 * Testataan pyöräluokan toimivuutta.
-	 * @param args
+	 * @param args Ei käytössä
 	 */
 	public static void main(String[] args) {
-
+	    // Ei käytössä
 	}
 
 }

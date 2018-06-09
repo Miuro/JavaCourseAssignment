@@ -22,6 +22,9 @@ public class Vuokraus implements Cloneable {
 	private String 		lisatiedot 		= "-";
 	
 	
+	/**
+	 * Käytetään samaa kalenteria kaikille oliolle.
+	 */
 	public static Calendar pvm; // = Calendar.getInstance();
 	private Calendar palautus; // = Calendar.getInstance();
 	private static final DateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -53,12 +56,11 @@ public class Vuokraus implements Cloneable {
 	
 	/**
 	 * Konstruktori vuokrauksella tarvittavilla tiedoilla
-	 * @param kestoTunneissa Vuokrauksen kesto
 	 * @param vuokraPerPaiva Vuokran määrä euroissa
 	 * @param pyoraID Pyörän ID
 	 * @param asiakasID Asiakkaan ID
 	 */
-	public Vuokraus(int kestoTunneissa, double vuokraPerPaiva, int pyoraID, int asiakasID) {
+	public Vuokraus(double vuokraPerPaiva, int pyoraID, int asiakasID) {
 		this.pyoraId = pyoraID;
 		this.asiakasId = asiakasID;
 		this.hinta = vuokraPerPaiva;
@@ -161,7 +163,7 @@ public class Vuokraus implements Cloneable {
 	 * v1.toString() === "1|1|1|13.04.2018 23:48|14.04.2018 04:48|60.0|Maksettu luottokortilla";
 	 * v2.toString() === "0|0|0|||0.0|";
 	 * </pre>
-	 * @throws SailoException 
+	 * @throws SailoException jos parsiminen epäonnistuu.
 	 */
 	public void parse(String rivi) throws SailoException {
 		String[] osat = rivi.split("\\|");
@@ -176,7 +178,7 @@ public class Vuokraus implements Cloneable {
 	 * @param k kentän indeksi
 	 * @param jono asetettava merkkijono
 	 * @return null jos kaikki ok, muu merkkijono jos jotain ongelmaa
-	 * @throws SailoException 
+	 * @throws SailoException  jos syötetään väärää tietoa.
 	 */
 	public String aseta(int k, String jono) throws SailoException {
 		String tjono = jono.trim();
@@ -248,10 +250,11 @@ public class Vuokraus implements Cloneable {
 	
 	/**
 	 * Luo testattavan ja esim. dataa sisältävän vuokrauksen.
+	 * @param pyoraId1 Mikä Id annetaan pyörälle.
 	 * @param kestoTunneissa Vuokrauksen kesto tunneissa.
 	 */
-	public void testiVuokraus(int pyoraId, int kestoTunneissa) {
-		this.pyoraId = pyoraId;
+	public void testiVuokraus(int pyoraId1, int kestoTunneissa) {
+		this.pyoraId = pyoraId1;
 		pvm = Calendar.getInstance();
 		palautus = Calendar.getInstance();
 		palautus.add(Calendar.HOUR, kestoTunneissa);
@@ -325,11 +328,11 @@ public class Vuokraus implements Cloneable {
 	 * @param args ei käytösä
 	 */
 	public static void main(String[] args) {
-		Vuokraus testi = new Vuokraus(10,1,1,1);
+		Vuokraus testi = new Vuokraus(1,1,1);
 		testi.rekisteroi();
 		testi.testiVuokraus(1,5);
 		testi.tulosta(System.out);
-		Vuokraus testi2 = new Vuokraus(20,2,2,2);
+		Vuokraus testi2 = new Vuokraus(2,2,2);
 		testi2.rekisteroi();
 		testi2.testiVuokraus(2,5);
 		System.out.println();

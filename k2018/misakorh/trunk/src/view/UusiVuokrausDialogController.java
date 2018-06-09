@@ -175,7 +175,7 @@ public class UusiVuokrausDialogController {
 
 	/**
 	 * Asettaa stageksi ("näyttämöksi") tämän ikkunan.
-	 * @param dialogStage
+	 * @param dialogStage Näyttämö.
 	 */
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
@@ -192,32 +192,32 @@ public class UusiVuokrausDialogController {
 
 	/**
 	 * Säädetään näkymään vuokrattavan pyörän tiedot
-	 * @param pyora Pyörä, mikä vuokrataan
+	 * @param pyora1 Pyörä, mikä vuokrataan
 	 */
-	public void asetaPyora(Pyora pyora) {
-		this.pyora = pyora;
+	public void asetaPyora(Pyora pyora1) {
+		this.pyora = pyora1;
 
-		pyoraKentta.setText(pyora.getNimi());
-		tuntivuokraKentta.setText(Double.toString(pyora.getVuokraPerTunti()));
+		pyoraKentta.setText(pyora1.getNimi());
+		tuntivuokraKentta.setText(Double.toString(pyora1.getVuokraPerTunti()));
 	}
 
 
 	/**
 	 * Vuokraus-olio, jota muokataan.
-	 * @param vuokraus Vuokrausolio mainApp:sta
+	 * @param vuokraus1 Vuokrausolio mainApp:sta
 	 */
-	public void asetaVuokraus(Vuokraus vuokraus) {
-		this.vuokraus = vuokraus;
+	public void asetaVuokraus(Vuokraus vuokraus1) {
+		this.vuokraus = vuokraus1;
 	}
 
 
 	/**
 	 * Asettaa asiakkaan, jota käytetään dialogissa. Muuttaa Vuokraa-napin Kuittaa vuokraus-napiksi, jos asetettu
 	 * asiakas on uusi.
-	 * @param asiakas Asiakas
+	 * @param asiakas1 Asiakas
 	 */
-	public void asetaAsiakas(Asiakas asiakas) {
-		this.asiakas = asiakas;
+	public void asetaAsiakas(Asiakas asiakas1) {
+		this.asiakas = asiakas1;
 
 		if (pyora.getOnkoVarattu()) {
 			taytaAsiakasKentat();
