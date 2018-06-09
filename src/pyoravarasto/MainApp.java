@@ -26,8 +26,8 @@ public class MainApp extends Application {
 	private BorderPane overview;
 
 	@Override
-	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
+	public void start(Stage primaryStage1) {
+		this.primaryStage = primaryStage1;
 		this.primaryStage.setTitle("Pyörävuokraamo");
 		
 		initRootLayout();
@@ -63,6 +63,8 @@ public class MainApp extends Application {
 	/**
 	 * Luonti vuokrausikkunalle
 	 * @param pyora Pyörä, mitä vuokrataa
+	 * @param vuokraus Vuokraus, mitä käsitellään vuokrauksessa.
+	 * @param asiakas Asiakas, mitä käsitellään vuokrauksessa.
 	 * @return True, jos pyörä vuokrattiin onnistuneesti
 	 */
 	public int showUusiVuokrausDialog(Pyora pyora, Vuokraus vuokraus, Asiakas asiakas) {

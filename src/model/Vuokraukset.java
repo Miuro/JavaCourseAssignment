@@ -51,8 +51,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * Lukee vuokraukset tiedostosta.
 	 * 
 	 * @param tied tiedoston nimi
-	 * @throws FileNotFoundException jos ei aukea
-	 * @throws IOException jos ongelmia tiedoston kanssa
+	 * @throws SailoException jos luku epäonnistuu.
 	 */
 	public void lueTiedostosta(String tied) throws SailoException {
 		setTiedostonPerusNimi(tied);
@@ -79,7 +78,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	/**
 	 * Tallettaa vuokraukset tiedostoon
 	 * 
-	 * @throws SailoException 
+	 * @throws SailoException jos tiedoston luku tai kirjoitus epäonnistuu.
 	 */
 	public void tallenna() throws SailoException {
 		if (!muutettu) return;
@@ -172,10 +171,8 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	
 	/**
 	 * Palauttaa halutun vuokrauksen
-	 * 
-	 * @param tunnusNro halutun vuokrauksen id
+	 * @param vuokrauksenId Halutun vuokrauksen id
 	 * @return vuokr haluttu vuokraus
-	 * @throws SailoException jos ei löydy
 	 * @example
 	 * <pre name="test">
 	 * Vuokraukset t = new Vuokraukset();
@@ -222,7 +219,7 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * Testiohjelma vuokrauksille
 	 *
 	 * @param args ei käytösä 
-	 * @throws SailoException 
+	 * @throws SailoException jos tiedoston luku epäonnistuu.
 	 * @example
 	 * <pre name="test">
 	 * #THROWS SailoException 

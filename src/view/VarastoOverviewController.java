@@ -109,7 +109,7 @@ public class VarastoOverviewController {
 
 	/**
 	 * Tätä kutsutaan MainApp:sta. Määrittää, että tämä on perusnäkymä-
-	 * @param mainApp
+	 * @param mainApp mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
@@ -391,17 +391,12 @@ public class VarastoOverviewController {
 		String virhe = lueTiedosto(vuokraamonNimi);
 		if (virhe == null)
 			return true;
-		else {
-			//Dialogs.showMessageDialog(virhe);
-			return false;
-		}
-
+		return false;
 	}
 
 
 	/**
 	 * Tarkistetaan onko tallennus tehty
-	 * @return true jos saa sulkea sovelluksen, false jos ei
 	 */
 	public void voikoSulkea() {
 		if (muokattavana == true) {
@@ -444,7 +439,7 @@ public class VarastoOverviewController {
 
 	/**
 	 * Luo ikkunan uuden vuokrauksen luontia varten.
-	 * @throws SailoException
+	 * @throws SailoException jos virhe tapahtuu vuokrauksen luonnissa.
 	 */
 	public void uusiVuokraus() throws SailoException {
 		if (pyoraKohdalla == null) {
@@ -502,7 +497,7 @@ public class VarastoOverviewController {
 
 	/**
 	 * Luo uuden pyörän jota aletaan editoimaan
-	 * @throws SailoException
+	 * @throws SailoException jos virhe tapahtuu uuden luomisessa.
 	 */
 	protected void uusiPyora() throws SailoException {
 		if (muokattavana) {
@@ -664,7 +659,7 @@ public class VarastoOverviewController {
 	 * @param args ei käytösä
 	 */
 	public static void main(String[] args) {
-
+	    // Ei käytössä.
 	}
 
 }

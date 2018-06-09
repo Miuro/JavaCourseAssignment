@@ -253,7 +253,7 @@ public class Asiakas{
      * </pre>
      */
 	public static void main(String[] args) {
-		
+		// Ei käytössä
 	}
 
 }

@@ -85,6 +85,12 @@ public class Vuokraamo {
 		return pyorat.getLkm();
 	}
 	
+	/**
+	 * Järjestää pyörän hinnan mukaan
+	 * @param lista Lista pyöristä, mitkä järjestetään
+	 * @return Sama lista, mutta pyörän järjestyksessä hinnan mukaan.
+	 * @throws SailoException jos järjestys ei onnistunut.
+	 */
 	public Collection<Pyora> hinnanMukaan(Collection<Pyora> lista) throws SailoException{
 		return pyorat.jarjestaHalvin(lista);
 	}
@@ -125,6 +131,7 @@ public class Vuokraamo {
 	/**
 	 * Palauttaa "taulukossa" hakuehtoon vastaavien pyörien viitteet
 	 * @param hakuehto hakuehto
+	 * @param vapaanaValittu Onko checkbox valittu.
 	 * @return tietorakenteen löytyneistä pyöristä
 	 * @throws SailoException Jos jotakin menee väärin
 	 */
@@ -135,7 +142,7 @@ public class Vuokraamo {
 
 	/**
 	 * Tallentaa tiedostot
-	 * @throws SailoException
+	 * @throws SailoException jos tallennuksessa tapahtuu virhe.
 	 */
 	public void tallenna() throws SailoException {
 		pyorat.setMuutettu(true);
@@ -164,11 +171,12 @@ public class Vuokraamo {
 	 * @param alku muutettava pyörä
 	 * @param uusi pyörä jolla alku korvataan
 	  */
+	/*
 	public void muutaPyora(Pyora alku, Pyora uusi) {
 		pyorat.muutaPyora(alku, uusi);
 		
 	}
-
+    */
 
 	/**
 	 * Poistaa valitun pyörän
@@ -197,7 +205,7 @@ public class Vuokraamo {
 	
 	/**
 	 * Poistaa vuokraamosta parametrina annetun asiakkaan
-	 * @param asiakas Poistettava asiakas
+	 * @param vuokraus Poistettava vuokraus.
 	 * @return True, jos poisto onnistui
 	 */
 	public boolean poistaVuokraus(Vuokraus vuokraus) {
@@ -210,7 +218,7 @@ public class Vuokraamo {
 	/**
 	 * Testi ohjelmaa vuokramolle
 	 * @param args ei käytösä
-	 * @throws SailoException
+	 * @throws SailoException jos tallennuksessa tapahtuu virhe.
 	 */
 	public static void main(String[] args) throws SailoException {
 		Vuokraamo testi = new Vuokraamo();

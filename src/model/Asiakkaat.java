@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;
 
+// HUOM. Asiakkaan poistoa ei ole toteutettu ohjelmassa. Koodi ei välttämättä toimi.
+
 /**
  * Tietorakenne asiakkaille
  * @author Jouko Sirkka, Miro Korhonen
@@ -62,6 +64,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 
 	/**
 	 * Tallentaa asiakkaan tiedostoon.
+	 * @throws SailoException jos tallennuse epäonnistuu.
 	 */
 	public void tallenna() throws SailoException {
 		if (!muutettu) return;
@@ -144,7 +147,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 
 	/**
 	 * Poistaa asiakkaan jonka id on sama kuin parametrina tuodun asiakkaan id
-	 * @param asiakas Asiakas
+	 * @param asiakasID Poistettavan asiakkaan id
 	 * @return true jos poisto onnistui
 	 * <pre name="test">
 	 * Asiakkaat testi = new Asiakkaat();
@@ -191,8 +194,7 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	/**
 	 * Lukee asiakkaat tiedostosta
 	 * @param tied tiedoston nimi
-	 * @throws FileNotFoundException jos ei aukea
-	 * @throws IOException jos ongelmia tiedoston kanssa
+	 * @throws SailoException jos luku epäonnistuu.
 	 */
 	public void lueTiedostosta(String tied) throws SailoException {
 		setTiedostonPerusNimi(tied);

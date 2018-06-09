@@ -44,6 +44,7 @@ public class Pyorat implements Iterable<Pyora> {
 	/**
 	 * Palauttaa listan hakuehtoon vastaavien pyörien viitteet
 	 * @param hakuehto hakuehto
+	 * @param vapaanaValittu Onko checkbox valittu.
 	 * @return pyörät, jotka vastaavat hakuehtoa
 	 */
 	public Collection<Pyora> etsi(String hakuehto, boolean vapaanaValittu) {
@@ -70,7 +71,6 @@ public class Pyorat implements Iterable<Pyora> {
 	 * Lisää uuden pyörän tietorakenteeseen. Ottaa pyörän omistukseensa.
 	 * 
 	 * @param pyora lisättävän pyörän viite. Huom tietorakenne muuttuu omistajaksi
-	 * @throws SailoException  jos tietorakenne on jo täynnä
 	 */
 	public void lisaa(Pyora pyora) {
 		//if(pyora.getPyoranID() == 0) {
@@ -87,10 +87,13 @@ public class Pyorat implements Iterable<Pyora> {
 	 * @param alku muutettava pyörä
 	 * @param uusi pyörä jolla alku korvataan
 	 */
+	/*
 	public void muutaPyora(Pyora alku, Pyora uusi) {
 		alku = uusi;
 		muutettu = true;
 	}
+	*/
+	
 	
 	/**
 	 * Antaa kokoelman kaikista vapaana olevista pyöristä
@@ -110,6 +113,7 @@ public class Pyorat implements Iterable<Pyora> {
 	 * 
 	 * @param i Halutun pyörän ID
 	 * @return viite pyörään, jonka ID on annettu ID
+	 * @throws IndexOutOfBoundsException jos ylitetään rajat.
 	 */
 	public Pyora anna(int i) throws IndexOutOfBoundsException {
 		for (Pyora pyora : alkiot) {
@@ -125,8 +129,7 @@ public class Pyorat implements Iterable<Pyora> {
 	 * Lukee pyörät tiedostosta
 	 * 
 	 * @param tied tiedoston nimi
-	 * @throws FileNotFoundException jos ei aukea
-	 * @throws IOException jos ongelmia tiedoston kanssa
+	 * @throws SailoException jos luku epäonnistuu.
 	 */
 	public void lueTiedostosta(String tied) throws SailoException {
 		setTiedostonPerusNimi(tied);
@@ -247,8 +250,7 @@ public class Pyorat implements Iterable<Pyora> {
         Pyora p = anna(pyoranID);
         if(p == null)
         	return false;
-        else
-        	alkiot.remove(p);
+        alkiot.remove(p);
         
         
         muutettu = true; 
@@ -257,8 +259,9 @@ public class Pyorat implements Iterable<Pyora> {
 
 	/**
 	 * Palauttaa kopion listasta, jossa pyörät ovat hinnan mukaan kasvavassa järjestyksessä
+	 * @param lista lista pyöristä, mistä haetaan.
 	 * @return Sama lista pyöriä, mutta järjestyksessä
-	 * @throws SailoException 
+	 * @throws SailoException jos tapahtuu virhe pyörien luvussa.
 	 */
 	public Collection<Pyora> jarjestaHalvin(Collection<Pyora> lista) throws SailoException {
 		Collection<Pyora> jarjestetty = new ArrayList<>();
@@ -298,8 +301,8 @@ public class Pyorat implements Iterable<Pyora> {
 	/**
 	 * Testataan toimivuutta
 	 * 
-	 * @param args
-	 * @throws SailoException 
+	 * @param args Ei käytössä
+	 * @throws SailoException Jos tiedoston luku epäonnistuu.
 	 * @example
 	 * <pre name="test">
 	 * #THROWS SailoException
