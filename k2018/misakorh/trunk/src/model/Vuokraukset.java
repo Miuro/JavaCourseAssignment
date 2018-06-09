@@ -223,9 +223,17 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * @example
 	 * <pre name="test">
 	 * #THROWS SailoException 
+	 * #import java.io.*;
 	 * String nimi = "vuokrauksetTesti";
+	 * File tied = new File(nimi + ".dat");
+	 * tied.delete();
 	 * Vuokraukset vuokraukset = new Vuokraukset();
-	 * vuokraukset.lueTiedostosta(nimi); #THROWS SailoException 
+     * try {
+     *       vuokraukset.lueTiedostosta(nimi);
+     *   } catch (SailoException e) {
+     *       //e.printStackTrace();
+     *       System.out.println();
+     *   }
 	 * Vuokraus t1 = new Vuokraus();
 	 * Vuokraus t2 = new Vuokraus();
 	 * t1.testiVuokraus(1, 2);
@@ -234,7 +242,11 @@ public class Vuokraukset implements Iterable<Vuokraus> {
 	 * t2.rekisteroi();
 	 * vuokraukset.lisaa(t1);
 	 * vuokraukset.lisaa(t2);
-	 * vuokraukset.tallenna();
+	 * try {
+           vuokraukset.tallenna();
+        } catch (SailoException e) {
+            System.out.println("paska");
+        }
 	 * vuokraukset = new Vuokraukset();
 	 * vuokraukset.lueTiedostosta(nimi);
 	 * vuokraukset.getLkm() === 2;
