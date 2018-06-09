@@ -72,6 +72,22 @@ public class Pyorat implements Iterable<Pyora> {
 	 * Lisää uuden pyörän tietorakenteeseen. Ottaa pyörän omistukseensa.
 	 * 
 	 * @param pyora lisättävän pyörän viite. Huom tietorakenne muuttuu omistajaksi
+	 * @example
+	 * <pre name="test">
+	 * #THROWS SailoException
+	 * Pyorat pyorat = new Pyorat();
+     * Pyora jopo1 = new Pyora(), jopo2 = new Pyora();
+     * jopo1.rekisteroi();
+     * jopo1.vastaaJopo();
+     * jopo2.rekisteroi();
+     * jopo2.vastaaJopo();
+     * pyorat.lisaa(jopo1);
+     * pyorat.lisaa(jopo2);
+     * pyorat.tallenna();
+     * int a = jopo1.getPyoranID();
+     * int b = jopo2.getPyoranID();
+     * b - a === 1;
+	 * </pre>
 	 */
 	public void lisaa(Pyora pyora) {
 		//if(pyora.getPyoranID() == 0) {
@@ -115,19 +131,20 @@ public class Pyorat implements Iterable<Pyora> {
 	 * @param i Halutun pyörän ID
 	 * @return viite pyörään, jonka ID on annettu ID
 	 * @throws IndexOutOfBoundsException jos ylitetään rajat.
+	 * @example
 	 * <pre name="test">
-	 * Pyorat pyorat = new Pyorat();
-	 * Pyora p = new Pyora();
-	 * Pyora q = new Pyora();
-	 * p.vastaaJopo();
-	 * q.vastaaJopo2();
-	 * p.setPyoranID(8);
-	 * pyorat.lisaa(p);
-	 * pyorat.lisaa(q);
-	 * pyorat.anna(8) === p;
-	 * p.setPyoranID(10);
-	 * pyorat.anna(8) === null;
-	 * </pre>
+	 * #THROWS SailoException
+     * Pyorat pyorat = new Pyorat();
+     * Pyora jopo1 = new Pyora(), jopo2 = new Pyora();
+     * jopo1.rekisteroi();
+     * jopo1.vastaaJopo();
+     * jopo2.rekisteroi();
+     * jopo2.vastaaJopo();
+     * pyorat.lisaa(jopo1);
+     * pyorat.lisaa(jopo2);
+     * pyorat.tallenna();
+     * pyorat.anna(jopo2.getPyoranID()).getPyoranID() === jopo2.getPyoranID();
+     * </pre>
 	 */
 	public Pyora anna(int i) throws IndexOutOfBoundsException {
 		for (Pyora pyora : alkiot) {
@@ -317,24 +334,6 @@ public class Pyorat implements Iterable<Pyora> {
 	 * 
 	 * @param args Ei käytössä
 	 * @throws SailoException Jos tiedoston luku epäonnistuu.
-	 * @example
-	 * <pre name="test">
-	 * #THROWS SailoException
-	 * Pyorat pyorat = new Pyorat();
-	 * Pyora jopo1 = new Pyora(), jopo2 = new Pyora();
-	 * jopo1.rekisteroi();
-	 * jopo1.vastaaJopo();
-	 * jopo2.rekisteroi();
-	 * jopo2.vastaaJopo();
-	 * String nimi = "pyoratTesti";
-	 * pyorat.lueTiedostosta(nimi); #THROWS SailoException
-	 * pyorat.lisaa(jopo1);
-	 * pyorat.lisaa(jopo2);
-	 * pyorat.tallenna();
-	 * pyorat.getLkm() === 2;
-	 * pyorat.poista(1);
-	 * pyorat.getLkm() === 1;
-	 * </pre>
 	 */
 	public static void main(String[] args) throws SailoException {
 		Pyorat pyorat = new Pyorat();

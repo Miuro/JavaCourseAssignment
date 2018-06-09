@@ -174,7 +174,6 @@ public class Asiakkaat implements Iterable<Asiakas> {
 	 * testi.etsi(1) === a1;
 	 * testi.etsi(2) === a2;
 	 * testi.etsi(3) === null;
-	 * testi.poista(a1.getAsiakasId()) === true;
 	 * </pre>
 	 */
 	/*public boolean poista(int asiakasID) {
