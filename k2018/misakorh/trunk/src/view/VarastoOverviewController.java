@@ -640,10 +640,11 @@ public class VarastoOverviewController {
 		
 		// jos ei ole pyöriä, niin tyhjennetään kentät. Parempi paikka tälle olisi naytaPyora() aliohjelmassa, mutta vaivalloinen fxguin takia.
 		if(i == 0) {
-			pyoraKohdalla = null;
+			//pyoraKohdalla = null;
 			tyhjennaKentat();
 		}
 		fxChooserPyorat.setSelectedIndex(index);
+		
 	}
 
 
