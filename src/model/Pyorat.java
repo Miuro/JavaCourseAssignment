@@ -49,7 +49,8 @@ public class Pyorat implements Iterable<Pyora> {
 	 */
 	public Collection<Pyora> etsi(String hakuehto, boolean vapaanaValittu) {
 		String ehto = "*";
-		if(hakuehto != null && hakuehto.length() > 0) ehto = hakuehto;
+		if(!hakuehto.equals("") && hakuehto.length() > 0) 
+		    ehto = hakuehto;
 		Collection<Pyora> loytyneet = new ArrayList<>();
 		if (vapaanaValittu) {
 			for(Pyora pyora : annaVapaat()) {
