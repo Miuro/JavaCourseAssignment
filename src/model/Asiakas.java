@@ -118,7 +118,7 @@ public class Asiakas{
 	 * <pre name="test">
 	 * Asiakas a = new Asiakas();
 	 * a.vastaaHessuHopo();
-	 * a.toString() === "0|Hessu Hopo|123123-123W|Aleksanterinkatu 14, Helsinki|050 1231231|";
+	 * a.toString() === "0|Hessu Hopo|123123-123W|Aleksanterinkatu 14, Helsinki|050 1231231";
 	 * </pre>
 	 */
 	@Override
@@ -140,9 +140,9 @@ public class Asiakas{
 	 * Asiakas a1 = new Asiakas();
 	 * Asiakas a2 = new Asiakas();
 	 * a1.parse("1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-");
-	 * a1.toString() === "1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-|";
+	 * a1.toString() === "1|Frans Bergman|110156-728K|Marjakatu 6 62420 Vuoristo|-";
 	 * a2.setAsiakasId(2);
-	 * a2.toString() === "2|-|-|-|-|";
+	 * a2.toString() === "2|-|-|-|-";
 	 * </pre>
 	 */
 	public void parse(String rivi) {
@@ -160,7 +160,7 @@ public class Asiakas{
 	 * <pre name="test">
 	 * Asiakas a = new Asiakas();
 	 * a.aseta(1, "Snibs");
-	 * a.toString() === "0|Snibs|-|-|-|";
+	 * a.toString() === "0|Snibs|-|-|-";
 	 * </pre>
 	 */
 	public String aseta(int k, String jono) {
