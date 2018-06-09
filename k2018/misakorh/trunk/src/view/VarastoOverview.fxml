@@ -105,7 +105,7 @@
                               <TextField fx:id="textFieldMalli" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField fx:id="textFieldKunto" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="textFieldVuokra" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <TextField fx:id="textFieldTila" editable="false" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="textFieldTila" editable="false" focusTraversable="false" Opacity="0.7" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <TextField fx:id="textFieldLisatietoja" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            </children>
                            <padding>
