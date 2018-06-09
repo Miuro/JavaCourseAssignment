@@ -16,7 +16,7 @@ public class Vuokraus implements Cloneable {
 	private int 		vuokrausId;
 	private int			pyoraId;	 
 	private int			asiakasId;
-	private int 		vuokrausAika    = 0;
+	private String 		vuokrausAika    = "-";
 	private String		palautusAika 	= "-";
 	private double 		hinta 			= 0.;
 	private String 		lisatiedot 		= "-";
@@ -129,6 +129,13 @@ public class Vuokraus implements Cloneable {
 	 * Palauttaa k:n kentän sisällön merkkijonona
 	 * @param k halutun kentän numero
 	 * @return kentän sisältö merkkijonona
+	 * @example
+	 * <pre name=""test>
+	 * Vuokraus v1 = new Vuokraus();
+	 * v1.testiVuokraus(1, 2);
+	 * v1.anna(1) === 1;
+	 * v1.anna(3) === 2;
+	 * </pre>
 	 */
 	public String anna(int k) {
 		switch (k) {
@@ -157,11 +164,12 @@ public class Vuokraus implements Cloneable {
 	 * Pilkkoo rivin ja kutsuu aseta -funktiota
 	 * @param rivi pilkottava rivi
 	 * <pre name="test">
+	 * #THROWS SailoException
 	 * Vuokraus v1 = new Vuokraus();
 	 * Vuokraus v2 = new Vuokraus();
 	 * v1.parse("1|1|1|13.04.2018 23:48|14.04.2018 04:48|60.0|Maksettu luottokortilla");
 	 * v1.toString() === "1|1|1|13.04.2018 23:48|14.04.2018 04:48|60.0|Maksettu luottokortilla";
-	 * v2.toString() === "0|0|0|||0.0|";
+	 * v2.toString() === "0|0|0|-|-|0.0|-";
 	 * </pre>
 	 * @throws SailoException jos parsiminen epäonnistuu.
 	 */
@@ -193,7 +201,7 @@ public class Vuokraus implements Cloneable {
 			asiakasId = Integer.parseInt(tjono);
 			return null;
 		case 3:
-			vuokrausAika = Integer.parseInt(tjono);
+			vuokrausAika = tjono;
 			return null;
 		case 4:
 			palautusAika = tjono;
@@ -258,7 +266,7 @@ public class Vuokraus implements Cloneable {
 		pvm = Calendar.getInstance();
 		palautus = Calendar.getInstance();
 		palautus.add(Calendar.HOUR, kestoTunneissa);
-		vuokrausAika = kestoTunneissa;
+		vuokrausAika = Integer.toString(kestoTunneissa);
 		palautusAika = sdf.format(palautus.getTime());
 		hinta = 10;
 		hinta = hinta * kestoTunneissa;
@@ -295,7 +303,7 @@ public class Vuokraus implements Cloneable {
 	 * Antaa vuokrausajanhetken
 	 * @return viite vuokrauksen aloitusajankohtaan, milloin pyörä vuokrattiin
 	 */
-	public int getVuokrausAika() {
+	public String getVuokrausAika() {
 		return vuokrausAika;
 	}
 	
@@ -303,7 +311,7 @@ public class Vuokraus implements Cloneable {
 	 * Asettaa vuokrausajan
 	 * @param vuokrAika vuokrausajankohta
 	 */
-	public void setVuokrausAika(int vuokrAika) {
+	public void setVuokrausAika(String vuokrAika) {
 		vuokrausAika = vuokrAika;
 	}
 	
